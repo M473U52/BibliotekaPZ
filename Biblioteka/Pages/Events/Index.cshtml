@@ -1,0 +1,78 @@
+﻿@page
+@model Biblioteka.Pages.Events.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="main_container">
+    <div class="inner_container">
+        <div class="list_header">
+            <h1>Wydarzenia</h1>
+        </div>
+        @if (User.IsInRole("Author"))
+        {
+            <div class="move_right">
+                <button class="button buttonDefault addNewBookButton">
+                    <a class="nav-link text-light" asp-page="Create">Dodaj nowe wydarzenie</a>
+                </button>
+            </div>           
+        }
+        <div class="list_div">
+            <div class="table-responsive events_table_scroll">
+                <table class="tableToModify">
+                    <thead>
+                        <tr>
+                            @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                            {
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Event[0].author)
+                                </th>
+                            }
+                            <th>
+                                @Html.DisplayNameFor(model => model.Event[0].name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Event[0].eventDate)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Event)
+                        {
+                            <tr>
+                                @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                                {
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.author.FullName)
+                                    </td>
+                                }
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.eventDate)
+                                </td>
+                                <td>
+                                    @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
+                                    {
+                                        <button class="button buttonGreen"><a class="lightText" asp-page="./Edit" asp-route-id="@item.eventId">Edytuj</a></button>
+                                    }
+                                    else if (User.IsInRole("Author"))
+                                    {
+                                        <button class="button buttonGreen"><a class="lightText" asp-page="./Edit" asp-route-id="@item.eventId">Edytuj</a></button>
+                                    }
+                                    <button class="button buttonRed"><a class="lightText" asp-page="./Delete" asp-route-id="@item.eventId">Usuń</a></button>
+                                    <button class="button buttonYellow"><a class="lightText" asp-page="./Details" asp-route-id="@item.eventId">Detale</a></button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> 
+</div>
+
+

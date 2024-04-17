@@ -1,0 +1,50 @@
+﻿@page
+@model Biblioteka.Pages.FAQs.AllModel
+@{
+    ViewData["Title"] = "IndexFAQ";
+}
+
+<div class="main_container">
+    <div class="faq_header">
+        <h1>Najczęściej zadawane pytania</h1>
+        <div class="list_div">
+            <div class="move_right" style="margin-left: 550px">
+                <button class="button buttonDefault addNewBookButton">
+                    <a class="nav-link text-light" asp-page="Create">Dodaj nowy</a>
+                </button>
+            </div>
+            <div class="table-responsive">
+                <table class="tableToModify" style="width: 1300px">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FAQList[0].question)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FAQList[0].answer)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.FAQList)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.question)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.answer)
+                                </td>
+                                <td>
+                                    <button class="button buttonRed"><a class="lightText" asp-page="./Delete" asp-route-id="@item.FAQId">Usuń</a></button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+    </div>
+</div>
+
+ <script src="~/js/faq.js"></script>

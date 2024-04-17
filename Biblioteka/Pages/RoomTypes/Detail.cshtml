@@ -1,0 +1,49 @@
+﻿@page
+@model Biblioteka.Pages.RoomTypes.DetailModel
+
+@{
+    ViewData["Title"] = "SelectingRoomTypes";
+}
+<link rel="stylesheet" href="~/css/RoomTypes/Details.css" asp-append-version="true" />
+<div>
+    <partial name="_UnderHeader" />
+
+</div>
+<body>
+
+    <div class="image-container">
+        <!-- Możesz podać ścieżkę do swojego obrazu -->
+        <img src="~/images/R1.jpg" alt="Sale konferencyjne">
+        <div class="centered-text">@Model?.roomType?.name</div>
+    </div>
+    <div class="room-info">
+        <div class="button-container">
+            <a asp-page="/RoomReservations/Create" asp-route-roomtypeid="@Model?.roomType?.roomTypeId">
+                <div class="reserv-btn">
+                    <p>Rezerwuj już teraz</p>
+                </div>
+            </a>
+        </div>
+        <div class="counts-container">
+            <div class="text-block">
+                <h1 style="font-weight:bold">@Model.roomCount</h1>
+                <h2 style="color:#801c1c">liczba sal</h2>
+            </div>
+            
+            <p style="width:50%;"></p>
+
+            <div class="text-block">
+                <h1 style="font-weight:bold">max @Model.maxSeats</h1>
+                <h2 style="color:#801c1c;">miejsc siedzących</h2>
+            </div>
+            
+        </div>
+
+        <div style="margin-top: 30px;">
+            <p style="font-weight:bold;">Nowoczesne sale konferencyjne w naszej bibliotece zostały zaprojektowane z myślą o organizacji spotkań grupowych oraz biznesowych na najwyższym poziomie. Charakteryzują się nowoczesnym wyposażeniem oraz atrakcyjnym designem, aby zapewnić naszym klientom komfort i efektywność podczas ich działalności. Każda sala wyposażona jest w zaawansowany sprzęt multimedialny, w tym projektory, ekrany dotykowe oraz dostęp do szybkiego internetu. Dzięki elastycznemu układowi mebli, sale mogą być dostosowywane do różnych potrzeb i typów spotkań, od warsztatów po spotkania biznesowe. Dodatkowo, nasz profesjonalny personel zapewnia wsparcie techniczne oraz obsługę logistyczną, aby każde wydarzenie przebiegło sprawnie i zgodnie z oczekiwaniami klientów.</p>
+
+        </div>
+        
+    </div>
+    
+</body>

@@ -1,0 +1,44 @@
+﻿@page
+@model Biblioteka.Pages.Tags.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="main_container">
+    <div class="inner_container">
+        <div class="list_header">
+            <h1>Edycja tagu: @Model.Tag.name</h1>
+        </div>
+        <div class="form_div">
+            <div class="form_div_login">
+                <form method="post">
+                    <hr />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Tag.tagId" />
+                    <div class="form-group">
+                        <label asp-for="Tag.name" class="control-label"></label>
+                        <input asp-for="Tag.name" class="form-control" />
+                        <span asp-validation-for="Tag.name" class="text-danger"></span>
+                    </div>
+                    <div class="form_buttons">
+                        <div class="form-group">
+                            <input type="submit" value="Zapisz" class="button buttonGreen lightText" />
+                        </div>
+                        <div>
+                            <a class="lightText button buttonDefault" asp-page="./Index">Wróć</a>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,54 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<div class="main_container">
+        <div class="list_header">
+            <h3>Zaloguj się na konto biblioteki</h3>
+        </div>
+            <div class="form_div_login">
+                <form id="account" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                    <div class ="form-floating mb-3">
+                        <input asp-for="Input.Email" class="form-control text-black" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                        <label asp-for="Input.Email" class="form-label text-black">Login:</label>
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.Password" class="form-control  text-black" autocomplete="current-password" aria-required="true" placeholder="password" />
+                        <label asp-for="Input.Password" class="form-label  text-black">Hasło:</label>
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div class="login_checkbox">
+                        <label asp-for="Input.RememberMe" class="form-label">
+                            <input class="form-check-input darkText" asp-for="Input.RememberMe" />
+                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                        </label>
+                    </div>
+                    <div class="button_login">
+                        <button class="button buttonDefault" id="registerSubmit" type="submit" style="width:50%; left:25%;position: relative;">Zaloguj się</button>
+                    </div>
+                    <div style="text-align:center">
+                        <p>
+                            <a class="optionsLoginText" id="forgot-password" asp-page="./ForgotPassword">Zapomniałeś hasła?</a>
+                        </p>
+                        <p>
+                    <a class="optionsLoginText" asp-page="./ReaderRegister" asp-route-returnUrl="@Model.ReturnUrl">Zarejestruj się</a>
+                        </p>
+                        <p>
+                    <a class="optionsLoginText" id="resend-confirmation" asp-page="./ResendEmailConfirmation">Wyślij potwierdzenie na email</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+</div>
+
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

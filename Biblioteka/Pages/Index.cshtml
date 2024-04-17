@@ -1,0 +1,185 @@
+﻿@page
+@model Biblioteka.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+<link rel="stylesheet" href="~/css/Home/main.css" asp-append-version="true" />
+<article class="home-article">
+    <section id="info">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="display:none;"></button>
+
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Powiadomienie</h5>
+                            <button type="button" class="close" id="closeButton" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" id="modalBodyContent"></div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="closeModalButton" data-dismiss="modal">Zamknij</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @{
+            List<string> messages = new List<string>();
+
+            var daysBeforeReturn = (int?)ViewData["DaysBeforeReturn"] ?? 0;
+
+            if (Model.Borrowing != null && Model.Borrowing.Any())
+            {
+                foreach (var item in Model.Borrowing)
+                {
+                    var today = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+                    var startDate = today;
+                    var endDate = item.plannedReturnDate;
+                    var timeDifference = endDate - startDate;
+                    var daysDifference = (int)Math.Floor(timeDifference.TotalDays);
+                    var fEndDate = endDate.ToShortDateString();
+                    var message = "";
+
+                    if (daysDifference <= 0)
+                    {
+                        message = "Od " + fEndDate + " zostaje ci naliczana kara za nieoddanie książki " + item.book.title;
+                        messages.Add(message);
+                    }
+                    else if (daysDifference <= daysBeforeReturn)
+                    {
+                        message = "Zostało ci " + daysDifference + " dni, aby zwrócić książkę " + item.book.title;
+                        messages.Add(message);
+                    }
+                    }
+                }
+                if (messages.Count != 0)
+                {
+
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            var messages = @Html.Raw(Json.Serialize(messages));
+                            var currentIndex = 0;
+
+                            var myModal = new bootstrap.Modal(document.getElementById('myModal'));
+                            var modalBody = document.getElementById('modalBodyContent');
+
+                            myModal._element.addEventListener('hidden.bs.modal', function () {
+                                currentIndex++;
+                                if (currentIndex < messages.length) {
+                                    modalBody.textContent = messages[currentIndex];
+                                    myModal.show();
+                                }
+                            });
+
+                            modalBody.textContent = messages[currentIndex];
+                            myModal.show();
+
+                            closeModalButton.addEventListener('click', function () {
+                                myModal.hide();
+                            });
+                            closeButton.addEventListener('click', function () {
+                                myModal.hide();
+                            });
+                        });
+                    </script>
+                }
+            }
+    </section>
+    <section class="events containers-horizontal-vertical">
+        <div class="title-section">
+            <div class="title-section-h2">
+                <div class="red-box"></div>
+                <h2 class="title-h3">Nadchodzące wydarzenia</h2>
+            </div>
+            <div class="slider">
+                    <img class="image" id="slide1" src="~/images/silde_1.png">
+                    <img class="image" id="slide2" style="display: none" src="~/images/silde_2.png">
+            </div>
+        </div>
+        <div>
+            <div class="info-container">
+                <div class="text-4">Godziny otwarcia</div>
+                <div class="text">Pon: 8:00 - 19:00</div>
+                <div class="text">Wt: 8:00 - 19:00</div>
+                <div class="text">Śr: 8:00 - 19:00</div>
+                <div class="text">Czw: 8:00 - 19:00</div>
+                <div class="text">Pt: 8:00 - 19:00</div>
+                <div class="text">Sob: 10:00 - 18:00</div>
+                <div class="text">Niedz: Nieczynne</div>
+            </div>
+             <div class="info-container">
+                <div class="text-4">Kalendarium</div>
+                    @if (Model.Events != null && Model.Events.Count() > 0)
+                    {   
+                        
+                        @foreach (Event item in Model.Events)
+                        {
+                                <a asp-page="/Events/Details" asp-route-id="@item.eventId">
+                                <div class="containers-horizontal-1">
+                                <div class="text-2">@item.eventDate.ToString("dd MMMM yyyy") r.</div>
+                                
+                                    @if(item.name.Length < 20)
+                                    {
+                                        <div class="text">@item.name</div>
+                                    }
+                                    else
+                                    {
+                                        <div class="text">@item.name.Remove(20)...</div>
+                                    }
+
+                                                    
+                                </div>
+                                </a>
+                          
+                        }
+                        
+                    }
+                    else
+                    {
+                        <div class="text">Brak spotkań</div>
+                    }
+        </div>
+        </div>
+    </section>
+    <section class="publication">
+        <div class="title-section">
+            <div class="title-section-h2">
+                <div class="red-box"></div>
+                <h2 class="title-h3">Nowe publikacje</h2>
+            </div class="book-items">
+             @if (Model.NewPublications != null && Model.NewPublications.Count() > 0)
+                {   
+                    <div class="containers-horizontal-2">    
+                    @foreach (Book item in Model.NewPublications)
+                    {
+                            
+                            <a asp-page="/Books/Details" asp-route-id="@item.bookId">
+                            <div class="containers-vertical"> 
+                            <img class="cover" src="~/images/rewd.png">
+                            
+                                @if(item.title.Length < 20)
+                                {
+                                    <div class="text" style="color: black">@item.title</div>
+                                }
+                                else
+                                {
+                                    <div class="text" style="color: black">@item.title.Remove(20)...</div>
+                                }
+                            
+                            </div>
+                            </a>                        
+                            
+                    }
+                    </div>
+                }
+                else
+                {
+                    <div class="text-3">Brak nowych publikacji <i class="fa-solid fa-book-open-reader fa-xl" style="color: #550707;"></i></div>
+                    
+                }
+        </div>
+    </section>
+</article>
+
+<script src="~/js/Home/Slider.js"></script>

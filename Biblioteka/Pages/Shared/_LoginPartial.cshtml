@@ -1,0 +1,152 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Biblioteka.Areas.Identity.Data
+
+@inject SignInManager<BibUser> SignInManager
+@inject UserManager<BibUser> UserManager
+
+
+    @{
+        if (SignInManager.IsSignedIn(User))
+        {
+            <div class="menu_panel">
+                <button class="button_menu">
+                    <i class="fa-solid fa-user icon_user"></i> 
+                </button>
+                <p class="button_account_text">Konto</p>
+            </div>
+            <div class="menu_content">
+                <div>
+                    <div class="menu_option">
+                        <a id="manage" class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                            <i class="fa-regular fa-user"></i> Panel konta
+                        </a>                      
+                    </div>
+                    <div class="menu_option is_displayed_option">
+                        <a class="nav-link text-white" asp-area="" asp-page="/Books/Index">
+                        <i class="fa-solid fa-book-open"></i> Księgozbiór
+                        </a>
+                    </div>
+                    
+                    @if (User.IsInRole("Admin")||User.IsInRole("Employee"))
+                    {
+                        
+                        <div class="menu_option is_displayed_option">
+                            <a class="nav-link text-white" asp-area="" asp-page="/RoomReservations/IndexEmployees">
+                            <i class="fa-solid fa-bookmark"></i> Wynajem sal
+                            </a>
+                        </div>
+                        <div class="menu_option is_displayed_option">
+                            <a class="nav-link text-white" asp-area="" asp-page="/Borrowings/IndexAdmin">
+                            <i class="fa-solid fa-address-book"></i> Wypożyczenia
+                            </a>
+                        </div>
+                        <div class="menu_option">
+                            <a class="nav-link text-white" asp-area="" asp-page="/Manage/Management">
+                                <i class="fa-solid fa-book"></i> Zarządzaj biblioteką
+                            </a>
+                        </div>
+                    }
+                    @if (!User.IsInRole("Employee")&&User.IsInRole("Reader"))
+                    {
+                        <div class="menu_option is_displayed_option">
+                            <a class="nav-link text-white" asp-area="" asp-page="/RoomTypes/SelectingRoomTypes">
+                            <i class="fa-solid fa-bookmark"></i> Wynajem sal
+                            </a>
+                        </div>
+                        <div class="menu_option is_displayed_option">
+                            <a class="nav-link text-white" asp-area="" asp-page="/Borrowings/IndexReader">
+                            <i class="fa-solid fa-address-book"></i> Wypożyczenia
+                            </a>
+                        </div>
+                    <div class="menu_option is_displayed_option">
+                        <a class="nav-link text-white" asp-area="" asp-page="/FAQs/Index">
+                            <i class="fa-solid fa-question"></i> Sekcja FAQ
+                        </a>
+                    </div>
+                    <div class="menu_option">
+                            <a class="nav-link text-white" asp-area="" asp-page="/Basket/Index">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                Koszyk
+                            </a>
+                    </div>
+                    }
+                    @if (User.IsInRole("Author"))
+                    {
+                        <div class="menu_option">
+                            <a class="nav-link text-white" asp-area="" asp-page="/Manage/Management">
+                                <i class="fa-solid fa-book"></i>
+                                Panel Autora
+                            </a>
+                        </div>
+                    }
+                <div class="menu_option menu_option_serach_bar">
+                    <form method="get" action="~/Books/Index">
+                        <div class="form_search_bar_in_collapsed_menu">
+                            <input type="text" class="search_bar_input" id="searchText" name="SearchTerm" placeholder="Szukaj">
+                            <button type="submit" class="search_bar_submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                    </form>
+                </div>
+                <div class="menu_option-last">
+                        <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
+                            <button id="logout" type="submit" class="logout_button text-white">
+                            <i class="fa-solid fa-right-from-bracket"></i>Wyloguj
+                            </button>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="menu_panel">
+                <button class="button_menu_no_logged">
+                    <i class="fa-solid fa-bars icon_user"></i>
+                </button>
+                <p class="button_account_text">Menu</p>
+            </div>
+            <div class="menu_content_no_logged">
+                <div>
+                    <div class="menu_option">
+                        <a class="nav-link text-white" asp-area="" asp-page="/Books/Index">
+                            <i class="fa-solid fa-book-open"></i> Księgozbiór
+                        </a>
+                    </div>
+                    <div class="menu_option">
+                        <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Login">
+                            <i class="fa-solid fa-bookmark"></i> Wynajem sal
+                        </a>
+                    </div>
+                    <div class="menu_option">
+                        <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Login">
+                        <i class="fa-solid fa-book-bookmark"></i> Wypożyczenia
+                        </a>
+                    </div>
+                    <div class="menu_option">
+                        <a class="nav-link text-white" asp-area="" asp-page="/FAQs/Index">
+                            <i class="fa-solid fa-question"></i> Sekcja FAQ
+                        </a>
+                    </div>
+                    <div class="menu_option">
+                        <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Login">
+                            <i class="fa-solid fa-user"></i> Logowanie
+                        </a>
+                    </div>
+                    <div class="menu_option">
+                        <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/ReaderRegister">
+                            <i class="fa-solid fa-user-plus"></i> Rejestracja
+                        </a>
+                    </div>
+                    <div class="menu_option menu_option_serach_bar">
+                        <form method="get" action="~/Books/Index">
+                            <div class="form_search_bar_in_collapsed_menu">
+                                <input type="text" class="search_bar_input" id="searchText" name="SearchTerm" placeholder="Szukaj">
+                                <button type="submit" class="search_bar_submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    }

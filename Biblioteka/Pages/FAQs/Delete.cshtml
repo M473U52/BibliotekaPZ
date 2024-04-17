@@ -1,0 +1,20 @@
+﻿@page
+@model Biblioteka.Pages.FAQs.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<div class="myContainerv2">
+    <h1>Usunięcie FAQ:</h1>
+    <h3>@Model.FAQ.question</h3>
+    <h3>@Model.FAQ.answer</h3>
+    <div class="myForm">
+        <h3>Czy na pewno chcesz usunąć ten element?</h3>
+
+        <form method="post">
+            <input type="hidden" asp-for="FAQ.FAQId" />
+            <input type="submit" value="Usuń" class="button buttonRed" />
+            <button class="button buttonDefault"><a class="lightText" asp-page="./Index">Wróć</a></button>
+        </form>
+    </div>
+</div>

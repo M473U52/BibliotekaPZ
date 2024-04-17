@@ -1,0 +1,73 @@
+﻿@page
+@model Biblioteka.Pages.RoomReservations.CreateModel
+
+@{
+    ViewData["Title"] = "RoomReservations";
+}
+<link rel="stylesheet" href="~/css/RoomReservations/create.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/RoomTypes/underheeader.css" asp-append-version="true" />
+
+<div>
+    <partial name="_UnderHeader" />
+    <div class="vertical">
+        <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="container-1">
+                <div class="calendar-month">
+                    <div class="name-month">
+                        <i id="arrow-left" onclick="ChangeDateLeftArrow()" class="fa-solid fa-arrow-left" style="color: #741a1a;"></i>
+                        <div class="datetime" id="currentDate" ></div>
+                        <i id="arrow-right" onclick="ChangeDateRightArrow()" class="fa-solid fa-arrow-right" style="color: #741a1a;"></i>
+                    </div>
+                    <div id="days-container">
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <h5>Mapa pomocnicza</h5>
+                <img class="map" src="~/images/map1.png">
+            </div>
+            <div class="item">
+                <h3>Wybierz numer sali</h3>
+                <select asp-for="@Model.RoomId" class="form-control size-select" asp-items="Model.Rooms"></select>
+             </div>
+             <div class="item">
+                <h3>Wybierz czas rezerwacji</h3>
+                <div class="horizontal-items">
+                    <div class="item-vertical-1">
+                        <h4>Od godziny</h4>
+                         <input asp-for="StartingHour" type="time" class="form-control size-input" />
+                         <span asp-validation-for="StartingHour" class="text-danger"></span>
+                    </div>
+                    <div class="item-vertical-2">
+                        <h4>Do godziny</h4>
+                        <input asp-for="FinalHour" type="time" class="form-control size-input" />
+                        <span asp-validation-for="FinalHour" class="text-danger"></span>
+                    </div>
+                </div>
+             <div>
+             <div class="item">
+                <h3>Opłata za rezerwację</h3>
+                <div class="price">@Model.RoomTypeForReservation.price ZŁ<div>
+             </div>
+             </div class="item">
+                 <label class="checkbox-input">Oświadczam, że zapoznałem/am się z regulaminem dotyczącym rezerwacji sal w bibliotece HERE AND NOW.
+                    <input type="checkbox" name="AgreementCheckbox" >
+                    <span></span>
+                </label>
+                <span asp-validation-for="AgreementCheckbox" class="text-danger"></span>
+             </div> 
+             </div class="item">
+                <input type="submit" value="Rezerwuję z obowiązkiem zapłaty" class="library-button" />
+             </div>    
+        </form>
+    </div>
+</div>
+
+<script src="~/js/RoomReservations/Calendar.js"></script>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

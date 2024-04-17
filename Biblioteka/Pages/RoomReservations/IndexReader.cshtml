@@ -1,0 +1,75 @@
+﻿@page
+@model Biblioteka.Pages.RoomReservations.IndexReaderModel
+
+@{
+    ViewData["Title"] = "IndexReader";
+}
+<div class="main_container">
+    <div class="inner_container">
+        @if (Model.RoomReservation.Count == 0)
+        {
+            <div class="list_header">
+                <h1>Zarezerwuj salę tym przyciskiem:</h1>
+            </div>       
+            if (!User.IsInRole("Employee"))
+            {
+                <button class="button buttonDefault">
+                    <a class="nav-link lightText" asp-page="Create">Zarezerwuj salę</a>
+                </button>
+            }
+            <img src="~/images/noreservations.jpg" style="position:relative;width: 100%;height: auto;" />
+        }
+        else
+        {
+            <div class="list_header">
+                <h1>Wynajmowane sale</h1>
+            </div>
+            <div class="move_right">
+                <button class="button buttonDefault">
+                    <a class="nav-link lightText" asp-page="Create">Zarezerwuj salę</a>
+                </button>
+            </div>
+
+            <div class="list_div">
+                <div class="table-responsive reservation_table_scroll">
+                    <table class="tableToModify">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.RoomReservation[0].begginingOfReservationDate)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.RoomReservation[0].endOfReservationDate)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.RoomReservation[0].room)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.RoomReservation)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.begginingOfReservationDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.endOfReservationDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.room.FullData)
+                                    </td>
+                                    <td>
+                                        <button class="button buttonRed"><a class="lightText" asp-page="./Delete" asp-route-id="@item.reservationId">Anuluj</a></button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

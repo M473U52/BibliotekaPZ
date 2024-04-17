@@ -1,0 +1,108 @@
+﻿@page
+@model Biblioteka.Views.Books.AuthorBooksModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<BibUser> SignInManager
+@inject UserManager<BibUser> UserManager
+
+<div class="myContainerv2">
+    
+    <button class="button buttonDefault addNewBookButton" style="float:right; margin-right: 50px;">
+                <a class="nav-link text-light" asp-page="CreateForAuthor">Dodaj nową książkę</a>
+            </button>
+    @{
+        if (Model.Book.Count() == 0)
+        {
+            <img src="~/images/nobooks.jpg" style="position:relative;width: 100%;height: auto;" />
+        }
+        else
+        {
+            <h1>Moje Książki <i class="fas fa-book"></i></h1>
+
+
+            <table class="tableToModify">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Book.FirstOrDefault().title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Book.FirstOrDefault().availableCopys)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Book.FirstOrDefault().releaseDate)
+                        </th>
+                        <th>
+                            @Html.DisplayName("Autorzy")
+
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Book.FirstOrDefault().genre)
+                        </th>
+                        <th>
+                            @Html.DisplayName("Tagi")
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Book)
+                    {
+                        @foreach (var temp in item.authors)
+                        {
+                                <tr>
+                                    <td style="font-weight: bold;">
+                                        @Html.DisplayFor(modelItem => item.title)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.availableCopys)
+                                    </td>
+                                    <td>
+                                        @item.releaseDate.ToString("yyyy-MM-dd")
+                                    </td>
+                                    <td>
+
+                                        @foreach (var authors in item.authors.Select((value, index) => new { value, index }))
+                                        {
+
+                                            @if (authors.index < item.authors.Count - 1)
+                                            {
+                                                <span>@authors.value.author.name @authors.value.author.surname, </span>
+                                            }
+                                            else
+                                            {
+                                                <span>@authors.value.author.name @authors.value.author.surname</span>
+                                            }
+
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.genre.name)
+                                    </td>
+                                    <td>
+                                        @foreach (var tag in item.tags)
+                                        {
+                                            <span>@tag.tag.name</span>
+                                        }
+                                    </td>
+                                    <td>
+                                    <button class="button buttonGreen"><a class="lightText" asp-page="./Edit" asp-route-id="@item.bookId">Edytuj</a></button>
+                                    <button class="button buttonRed"><a class="lightText" asp-page="./Delete" asp-route-id="@item.bookId">Usuń</a></button>
+                                    <button class="button buttonYellow"><a class="lightText" asp-page="./Details" asp-route-id="@item.bookId">Detale</a></button>
+                                    </td>
+                                </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        }
+    }
+
+</div>
+
+
+
+

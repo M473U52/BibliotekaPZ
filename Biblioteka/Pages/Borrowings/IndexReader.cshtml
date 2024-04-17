@@ -1,0 +1,89 @@
+﻿@page
+@model Biblioteka.Pages.Borrowings.IndexReaderModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+@using Microsoft.AspNetCore.Identity
+
+<div class="main_container">
+    <div class="inner_container">
+        @{
+            if (Model.Borrowing == null || Model.Borrowing.Count == 0)
+            {
+                <div class="list_header">
+                    <h1>Wypożycz książkę tym przyciskiem:</h1>
+                </div>            
+                if (!User.IsInRole("Employee"))
+                {
+                    <button class="button buttonDefault">
+                        <a class="nav-link lightText" asp-page="../Books/Index">Zacznij Wypożyczać!</a>
+                    </button>
+                }
+                <img src="~/images/noborrows.jpg" style="position:relative;width: 100%;height: auto;" />
+            }
+            else
+            {
+                <div class="list_header">
+                    <h1>Wypożyczenia</h1>
+                </div>
+                <div class="list_div">
+                    <div class="table-responsive borrowing_table_scroll">
+                        <table class="tableToModify">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Borrowing[0].borrowDate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Borrowing[0].plannedReturnDate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Borrowing[0].returnDate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName("Wypożyczona książka")
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Borrowing)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.borrowDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.plannedReturnDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.returnDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.book.title)
+                                        </td>
+                                        <td>
+                                            @if (item.bookLost == false)
+                                            {
+                                                <button class="button buttonRed"><a class="lightText" asp-page="./Delete" asp-route-id="@item.borrowId">Usuń</a></button>
+                                                @if (item.Confirmation == true && item.IsReturned == false)
+                                                {
+                                                    <button class="button buttonYellow"><a class="lightText" asp-page="./BookLost" asp-route-id="@item.borrowId">Zgłoś zagubienie książki</a></button>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <p class="button buttonRed">Zgubiono książkę</p>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

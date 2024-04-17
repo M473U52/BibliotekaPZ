@@ -1,0 +1,45 @@
+﻿@page
+@model Biblioteka.Pages.Events.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+
+<div class="main_container">
+    <div class="inner_container">
+        <div class="list_header">
+            <h3>Czy napewno chcesz usunąć to wydarzenie?</h3>
+        </div>
+        <div class="form_div">
+            <div class="form_div_login">
+                <dl>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Event.name)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Event.name)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Event.description)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Event.description)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Event.eventDate)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Event.eventDate)
+                    </dd>
+                </dl>
+
+                <form method="post">
+                    <input type="hidden" asp-for="Event.eventId" />
+                    <input type="submit" value="Usuń" class="button buttonRed" />
+                    <button class="button buttonDefault"><a class="lightText" asp-page="./Index">Wróć</a></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

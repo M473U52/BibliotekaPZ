@@ -1,0 +1,40 @@
+﻿@page
+@model Biblioteka.Pages.RoomReservations.ConfirmationModel
+
+@{
+    ViewData["Title"] = "Confirmation";
+}
+<div class="main_container">
+    <div class="inner_container">
+        <div class="list_header">
+            <h1>Potwierdzenie wydania klucza</h1>
+        </div>
+        <div class="form_div">
+            <div class="form_div_login">
+                <dl>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.RoomReservation.begginingOfReservationDate)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.RoomReservation.begginingOfReservationDate)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.RoomReservation.endOfReservationDate)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.RoomReservation.endOfReservationDate)
+                    </dd>
+
+                </dl>
+
+                <form method="post">
+                    <input type="hidden" asp-for="RoomReservation.reservationId" />
+                    <input type="submit" value="Potwierdź" class="btn btn-danger" /> |
+                    <a asp-page="./IndexEmployees">Wróć</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

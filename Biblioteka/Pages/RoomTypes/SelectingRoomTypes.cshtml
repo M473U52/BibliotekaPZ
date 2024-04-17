@@ -1,0 +1,33 @@
+﻿@page
+@model Biblioteka.Pages.RoomTypes.SelectingRoomTypes
+
+@{
+    ViewData["Title"] = "SelectingRoomTypes";
+}
+<link rel="stylesheet" href="~/css/RoomTypes/SelectingRoomTypes.css" asp-append-version="true" />
+<div>
+    <partial name="_UnderHeader" />
+    <div class="container-1">
+    @if (Model.RoomTypes.Any())
+    {
+        <h2>Wybór rodzaju sali</h2>
+        <p class="paragraph-1">Oferujemy sale konferencyjne, idealne do organizacji spotkań biznesowych czy prezentacji, sala multimedialne wyposażone w nowoczesny sprzęt do prowadzenia wykładów lub pokazów multimedialnych oraz pracownie komputerowe, które zapewniają warunki do pracy przy projektach czy też w prowadzeniu szkoleń.</p>
+        <div class="container-grid-1">
+        @foreach(var item in Model.RoomTypes)
+        {
+            <a asp-page="/RoomTypes/Detail" asp-route-id="@item.roomTypeId">
+            <div class="containers-vertical-1">
+                <img class="cover-2" src="~/images/R.jpg">
+                <div class="text-5">@item.name</div>
+            </div>
+            </a>
+        }
+        </div>
+    }
+    else
+    {
+        <h2>Brak obecnie dostępnych danych</h2>
+    }
+    </div>
+</div>
+

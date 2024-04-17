@@ -1,0 +1,79 @@
+﻿@page
+@model Biblioteka.Views.Books.CreateForAuthorModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="main_container">
+    <div class="inner_container">
+        <div class="list_header">
+            <h1>Dodawanie nowej książki</h1>
+        </div>
+        <div class="form_div">
+            <div class="form_div_login">
+                <form method="post">
+                    <hr />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Book.title" class="control-label"></label>
+                        <input asp-for="Book.title" class="form-control" />
+                        <span asp-validation-for="Book.title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Book.ISBN" class="control-label"></label>
+                        <input asp-for="Book.ISBN" class="form-control" />
+                        <span asp-validation-for="Book.ISBN" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Book.description" class="control-label"></label>
+                        <input asp-for="Book.description" class="form-control" />
+                        <span asp-validation-for="Book.description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Book.releaseDate" class="control-label"></label>
+                        <input asp-for="Book.releaseDate" class="form-control" />
+                        <span asp-validation-for="Book.releaseDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="GenreId" class="control-label"></label>
+                        <select asp-for="GenreId" class="form-control" asp-items="Model.Genre"></select>
+                        <span asp-validation-for="GenreId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="TagIds" class="control-label"></label>
+                        <select asp-for="TagIds" asp-items="Model.Tag" class="form-control" multiple="multiple"></select>
+                        <span asp-validation-for="TagIds" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="BookTypeId" class="control-label"></label>
+                        <select asp-for="BookTypeId" class="form-control" asp-items="Model.Type"></select>
+                        <span asp-validation-for="BookTypeId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="PublisherId" class="control-label"></label>
+                        <select asp-for="PublisherId" class="form-control" asp-items="Model.Publisher"></select>
+                        <span asp-validation-for="PublisherId" class="text-danger"></span>
+                    </div>
+                    <hr />
+                <dd>
+                    <div class="form-group">
+                        <input type="submit" value="Dodaj" class="button buttonGreen lightText" />
+                    </div>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

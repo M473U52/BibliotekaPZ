@@ -1,0 +1,45 @@
+﻿@page
+@model Biblioteka.Pages.Publishers.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<div class="main_container">
+    <div class="inner_container">
+        <div class="list_header">
+            <h1>Edytuj informacje o @Model.Publisher.name</h1>
+        </div>
+        <div class="form_div">
+            <div class="form_div_login">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Publisher.publisherId" />
+                    <div class="form-group">
+                        <label asp-for="Publisher.name" class="control-label"></label>
+                        <input asp-for="Publisher.name" class="form-control" />
+                        <span asp-validation-for="Publisher.name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Publisher.description" class="control-label"></label>
+                        <input asp-for="Publisher.description" class="form-control" />
+                        <span asp-validation-for="Publisher.description" class="text-danger"></span>
+                    </div>
+                    <div class="form_buttons">
+                        <div class="form-group">
+                            <input type="submit" value="Zapisz" class="button buttonGreen lightText" />
+                        </div>
+                        <div>
+                            <a class="button buttonDefault lightText" asp-page="./Index">Wróć</a>
+                        </div>
+                    </div>
+                   
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

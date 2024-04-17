@@ -1,0 +1,39 @@
+﻿@page
+@model Biblioteka.Pages.Borrowings.BookLostModel
+
+@{
+    ViewData["Title"] = "Book lost";
+}
+
+<div class="main_container">
+    <div class="inner_container">
+        <div class="list_header">
+            <h1>Zgłoszenie zgubienia książki</h1>
+        </div>
+        <div class="form_div">
+            <div class="form_div_login">
+                <dl>
+                    <dt>
+                        @* @Html.DisplayNameFor(model => model.Borrowing.book.title) *@
+                    </dt>
+                    <dd>
+                        @* @Html.DisplayFor(model => model.Borrowing.book.title) *@
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Reader.FullName)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Reader.FullName)
+                    </dd>
+
+                </dl>
+
+                <form method="post">
+                    <input type="hidden" asp-for="Borrowing.borrowId" />
+                    <input type="submit" value="Potwierdź zgubienie książki" class="button buttonRed" />
+                    <button class="button buttonDefault"><a class="lightText" asp-page="./IndexReader">Wróć</a></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

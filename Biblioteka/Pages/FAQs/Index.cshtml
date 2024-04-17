@@ -1,0 +1,28 @@
+﻿@page
+@model Biblioteka.Pages.FAQs.IndexModel
+@{
+    ViewData["Title"] = "IndexFAQ";
+}
+
+<div class="main_container">
+    <div class="faq_header">
+        <h1>Najczęściej zadawane pytania</h1>
+    </div>
+
+        @foreach (var item in Model.FAQList)
+    {
+    <div class="faq-container">
+        <div class="faq-title">
+                <p>@item.question</p>
+            <button class="show_faq_content_button"><i class="fa-solid fa-chevron-up" style="color:#fff"></i></button>
+        </div>
+        <div class="faq-accordion">
+            <div>
+                    <p>@item.answer</p>
+            </div>
+        </div>
+    </div>
+    }
+</div>
+
+ <script src="~/js/faq.js"></script>

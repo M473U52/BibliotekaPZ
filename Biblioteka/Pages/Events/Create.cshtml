@@ -1,0 +1,49 @@
+﻿@page
+@model Biblioteka.Pages.Events.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="main_container">
+    <div class="inner_container">
+        <div class="list_header">
+            <h1>Dodaj nowe wydarzenie</h1>
+        </div>
+        <div class="form_div">
+            <div class="form_div_login">
+                <form method="post">
+                    <hr />
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Event.name" class="control-label"></label>
+                        <input asp-for="Event.name" class="form-control" />
+                        <span asp-validation-for="Event.name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Event.description" class="control-label"></label>
+                        <input asp-for="Event.description" class="form-control" />
+                        <span asp-validation-for="Event.description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Event.eventDate" class="control-label"></label>
+                        <input asp-for="Event.eventDate" class="form-control" />
+                        <span asp-validation-for="Event.eventDate" class="text-danger"></span>
+                    </div>
+                    <div class="form_buttons">
+                        <div class="form-group">
+                            <input type="submit" value="Dodaj" class="button buttonGreen" />
+                        </div>
+                        <div>
+                            <a class="lightText button buttonDefault" asp-page="./Index">Wróć</a>
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

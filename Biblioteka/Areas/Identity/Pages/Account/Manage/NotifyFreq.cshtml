@@ -1,0 +1,14 @@
+﻿@page
+@model Biblioteka.Areas.Identity.Pages.Account.Manage.NotifyFreqModel
+@{
+}
+
+<h2>Ustawienia powiadomień</h2>
+
+<p>Aktualna liczba dni przed zwrotem: @Model.CurrentDaysBeforeReturn</p>
+
+<form method="post">
+    <label for="notificationDays">Wybierz nową liczbę dni przed, w których chcesz otrzymywać powiadomienia:</label>
+    <input type="number" id="notificationDays" name="notificationDays" min="1" max="30" required />
+    <button type="submit">Zapisz</button>
+</form>

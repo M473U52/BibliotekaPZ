@@ -1,0 +1,68 @@
+﻿.image-container {
+    position: relative;
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+}
+
+    /* Dodanie stylów dla obrazu, żeby rozciągnął się na całą dostępną szerokość kontenera */
+    .image-container img {
+        width: 80%;
+        height: auto;
+    }
+
+/* Styl dla tekstu, aby wyśrodkować go w pionie i poziomie */
+.centered-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0,0,0,0.7);
+    font-size: 70px; /* można dostosować rozmiar tekstu */
+    /* Dodatkowe style można dodać według potrzeb, na przykład dla tła tekstu itp. */
+}
+
+.room-info {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    height: auto;
+    align-content: center;
+}
+
+.button-container {
+    display: flex; /* Użyj Flexboxa */
+    justify-content: center; /* Wyśrodkuj w poziomie */
+    align-items: center; /* Opcjonalnie, jeśli chcesz wyśrodkować także w pionie */
+    height: auto; /* Ustawienie wysokości, jeśli potrzebne */
+    margin-top: 20px; /* Opcjonalnie, dodaj margines na górze, aby oddzielić od innych elementów */
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.counts-container {
+    display: flex;
+    justify-content: center;
+}
+
+.text-block {
+    padding: 5px;
+    text-align: center;
+}
+
+.reserv-btn {
+    background-color: #902c2c;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+}
+
+    .reserv-btn:hover {
+        background-color: #801c1c;
+    }

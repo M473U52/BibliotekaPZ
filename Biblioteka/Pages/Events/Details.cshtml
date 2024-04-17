@@ -1,0 +1,47 @@
+﻿@page
+@model Biblioteka.Pages.Events.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="main_container">
+    <div class="inner_container">
+        <div class="list_header">
+            <h1>Informacje o wydarzeniu</h1>
+        </div>
+        <div class="form_div">
+            <div class="form_div_login">
+                <dl>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Event.name)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Event.name)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Event.description)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Event.description)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Event.eventDate)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Event.eventDate)
+                    </dd>
+                </dl>
+                <div class="form_buttons">
+                    <button class="button buttonGreen">
+                        <a class="lightText" asp-page="./Edit" asp-route-id="@Model.Event?.eventId">Edytuj</a>
+                    </button>
+                    <button class="button buttonDefault">
+                        <a class="lightText" asp-page="./Index">Wróć</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

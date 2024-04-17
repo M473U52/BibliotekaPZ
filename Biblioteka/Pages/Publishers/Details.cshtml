@@ -1,0 +1,40 @@
+﻿@page
+@model Biblioteka.Pages.Publishers.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="main_container">
+    <div class="inner_container">
+        <div class="list_header">
+            <h1>Informacje o @Model.Publisher.name</h1>
+        </div>
+        <div class="form_div">
+            <div class="form_div_login">
+                <hr />
+                <dl>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Publisher.name)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Publisher.name)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Publisher.description)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Publisher.description)
+                    </dd>
+                </dl>
+                <div>
+                    <button class="button buttonGreen">
+                        <a class="lightText" asp-page="./Edit" asp-route-id="@Model.Publisher?.publisherId">Edytuj</a>
+                    </button>
+                    <button class="button buttonDefault">
+                        <a class="lightText" asp-page="./Index">Wróć</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
