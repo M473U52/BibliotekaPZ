@@ -1,0 +1,103 @@
+﻿@page
+@model Biblioteka.Views.Books.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<BibUser> SignInManager
+@inject UserManager<BibUser> UserManager
+
+<div class="outer_library_container">
+    @if (User.Identity.IsAuthenticated && (User.IsInRole("Employee") || User.IsInRole("Admin")))
+    {
+        <a asp-page="./Create">
+            <input type="button" value="Dodaj książke" />
+        </a>
+    }
+
+
+    <div class="used_filters">
+        <div class="used_filters_header">
+            <h4>Użyte filtry:</h4>
+        </div>
+        <div class="remove_all_filters_container">
+            <p class="filter_name">Wyczyść filtry</p>
+            <form method="get" action="~/Books/Index">
+                <input class="fake_input" type="text" id="searchText" name="SearchTerm" placeholder="Szukaj">
+                <button type="submit" class="remove_all_filters"><i class="fa-solid fa-filter-circle-xmark"></i></button>
+            </form>
+
+        </div>
+    </div>
+    <div class="library_container">
+        <div class="filter_books_container">
+            <h4>Filtry</h4>
+            <div>
+                <div class="filter_content">
+                    <h5>Dostępnosć</h5>
+                    <div class="filter_content_options">
+                        <p class="available_books_filter">Dostępne (@Model.AvailableBookCount())</p>
+                        <p class="available_books_filter">Mała ilość (@Model.LowQuantityBookCount())</p>
+                        <p class="available_books_filter">Niedostępne (@Model.NotAvailableBookCount())</p>
+                    </div>
+                </div>
+                <div class="filter_content">
+                    <h5>Gatunek</h5>
+                    <div class="filter_content_options">
+                        @foreach (var genre in Model.Genres)
+                        {
+                            <p class="genre_book_filter">@genre.name (@Model.BookCountForGenre(genre.genreId))</p>
+                        }
+                    </div>
+                </div>
+                <div class="filter_content">
+                    <h5>Rodzaj</h5>
+                    <div class="filter_content_options">
+                        @foreach (var type in Model.Types)
+                        {
+                            <p class="type_book_filter">@type.name (@Model.BookCountForType(type.typeId))</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="book_list_container">
+            @foreach (var book in Model.Book)
+            {
+
+                <div class="book_div">
+                    <a class="lightText" asp-page="./Details" asp-route-id="@book.bookId">
+                        <div class="book_cover">
+                            <img src="~/images/okladka.jpg" alt="Okładka ksiązki @book.title" />
+                        </div>
+                    </a>
+                    <div class="book_info">
+                        <p class="book_title">@book.title</p>
+                        <div class="book_authors">
+                            @foreach (var author in book.authors)
+                            {
+                                <p>@author.author.FullName</p>
+                            }
+                        </div>
+                        <p class="book_genre">@book.genre.name</p>
+                        <p class="book_relase_date">
+                            @book.releaseDate.ToString().Substring(6, 4)
+                        </p>
+                        <div class="book_tags">
+                            @foreach (var tag in book.tags)
+                            {
+                                <p>#@tag.tag.name.Replace(" ", "")</p>
+                            }
+                        </div>
+                        <div class="additional_book_info">
+                            <p class="book_quantity">@book.availableCopys</p>
+                            <p class="book_type">@book.type.name</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script src="~/js/Books/book_filter.js"></script>
