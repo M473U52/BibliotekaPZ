@@ -53,30 +53,89 @@ namespace Biblioteka.Repositories.DbImplementations
              .ThenInclude(a => a.author).ToList();
         }
 
-       /* public Book getBook(int id)
+        public List<Book> GetBooksByGenre(string genreName)
         {
             return _context.Book
                 .Include(b => b.tags)
-                .ThenInclude(b => b.tag)
+                    .ThenInclude(b => b.tag)
                 .Include(b => b.publisher)
                 .Include(b => b.genre)
                 .Include(b => b.type)
                 .Include(b => b.authors)
-                .ThenInclude(a => a.author).FirstOrDefault(b => b.bookId == id);
-
+                    .ThenInclude(a => a.author)
+                .Where(b => b.genre.name == genreName) // Filter books by the genre name
+                .ToList();
         }
 
-        public Book getBook(string title)
+        public Book GetRandomBookByGenre(string genreName)
         {
+            // EF Core does not directly support SQL's NEWID(), but we can sort by Guid and take one book
             return _context.Book
                 .Include(b => b.tags)
-                .ThenInclude(b => b.tag)
+                    .ThenInclude(b => b.tag)
                 .Include(b => b.publisher)
                 .Include(b => b.genre)
                 .Include(b => b.type)
                 .Include(b => b.authors)
-                .ThenInclude(a => a.author).FirstOrDefault(b => b.title == title);
-        }*/
+                    .ThenInclude(a => a.author)
+                .Where(b => b.genre.name == genreName)
+                .OrderBy(b => Guid.NewGuid())
+                .FirstOrDefault();
+        }
+
+        public Book GetRandomBookByAuthor(string authorFullName)
+        {
+            // Split the full name to get first name and surname, assuming the full name structure is "FirstName LastName"
+            var names = authorFullName.Split(' ');
+            string firstName = names[0];
+            string lastName = names[^1]; // Last element in the names array
+
+            // Retrieve all books by this author
+            var books = _context.Book
+                .Include(b => b.authors)
+                    .ThenInclude(ba => ba.author)
+                .Where(b => b.authors.Any(ba => ba.author.name == firstName && ba.author.surname == lastName))
+                .ToList();
+
+            if (books.Count == 0)
+            {
+                return null; // Return null if there are no books by this author
+            }
+
+            // Generate a random index
+            Random rnd = new Random();
+            int randomIndex = rnd.Next(books.Count);
+
+            // Return a book at the random index
+            return books[randomIndex];
+        }
+
+
+
+        /* public Book getBook(int id)
+         {
+             return _context.Book
+                 .Include(b => b.tags)
+                 .ThenInclude(b => b.tag)
+                 .Include(b => b.publisher)
+                 .Include(b => b.genre)
+                 .Include(b => b.type)
+                 .Include(b => b.authors)
+                 .ThenInclude(a => a.author).FirstOrDefault(b => b.bookId == id);
+
+         }
+
+         public Book getBook(string title)
+         {
+             return _context.Book
+                 .Include(b => b.tags)
+                 .ThenInclude(b => b.tag)
+                 .Include(b => b.publisher)
+                 .Include(b => b.genre)
+                 .Include(b => b.type)
+                 .Include(b => b.authors)
+                 .ThenInclude(a => a.author).FirstOrDefault(b => b.title == title);
+         }*/
 
         public IEnumerable<Book> SearchBooks(string searchTerm)
         {

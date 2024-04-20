@@ -63,8 +63,49 @@
             </div>
         </div>
         <div class="book_list_container">
-            <h3>Polecane:</h3>
+     
 
+
+            @if (Model.RecommendedBooks.Count()>=2)
+
+            {
+                <h3>Polecane:</h3>
+                foreach (var book in Model.RecommendedBooks)
+                {
+                    <div class="book_div">
+                        <a class="lightText" asp-page="./Details" asp-route-id="@book.bookId">
+                            <div class="book_cover">
+                                <img src="~/images/@(book.imageData != null ? $"covers/{book.bookId}.jpg" : "okladka.jpg")" alt="Okładka książki @book.title" />
+                            </div>
+                        </a>
+                        <div class="book_info">
+                            <p class="book_title">@book.title</p>
+                            <div class="book_authors">
+                                @foreach (var author in book.authors)
+                                {
+                                    <p>@author.author.FullName</p>
+                                }
+                            </div>
+                            <p class="book_genre">@book.genre.name</p>
+                            <p class="book_release_date">
+                                @book.releaseDate.Year.ToString()
+                            </p>
+                            <div class="book_tags">
+                                @foreach (var tag in book.tags)
+                                {
+                                    <p>#@tag.tag.name.Replace(" ", "")</p>
+                                }
+                            </div>
+                            <div class="additional_book_info">
+                                <p class="book_quantity">@book.availableCopys</p>
+                                <p class="book_type">@book.type.name</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+          
+            
 
             @foreach (var book in Model.Book)
             {
