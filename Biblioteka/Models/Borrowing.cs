@@ -25,14 +25,14 @@ namespace Biblioteka.Models
         public DateTime plannedReturnDate { get; set; }
 
         [BindProperty(SupportsGet = true),
-        Display(Name = "Potwierdzenie odbioru")]
+        Display(Name = "Odbiór")]
         public bool Confirmation { get; set; }
         [BindProperty(SupportsGet = true),
-        Display(Name = "Potwierdzenie zwrotu")]
+        Display(Name = "Zwrot")]
         public bool IsReturned { get; set; }
 
         [BindProperty(SupportsGet = true),
-        Display(Name = "Potwierdzenie opłaty")]
+        Display(Name = "Opłata")]
         public bool IsPaid { get; set; }
 
         [BindProperty(SupportsGet = true),

@@ -615,43 +615,7 @@ dt {
 
 
 
-.cancel_button_dialog {
-    border: none;
-    margin-right: 1rem;
-    color: #fff;
-    font-weight: bold;
-    border-radius: 5px;
-    font-size: 0.9rem;
-    padding: 0.2rem 0.3rem 0.2rem 0.3rem;
-    background-color: #0080ff;
-}
 
-.cancel_button_dialog:hover {
-    background-color: #0060dd;
-}
-
-dialog {
-    border: 0.2rem solid #c73636;
-    background-color: rgb(0,0,0,0.9);
-    color: #fff;
-    border-radius: 10px;
-    text-align: center;
-}
-
-.delete_button_dialog {
-    border: none;
-    margin-right: 1rem;
-    color: #fff;
-    font-weight: bold;
-    border-radius: 5px;
-    font-size: 0.9rem;
-    padding: 0.2rem 0.3rem 0.2rem 0.3rem;
-    background-color: #c90000;
-}
-
-.delete_button_dialog:hover {
-    background-color: #a70000;
-}
 
 
 
@@ -1111,30 +1075,6 @@ dialog {
     margin-top: 3rem;
     margin-bottom: 3rem;
     text-align:center;
-}
-.search_div{
-    margin-bottom : 1rem;
-}
-.search_div > form > button {
-    border: none;
-    border-radius: 5px;
-    padding: .8rem;
-    background-color: #e6d800;
-}
-.search_div > form > button:hover {
-    background-color: #d5c700;
-}
-.search_div > form > input {
-    border: none;
-    border-radius: 5px;
-    width: 30rem;
-    padding: .8rem;
-    font-size: 1rem;
-}
-@media(max-width:850px){
-    .search_div > form > input {
-        width: calc(100% - 3rem);
-    }
 }
 
 .list_div {

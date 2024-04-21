@@ -6,84 +6,104 @@
 }
 @using Microsoft.AspNetCore.Identity
 
-<div class="main_container">
-    <div class="inner_container">
-        @{
-            if (Model.Borrowing == null || Model.Borrowing.Count == 0)
-            {
-                <div class="list_header">
-                    <h1>Wypożycz książkę tym przyciskiem:</h1>
-                </div>            
-                if (!User.IsInRole("Employee"))
+<link rel="stylesheet" href="~/css/Borrowings/index_admin.css" asp-append-version="true" />
+
+<div>
+    <partial name="_UnderHeaderBorrowing" />
+
+    <dialog id="delete_borrowing_dialog">
+        <i class="fa-solid fa-circle-xmark dialog-exit"></i>
+        <form method="post" asp-page-handler="CancelBorrowing">
+            <input type="hidden" name="borrowingId" value="1">
+            <p class="dialog_header">Anulowanie wypożyczenia</p>
+            <p class="dialog_content">Czy napewno chcesz anulować te wypożyczenie ?</p>
+            <div class="d-flex flex-row justify-content-center align-items-center">
+                <button type="button" class="action-button action-cancel"><i class="fa-solid fa-xmark"></i>Nie, wróc</button>
+                <button type="submit" class="action-button action-delete"><i class="fa-solid fa-trash-can"></i>Tak, anuluj</button>
+            </div>
+        </form>
+    </dialog>
+
+    <div class="table_div table-responsive">
+        <table class="table table-striped text-center">
+            <thead class="table-header-style">
+                <tr>
+                    <th class="align-middle">
+                        @Html.DisplayName("Tytuł")
+                    </th>
+                    <th class="align-middle">
+                        @Html.DisplayNameFor(model => model.Borrowing[0].borrowDate)
+                    </th>
+                    <th class="align-middle">
+                        @Html.DisplayNameFor(model => model.Borrowing[0].plannedReturnDate)
+                    </th>
+                    <th class="align-middle">
+                        @Html.DisplayNameFor(model => model.Borrowing[0].returnDate)
+                    </th>
+                    <th class="align-middle">Akcja</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Borrowing)
                 {
-                    <button class="button buttonDefault">
-                        <a class="nav-link lightText" asp-page="../Books/Index">Zacznij Wypożyczać!</a>
-                    </button>
+                    <tr>
+                        <td class="align-middle td_book_title">
+                            @Html.DisplayFor(modelItem => item.book.title)
+                        </td>
+                        <td class="align-middle td_borrow_date">
+                            @item.borrowDate.ToString("dd.MM.yyyy")
+                        </td>
+                        <td class="align-middle">
+                            @item.plannedReturnDate.ToString("dd.MM.yyyy")
+                        </td>
+                        <td class="align-middle">
+                            @item.returnDate?.ToString("dd.MM.yyyy\nHH:MM")
+                        </td>
+                        <td class="align-middle">
+                            <button class="action-button action-delete"><i class="fa-solid fa-trash-can"></i>Anuluj<p class="hidden-borrowId">@item.borrowId</p></button>
+                        </td>
+                    </tr>
                 }
-                <img src="~/images/noborrows.jpg" style="position:relative;width: 100%;height: auto;" />
-            }
-            else
-            {
-                <div class="list_header">
-                    <h1>Wypożyczenia</h1>
-                </div>
-                <div class="list_div">
-                    <div class="table-responsive borrowing_table_scroll">
-                        <table class="tableToModify">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Borrowing[0].borrowDate)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Borrowing[0].plannedReturnDate)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Borrowing[0].returnDate)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayName("Wypożyczona książka")
-                                    </th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.Borrowing)
-                                {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.borrowDate)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.plannedReturnDate)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.returnDate)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.book.title)
-                                        </td>
-                                        <td>
-                                            @if (item.bookLost == false)
-                                            {
-                                                <button class="button buttonRed"><a class="lightText" asp-page="./Delete" asp-route-id="@item.borrowId">Usuń</a></button>
-                                                @if (item.Confirmation == true && item.IsReturned == false)
-                                                {
-                                                    <button class="button buttonYellow"><a class="lightText" asp-page="./BookLost" asp-route-id="@item.borrowId">Zgłoś zagubienie książki</a></button>
-                                                }
-                                            }
-                                            else
-                                            {
-                                                <p class="button buttonRed">Zgubiono książkę</p>
-                                            }
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            }
+            </tbody>
+        </table>
+        @if (!Model.Borrowing.Any())
+        {
+            <img src="~/images/noborrows.jpg" class="position-relative h-auto w-100" />
         }
     </div>
+    @{
+        if (TempData["Message"] != null)
+        {
+            <div class="notification_div">
+                @if (TempData["Message"]?.ToString()?.Split("/")[0] == "Success")
+                {
+                    <div>
+                        <i class="fa-solid fa-check success_notification_icon"></i>
+                    </div>
+                }
+                else
+                {
+                    <div>
+                        <i class="fa-solid fa-circle-exclamation error_notification_icon"></i>
+                    </div>
+                }
+                <div class="notification-content">
+                    @if (TempData["Message"]?.ToString()?.Split("/")[0] == "Success")
+                    {
+                        <p class="notification-header-success">Sukces!</p>
+                    }
+                    else
+                    {
+                        <p class="notification-header-error">Błąd!</p>
+                    }
+                    <p class="notification-message">@TempData["Message"]?.ToString()?.Split("/")[1]</p>
+                </div>
+                <div class="hide-notification">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
+        }
+    }
 </div>
+<script src="~/js/Borrowing/ModalDialogRunner.js"></script>
+<script src="~/js/Borrowing/Notification.js"></script>

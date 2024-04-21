@@ -276,3 +276,112 @@ a:hover {
 ::-webkit-scrollbar-thumb {
     background-color: #8F2121;
 }
+
+.under-header {
+    color: white;
+    background-color: #882E2E;
+    height: 15%;
+    width: 100%;
+    padding: 1%;
+    padding-left: 5%;
+    font: bold;
+    margin-bottom: 3%;
+}
+
+
+.search_div {
+    margin-bottom: 2rem;
+}
+.search_div form{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.search_div > form > button {
+    border: none;
+    border-radius: 0 10px 10px 0;
+    padding: .8rem 1rem 0.8rem 1rem;
+    background-color: #e6d800;
+    box-shadow: rgba(0, 0, 0, 0.2) 3px 4px 10px;
+}
+
+.search_div > form > button:hover {
+    background-color: #d5c700;
+}
+
+.search_div > form > input {
+    border: none;
+    border-radius: 10px 0 0 10px;
+    width: 30rem;
+    padding: .8rem;
+    font-size: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.2) -2px 4px 10px;
+}
+@media(max-width:840px) {
+    .search_div > form > input {
+        width: calc(100% - 6.5rem);
+    }
+}
+
+dialog {
+    border: none;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.8) 0px 0px 20px;
+    max-width: 35rem;
+    position: relative;
+}
+.dialog-exit {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    font-size: 1.7rem;
+}
+.dialog-exit:hover{
+    cursor:pointer;
+    opacity:.8;
+}
+@media(max-width:800px) {
+    dialog {
+    max-width: 80% ;
+}
+}
+.dialog_header{
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem
+}
+.dialog_content {
+    color: #9298a1 /*#a0a6b0*/;
+}
+
+.cancel_button_dialog {
+    border: none;
+    margin-right: 1rem;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    padding: 0.2rem 0.3rem 0.2rem 0.3rem;
+    background-color: #0080ff;
+}
+
+.cancel_button_dialog:hover {
+    background-color: #0060dd;
+}
+
+
+
+.delete_button_dialog {
+    border: none;
+    margin-right: 1rem;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    padding: 0.2rem 0.3rem 0.2rem 0.3rem;
+    background-color: #c90000;
+}
+
+.delete_button_dialog:hover {
+    background-color: #a70000;
+}

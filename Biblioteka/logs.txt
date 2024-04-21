@@ -111,3 +111,24 @@
 2024-04-11 19:42:09.343 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
 2024-04-11 19:47:36.255 +02:00 [INF] Wylogowanie employee@employee.com - Employee
 2024-04-11 19:47:45.970 +02:00 [INF] Zalogowany użytkownik asd@gmail.com - Reader
+2024-04-20 13:53:37.091 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
+2024-04-20 13:53:47.769 +02:00 [INF] Wylogowanie jan.kowalski@gmail.com - Reader
+2024-04-20 13:54:03.159 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-04-20 13:55:12.668 +02:00 [INF] Wylogowanie janusz.kowalski@gmail.com - Employee
+2024-04-20 13:55:26.463 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
+2024-04-20 13:55:43.314 +02:00 [INF] Wylogowanie jan.kowalski@gmail.com - Reader
+2024-04-20 14:02:15.211 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-04-20 14:11:34.954 +02:00 [INF] Wylogowanie janusz.kowalski@gmail.com - Employee
+2024-04-20 14:11:45.484 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
+2024-04-20 14:16:59.480 +02:00 [INF] Wylogowanie jan.kowalski@gmail.com - Reader
+2024-04-20 14:17:18.521 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-04-20 17:33:05.559 +02:00 [INF] zwrócono książkę Władca Pierścieni
+2024-04-20 22:01:23.570 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-04-20 23:37:16.107 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-04-21 00:06:25.039 +02:00 [INF] Wylogowanie janusz.kowalski@gmail.com - Employee
+2024-04-21 00:06:34.793 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
+2024-04-21 00:11:04.097 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
+2024-04-21 00:17:25.117 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
+2024-04-21 00:18:54.136 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
+2024-04-21 00:20:05.138 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
+2024-04-21 00:22:51.938 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
