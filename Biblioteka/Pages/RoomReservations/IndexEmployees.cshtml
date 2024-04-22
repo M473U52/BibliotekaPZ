@@ -9,14 +9,13 @@
 @inject UserManager<BibUser> UserManager
 
 <div class="main_container">
-    <div class="inner_container">
         <div class="list_header">
             <h1>Wynajmowane sale</h1>
         </div>
         @if (Model.RoomReservation.Any())
         {
             <div class="search_div">
-                <form method="get" asp-page="./Index">
+                <form method="get" asp-page="./IndexEmployees">
                     <input type="text" placeholder="Wyszukaj rezerwację" name="SearchTerm" value="@Model.SearchTerm">
                     <button type="submit">
                         <i class="fas fa-search"></i>
@@ -24,14 +23,8 @@
                 </form>
             </div>
         }
-        <div class="move_right">
-            <button class="button buttonDefault">
-                <a class="nav-link lightText" asp-page="Create">Zarezerwuj salę</a>
-            </button>
-        </div>
-        <div class="list_div">    
-            <div class="table-responsive reservation_table_scroll">    
-                <table class="tableToModify">
+        <div class="table-container">      
+                <table id="tableToModify">
                     <thead>
                         <tr>
                             <th>
@@ -52,7 +45,9 @@
                                     @Html.DisplayNameFor(model => model.RoomReservation[0].Confirmation)
                                 </th>
                             }
-                            <th></th>
+                            <th>
+                                Anulowanie rezerwacji
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -66,33 +61,115 @@
                                     @Html.DisplayFor(modelItem => item.endOfReservationDate)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.room.FullData)
+                                    @Html.DisplayFor(modelItem => item.room.roomNumber)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.reader.FullName)
                                 </td>
                                 @if (User.IsInRole("Employee"))
                                 {
-                                    <td>
+                                    <td class="plzdzialaj">
                                         @if (!item.Confirmation)
                                         {
-                                            <button class="button buttonRed"><a class="lightText" asp-page="./Confirmation" asp-route-id="@item.reservationId">Potwierdź</a></button>
+                                            <button class="button buttonDefault"><a class="lightText" asp-page="./Confirmation" asp-route-id="@item.reservationId">Potwierdź</a></button>
 
                                         }
                                         else
                                         {
-                                            <div>Potwierdzone już</div>
+                                            <div>Potwierdzone</div>
                                         }
                                     </td>
                                 }
                                 <td>
-                                    <button class="button buttonRed"><a class="lightText" asp-page="./Delete" asp-route-id="@item.reservationId">Anuluj</a></button>
+                                    <button class="button buttonDefault"><a class="lightText" asp-page="./Delete" asp-route-id="@item.reservationId">Anuluj</a></button>
                                 </td>
                             </tr>
                         }
                     </tbody>
                 </table>
-            </div>
         </div>
-    </div>	
 </div>
+
+<style>
+    .kolumna1 {
+        background-color: #f2f2f2 !important;  /* Jasny szary */
+    }
+
+    .kolumna2 {
+        background-color: #d9d9d9 !important; /* Ciemniejszy szary */
+    }
+    .plzdzialaj{
+        
+    }
+
+    #tableToModify {
+        clear: both;
+        margin-left: auto;
+        margin-right: auto;
+        border-collapse: collapse;
+        font-size: 0.9em;
+        min-width: 400px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0,0,0,0.15);
+        width: 100%;
+    }
+
+        #tableToModify thead tr {
+            text-align: left;
+            font-weight: bold;
+        }
+
+        #tableToModify th,
+        #tableToModify td {
+            padding: 12px 5px;
+            text-align: center;
+            align-items: center;
+        }
+
+        #tableToModify td:last-child{
+            width:120px;
+        }
+        #tableToModify td:nth-last-child(2)
+        {
+            width: 150px;
+        }
+        #tableToModify tbody tr,
+        #tableToModify th{
+            border-bottom: 1px solid #111111;
+        }
+
+            #tableToModify tbody tr:last-of-type {
+                border-bottom: 2px solid #782222;
+            }
+
+        
+    }
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var tabela = document.getElementById("tableToModify");
+
+        // Stylizacja nagłówków
+        var naglowki = tabela.getElementsByTagName("th");
+        for (var i = 0; i < naglowki.length; i++) {
+            if ((i + 1) % 2 === 0) { // Dla parzystych kolumn
+                naglowki[i].classList.add("kolumna2");
+            } else { // Dla nieparzystych kolumn
+                naglowki[i].classList.add("kolumna1");
+            }
+        }
+
+        // Stylizacja wierszy danych
+        var wiersze = tabela.getElementsByTagName("tr");
+        for (var i = 0; i < wiersze.length; i++) {
+            var komorki = wiersze[i].getElementsByTagName("td");
+            for (var j = 0; j < komorki.length; j++) {
+                if ((j + 1) % 2 === 0) { // Dla parzystych kolumn
+                    komorki[j].classList.add("kolumna2");
+                } else { // Dla nieparzystych kolumn
+                    komorki[j].classList.add("kolumna1");
+                }
+            }
+        }
+    });
+</script>

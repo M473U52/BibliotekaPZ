@@ -20,11 +20,18 @@ namespace Biblioteka.Pages.RoomReservations
         [BindProperty(SupportsGet = true)]
         public string SearchTerm { get; set; }
 
-        public void OnGet()
+        public void OnGet(string searchTerm)
         {
+            SearchTerm = searchTerm;
+            if (SearchTerm == null)
+            {
+                RoomReservation = _roomReservationRepository.getAll();
+            } else
+            {
+                RoomReservation = _roomReservationRepository.SearchRoomReservations(SearchTerm);
+            }
 
-            //RoomReservation = _roomReservationRepository.SearchRoomReservations(SearchTerm);
-            RoomReservation = _roomReservationRepository.getAll();
+            
         }
     }
 }

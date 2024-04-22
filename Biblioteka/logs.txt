@@ -111,3 +111,14 @@
 2024-04-11 19:42:09.343 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
 2024-04-11 19:47:36.255 +02:00 [INF] Wylogowanie employee@employee.com - Employee
 2024-04-11 19:47:45.970 +02:00 [INF] Zalogowany użytkownik asd@gmail.com - Reader
+2024-04-22 14:26:01.793 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
+2024-04-22 14:27:38.434 +02:00 [INF] Wylogowanie employee@employee.com - Employee
+2024-04-22 14:28:13.283 +02:00 [INF] Zarejestrowano czytelnika Jakub Pałaszewski
+2024-04-22 14:38:48.662 +02:00 [INF] Wylogowanie kuba.palaszewski8@gmail.com - Reader
+2024-04-22 14:39:01.188 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
+2024-04-22 14:52:05.311 +02:00 [INF] Wylogowanie employee@employee.com - Employee
+2024-04-22 14:52:21.194 +02:00 [INF] Zalogowany użytkownik kuba.palaszewski8@gmail.com - Reader
+2024-04-22 14:53:11.243 +02:00 [INF] Wylogowanie kuba.palaszewski8@gmail.com - Reader
+2024-04-22 14:53:28.886 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
+2024-04-22 16:13:27.124 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
+2024-04-22 21:47:55.283 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee

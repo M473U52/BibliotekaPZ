@@ -1115,6 +1115,9 @@ dialog {
 .search_div{
     margin-bottom : 1rem;
 }
+search_div > form {
+    border: 1px solid black;
+}
 .search_div > form > button {
     border: none;
     border-radius: 5px;
@@ -1254,7 +1257,7 @@ h1 {
 }
 
     .tableToModify thead tr {
-        background-color: #782222;
+        /*background-color: #a1a1a1;*/
         color: white;
         text-align: left;
         font-weight: bold;
@@ -1267,11 +1270,11 @@ h1 {
 
     .tableToModify tbody tr {
         border-bottom: 1px solid #dddddd;
-        background-color: #fff2da;
+        /*background-color: #f3f3f3;*/
     }
 
         .tableToModify tbody tr:nth-of-type(even) {
-            background-color: #ffeccb;
+            /*background-color: #e6e6e6;*/
         }
 
         .tableToModify tbody tr:last-of-type {
@@ -1291,7 +1294,7 @@ h1 {
 .button {
     flex: 1 1 auto;
     margin: 3px;
-    padding: 20px;
+    padding: 15px;
     text-decoration: none;
     text-align: center;
     transition: 0.5s;
@@ -1299,7 +1302,6 @@ h1 {
     color: white;
     /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
     box-shadow: 0 0 20px rgba(0,0,0,0.15);
-    border-radius: 5px;
     font-weight: bold;
     outline: none;
 }
@@ -1491,4 +1493,15 @@ h1 {
 .bootstrap-datetimepicker-widget .thead-default th {
     background-color: #801c1c !important; /* zmień na kolor bordowy */
     color: white !important;
+}
+
+
+.table-container {
+    overflow-x: auto; /* Zapewnia poziome przewijanie, gdy zawartość przekracza kontener */
+}
+
+@media (max-width: 1000px) {
+    .table-container table {
+        min-width: 1000px; /* Zapobiega kurczeniu się tabeli poniżej 1000px */
+    }
 }
