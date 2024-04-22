@@ -17,7 +17,7 @@
 
 @media screen and (min-width: 1300px) {
     .two-columns {
-        margin-left: 9%;
+        margin-left: 8%;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-gap: 35%;
@@ -28,6 +28,7 @@
         background-color: #10A377;
         border: none;
         padding: 20px;
+        width: 250px;
     }
 }
 
@@ -47,7 +48,7 @@
         background-color: #10A377;
         border: none;
         padding: 20px;
-        width: 120%;
+        width: 250px;
     }
 }
 
@@ -96,13 +97,56 @@
     border-radius: 15px;
 }
 
-.container{
-    margin-top: 30px;
+@media screen and (min-width: 1000px) {
+    .container {
+        margin-top: 30px;
+        width: 100%;
+        max-width: 95%;
+    }
 }
+
+
+@media screen and (min-width: 800px) and (max-width: 1000px) {
+    .container {
+        margin-top: 30px;
+        width: 100%;
+        max-width: 500px;
+        overflow-x: auto;
+    }
+}
+
+@media screen and (min-width: 600px) and (max-width: 800px) {
+    .container {
+        margin-top: 30px;
+        width: 100%;
+        max-width: 430px;
+        overflow-x: auto;
+    }
+}
+
+@media screen and (min-width: 500px) and (max-width: 600px) {
+    .container {
+        margin-top: 30px;
+        width: 100%;
+        max-width: 330px;
+        overflow-x: auto;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .container {
+        margin-top: 30px;
+        width: 100%;
+        max-width: 280px;
+        overflow-x: auto;
+    }
+}
+
 
 .simple-table {
     background-color: gainsboro;
     text-align: center;
+    position: sticky;
     width: 90%;
 }
 

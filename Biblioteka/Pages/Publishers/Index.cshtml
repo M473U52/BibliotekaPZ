@@ -45,21 +45,22 @@
             <tbody>
             @foreach (var item in Model.Publisher)
             {
-                                <tr>
-                                    <td>
-                        @Html.DisplayFor(modelItem => item.name)
-                                    </td>
-                                                                            <td>
-                            @Html.DisplayFor(modelItem => item.description)
-                                        </td>
-                                    <td>
-                                            <button class="button-green2"><a class="text-light" asp-page="./Edit" asp-route-id="@item.publisherId">Edytuj</a></button>
-                                            <button class="button-red"><a class="text-light" asp-page="./Delete" asp-route-id="@item.publisherId">Usuń</a></button>
-                                    </td>
-                                </tr>
+                        <tr>
+                            <td>
+                @Html.DisplayFor(modelItem => item.name)
+                            </td>
+                                                                    <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                                </td>
+                            <td>
+                                    <button class="button-green2"><a class="text-light" asp-page="./Edit" asp-route-id="@item.publisherId">Edytuj</a></button>
+                                    <button class="button-red"><a class="text-light" asp-page="./Delete" asp-route-id="@item.publisherId">Usuń</a></button>
+                            </td>
+                        </tr>
             }
                     </tbody>
         </table>
+        </div>
     </div>
 </div>
 </div>
