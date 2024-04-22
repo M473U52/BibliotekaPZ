@@ -65,5 +65,9 @@ namespace Biblioteka.Models
         [Display(Name = "Okładka"),
             NotMapped]
         public IFormFile? image { get; set; }
+
+        [Display(Name = "Ebook"),
+            NotMapped]
+        public IFormFile? ebook { get; set; }
     }
 }

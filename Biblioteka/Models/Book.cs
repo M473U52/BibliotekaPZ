@@ -101,6 +101,9 @@ namespace Biblioteka.Models
 		[AllowNull]
         public byte[]? imageData { get; set; }
 
+        [AllowNull]
+        public byte[]? ebookData { get; set; }
+
         public ICollection<Book_Author> authors { get; set; } = new List<Book_Author>();
         public ICollection<Book_Opinions> opinions { get; set; } = new List<Book_Opinions>();
 		public ICollection<Book_Tag> tags { get; set; } = new List<Book_Tag>();

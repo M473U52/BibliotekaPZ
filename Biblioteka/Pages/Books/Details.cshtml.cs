@@ -77,27 +77,6 @@ namespace Biblioteka.Views.Books
             return Page();
         }
 
-
-
-
-        /*       public IActionResult OnGet(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            Book = _bookRepository.getOne(id.Value);
-
-            if (Book == null)
-            {
-                return NotFound();
-            }
-
-            return Page();
-        }*/
-
-
         public IActionResult OnPostAddOpinion(int bookId)
         {
             var id = bookId; //Book.bookId;
