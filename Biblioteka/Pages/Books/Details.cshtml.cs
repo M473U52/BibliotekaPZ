@@ -187,5 +187,13 @@ namespace Biblioteka.Views.Books
 
             return RedirectToPage("./Details", new { id = book.bookId });
         }
+
+        public FileResult OnGetDownloadPDF(int id)
+        {
+            var book = _bookRepository.getOne(id);
+            string fileName = book.title + " ebook.pdf";
+
+            return File(book.ebookData, "application/pdf", fileName);
+        }
     }
 }

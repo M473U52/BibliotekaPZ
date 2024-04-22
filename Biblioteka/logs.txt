@@ -133,3 +133,6 @@
 2024-04-21 00:20:05.138 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
 2024-04-21 00:22:51.938 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
 2024-04-22 22:14:51.388 +02:00 [INF] Zarejestrowano czytelnika asd asd
+2024-04-22 22:31:09.174 +02:00 [INF] Wylogowanie asd@asd.asd - Reader
+2024-04-22 22:31:16.303 +02:00 [INF] Zalogowany użytkownik admin@admin.com - Admin
+2024-04-22 22:31:54.179 +02:00 [INF] Dodano książkę aaaaaaaa

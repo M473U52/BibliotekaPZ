@@ -165,8 +165,20 @@ namespace Biblioteka.Views.Books
                         }
                     }
                     else
-                        ModelState.AddModelError("file not pdf or wrong size", "Plik musi być w formacie JPG i nie większy niż 10MB!");
-                
+                        ModelState.AddModelError("file not jpg or wrong size", "Plik musi być w formacie JPG i nie większy niż 10MB!");
+
+                if (Book.ebook != null)
+                    if (Book.ebook.Length > 0 && Book.ebook.Length < 10000000 && Path.GetExtension(Book.ebook.FileName) == ".pdf")
+                    {
+                        using (var ms = new MemoryStream())
+                        {
+                            Book.ebook.CopyTo(ms);
+                            newBook.ebookData = ms.ToArray();
+                        }
+                    }
+                    else
+                        ModelState.AddModelError("file not pdf or wrong size", "Plik musi być w formacie PDF i nie większy niż 10MB!");
+
                 Book after = newBook;
 
 
