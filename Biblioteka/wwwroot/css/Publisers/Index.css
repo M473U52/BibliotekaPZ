@@ -1,0 +1,119 @@
+﻿.under-header {
+    border-top: 2px solid white;
+    width: 100%;
+    height: 65px;
+    background-color: #781C1C;
+}
+
+.main-container{
+    min-height: 400px;
+}
+.vertical {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (min-width: 1300px) {
+    .two-columns {
+        margin-left: 9%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 35%;
+    }
+
+    .button-green {
+        border-radius: 15px;
+        background-color: #10A377;
+        border: none;
+        padding: 20px;
+    }
+}
+
+@media screen and (max-width: 1300px) {
+    .two-columns {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .column{
+        margin-top: 20px;
+    }
+
+    .button-green {
+        margin-left: -9%;
+        border-radius: 15px;
+        background-color: #10A377;
+        border: none;
+        padding: 20px;
+        width: 120%;
+    }
+}
+
+
+.button-red {
+    background-color: #BA4A4A;
+    border: none;
+    border-radius: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.button-green2 {
+    background-color: #10A377;
+    border: none;
+    border-radius: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.no-button{
+    border: none;
+    background-color: none;
+    background: none;
+
+}
+
+.no-input{
+    border: none;
+    outline: none;
+}
+
+.search-bar {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 40px;
+    padding-right: 20px;
+    border: 1px solid #ccc;
+    outline: 0;
+    border-radius: 15px;
+}
+
+.container{
+    margin-top: 30px;
+}
+
+.simple-table {
+    background-color: gainsboro;
+    text-align: center;
+    width: 90%;
+}
+
+th, td {
+    padding: 5px;
+    padding-bottom: 10px;
+    font-weight: 400;
+}
+
+td:nth-child(even) {
+    background-color: #f2f2f2; 
+}
+
+th:nth-child(even) {
+    background-color: #f2f2f2;
+}
