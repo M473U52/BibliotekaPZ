@@ -111,3 +111,32 @@
 2024-04-11 19:42:09.343 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
 2024-04-11 19:47:36.255 +02:00 [INF] Wylogowanie employee@employee.com - Employee
 2024-04-11 19:47:45.970 +02:00 [INF] Zalogowany użytkownik asd@gmail.com - Reader
+2024-04-22 11:10:02.504 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
+2024-04-22 11:18:23.883 +02:00 [INF] Wylogowanie jan.kowalski@gmail.com - Reader
+2024-04-22 11:18:26.889 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
+2024-04-22 11:19:01.339 +02:00 [INF] Dodano książkę test123
+2024-04-22 11:19:27.987 +02:00 [INF] Dodano książkę test2
+2024-04-22 11:19:31.872 +02:00 [INF] Wylogowanie employee@employee.com - Employee
+2024-04-22 11:20:09.981 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
+2024-04-22 12:47:45.124 +02:00 [INF] zwrócono książkę Zbrodnia Ikara
+2024-04-22 12:47:49.109 +02:00 [INF] zwrócono książkę Władca Pierścieni
+2024-04-22 12:47:59.308 +02:00 [INF] zwrócono książkę Wiedźmin
+2024-04-22 12:54:10.413 +02:00 [INF] zwrócono książkę test2
+2024-04-22 12:54:11.751 +02:00 [INF] zwrócono książkę Władca Pierścieni
+2024-04-22 13:13:43.349 +02:00 [INF] zwrócono książkę Mały Książe
+2024-04-22 18:02:18.793 +02:00 [INF] zwrócono książkę Wiedźmin
+2024-04-22 18:02:20.304 +02:00 [INF] zwrócono książkę Mały Książe
+2024-04-22 18:02:21.592 +02:00 [INF] zwrócono książkę test123
+2024-04-22 18:18:05.012 +02:00 [INF] zwrócono książkę Władca Pierścieni
+2024-04-23 11:54:19.989 +02:00 [INF] zwrócono książkę Wiedźmin
+2024-04-23 11:58:41.478 +02:00 [INF] zwrócono książkę test2
+2024-04-23 11:58:57.225 +02:00 [INF] zwrócono książkę Władca Pierścieni
+2024-04-23 12:00:26.757 +02:00 [INF] Wylogowanie jan.kowalski@gmail.com - Reader
+2024-04-23 12:00:30.026 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
+2024-04-23 12:01:04.718 +02:00 [INF] Dodano książkę test3
+2024-04-23 12:01:41.927 +02:00 [INF] Dodano książkę test4
+2024-04-23 12:01:51.970 +02:00 [INF] Wylogowanie employee@employee.com - Employee
+2024-04-23 12:01:59.820 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
+2024-04-23 12:08:13.721 +02:00 [INF] zwrócono książkę Władca Pierścieni cz. 4
+2024-04-23 12:09:22.849 +02:00 [INF] zwrócono książkę Zbrodnia Ikara
+2024-04-23 12:09:24.257 +02:00 [INF] zwrócono książkę Władca Pierścieni cz. 4

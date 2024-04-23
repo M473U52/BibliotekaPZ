@@ -39,7 +39,7 @@ namespace Biblioteka.Views.Books
             _authorRepository = authorRepository;
             _borrowingRepository = borrowingRepository;
             _userManager = userManager;
-            _bibContext = bibContext;   
+            _bibContext = bibContext;
         }
 
         [BindProperty(SupportsGet = true)]
@@ -56,7 +56,7 @@ namespace Biblioteka.Views.Books
 
         public List<string> GenresBorrowed { get; set; } = new List<string>();
 
-        public List<string> AuthorsBorrowed { get; set;} = new List<string>();
+        public List<string> AuthorsBorrowed { get; set; } = new List<string>();
 
         public List<Book> RecommendedBooks { get; set; } = new List<Book>();
 
@@ -74,7 +74,7 @@ namespace Biblioteka.Views.Books
             if (loggedInUserId != null)
             {
                 var user = await _userManager.FindByIdAsync(loggedInUserId);
-          
+
                 if (user != null)
                 {
                     string name = user.name;
@@ -98,6 +98,9 @@ namespace Biblioteka.Views.Books
 
                         Borrowing = foundBorrowings;
 
+                        
+
+
                         foreach (var borrowing in foundBorrowings)
                         {
                             if (borrowing.book != null && borrowing.book.genre != null)
@@ -111,123 +114,76 @@ namespace Biblioteka.Views.Books
                                 {
                                     if (bookAuthor.author != null)
                                     {
-                                       
-                                        string fullName = bookAuthor.author.FullName; 
+
+                                        string fullName = bookAuthor.author.FullName;
                                         AuthorsBorrowed.Add(fullName);
                                         Debug.WriteLine(fullName);
                                     }
                                 }
                             }
-
-
                         }
 
-                        if (GenresBorrowed!=null)
+                        if (GenresBorrowed != null)
                         {
-
                             var genreNameCounts = GenresBorrowed
-                            .GroupBy(name => name)
-                            .Select(group => new { GenreName = group.Key, Count = group.Count() })
-                            .OrderByDescending(g => g.Count)
-                            .ToList();
+                                .GroupBy(name => name)
+                                .Select(group => new { GenreName = group.Key, Count = group.Count() })
+                                .OrderByDescending(g => g.Count)
+                                .ToList();
 
-
-                            if(genreNameCounts.Count >= 2)
+                            if (genreNameCounts.Count >= 2)
                             {
-                                /*List<string> twoMostOccurredGenres = genreNameCounts
-                                .Take(2)
-                                .Select(g => g.GenreName)
-                                .ToList();*/
                                 bool isDifferentBook = true;
-                                for (int i=0;i<genreNameCounts.Count;i++)
-                                {
-                                    for(int j=0;j<15;j++)
-                                    {
-                                        List<Book> booksByMostCommonGenre = _bookRepository.GetBooksByGenre(genreNameCounts[i].GenreName);
-
-
-                                        //  Debug.WriteLine(booksByMostCommonGenre.Count > 0 ? booksByMostCommonGenre[i].bookId.ToString() : "No books found");
-
-                                        Random rnd = new Random();
-                                        int randomIndex = rnd.Next(booksByMostCommonGenre.Count);  // Generate a random index
-                                        Book randomBook = booksByMostCommonGenre[randomIndex];  // Retrieve the book at the randomly generated index
-
-                                        foreach (var Book in RecommendedBooks)
-                                        {
-                                            if (randomBook == Book)
-                                            {
-                                                isDifferentBook = false;
-                                                break;
-                                            }
-
-                                        }
-                                        if (isDifferentBook)
-                                        {
-                                            RecommendedBooks.Add(randomBook);
-                                            break;
-
-                                        }
-                                        
-                                        /*if (recommendedBook == )
-                                        for(int j = 0; j < 15;j++) {
-
-                                            RecommendedBooks.Add(recommendedBook);
-                                        }*/
-                                    }
-
-                                }
-
-                                for (int i = 1; i < genreNameCounts.Count; i++)
+                                for (int i = 0; i < genreNameCounts.Count; i++)
                                 {
                                     for (int j = 0; j < 15; j++)
                                     {
-                                        List<Book> booksByMostCommonGenre2 = _bookRepository.GetBooksByGenre(genreNameCounts[i].GenreName);
-
-
-                                        //  Debug.WriteLine(booksByMostCommonGenre.Count > 0 ? booksByMostCommonGenre[i].bookId.ToString() : "No books found");
-
+                                        List<Book> booksByMostCommonGenre = _bookRepository.GetBooksByGenre(genreNameCounts[i].GenreName);
                                         Random rnd = new Random();
-                                        int randomIndex = rnd.Next(booksByMostCommonGenre2.Count);  // Generate a random index
-                                        Book randomBook = booksByMostCommonGenre2[randomIndex];  // Retrieve the book at the randomly generated index
-
+                                        int randomIndex = rnd.Next(booksByMostCommonGenre.Count);
+                                        Book randomBook = booksByMostCommonGenre[randomIndex];
                                         foreach (var Book in RecommendedBooks)
                                         {
-                                            if (randomBook == Book)
+                                            if (randomBook == Book || Borrowing.Any(b => b.book.bookId == randomBook.bookId))
                                             {
                                                 isDifferentBook = false;
                                                 break;
                                             }
-
                                         }
+
                                         if (isDifferentBook)
                                         {
                                             RecommendedBooks.Add(randomBook);
                                             break;
-
                                         }
-
-                                        /*if (recommendedBook == )
-                                        for(int j = 0; j < 15;j++) {
-
-                                            RecommendedBooks.Add(recommendedBook);
-                                        }*/
                                     }
-
                                 }
+                                //for (int i = 1; i < genreNameCounts.Count; i++)
+                                //{
+                                //    for (int j = 0; j < 15; j++)
+                                //    {
+                                //        List<Book> booksByMostCommonGenre2 = _bookRepository.GetBooksByGenre(genreNameCounts[i].GenreName);
+                                //        Random rnd = new Random();
+                                //        int randomIndex = rnd.Next(booksByMostCommonGenre2.Count);
+                                //        Book randomBook = booksByMostCommonGenre2[randomIndex];
+                                //        foreach (var Book in RecommendedBooks)
+                                //        {
+                                //            if (randomBook == Book || Borrowing.Any(b => b.book.bookId == randomBook.bookId))
+                                //            {
+                                //                isDifferentBook = false;
+                                //                break;
+                                //            }
+                                //        }
 
-
-                             //   List<Book> booksByMostCommonGenre2 = _bookRepository.GetBooksByGenre(genreNameCounts[1].GenreName);
-                              //  Debug.WriteLine(booksByMostCommonGenre2.Count > 0 ? booksByMostCommonGenre2[0].bookId.ToString() : "No books found");
-                            //    Book recommendedBook2 = booksByMostCommonGenre2[0];
-                             //   RecommendedBooks.Add(recommendedBook2);
-
-
+                                //        if (isDifferentBook)
+                                //        {
+                                //            RecommendedBooks.Add(randomBook);
+                                //            break;
+                                //        }
+                                //    }
+                                //}
                             }
-             
-                            
                         }
-                 
-
 
                         if (AuthorsBorrowed != null && AuthorsBorrowed.Any())
                         {
@@ -237,44 +193,51 @@ namespace Biblioteka.Views.Books
                                 .OrderByDescending(g => g.Count)
                                 .ToList();
 
-                            // Check that we have at least one author before proceeding
                             if (authorNameCounts.Count > 0)
                             {
-
-                                for(int i=0;i<authorNameCounts.Count;i++)
+                                for (int i = 0; i < authorNameCounts.Count; i++)
                                 {
                                     var authorName = authorNameCounts[i];
                                     bool isDifferentBook = true;
-
                                     Book recommendedBook3 = _bookRepository.GetRandomBookByAuthor(authorName.FullName);
                                     foreach (var Book in RecommendedBooks)
                                     {
-                                        if (recommendedBook3 == Book)
+                                        if (recommendedBook3 == Book || Borrowing.Any(b => b.book.bookId == recommendedBook3.bookId))
                                         {
                                             isDifferentBook = false;
+                                            break;
                                         }
                                     }
-
                                     if (isDifferentBook)
                                     {
                                         RecommendedBooks.Add(recommendedBook3);
                                         return;
-
                                     }
                                 }
-                               
                             }
                         }
+
+
+                        var highestRatedBook = await _bibContext.Book
+                        .Where(b => b.ratingAVG.HasValue)
+                        .OrderByDescending(b => b.ratingAVG)
+                        .FirstOrDefaultAsync();
+
+                        if (highestRatedBook != null || !Borrowing.Any(b => b.book.bookId == highestRatedBook.bookId))
+                        {
+                            RecommendedBooks.Add(highestRatedBook);
+                        }
+
 
                     }
                     else
                     {
                         Borrowing = new List<Borrowing>();
-
                     }
                 }
             }
         }
+
         public int BookCountForGenre(int genre_id)
         {
             return Book.Where(b => b.genre.genreId == genre_id).Count();

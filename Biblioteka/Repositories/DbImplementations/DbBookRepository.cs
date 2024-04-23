@@ -1,4 +1,4 @@
-using Biblioteka.Context;
+﻿using Biblioteka.Context;
 using Biblioteka.Models;
 using Biblioteka.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -9,24 +9,24 @@ namespace Biblioteka.Repositories.DbImplementations
     public class DbBookRepository : GenericRepository<Book>, IBookRepository
     {
         private readonly BibContext _context;
-       
+
         public DbBookRepository(BibContext context) : base(context)
         {
             _context = context;
         }
 
-   
+
         public Book getOne(int id)
         {
             return _context.Book
                 .Include(b => b.tags)
-                .ThenInclude( b => b.tag)
+                .ThenInclude(b => b.tag)
                 .Include(b => b.publisher)
                 .Include(b => b.genre)
                 .Include(b => b.type)
                 .Include(b => b.authors)
                 .ThenInclude(a => a.author).FirstOrDefault(b => b.bookId == id);
-            
+
         }
 
         public Book getOne(string title)
@@ -153,7 +153,7 @@ namespace Biblioteka.Repositories.DbImplementations
             {
                 var searchTerms = searchTerm.Split(',').Select(term => term.Trim().ToLower()).ToArray();
 
-                // Pobierz dane z bazy danych do pami�ci
+                // Pobierz dane z bazy danych do pamiêci
                 var booksInMemory = query.ToList();
 
                 var filteredBooks = booksInMemory
@@ -163,7 +163,7 @@ namespace Biblioteka.Repositories.DbImplementations
                             (book.ISBN.ToString() != null && book.ISBN.ToString().ToLower().Contains(searchTerm)) ||
                             (book.publisher != null && book.publisher.name.ToLower().Contains(searchTerm)) ||
                             (book.genre != null && book.genre.name.ToLower().Contains(searchTerm)) ||
-                            (book.type != null && book.type.name.ToLower().Contains(searchTerm)) ||                          
+                            (book.type != null && book.type.name.ToLower().Contains(searchTerm)) ||
                             book.authors.Any(a =>
                                 (a.author.name != null && a.author.name.ToLower().Contains(searchTerm)) ||
                                 (a.author.surname != null && a.author.surname.ToLower().Contains(searchTerm)) ||

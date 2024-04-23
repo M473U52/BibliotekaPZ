@@ -5,7 +5,7 @@ namespace Biblioteka.Repositories.Interfaces
 {
     public interface IBookRepository
     {
-       
+
         public Book getOne(int id);
         public Book getOne(string title);
         public List<Book> getAll();
