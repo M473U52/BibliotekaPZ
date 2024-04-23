@@ -6,22 +6,25 @@
 }
 @using Biblioteka.Repositories
 
-<div class="main_container">
-    <div class="inner_container">
-        <div class="list_header">
-            <h1>Autorzy</h1>
-        </div>
-        <div class="move_right">
-            <button class="button buttonDefault">
-                <a class="nav-link lightText" asp-page="Create">Dodaj nowego autora</a>
-            </button>
-            <button class="button buttonDefault">
-                <a class="nav-link lightText" asp-page="AddAuthor">Nadaj prawa autora</a>
-            </button>
-        </div>
-        <div class="list_div">
-            <div class="table-responsive author_table_scroll">
-                <table class="tableToModify">
+<link rel="stylesheet" href="~/css/Authors/Index.css" asp-append-version="true" />
+<div class="under-header">
+    <h3>Autorzy</i>
+</div>
+<div class="main-container">
+<div class="two-columns">
+        <div class="column">
+             <button class="button-green">
+                    <a class="text-light" asp-page="Create">Dodaj nowego autora</a>
+             </button>
+         </div>
+        <div class="column">
+             <button class="button-green">
+                    <a class="text-light" asp-page="AddAuthor">Nadaj prawa autora</a>
+             </button>
+         </div>
+</div>
+<div class="vertical container">
+        <table class="simple-table">
                     <thead>
                         <tr>
                             <th>
@@ -62,16 +65,13 @@
                                     @Html.DisplayFor(modelItem => item.nickname)
                                 </td>
                                 <td>
-                                    <button class="button buttonGreen"><a class="lightText" asp-page="./Edit" asp-route-id="@item.authorId">Edytuj</a></button>
-                                    <button class="button buttonRed"><a class="lightText" asp-page="./Delete" asp-route-id="@item.authorId">Usuń</a></button>
-                                    <button class="button buttonYellow"><a class="lightText" asp-page="./Details" asp-route-id="@item.authorId">Detale</a></button>
+                                         <button class="button-green2"><a class="lightText" asp-page="./Edit" asp-route-id="@item.authorId">Edytuj</a></button>
+                                          <button class="button-green2"><a class="lightText" asp-page="./Details" asp-route-id="@item.authorId">Detale</a></button>
+                                    <button class="button-red"><a class="lightText" asp-page="./Delete" asp-route-id="@item.authorId">Usuń</a></button>
+                                         
                                 </td>
                             </tr>
                         }
                     </tbody>
                 </table>
             </div>
-        </div>
-
-    </div>
-</div>

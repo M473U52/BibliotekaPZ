@@ -4,55 +4,63 @@
 @{
     ViewData["Title"] = "Index";
 }
-<div class="main_container">
-    <div class="inner_container">
-        <div class="list_header">
-            <h1>Wydawnictwa</h1>
+<link rel="stylesheet" href="~/css/Publisers/Index.css" asp-append-version="true" />
+<div class="under-header">
+    <h3>Wydawnictwa</i>
+</div>
+<div class="main-container">
+    <div class="two-columns">
+        <div class="column">
+            @if (Model.Publisher.Any())
+            {
+                        <div class="search-bar">
+                                <form method="get" asp-page="./Index">
+                                    <input  class="no-input" ype="text" placeholder="Wyszukaj wydawnictwo" name="publisherName">
+                                    <button type="submit" class="no-button">
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                    </button>
+                                </form>
+                        </div>
+            }
         </div>
-        @if (Model.Publisher.Any())
-        {
-            <div class="search_div">
-                <form method="get" asp-page="./Index">
-                    <input type="text" placeholder="Wyszukaj wydawnictwo" name="publisherName">
-                    <button type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </form>
-            </div>
-        }
-        <div class="move_right">
-            <button class="button buttonDefault addNewBookButton">
-                <a class="nav-link text-light" asp-page="Create">Dodaj nowe wydawnictwo</a>
-            </button>
-        </div>
-        <div class="list_div">
-            <div class="table-responsive">
-                <table class="tableToModify">
-                    <thead>
+        <div class="column">
+             <button class="button-green">
+                    <a class="text-light" asp-page="Create">Dodaj nowe wydawnictwo</a>
+             </button>
+         </div>
+    </div>
+<div class="vertical container">
+        <table class="simple-table">
+            <thead>
+                <tr>
+                    <th>
+            @Html.DisplayNameFor(model => model.Publisher[0].name)
+                    </th>
+                     <th>
+                        @Html.DisplayNameFor(model => model.Publisher[0].description)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.Publisher)
+            {
                         <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Publisher[0].name)
-                            </th>
-                            <th></th>
+                            <td>
+                @Html.DisplayFor(modelItem => item.name)
+                            </td>
+                                                                    <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                                </td>
+                            <td>
+                                    <button class="button-green2"><a class="text-light" asp-page="./Edit" asp-route-id="@item.publisherId">Edytuj</a></button>
+                                    <button class="button-red"><a class="text-light" asp-page="./Delete" asp-route-id="@item.publisherId">Usuń</a></button>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.Publisher)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.name)
-                                </td>
-                                <td>
-                                    <button class="button buttonGreen"><a class="lightText" asp-page="./Edit" asp-route-id="@item.publisherId">Edytuj</a></button>
-                                    <button class="button buttonRed"><a class="lightText" asp-page="./Delete" asp-route-id="@item.publisherId">Usuń</a></button>
-                                    <button class="button buttonYellow"><a class="lightText" asp-page="./Details" asp-route-id="@item.publisherId">Detale</a></button>
-                                </td>
-                            </tr>
-                        }
+            }
                     </tbody>
-                </table>
-            </div>
+        </table>
         </div>
     </div>
+</div>
 </div>

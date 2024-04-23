@@ -6,12 +6,14 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 	</PropertyGroup>
 
-	<ItemGroup>
-		<Compile Remove="Migrations\20240401141338_sala_rodzaj.cs" />
-		<Compile Remove="Migrations\20240401141338_sala_rodzaj.Designer.cs" />
-		<Compile Remove="Migrations\20240401141714_sala_rodzaj.cs" />
-		<Compile Remove="Migrations\20240401141714_sala_rodzaj.Designer.cs" />
-	</ItemGroup>
+  <ItemGroup>
+	  <Compile Remove="Migrations\20240401141338_sala_rodzaj.cs" />
+	  <Compile Remove="Migrations\20240401141338_sala_rodzaj.Designer.cs" />
+	  <Compile Remove="Migrations\20240401141714_sala_rodzaj.cs" />
+	  <Compile Remove="Migrations\20240401141714_sala_rodzaj.Designer.cs" />
+	  <Compile Remove="Migrations\20240422183817_sprint3init.cs" />
+	  <Compile Remove="Migrations\20240422183817_sprint3init.Designer.cs" />
+  </ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="FakeItEasy" Version="8.1.0" />
