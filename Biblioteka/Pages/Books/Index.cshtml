@@ -1,6 +1,5 @@
 ﻿@page
 @model Biblioteka.Views.Books.IndexModel
-
 @{
     ViewData["Title"] = "Index";
 }
@@ -12,10 +11,9 @@
     @if (User.Identity.IsAuthenticated && (User.IsInRole("Employee") || User.IsInRole("Admin")))
     {
         <a asp-page="./Create">
-            <input type="button" value="Dodaj książke" />
+            <input type="button" value="Dodaj książkę" />
         </a>
     }
-
 
     <div class="used_filters">
         <div class="used_filters_header">
@@ -27,7 +25,6 @@
                 <input class="fake_input" type="text" id="searchText" name="SearchTerm" placeholder="Szukaj">
                 <button type="submit" class="remove_all_filters"><i class="fa-solid fa-filter-circle-xmark"></i></button>
             </form>
-
         </div>
     </div>
     <div class="library_container">
@@ -35,7 +32,7 @@
             <h4>Filtry</h4>
             <div>
                 <div class="filter_content">
-                    <h5>Dostępnosć</h5>
+                    <h5>Dostępność</h5>
                     <div class="filter_content_options">
                         <p class="available_books_filter">Dostępne (@Model.AvailableBookCount())</p>
                         <p class="available_books_filter">Mała ilość (@Model.LowQuantityBookCount())</p>
@@ -63,57 +60,52 @@
             </div>
         </div>
         <div class="book_list_container">
-     
-
-
-            @if (Model.RecommendedBooks.Count()>=2)
-
+            @if (Model.RecommendedBooks.Count() >= 2)
             {
-                <h3>Polecane:</h3>
-                foreach (var book in Model.RecommendedBooks)
-                {
-                    <div class="book_div">
-                        <a class="lightText" asp-page="./Details" asp-route-id="@book.bookId">
-                            <div class="book_cover">
-                                <img src="~/images/@(book.imageData != null ? $"covers/{book.bookId}.jpg" : "okladka.jpg")" alt="Okładka książki @book.title" />
+                <div class="recommended_books_section">
+                    <h3 class="section_title">Polecane książki</h3>
+                    <div class="recommended_books_row">
+                        @foreach (var book in Model.RecommendedBooks)
+                        {
+                            <div class="book_div">
+                                <a class="lightText" asp-page="./Details" asp-route-id="@book.bookId">
+                                    <div class="book_cover">
+                                        <img src="~/images/@(book.imageData != null ? $"covers/{book.bookId}.jpg" : "okladka.jpg")" alt="Okładka książki @book.title" />
+                                    </div>
+                                </a>
+                                <div class="book_info">
+                                    <p class="book_title">@book.title</p>
+                                    <div class="book_authors">
+                                        @foreach (var author in book.authors)
+                                        {
+                                            <p>@author.author.FullName</p>
+                                        }
+                                    </div>
+                                    <p class="book_genre">@book.genre.name</p>
+                                    <p class="book_release_date">@book.releaseDate.Year.ToString()</p>
+                                    <div class="book_tags">
+                                        @foreach (var tag in book.tags)
+                                        {
+                                            <p>#@tag.tag.name.Replace(" ", "")</p>
+                                        }
+                                    </div>
+                                    <div class="additional_book_info">
+                                        <p class="book_quantity">@book.availableCopys</p>
+                                        <p class="book_type">@book.type.name</p>
+                                    </div>
+                                </div>
                             </div>
-                        </a>
-                        <div class="book_info">
-                            <p class="book_title">@book.title</p>
-                            <div class="book_authors">
-                                @foreach (var author in book.authors)
-                                {
-                                    <p>@author.author.FullName</p>
-                                }
-                            </div>
-                            <p class="book_genre">@book.genre.name</p>
-                            <p class="book_release_date">
-                                @book.releaseDate.Year.ToString()
-                            </p>
-                            <div class="book_tags">
-                                @foreach (var tag in book.tags)
-                                {
-                                    <p>#@tag.tag.name.Replace(" ", "")</p>
-                                }
-                            </div>
-                            <div class="additional_book_info">
-                                <p class="book_quantity">@book.availableCopys</p>
-                                <p class="book_type">@book.type.name</p>
-                            </div>
-                        </div>
+                        }
                     </div>
-                }
+                </div>
             }
-          
-            
-
-            @foreach (var book in Model.Book)
+            <hr class="separator_line" />
+            @foreach (var book in Model.Book.Where(b => !Model.RecommendedBooks.Any(rb => rb.bookId == b.bookId)))
             {
-
                 <div class="book_div">
                     <a class="lightText" asp-page="./Details" asp-route-id="@book.bookId">
                         <div class="book_cover">
-                            <img src="~/images/okladka.jpg" alt="Okładka ksiązki @book.title" />
+                            <img src="~/images/okladka.jpg" alt="Okładka książki @book.title" />
                         </div>
                     </a>
                     <div class="book_info">
@@ -125,9 +117,7 @@
                             }
                         </div>
                         <p class="book_genre">@book.genre.name</p>
-                        <p class="book_relase_date">
-                            @book.releaseDate.ToString().Substring(6, 4)
-                        </p>
+                        <p class="book_release_date">@book.releaseDate.ToString().Substring(6, 4)</p>
                         <div class="book_tags">
                             @foreach (var tag in book.tags)
                             {
@@ -141,7 +131,9 @@
                     </div>
                 </div>
             }
+
         </div>
+
     </div>
 </div>
 <script src="~/js/Books/book_filter.js"></script>
