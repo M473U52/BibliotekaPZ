@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Identity;
 using Biblioteka.Areas.Identity.Data;
 using Biblioteka.Repositories.Interfaces;
 using Serilog;
+using Biblioteka.Repositories.DbImplementations;
+using Microsoft.AspNetCore.Mvc;
 namespace Biblioteka.Pages.Borrowings
 {
     public class IndexReaderModel : PageModel
@@ -14,14 +16,17 @@ namespace Biblioteka.Pages.Borrowings
         private readonly BibContext _bibContext;
         private readonly UserManager<BibUser> _userManager;
         private IBorrowingRepository _borrowingRepository;
+        private IBookRepository _bookRepository;
         public IList<RoomReservation> RoomReservation { get; set; }
 
-        public IndexReaderModel(BibContext bibContext, UserManager<BibUser> userManager, IBorrowingRepository borrowingRepository)
+        public IndexReaderModel(BibContext bibContext, UserManager<BibUser> userManager, IBorrowingRepository borrowingRepository, IBookRepository bookRepository)
         {
             _userManager = userManager;
             _bibContext = bibContext;
             _borrowingRepository = borrowingRepository;
             RoomReservation = new List<RoomReservation>();
+            _bookRepository = bookRepository;
+
         }
 
         public IList<Borrowing> Borrowing { get; set; } = new List<Borrowing>();
@@ -60,6 +65,34 @@ namespace Biblioteka.Pages.Borrowings
                     }
                 }
             }
+        }
+        public IActionResult OnPostCancelBorrowing(int borrowingId)
+        {
+            var borrowing = _borrowingRepository.GetOne(borrowingId);
+
+            if (borrowing != null)
+            {
+                var book = _bookRepository.getOne(borrowing.book.bookId);
+                if (book != null)
+                {
+                    string message = $"Success/Pomyślnie usunięto wypożyczenie książki \"{book.title}\" " +
+                                    $"z dnia {borrowing.borrowDate.ToString("dd.MM.yyyy")}.";
+
+                    _borrowingRepository.Delete(borrowingId);
+                    book.availableCopys += 1;
+                    _bookRepository.Update(book);
+                    TempData["Message"] = message;
+                }
+                else
+                {
+                    TempData["Message"] = $"Error/Brak książki o takim ID.";
+                }
+            }
+            else
+            {
+                TempData["Message"] = $"Error/Brak wypożyczenia o takim ID.";
+            }
+            return RedirectToPage("./IndexReader");
         }
     }
 
