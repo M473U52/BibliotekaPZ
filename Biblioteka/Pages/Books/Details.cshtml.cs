@@ -77,27 +77,6 @@ namespace Biblioteka.Views.Books
             return Page();
         }
 
-
-
-
-        /*       public IActionResult OnGet(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            Book = _bookRepository.getOne(id.Value);
-
-            if (Book == null)
-            {
-                return NotFound();
-            }
-
-            return Page();
-        }*/
-
-
         public IActionResult OnPostAddOpinion(int bookId)
         {
             var id = bookId; //Book.bookId;
@@ -207,6 +186,14 @@ namespace Biblioteka.Views.Books
             _bookOpinionRepository.DeleteOpinion(opinion);
 
             return RedirectToPage("./Details", new { id = book.bookId });
+        }
+
+        public FileResult OnGetDownloadPDF(int id)
+        {
+            var book = _bookRepository.getOne(id);
+            string fileName = book.title + " ebook.pdf";
+
+            return File(book.ebookData, "application/pdf", fileName);
         }
     }
 }

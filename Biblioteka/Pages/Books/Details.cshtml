@@ -73,6 +73,9 @@
                 <input type="submit" value="Wypożycz" class="button buttonGreen lightText" />
             </div>
         </form>
+        <div class="mt-3">
+            <a href=@Url.Page("Details", "DownloadPDF", new { id = Model.Book?.bookId}) class="button buttonGreen lightText">Pobierz ebook</a>
+        </div>
 
 
         <div class="details_buttons">
