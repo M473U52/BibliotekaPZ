@@ -33,12 +33,14 @@ namespace Biblioteka.Views.Books
 
         //[BindProperty]
         public BookDto Book { get; set; }
+        public Book bookModel { get; set; }
         public bool IsRatingAdded { get; set; }
         public BibUser user;
 
         public IActionResult OnGet(int id)
         {
             var book = _bookRepository.getOne(id);
+            bookModel = book;
             Opinions = _bookOpinionRepository.getOpinionsForBook(book);
             
             Reader reader;
