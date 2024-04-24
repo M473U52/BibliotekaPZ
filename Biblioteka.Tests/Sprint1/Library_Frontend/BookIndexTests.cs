@@ -3,6 +3,8 @@ using Biblioteka.Models;
 using Biblioteka.Repositories.Interfaces;
 using FakeItEasy;
 using FluentAssertions;
+using Microsoft.AspNetCore.Identity;
+using Biblioteka.Areas.Identity.Data;
 
 namespace Biblioteka.Tests.Sprint1.Library_Frontend
 {
@@ -18,9 +20,12 @@ namespace Biblioteka.Tests.Sprint1.Library_Frontend
             var bookTypeRepository = A.Fake<IBookTypeRepository>();
             var tagRepository = A.Fake<ITagRepository>();
             var authorRepository = A.Fake<IAuthorRepository>();
+            var borrowingRepository = A.Fake<IBorrowingRepository>();
 
-            // Tworzenie listy obiektów książek z gatunkami
-            var genreId = 1;
+
+
+        // Tworzenie listy obiektów książek z gatunkami
+        var genreId = 1;
             var books = new List<Book>
             {
                 new Book { genre = new Genre { genreId = genreId } },
@@ -32,7 +37,7 @@ namespace Biblioteka.Tests.Sprint1.Library_Frontend
             A.CallTo(() => bookRepository.SearchBooks("")).Returns(books);
 
             // Tworzenie obiektu strony Index Book
-            var indexModel = new IndexModel(bookRepository, genreRepository, bookTypeRepository, tagRepository, authorRepository);
+            var indexModel = new IndexModel(bookRepository, genreRepository, bookTypeRepository, tagRepository, authorRepository, borrowingRepository);
             indexModel.SearchTerm = "";
 
             // Wywołanie onGet
