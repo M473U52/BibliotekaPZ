@@ -1,75 +1,191 @@
 ﻿@page
-@model Biblioteka.Pages.RoomReservations.IndexReaderModel
+@model Biblioteka.Pages.RoomReservations.IndexEmployeesModel
 
 @{
-    ViewData["Title"] = "IndexReader";
+    ViewData["Title"] = "ReservationPanel";
 }
-<div class="main_container">
-    <div class="inner_container">
-        @if (Model.RoomReservation.Count == 0)
-        {
-            <div class="list_header">
-                <h1>Zarezerwuj salę tym przyciskiem:</h1>
-            </div>       
-            if (!User.IsInRole("Employee"))
-            {
-                <button class="button buttonDefault">
-                    <a class="nav-link lightText" asp-page="Create">Zarezerwuj salę</a>
-                </button>
-            }
-            <img src="~/images/noreservations.jpg" style="position:relative;width: 100%;height: auto;" />
-        }
-        else
-        {
-            <div class="list_header">
-                <h1>Wynajmowane sale</h1>
-            </div>
-            <div class="move_right">
-                <button class="button buttonDefault">
-                    <a class="nav-link lightText" asp-page="Create">Zarezerwuj salę</a>
-                </button>
-            </div>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<BibUser> SignInManager
+@inject UserManager<BibUser> UserManager
 
-            <div class="list_div">
-                <div class="table-responsive reservation_table_scroll">
-                    <table class="tableToModify">
-                        <thead>
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.RoomReservation[0].begginingOfReservationDate)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.RoomReservation[0].endOfReservationDate)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.RoomReservation[0].room)
-                                </th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model.RoomReservation)
+<link rel="stylesheet" href="~/css/Borrowings/index_admin.css" asp-append-version="true" />
+
+
+<div>
+    <div class="list_header">
+        <h1>Wynajmowane sale</h1>
+    </div>
+    @if (Model.RoomReservation.Any())
+    {
+        <div class="search_div">
+            <form method="get" asp-page="./IndexEmployees">
+                <input type="text" placeholder="Wyszukaj rezerwację" name="SearchTerm" value="@Model.SearchTerm">
+                <button type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+        </div>
+    }
+
+    <dialog id="delete_borrowing_dialog">
+        <i class="fa-solid fa-circle-xmark dialog-exit"></i>
+        <form method="post" asp-page-handler="DeleteBorrowing">
+            <input type="hidden" name="reservationId" value="1">
+            <p class="dialog_header">Usuwanie rezerwacji sali</p>
+            <p class="dialog_content">Czy napewno chcesz usunąć tą rezerwację sali?</p>
+            <div class="d-flex flex-row justify-content-center align-items-center">
+                <button type="button" class="action-button action-cancel"><i class="fa-solid fa-xmark"></i>Anuluj</button>
+                <button type="submit" class="action-button action-delete"><i class="fa-solid fa-trash-can"></i>Usuń</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog id="confirmation_borrowing_dialog">
+        <i class="fa-solid fa-circle-xmark dialog-exit"></i>
+        <form method="post" asp-page-handler="ConfirmBorrowing">
+            <input type="hidden" name="reservationId" value="1">
+            <p class="dialog_header">Potwierdzenie rezerwacji sali</p>
+            <p class="dialog_content">Czy napewno chcesz potwierdzić wydanie kluczy?</p>
+            <div class="d-flex flex-row justify-content-center align-items-center">
+                <button type="button" class="action-button action-cancel"><i class="fa-solid fa-xmark"></i>Anuluj</button>
+                <button type="submit" class="action-button action-confirm"><i class="fa-solid fa-check"></i>Potwierdź</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog id="confirmation_return_dialog">
+        <i class="fa-solid fa-circle-xmark dialog-exit"></i>
+        <form method="post" asp-page-handler="ConfirmReturn">
+            <input type="hidden" name="borrowingId" value="1">
+            <p class="dialog_header">Potwierdzenie zwrotu</p>
+            <p class="dialog_content">Czy napewno chcesz potwierdzić zwrot tej książki ?</p>
+            <div class="d-flex flex-row justify-content-center align-items-center">
+                <button type="button" class="action-button action-cancel"><i class="fa-solid fa-xmark"></i>Anuluj</button>
+                <button type="submit" class="action-button action-confirm"><i class="fa-solid fa-check"></i>Potwierdź</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog id="confirmation_payment">
+        <i class="fa-solid fa-circle-xmark dialog-exit"></i>
+        <form method="post" asp-page-handler="ConfirmPayment">
+            <input type="hidden" name="borrowingId" value="1">
+            <p class="dialog_header">Potwierdzenie opłaty</p>
+            <p class="dialog_content">Czy napewno chcesz potwierdzić opłatę za tą książkę ?</p>
+            <div class="d-flex flex-row justify-content-center align-items-center">
+                <button type="button" class="action-button action-cancel"><i class="fa-solid fa-xmark"></i>Anuluj</button>
+                <button type="submit" class="action-button action-confirm"><i class="fa-solid fa-check"></i>Potwierdź</button>
+            </div>
+        </form>
+    </dialog>
+
+    <div class="table_div table-responsive">
+        <table class="table table-striped text-center">
+            <thead class="table-header-style">
+                <tr>
+                    <th class="align-middle">
+                        @Html.DisplayNameFor(model => model.RoomReservation[0].begginingOfReservationDate)
+                    </th>
+                    <th class="align-middle">
+                        @Html.DisplayNameFor(model => model.RoomReservation[0].endOfReservationDate)
+                    </th>
+                    <th class="align-middle">
+                        @Html.DisplayNameFor(model => model.RoomReservation[0].room)
+                    </th>
+                    <th class="align-middle">
+                        @Html.DisplayNameFor(model => model.RoomReservation[0].reader.FullName)
+                    </th>
+                    @if (User.IsInRole("Employee"))
+                    {
+                        <th class="align-middle" style="max-width:150px;">
+                            @Html.DisplayNameFor(model => model.RoomReservation[0].Confirmation)
+                        </th>
+                    }
+                    <th class="align-middle" style="max-width:120px;">
+                        Anulowanie rezerwacji
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.RoomReservation)
+                {
+                    <tr>
+                        <td class="align-middle td_reservation_date">
+                            @Html.DisplayFor(modelItem => item.begginingOfReservationDate)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.endOfReservationDate)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.room.roomNumber)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => item.reader.FullName)
+                        </td>
+                        @if (User.IsInRole("Employee"))
+                        {
+                            <td class="align-middle td_confirm" style="align-items:center; text-align:center;">
+                                @if (!item.Confirmation)
+                                {
+                                    <button class="action-button action-confirm borrowing_confirmation_button"><i class="fa-solid fa-check"></i>Potwierdź<p class="hidden-borrowId">@item.reservationId</p></button>
+                                }
+                                else
+                                {
+                                    <div>Potwierdzone</div>
+                                }
+                            </td>
+                        }
+
+                        <td class="align-middle" style="align-items:center; text-align:center;">
+                            @if (!item.Confirmation)
                             {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.begginingOfReservationDate)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.endOfReservationDate)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.room.FullData)
-                                    </td>
-                                    <td>
-                                        <button class="button buttonRed"><a class="lightText" asp-page="./Delete" asp-route-id="@item.reservationId">Anuluj</a></button>
-                                    </td>
-                                </tr>
+                                <button class="action-button action-delete"><i class="fa-solid fa-trash-can"></i>Anuluj<p class="hidden-borrowId">@item.reservationId</p></button>
                             }
-                        </tbody>
-                    </table>
+                            else
+                            {
+                                <button class="action-button action-delete"><i class="fa-solid fa-trash-can"></i>Usuń<p class="hidden-borrowId">@item.reservationId</p></button>
+                            }
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    @{
+        if (TempData["Message"] != null)
+        {
+            <div class="notification_div">
+                @if (TempData["Message"]?.ToString()?.Split("/")[0] == "Success")
+                {
+                    <div>
+                        <i class="fa-solid fa-check success_notification_icon"></i>
+                    </div>
+                }
+                else
+                {
+                    <div>
+                        <i class="fa-solid fa-circle-exclamation error_notification_icon"></i>
+                    </div>
+                }
+                <div class="notification-content">
+                    @if (TempData["Message"]?.ToString()?.Split("/")[0] == "Success")
+                    {
+                        <p class="notification-header-success">Sukces!</p>
+                    }
+                    else
+                    {
+                        <p class="notification-header-error">Błąd!</p>
+                    }
+                    <p class="notification-message">@TempData["Message"]?.ToString()?.Split("/")[1]</p>
+                </div>
+                <div class="hide-notification">
+                    <i class="fa-solid fa-xmark"></i>
                 </div>
             </div>
         }
-    </div>
+    }
 </div>
 
+<script src="~/js/RoomReservations/ModalDialogRunner.js"></script>
+<script src="~/js/Borrowing/Notification.js"></script>

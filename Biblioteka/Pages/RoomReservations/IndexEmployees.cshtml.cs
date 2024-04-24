@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Biblioteka.Models;
 using Biblioteka.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Biblioteka.Repositories.DbImplementations;
+using Biblioteka.Repositories;
 
 namespace Biblioteka.Pages.RoomReservations
 {
@@ -32,6 +34,42 @@ namespace Biblioteka.Pages.RoomReservations
             }
 
             
+        }
+
+        public IActionResult OnPostDeleteBorrowing(int reservationId)
+        {
+            var reservation = _roomReservationRepository.getOne(reservationId);
+
+            if (reservation != null)
+            {
+                
+                    TempData["Message"] = $"Success/Pomyślnie usunięto wynajęcie sali: \"{reservation.roomId}\" " +
+                                    $"z dnia {reservation.begginingOfReservationDate.ToString("dd.MM.yyyy")}.";
+
+                    _roomReservationRepository.Delete(reservationId);
+            }
+            else
+            {
+                TempData["Message"] = $"Error/Brak sali o takim ID.";
+            }
+            return RedirectToPage("./IndexEmployees");
+        }
+        public IActionResult OnPostConfirmBorrowing(int reservationId)
+        {
+            var reservation = _roomReservationRepository.getOne(reservationId);
+            if (reservation == null)
+            {
+                TempData["Message"] = $"Error/Brak wynajęcia o takim ID.";
+            }
+            else
+            {
+
+                    reservation.Confirmation = true;
+                _roomReservationRepository.Update(reservation);
+                    TempData["Message"] = $"Success/Pomyślnie potwierdzono odbiór kluczy do sali \"{reservation.roomId}\"";
+            }
+
+            return RedirectToPage("./IndexEmployees");
         }
     }
 }

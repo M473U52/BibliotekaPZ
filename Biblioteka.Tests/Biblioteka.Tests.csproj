@@ -15,6 +15,9 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Sprint1\Library_Frontend\BookIndexTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="FakeItEasy" Version="8.1.0" />
     <PackageReference Include="FluentAssertions" Version="6.12.0" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.4" />
