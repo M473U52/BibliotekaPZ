@@ -99,6 +99,11 @@
                     </div>
                 </div>
             }
+            <div class="suggestions">
+                <p>
+                    Nie możesz znaleźć książki której szukasz? Zapraszamy do działu <a asp-page="../Suggestions/Index">sugestie</a>.
+                </p>
+            </div>
             <hr class="separator_line" />
             @foreach (var book in Model.Book.Where(b => !Model.RecommendedBooks.Any(rb => rb.bookId == b.bookId)))
             {

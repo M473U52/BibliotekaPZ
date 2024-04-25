@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Biblioteka.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class migracjatestowa : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -175,6 +175,21 @@ namespace Biblioteka.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_RoomType", x => x.roomTypeId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Suggestion",
+                columns: table => new
+                {
+                    suggestionId = table.Column<decimal>(type: "NUMERIC(4,0)", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    author = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    votes = table.Column<decimal>(type: "NUMERIC(4,0)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Suggestion", x => x.suggestionId);
                 });
 
             migrationBuilder.CreateTable(
@@ -359,7 +374,8 @@ namespace Biblioteka.Migrations
                     floor = table.Column<decimal>(type: "NUMERIC(1,0)", nullable: false),
                     alley = table.Column<decimal>(type: "NUMERIC(2,0)", nullable: false),
                     rowNumber = table.Column<decimal>(type: "NUMERIC(2,0)", nullable: false),
-                    imageData = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
+                    imageData = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    ebookData = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -760,14 +776,14 @@ namespace Biblioteka.Migrations
 
             migrationBuilder.InsertData(
                 table: "Book",
-                columns: new[] { "bookId", "ISBN", "alley", "availableCopys", "description", "floor", "genreId", "imageData", "publisherId", "ratingAVG", "ratingId", "releaseDate", "rowNumber", "title", "typeId" },
+                columns: new[] { "bookId", "ISBN", "alley", "availableCopys", "description", "ebookData", "floor", "genreId", "imageData", "publisherId", "ratingAVG", "ratingId", "releaseDate", "rowNumber", "title", "typeId" },
                 values: new object[,]
                 {
-                    { 1m, 4789305434712m, 0m, 14m, "super hit o hobbitach", 0m, 1m, null, 1m, null, 1, new DateTime(1954, 7, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, "Władca Pierścieni", 1m },
-                    { 2m, 8495208934212m, 0m, 6m, "bo Ikar był zbrodniarzem", 0m, 2m, null, 2m, null, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, "Zbrodnia Ikara", 2m },
-                    { 3m, 3489012343021m, 0m, 26m, "Geralt ze szkoły wilka, historia prawdziwa", 0m, 3m, null, 3m, null, 3, new DateTime(1975, 3, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, "Wiedźmin", 3m },
-                    { 4m, 9321734921412m, 0m, 11m, "o księciu który był naprawdę mały", 0m, 4m, null, 4m, null, 4, new DateTime(1987, 6, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, "Mały Książe", 4m },
-                    { 5m, 8940237032412m, 0m, 16m, "powieść o pół hobbicie a pół elfie", 0m, 5m, null, 5m, null, 5, new DateTime(2009, 11, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, "Władca Pierścieni cz. 4", 5m }
+                    { 1m, 4789305434712m, 0m, 14m, "super hit o hobbitach", null, 0m, 1m, null, 1m, null, 1, new DateTime(1954, 7, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, "Władca Pierścieni", 1m },
+                    { 2m, 8495208934212m, 0m, 6m, "bo Ikar był zbrodniarzem", null, 0m, 2m, null, 2m, null, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, "Zbrodnia Ikara", 2m },
+                    { 3m, 3489012343021m, 0m, 26m, "Geralt ze szkoły wilka, historia prawdziwa", null, 0m, 3m, null, 3m, null, 3, new DateTime(1975, 3, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, "Wiedźmin", 3m },
+                    { 4m, 9321734921412m, 0m, 11m, "o księciu który był naprawdę mały", null, 0m, 4m, null, 4m, null, 4, new DateTime(1987, 6, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, "Mały Książe", 4m },
+                    { 5m, 8940237032412m, 0m, 16m, "powieść o pół hobbicie a pół elfie", null, 0m, 5m, null, 5m, null, 5, new DateTime(2009, 11, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), 0m, "Władca Pierścieni cz. 4", 5m }
                 });
 
             migrationBuilder.InsertData(
@@ -787,11 +803,11 @@ namespace Biblioteka.Migrations
                 columns: new[] { "eventId", "authorId", "description", "eventDate", "name" },
                 values: new object[,]
                 {
-                    { 1m, 1m, "spotkanie fanów książek autora numer 1 ale nazywa się inaczej tylko nie chciało mi się sprawdzić bo długo by scrollować", new DateTime(2024, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), "Spotkanie fanów książek" },
-                    { 2m, 4m, "spotkanie antyfanów książek a autor numer 4 będzie ich zachęcał aby czytali", new DateTime(2024, 4, 13, 0, 0, 0, 0, DateTimeKind.Local), "Spotkanie antyfanów książek" },
-                    { 3m, 8m, "Autor Adam Niemowa będzie rozdawał autografy ale nie można do niego mówić bo sobie tego nie życzy i wtedy nie da autografu ", new DateTime(2024, 4, 13, 0, 0, 0, 0, DateTimeKind.Local), "Podpisywanie książek" },
-                    { 4m, 3m, "Konkurs w którym udział może wziąć każdy. Uczestnicy będą mieli 1h na napisanie rozdziału, który zostanie nastepnie oceniony. Czekają na Was wspaniałe nagrody!", new DateTime(2024, 4, 16, 0, 0, 0, 0, DateTimeKind.Local), "Konkurs pisania na czas" },
-                    { 5m, 9m, "Nauczymy się jak poprawnie pisać. Żerzuha a może rzeżuha czy żeżucha bądź rzerzucha? Na spotkaniu to oraz wiele wiedzy więcej.", new DateTime(2024, 4, 21, 0, 0, 0, 0, DateTimeKind.Local), "Dyktando" }
+                    { 1m, 1m, "spotkanie fanów książek autora numer 1 ale nazywa się inaczej tylko nie chciało mi się sprawdzić bo długo by scrollować", new DateTime(2024, 4, 26, 0, 0, 0, 0, DateTimeKind.Local), "Spotkanie fanów książek" },
+                    { 2m, 4m, "spotkanie antyfanów książek a autor numer 4 będzie ich zachęcał aby czytali", new DateTime(2024, 4, 28, 0, 0, 0, 0, DateTimeKind.Local), "Spotkanie antyfanów książek" },
+                    { 3m, 8m, "Autor Adam Niemowa będzie rozdawał autografy ale nie można do niego mówić bo sobie tego nie życzy i wtedy nie da autografu ", new DateTime(2024, 4, 28, 0, 0, 0, 0, DateTimeKind.Local), "Podpisywanie książek" },
+                    { 4m, 3m, "Konkurs w którym udział może wziąć każdy. Uczestnicy będą mieli 1h na napisanie rozdziału, który zostanie nastepnie oceniony. Czekają na Was wspaniałe nagrody!", new DateTime(2024, 5, 1, 0, 0, 0, 0, DateTimeKind.Local), "Konkurs pisania na czas" },
+                    { 5m, 9m, "Nauczymy się jak poprawnie pisać. Żerzuha a może rzeżuha czy żeżucha bądź rzerzucha? Na spotkaniu to oraz wiele wiedzy więcej.", new DateTime(2024, 5, 6, 0, 0, 0, 0, DateTimeKind.Local), "Dyktando" }
                 });
 
             migrationBuilder.InsertData(
@@ -824,11 +840,11 @@ namespace Biblioteka.Migrations
                 columns: new[] { "bookId", "readerId", "addedDate", "opinion", "rating" },
                 values: new object[,]
                 {
-                    { 1m, 1m, new DateTime(2024, 3, 18, 3, 48, 51, 580, DateTimeKind.Local).AddTicks(803), "niesmowicie wciągająca książka", 5m },
-                    { 2m, 2m, new DateTime(2024, 3, 29, 4, 48, 51, 580, DateTimeKind.Local).AddTicks(861), "taka sobie", 2m },
-                    { 3m, 3m, new DateTime(2024, 4, 7, 9, 48, 51, 580, DateTimeKind.Local).AddTicks(864), "nawet fajna ale czasem za długie opisy", 4m },
-                    { 4m, 4m, new DateTime(2024, 4, 5, 0, 48, 51, 580, DateTimeKind.Local).AddTicks(866), "beznadziejna", 1m },
-                    { 4m, 5m, new DateTime(2024, 4, 9, 21, 48, 51, 580, DateTimeKind.Local).AddTicks(868), "mi się nawet podoba", 3m }
+                    { 1m, 1m, new DateTime(2024, 4, 3, 1, 23, 31, 823, DateTimeKind.Local).AddTicks(5915), "niesmowicie wciągająca książka", 5m },
+                    { 2m, 2m, new DateTime(2024, 4, 14, 2, 23, 31, 823, DateTimeKind.Local).AddTicks(5974), "taka sobie", 2m },
+                    { 3m, 3m, new DateTime(2024, 4, 23, 7, 23, 31, 823, DateTimeKind.Local).AddTicks(5978), "nawet fajna ale czasem za długie opisy", 4m },
+                    { 4m, 4m, new DateTime(2024, 4, 20, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(5981), "beznadziejna", 1m },
+                    { 4m, 5m, new DateTime(2024, 4, 25, 19, 23, 31, 823, DateTimeKind.Local).AddTicks(5984), "mi się nawet podoba", 3m }
                 });
 
             migrationBuilder.InsertData(
@@ -848,11 +864,11 @@ namespace Biblioteka.Migrations
                 columns: new[] { "borrowId", "Confirmation", "IsPaid", "IsReturned", "LateFee", "bookId", "bookLost", "borrowDate", "employeeConfirmingPaymentId", "employeeConfirmingReturnId", "employeeId", "plannedReturnDate", "returnDate" },
                 values: new object[,]
                 {
-                    { 1m, false, false, false, 0m, 1m, false, new DateTime(2024, 4, 10, 0, 48, 51, 580, DateTimeKind.Local).AddTicks(1023), null, null, 1m, new DateTime(2024, 5, 10, 0, 48, 51, 580, DateTimeKind.Local).AddTicks(1026), null },
-                    { 2m, false, false, false, 3m, 2m, false, new DateTime(2024, 3, 7, 0, 48, 51, 580, DateTimeKind.Local).AddTicks(1035), null, null, 2m, new DateTime(2024, 4, 10, 0, 48, 51, 580, DateTimeKind.Local).AddTicks(1037), null },
-                    { 3m, false, false, false, 0m, 3m, false, new DateTime(2024, 3, 26, 0, 48, 51, 580, DateTimeKind.Local).AddTicks(1041), null, null, 3m, new DateTime(2024, 4, 25, 0, 48, 51, 580, DateTimeKind.Local).AddTicks(1042), null },
-                    { 4m, true, false, false, 0m, 4m, true, new DateTime(2024, 4, 4, 0, 48, 51, 580, DateTimeKind.Local).AddTicks(1044), null, null, 4m, new DateTime(2024, 5, 4, 0, 48, 51, 580, DateTimeKind.Local).AddTicks(1045), new DateTime(2024, 5, 10, 0, 48, 51, 580, DateTimeKind.Local).AddTicks(1047) },
-                    { 5m, false, false, true, 0m, 5m, false, new DateTime(2024, 4, 8, 0, 48, 51, 580, DateTimeKind.Local).AddTicks(1050), null, null, 5m, new DateTime(2024, 5, 8, 0, 48, 51, 580, DateTimeKind.Local).AddTicks(1051), new DateTime(2024, 4, 29, 0, 48, 51, 580, DateTimeKind.Local).AddTicks(1053) }
+                    { 1m, false, false, false, 0m, 1m, false, new DateTime(2024, 4, 25, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6261), null, null, 1m, new DateTime(2024, 5, 25, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6266), null },
+                    { 2m, false, false, false, 3m, 2m, false, new DateTime(2024, 3, 22, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6275), null, null, 2m, new DateTime(2024, 4, 25, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6278), null },
+                    { 3m, false, false, false, 0m, 3m, false, new DateTime(2024, 4, 10, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6285), null, null, 3m, new DateTime(2024, 5, 10, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6288), null },
+                    { 4m, true, false, false, 0m, 4m, true, new DateTime(2024, 4, 19, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6291), null, null, 4m, new DateTime(2024, 5, 19, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6293), new DateTime(2024, 5, 25, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6296) },
+                    { 5m, false, false, true, 0m, 5m, false, new DateTime(2024, 4, 23, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6300), null, null, 5m, new DateTime(2024, 5, 23, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6302), new DateTime(2024, 5, 14, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6304) }
                 });
 
             migrationBuilder.InsertData(
@@ -1067,6 +1083,9 @@ namespace Biblioteka.Migrations
 
             migrationBuilder.DropTable(
                 name: "RoomReservation");
+
+            migrationBuilder.DropTable(
+                name: "Suggestion");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

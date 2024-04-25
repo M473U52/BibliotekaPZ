@@ -1,0 +1,45 @@
+﻿@page
+@model Biblioteka.Pages.Suggestions.IndexModel
+@{
+    ViewData["Title"] = "IndexSuggestions";
+}
+<div class="suggestions_container"
+    <div class="suggestions_header">
+        <h1>Witamy w sekcji sugestii.</h1>
+        Tu możesz głosować na książki które chciałbyś aby znalazły się w naszym księgozbiorze
+        oraz samemu zgłaszać tytuły, które uważasz że warto aby wzgbogaciły naszą kolekcję!
+    </div>
+
+    <div class="suggestions">
+        <p>
+            Dodaj własną <a asp-page="./Create">sugestię</a>.
+        </p>
+    </div>
+
+    @foreach (var item in Model.suggestions)
+    {
+        <div class="suggestions_container">
+            <div class="suggestions_record">
+                <p>Tytuł: @item.title</p>
+                <p>Autor: @item.author</p>
+                <p>Ilość głosów: <span id="votes_@item.suggestionId">@item.votes</span></p>
+                <form method="post" asp-page-handler="Vote" asp-route-suggestionId="@item.suggestionId" onsubmit="return voteOnce(this);">
+                    <button type="submit" class="vote_button">Zagłosuj</button>
+                </form>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    function voteOnce(form) {
+        var suggestionId = $(form).find("[name='suggestionId']").val();
+        var votedKey = "voted_" + suggestionId;
+        if (localStorage.getItem(votedKey)) {
+            alert("Już zagłosowałeś na tę sugestię.");
+            return false; // Zapobiega przesłaniu formularza
+        }
+        localStorage.setItem(votedKey, "true");
+        return true; // Pozwala na przesłanie formularza
+    }
+</script>

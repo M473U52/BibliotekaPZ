@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Biblioteka.Migrations
 {
     [DbContext(typeof(BibContext))]
-    [Migration("20240409224851_Initial")]
-    partial class Initial
+    [Migration("20240425202332_migracjatestowa")]
+    partial class migracjatestowa
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -285,6 +285,9 @@ namespace Biblioteka.Migrations
                         .HasMaxLength(400)
                         .HasColumnType("nvarchar(400)");
 
+                    b.Property<byte[]>("ebookData")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<decimal>("floor")
                         .HasColumnType("NUMERIC(1)");
 
@@ -532,7 +535,7 @@ namespace Biblioteka.Migrations
                         {
                             bookId = 1m,
                             readerId = 1m,
-                            addedDate = new DateTime(2024, 3, 18, 3, 48, 51, 580, DateTimeKind.Local).AddTicks(803),
+                            addedDate = new DateTime(2024, 4, 3, 1, 23, 31, 823, DateTimeKind.Local).AddTicks(5915),
                             opinion = "niesmowicie wciągająca książka",
                             rating = 5m
                         },
@@ -540,7 +543,7 @@ namespace Biblioteka.Migrations
                         {
                             bookId = 2m,
                             readerId = 2m,
-                            addedDate = new DateTime(2024, 3, 29, 4, 48, 51, 580, DateTimeKind.Local).AddTicks(861),
+                            addedDate = new DateTime(2024, 4, 14, 2, 23, 31, 823, DateTimeKind.Local).AddTicks(5974),
                             opinion = "taka sobie",
                             rating = 2m
                         },
@@ -548,7 +551,7 @@ namespace Biblioteka.Migrations
                         {
                             bookId = 3m,
                             readerId = 3m,
-                            addedDate = new DateTime(2024, 4, 7, 9, 48, 51, 580, DateTimeKind.Local).AddTicks(864),
+                            addedDate = new DateTime(2024, 4, 23, 7, 23, 31, 823, DateTimeKind.Local).AddTicks(5978),
                             opinion = "nawet fajna ale czasem za długie opisy",
                             rating = 4m
                         },
@@ -556,7 +559,7 @@ namespace Biblioteka.Migrations
                         {
                             bookId = 4m,
                             readerId = 4m,
-                            addedDate = new DateTime(2024, 4, 5, 0, 48, 51, 580, DateTimeKind.Local).AddTicks(866),
+                            addedDate = new DateTime(2024, 4, 20, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(5981),
                             opinion = "beznadziejna",
                             rating = 1m
                         },
@@ -564,7 +567,7 @@ namespace Biblioteka.Migrations
                         {
                             bookId = 4m,
                             readerId = 5m,
-                            addedDate = new DateTime(2024, 4, 9, 21, 48, 51, 580, DateTimeKind.Local).AddTicks(868),
+                            addedDate = new DateTime(2024, 4, 25, 19, 23, 31, 823, DateTimeKind.Local).AddTicks(5984),
                             opinion = "mi się nawet podoba",
                             rating = 3m
                         });
@@ -679,9 +682,9 @@ namespace Biblioteka.Migrations
                             LateFee = 0m,
                             bookId = 1m,
                             bookLost = false,
-                            borrowDate = new DateTime(2024, 4, 10, 0, 48, 51, 580, DateTimeKind.Local).AddTicks(1023),
+                            borrowDate = new DateTime(2024, 4, 25, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6261),
                             employeeId = 1m,
-                            plannedReturnDate = new DateTime(2024, 5, 10, 0, 48, 51, 580, DateTimeKind.Local).AddTicks(1026)
+                            plannedReturnDate = new DateTime(2024, 5, 25, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6266)
                         },
                         new
                         {
@@ -692,9 +695,9 @@ namespace Biblioteka.Migrations
                             LateFee = 3m,
                             bookId = 2m,
                             bookLost = false,
-                            borrowDate = new DateTime(2024, 3, 7, 0, 48, 51, 580, DateTimeKind.Local).AddTicks(1035),
+                            borrowDate = new DateTime(2024, 3, 22, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6275),
                             employeeId = 2m,
-                            plannedReturnDate = new DateTime(2024, 4, 10, 0, 48, 51, 580, DateTimeKind.Local).AddTicks(1037)
+                            plannedReturnDate = new DateTime(2024, 4, 25, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6278)
                         },
                         new
                         {
@@ -705,9 +708,9 @@ namespace Biblioteka.Migrations
                             LateFee = 0m,
                             bookId = 3m,
                             bookLost = false,
-                            borrowDate = new DateTime(2024, 3, 26, 0, 48, 51, 580, DateTimeKind.Local).AddTicks(1041),
+                            borrowDate = new DateTime(2024, 4, 10, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6285),
                             employeeId = 3m,
-                            plannedReturnDate = new DateTime(2024, 4, 25, 0, 48, 51, 580, DateTimeKind.Local).AddTicks(1042)
+                            plannedReturnDate = new DateTime(2024, 5, 10, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6288)
                         },
                         new
                         {
@@ -718,10 +721,10 @@ namespace Biblioteka.Migrations
                             LateFee = 0m,
                             bookId = 4m,
                             bookLost = true,
-                            borrowDate = new DateTime(2024, 4, 4, 0, 48, 51, 580, DateTimeKind.Local).AddTicks(1044),
+                            borrowDate = new DateTime(2024, 4, 19, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6291),
                             employeeId = 4m,
-                            plannedReturnDate = new DateTime(2024, 5, 4, 0, 48, 51, 580, DateTimeKind.Local).AddTicks(1045),
-                            returnDate = new DateTime(2024, 5, 10, 0, 48, 51, 580, DateTimeKind.Local).AddTicks(1047)
+                            plannedReturnDate = new DateTime(2024, 5, 19, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6293),
+                            returnDate = new DateTime(2024, 5, 25, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6296)
                         },
                         new
                         {
@@ -732,10 +735,10 @@ namespace Biblioteka.Migrations
                             LateFee = 0m,
                             bookId = 5m,
                             bookLost = false,
-                            borrowDate = new DateTime(2024, 4, 8, 0, 48, 51, 580, DateTimeKind.Local).AddTicks(1050),
+                            borrowDate = new DateTime(2024, 4, 23, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6300),
                             employeeId = 5m,
-                            plannedReturnDate = new DateTime(2024, 5, 8, 0, 48, 51, 580, DateTimeKind.Local).AddTicks(1051),
-                            returnDate = new DateTime(2024, 4, 29, 0, 48, 51, 580, DateTimeKind.Local).AddTicks(1053)
+                            plannedReturnDate = new DateTime(2024, 5, 23, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6302),
+                            returnDate = new DateTime(2024, 5, 14, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6304)
                         });
                 });
 
@@ -988,7 +991,7 @@ namespace Biblioteka.Migrations
                             eventId = 1m,
                             authorId = 1m,
                             description = "spotkanie fanów książek autora numer 1 ale nazywa się inaczej tylko nie chciało mi się sprawdzić bo długo by scrollować",
-                            eventDate = new DateTime(2024, 4, 11, 0, 0, 0, 0, DateTimeKind.Local),
+                            eventDate = new DateTime(2024, 4, 26, 0, 0, 0, 0, DateTimeKind.Local),
                             name = "Spotkanie fanów książek"
                         },
                         new
@@ -996,7 +999,7 @@ namespace Biblioteka.Migrations
                             eventId = 2m,
                             authorId = 4m,
                             description = "spotkanie antyfanów książek a autor numer 4 będzie ich zachęcał aby czytali",
-                            eventDate = new DateTime(2024, 4, 13, 0, 0, 0, 0, DateTimeKind.Local),
+                            eventDate = new DateTime(2024, 4, 28, 0, 0, 0, 0, DateTimeKind.Local),
                             name = "Spotkanie antyfanów książek"
                         },
                         new
@@ -1004,7 +1007,7 @@ namespace Biblioteka.Migrations
                             eventId = 3m,
                             authorId = 8m,
                             description = "Autor Adam Niemowa będzie rozdawał autografy ale nie można do niego mówić bo sobie tego nie życzy i wtedy nie da autografu ",
-                            eventDate = new DateTime(2024, 4, 13, 0, 0, 0, 0, DateTimeKind.Local),
+                            eventDate = new DateTime(2024, 4, 28, 0, 0, 0, 0, DateTimeKind.Local),
                             name = "Podpisywanie książek"
                         },
                         new
@@ -1012,7 +1015,7 @@ namespace Biblioteka.Migrations
                             eventId = 4m,
                             authorId = 3m,
                             description = "Konkurs w którym udział może wziąć każdy. Uczestnicy będą mieli 1h na napisanie rozdziału, który zostanie nastepnie oceniony. Czekają na Was wspaniałe nagrody!",
-                            eventDate = new DateTime(2024, 4, 16, 0, 0, 0, 0, DateTimeKind.Local),
+                            eventDate = new DateTime(2024, 5, 1, 0, 0, 0, 0, DateTimeKind.Local),
                             name = "Konkurs pisania na czas"
                         },
                         new
@@ -1020,7 +1023,7 @@ namespace Biblioteka.Migrations
                             eventId = 5m,
                             authorId = 9m,
                             description = "Nauczymy się jak poprawnie pisać. Żerzuha a może rzeżuha czy żeżucha bądź rzerzucha? Na spotkaniu to oraz wiele wiedzy więcej.",
-                            eventDate = new DateTime(2024, 4, 21, 0, 0, 0, 0, DateTimeKind.Local),
+                            eventDate = new DateTime(2024, 5, 6, 0, 0, 0, 0, DateTimeKind.Local),
                             name = "Dyktando"
                         });
                 });
@@ -1555,6 +1558,32 @@ namespace Biblioteka.Migrations
                             name = "Pracownia komputerowa",
                             price = 100.5m
                         });
+                });
+
+            modelBuilder.Entity("Biblioteka.Models.Suggestion", b =>
+                {
+                    b.Property<decimal>("suggestionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("NUMERIC(4)");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<decimal>("suggestionId"));
+
+                    b.Property<string>("author")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("title")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<decimal>("votes")
+                        .HasColumnType("NUMERIC(4)");
+
+                    b.HasKey("suggestionId");
+
+                    b.ToTable("Suggestion");
                 });
 
             modelBuilder.Entity("Biblioteka.Models.Tag", b =>

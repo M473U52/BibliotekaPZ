@@ -42,6 +42,8 @@ namespace Biblioteka.Context
 
         public DbSet<FAQ> FAQ { get; set; }
 
+        public DbSet<Suggestion> Suggestion { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -57,6 +59,7 @@ namespace Biblioteka.Context
             modelBuilder.Entity<RoomReservation>().HasKey(p => p.reservationId);
             modelBuilder.Entity<Event>().HasKey(p => p.eventId);
             modelBuilder.Entity<FAQ>().HasKey(p => p.FAQId);
+            modelBuilder.Entity<Suggestion>().HasKey(p => p.suggestionId);
 
             //modelBuilder.Entity<Author>().Property(p => p.authorId).UseIdentityColumn(seed:1, increment:1);
 
