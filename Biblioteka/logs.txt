@@ -176,3 +176,28 @@
 2024-04-22 22:31:09.174 +02:00 [INF] Wylogowanie asd@asd.asd - Reader
 2024-04-22 22:31:16.303 +02:00 [INF] Zalogowany użytkownik admin@admin.com - Admin
 2024-04-22 22:31:54.179 +02:00 [INF] Dodano książkę aaaaaaaa
+2024-05-02 13:09:05.175 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
+2024-05-02 13:10:40.932 +02:00 [INF] Wylogowanie jan.kowalski@gmail.com - Reader
+2024-05-02 13:10:53.525 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-05-02 21:19:18.717 +02:00 [INF] Wylogowanie janusz.kowalski@gmail.com - Employee
+2024-05-02 21:20:48.227 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-05-02 21:53:07.260 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-05-02 21:58:03.779 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-05-02 22:02:33.862 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-05-02 22:07:01.902 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-05-02 22:10:34.332 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-05-02 22:16:51.192 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-05-02 22:19:44.311 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-05-02 22:24:15.931 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-05-02 22:33:12.955 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-05-02 22:35:29.174 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-05-02 22:44:56.659 +02:00 [INF] Wylogowanie janusz1.kowalski@gmail.com - Employee
+2024-05-02 22:45:09.505 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
+2024-05-02 22:45:54.597 +02:00 [INF] Wylogowanie jan1.kowalski@gmail.com - Reader
+2024-05-02 22:46:04.851 +02:00 [INF] Zalogowany użytkownik admin@admin.com - Admin
+2024-05-02 22:46:18.734 +02:00 [INF] Wylogowanie admin@admin.com - Admin
+2024-05-02 22:53:45.965 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-05-02 23:00:55.028 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-05-02 23:04:36.760 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-05-02 23:10:13.012 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-05-02 23:24:45.991 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader

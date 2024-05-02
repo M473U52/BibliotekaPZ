@@ -1,0 +1,46 @@
+﻿@media(max-width:1150px){
+    .panel_navigation{
+        display: flex;
+        flex-direction: row;
+        justify-content:center;
+        align-items:center;
+        flex-wrap:wrap;
+        gap: 1rem;
+    }
+    .panel_navigation_item {
+        min-height: 4rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+    .panel_navigation_item>a{
+        text-align:center;
+    }
+    .panel_navigation_item:not(:last-child) {
+        margin-bottom: 0 !important;
+    }
+}
+.panel_navigation_item {
+    width: 12rem;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.2) -2px 2px 6px;
+    transition: .5s ease;
+}
+.panel_navigation_item > a:hover {
+    color: #636363 !important;
+}
+.panel_navigation_item:not(:last-child) {
+    margin-bottom: .5rem;
+}
+.panel_navigation_item > a {
+    color: black;
+}
+
+.active_pill {
+    background-color: #c63636;
+}
+
+.panel_navigation_item:hover {
+    transform: translateY(-2px);
+}

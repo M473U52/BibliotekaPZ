@@ -10,33 +10,35 @@
         Layout = "/Areas/Identity/Pages/_Layout.cshtml";
     }
 }
-<div class="main_container">
-    <div class="profile">
-        <div class="left_profile_div">
-            <div class="profile_photo">
-				<a>
-                    @if (UserManager.FindByEmailAsync(User.Identity.Name).Result.profilePicData != null)
-                    {
-                        <img src="data:image/jpg;base64,@(Convert.ToBase64String(UserManager.FindByEmailAsync(User.Identity.Name).Result.profilePicData))" alt="~/images/user_photo.jpg" />
-					    <i class="fa-solid fa-pen-to-square"></i>
-                    }
-                    else
-                    {
-                        <img src="~/images/user_photo.jpg" alt="~/images/user_photo.jpg" />
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    }
-                </a>
-            </div>
-            <div class="profile_options">
-                <partial name="_ManageNav" />
-            </div>
-        </div>   
-        <div class="main_profile_details">
-              @RenderBody()
+<link rel="stylesheet" href="~/css/Account/profile_layout.css" asp-append-version="true" />
+<div class="main-profile-container">
+    <div class="left-profile-container">
+        <div class="photo-container">
+            @{
+                var user = await UserManager.GetUserAsync(User);
+                if (user != null && user.profilePicData != null)
+                {
+                    <img src="data:image/jpg;base64,@(Convert.ToBase64String(UserManager.FindByEmailAsync(User.Identity.Name).Result.profilePicData))" alt="Zdjęcie profilowe" />
+                    <i class="fa-solid fa-pen-to-square"></i>
+                }
+                else
+                {
+                    <img src="~/images/user_photo.jpg" alt="Zdjęcie profilowe" />
+                    <i class="fa-solid fa-pen-to-square"></i>
+                }
+            }
+            
+        </div>
+        <div class="nav_container">
+            <partial name="_ManageNav" />
+        </div>
+    </div>
+    <div class="outer-right-profile-container">
+        <div class="inner-right-profile-container">
+            @RenderBody()
         </div>
     </div>
 </div>
-
 
 @section Scripts {
     @RenderSection("Scripts", required: false)

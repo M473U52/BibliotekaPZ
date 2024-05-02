@@ -8,6 +8,8 @@ using Biblioteka.Areas.Identity.Data;
 using Biblioteka.Services;
 using NuGet.Protocol;
 using Serilog;
+using Biblioteka.Models;
+using Microsoft.CodeAnalysis.Elfie.Diagnostics;
 
 //using Microsoft.AspNetCore.Identity.UI.Services;
 
@@ -137,7 +139,8 @@ using (var scope = app.Services.CreateScope())
 
 		await userManager.AddToRoleAsync(user, "Admin");
 	}
-	email = "employee@employee.com";
+
+    email = "employee@employee.com";
 	password = "employee123";
 	if (await userManager.FindByEmailAsync(email) == null)
 	{
@@ -153,7 +156,9 @@ using (var scope = app.Services.CreateScope())
 
 		await userManager.AddToRoleAsync(user, "Employee");
 	}
-	// czytelnik
+
+
+    // czytelnik
     email = "jan.kowalski@gmail.com";
     password = "zaq12wsx";
     if (await userManager.FindByEmailAsync(email) == null)
@@ -170,6 +175,8 @@ using (var scope = app.Services.CreateScope())
 
         await userManager.AddToRoleAsync(user, "Reader");
     }
+
+
     // employee
     email = "janusz.kowalski@gmail.com";
     password = "zaq12wsx";
@@ -187,6 +194,7 @@ using (var scope = app.Services.CreateScope())
 
         await userManager.AddToRoleAsync(user, "Employee");
     }
+
     // autor
     email = "autor123@autor.com";
     password = "zaq12wsx";
@@ -204,6 +212,8 @@ using (var scope = app.Services.CreateScope())
 
         await userManager.AddToRoleAsync(user, "Author");
     }
+
+
     // gosc
     email = "gosc@gosc.com";
     password = "zaq12wsx";
