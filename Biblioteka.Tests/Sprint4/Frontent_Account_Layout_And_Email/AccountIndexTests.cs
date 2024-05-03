@@ -35,72 +35,100 @@ namespace Biblioteka.Tests.Sprint4.Frontent_Account_Layout_And_Email
             httpContextAccessor = A.Fake<IHttpContextAccessor>();
             tempData = new TempDataDictionary(new DefaultHttpContext(), A.Fake<ITempDataProvider>());
         }
-        private ClaimsPrincipal CreateUser(string role)
+
+        [Fact]
+        public async Task OnPostChangePhotoAsync_Should_Change_User_Photo_And_Provide_Success_Message()
         {
-            var claims = new List<Claim>
+            // Arrange - user, image, page
+            var user = new BibUser();
+            var stream = new MemoryStream();
+            var writer = new StreamWriter(stream);
+            writer.Write(new string('a', (int)1000000));
+            writer.Flush();
+            stream.Position = 0;
+            var userImage = new FormFile(stream, 0, 1000000, "image", "fakeImage.jpg")
             {
-                new Claim(ClaimTypes.NameIdentifier, "1"), // Możesz zmienić Id użytkownika według potrzeb
-                new Claim(ClaimTypes.Name, "example@example.com") // Możesz zmienić nazwę użytkownika według potrzeb
+                Headers = new HeaderDictionary(),
+                ContentType = "image/jpeg"
             };
-
-            // Dodaj role do listy claimów
-            claims.Add(new Claim(ClaimTypes.Role, role));
-
-            var identity = new ClaimsIdentity(claims, "TestAuthentication");
-
-            return new ClaimsPrincipal(identity);
-        }
-
-        /*[Fact]
-        public async Task OnPostChangeEmailAsync_Should_Change_Email_And_Provide_Correct_Success_Message()
-        {
+            var userImageData = await GetImageDataAsync(userImage);
             var model = new IndexModel(userManager, signInManager, readerRepository, employeeRepository, emailSender)
             {
-                TempData = tempData
+                TempData = tempData,
+                image = userImage
             };
-            model.NewEmail = "new.mail@example.com";
-            model.RepeatNewEmail = "new.mail@example.com";
 
-            var user = new BibUser { Id = "1", UserName = "old.mail@example.com", Email = "old.mail@example.com" };
-            var role = "Employee";
-            var userWithRole = CreateUser(role);
-            A.CallTo(() => userManager.GetUserAsync(userWithRole)).Returns(user);
-            A.CallTo(() => userManager.GetEmailAsync(user)).Returns(user.Email);
-            A.CallTo(() => userManager.GenerateChangeEmailTokenAsync(user, model.NewEmail)).Returns("token");
-            A.CallTo(() => userManager.GetUserIdAsync(user)).Returns(user.Id);
+            A.CallTo(() => userManager.GetUserAsync(A<ClaimsPrincipal>._)).Returns(user);
             A.CallTo(() => userManager.UpdateAsync(user)).Returns(IdentityResult.Success);
-            A.CallTo(() => readerRepository.GetByMail(user.Email)).Returns(null);
-            A.CallTo(() => employeeRepository.GetOneByMail(user.Email)).Returns(null);
 
             // Act
-            var result = await model.OnPostChangeEmailAsync() as RedirectToPageResult;
+            var result = await model.OnPostChangePhotoAsync() as RedirectToPageResult;
 
             // Assert
+            // Czy przekierowano spowrotem do /Account/Manage/Index ?
             result.Should().NotBeNull();
             result?.PageName.Should().Be("/Account/Manage/Index");
 
-            A.CallTo(() => userManager.UpdateAsync(user));
+            // Czy rzeczywiście zmieniono poprawnie zdjęcie profilowe ?
+            user.profilePicData.Should().NotBeNull();
+            user.profilePicData.Should().Equal(userImageData);
 
-            // Sprawdzenie wiadomości uzyskanej w TempData
+            // Czy została dostarczona wiadomość z sukcesem operacji ?
             tempData.ContainsKey("Message").Should().BeTrue();
             tempData["Message"].Should().NotBeNull();
-            model.TempData["Message"].Should().Be("Success/Link potwierdzający został wysłany na podany adres e-mail. Sprawdź swoją skrzynkę.");
+            model.TempData["Message"].Should().Be("Success/Pomyślnie zmieniono zdjęcie profilowe.");
+        }
 
-            
-            A.CallTo(() => emailSender.SendEmailAsync("new.mail@example.com", A<string>._, A<string>._)).MustHaveHappened();
+        [Fact]
+        public async Task OnPostChangePhotoAsync_Should_Not_Change_User_Photo_And_Provide_Error_Message()
+        {
+            // Arrange - user, image, page
+            var user = new BibUser();
+            var stream = new MemoryStream();
+            var writer = new StreamWriter(stream);
+            writer.Write(new string('a', (int)10000001)); // więcej niż 10 MB
+            writer.Flush();
+            stream.Position = 0;
+            var userImage = new FormFile(stream, 0, 10000001, "image", "fakeImage.gif")
+            {
+                Headers = new HeaderDictionary(),
+                ContentType = "image/gif"  // Format gif
+            };
+            var userImageData = await GetImageDataAsync(userImage);
+            var model = new IndexModel(userManager, signInManager, readerRepository, employeeRepository, emailSender)
+            {
+                TempData = tempData,
+                image = userImage
+            };
 
-            // If user is in Employee role
-            A.CallTo(() => employeeRepository.Update(A<Employee>._)).WhenArgumentsMatch(args => args.Get<Employee>(0).email == model.NewEmail).MustHaveHappened();
+            // Act
+            var result = await model.OnPostChangePhotoAsync() as RedirectToPageResult;
 
-            // If user is in Reader role
-            A.CallTo(() => readerRepository.Update(A<Reader>._)).WhenArgumentsMatch(args => args.Get<Reader>(0).email == model.NewEmail).MustHaveHappened();
+            // Assert
+            // Czy przekierowano spowrotem do /Account/Manage/Index ?
+            result.Should().NotBeNull();
+            result?.PageName.Should().Be("/Account/Manage/Index");
 
-            // Check if user has new email
-            user.Email.Should().Be(model.NewEmail);
-            
+            // Czy zdjęcie profilowe nie zostało zmienione - nadal jest null ?
+            user.profilePicData.Should().BeNull();
 
-           
-        }*/
+            // Czy funkcje wewnątrz zostały wykonane lub nie ?
+            A.CallTo(() => userManager.GetUserAsync(A<ClaimsPrincipal>._)).MustHaveHappened();
+            A.CallTo(() => userManager.UpdateAsync(user)).MustNotHaveHappened();
+
+            // Czy została dostarczona wiadomość z sukcesem operacji ?
+            tempData.ContainsKey("Message").Should().BeTrue();
+            tempData["Message"].Should().NotBeNull();
+            model.TempData["Message"].Should().Be("Error/Plik musi być w formacie JPG i nie większy niż 10MB!");
+        }
+        private async Task<byte[]> GetImageDataAsync(IFormFile image)
+        {
+            using (var ms = new MemoryStream())
+            {
+                await image.CopyToAsync(ms);
+                return ms.ToArray();
+            }
+        }
 
     }
 }
