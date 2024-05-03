@@ -18,7 +18,7 @@
                 var user = await UserManager.GetUserAsync(User);
                 if (user != null && user.profilePicData != null)
                 {
-                    <img src="data:image/jpg;base64,@(Convert.ToBase64String(UserManager.FindByEmailAsync(User.Identity.Name).Result.profilePicData))" alt="Zdjęcie profilowe" />
+                    <img src="data:image/jpg;base64,@(Convert.ToBase64String(user.profilePicData))" alt="Zdjęcie profilowe" />
                     <i class="fa-solid fa-pen-to-square"></i>
                 }
                 else

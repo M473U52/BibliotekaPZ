@@ -203,3 +203,12 @@
 2024-05-02 23:24:45.991 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
 2024-05-04 00:41:15.517 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
 2024-05-04 00:41:58.383 +02:00 [INF] Wylogowanie janusz.kowalski@gmail.com - Employee
+2024-05-04 00:46:00.733 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
+2024-05-04 01:04:56.167 +02:00 [INF] Wylogowanie jan.kowalski@gmail.com - Reader
+2024-05-04 01:05:10.382 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-05-04 01:08:30.758 +02:00 [INF] Wylogowanie janusz.kowalski@gmail.com - Employee
+2024-05-04 01:08:41.935 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
+2024-05-04 01:41:53.873 +02:00 [INF] Wylogowanie jan123.kowalski123@gmail.com - Reader
+2024-05-04 01:42:04.322 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
+2024-05-04 01:43:41.417 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
+2024-05-04 01:45:16.461 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee

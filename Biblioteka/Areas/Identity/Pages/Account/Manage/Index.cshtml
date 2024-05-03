@@ -19,15 +19,15 @@
         {
             <div class="photo_div_1">
                 <p class="photo_dimensions">180 x 180</p>
-                <img src="data:image/jpg;base64,@(Convert.ToBase64String(UserManager.FindByEmailAsync(User.Identity.Name).Result.profilePicData))" alt="Zdjęcie profilowe" />
+                <img src="data:image/jpg;base64,@(Convert.ToBase64String(user.profilePicData))" alt="Zdjęcie profilowe" />
             </div>
             <div class="photo_div_2">
                 <p class="photo_dimensions">108 x 108</p>
-                <img src="data:image/jpg;base64,@(Convert.ToBase64String(UserManager.FindByEmailAsync(User.Identity.Name).Result.profilePicData))" alt="Zdjęcie profilowe" />
+                <img src="data:image/jpg;base64,@(Convert.ToBase64String(user.profilePicData))" alt="Zdjęcie profilowe" />
             </div>
             <div class="photo_div_3">
                 <p class="photo_dimensions">54 x 54</p>
-                <img src="data:image/jpg;base64,@(Convert.ToBase64String(UserManager.FindByEmailAsync(User.Identity.Name).Result.profilePicData))" alt="Zdjęcie profilowe" />
+                <img src="data:image/jpg;base64,@(Convert.ToBase64String(user.profilePicData))" alt="Zdjęcie profilowe" />
             </div>
         }
         else
