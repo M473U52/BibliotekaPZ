@@ -4,6 +4,7 @@
     ViewData["Title"] = "Home";
 }
 <link rel="stylesheet" href="~/css/Home/main.css" asp-append-version="true" />
+
 <article class="home-article">
     <section id="info">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="display:none;"></button>
@@ -89,7 +90,7 @@
     <section class="events containers-horizontal-vertical">
         <div class="title-section">
             <div class="title-section-h2">
-                <div class="red-box"></div>
+                <div class="red-box"></div>                <div class="line"></div>
                 <h2 class="title-h3">Nadchodzące wydarzenia</h2>
             </div>
             <div class="slider">
@@ -146,6 +147,7 @@
         <div class="title-section">
             <div class="title-section-h2">
                 <div class="red-box"></div>
+                                <div class="line"></div>
                 <h2 class="title-h3">Nowe publikacje</h2>
             </div class="book-items">
              @if (Model.NewPublications != null && Model.NewPublications.Count() > 0)
