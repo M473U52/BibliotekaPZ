@@ -216,3 +216,5 @@
 2024-05-06 03:22:39.986 +02:00 [INF] Wylogowanie admin@admin.com - Admin
 2024-05-06 03:23:23.402 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
 2024-05-06 03:56:16.550 +02:00 [INF] Zalogowany użytkownik admin@admin.com - Admin
+2024-05-06 19:05:20.450 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
+2024-05-06 19:05:20.555 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader

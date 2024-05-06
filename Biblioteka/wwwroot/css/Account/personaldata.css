@@ -30,6 +30,7 @@
     align-items: center;
     text-align: center;
     justify-content: center;
+    width:40vw;
 }
 
 .container_account2 {
@@ -37,4 +38,5 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+
 }
