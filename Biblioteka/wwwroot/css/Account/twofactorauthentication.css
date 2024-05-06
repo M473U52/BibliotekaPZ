@@ -3,16 +3,50 @@
 
 
 
-
 @media screen and (min-width: 1150px) {
     .container_account {
-    width: 30vw;
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    align-items: center;
-    text-align: center;
-}
+        width: 30vw;
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+        align-items: center;
+        text-align: center;
+    }
+    .container_account4 {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+        align-items: center;
+        text-align: center;
+    }
+    .container_account3 {
+        width: 50vw;
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+    }
+    .red-button3 {
+        margin: 1vw;
+        background-color: #8F2121;
+        color: white;
+        padding: 2% 7%;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: none;
+        width: 30vw;
+    }
+    .red-button4 {
+        margin: 1vw;
+        background-color: #8F2121;
+        color: white;
+        padding: 2% 7%;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: none;
+        width: 12vw;
+    }
     .red-button {
         margin: 1vw;
         background-color: #8F2121;
@@ -36,6 +70,17 @@
         display: inline-block;
         border: none;
         width: 20vw;
+    }
+    .red-button2 {
+        margin: 1vw;
+        background-color: #8F2121;
+        color: white;
+        padding: 2% 4%;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: none;
+        width: 20%;
     }
 
 }
@@ -48,6 +93,20 @@
         margin: 20px 10vw;
         align-items: center;
         text-align: center;
+        justify-content: center;
+    }
+    .container_account4 {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+        align-items: center;
+        text-align: center;
+    }
+    .container_account3 {
+        width: 50vw;
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
     }
     .red-button {
         margin: 1vw;
@@ -60,7 +119,28 @@
         border: none;
         width: 40vw;
     }
-
+    .red-button3 {
+        margin: 1vw;
+        background-color: #8F2121;
+        color: white;
+        padding: 2% 7%;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: none;
+        width: 40vw;
+    }
+    .red-button4 {
+        margin: 1vw;
+        background-color: #8F2121;
+        color: white;
+        padding: 4% 7%;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: none;
+        width: 40vw;
+    }
 
     .blue-button {
         margin: 1vw;
@@ -72,5 +152,17 @@
         display: inline-block;
         border: none;
         width: 40vw;
+    }
+
+    .red-button2 {
+        margin: 1vw;
+        background-color: #8F2121;
+        color: white;
+        padding: 4%;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        border: none;
+        width: 65%;
     }
 }
