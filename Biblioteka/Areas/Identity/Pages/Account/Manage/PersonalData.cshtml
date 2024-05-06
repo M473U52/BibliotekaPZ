@@ -4,22 +4,22 @@
     ViewData["Title"] = "Personal Data";
     ViewData["ActivePage"] = ManageNavPages.PersonalData;
 }
-
-<div class="flex_div_col">
+<link rel="stylesheet" href="~/css/Account/personaldata.css" asp-append-version="true" />
+<div class="container_account">
     <div>
-        <h3>Dane osobiste</h3>
+        <h3><i class="fa-solid fa-book-open-reader"></i> Dane osobiste</h3>
     </div>
     <div>
         <p>Twoje konto zawiera dane osobowe, które nam przekazałeś. Ta strona umożliwia pobranie lub usunięcie tych danych.</p>
         <p>
             <strong>Usunięcie tych danych spowoduje trwałe usunięcie Twojego konta, którego nie będzie można odzyskać.</strong>
         </p>
-        <div class="flex_div_col_default_width">
+        <div class="container_account2">
             <form id="download-data" asp-page="DownloadPersonalData" method="post">
-                <button class="panel_button_positive" type="submit">Pobierz</button>
+                <button class="blue-button" type="submit">Pobierz</button>
             </form>
             <div style="margin-left:20px;">
-                <a id="delete" asp-page="DeletePersonalData" class="panel_button">Usuń</a>
+                <a id="delete" asp-page="DeletePersonalData" class="red-button"><i class="fa-solid fa-eraser"></i> Usuń</a>
             </div>
         </div>
     </div>

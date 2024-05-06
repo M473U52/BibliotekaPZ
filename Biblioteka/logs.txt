@@ -212,3 +212,4 @@
 2024-05-04 01:42:04.322 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
 2024-05-04 01:43:41.417 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
 2024-05-04 01:45:16.461 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-05-06 03:09:14.019 +02:00 [INF] Zalogowany użytkownik admin@admin.com - Admin
