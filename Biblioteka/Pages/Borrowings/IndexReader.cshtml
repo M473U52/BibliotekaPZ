@@ -26,23 +26,26 @@
 
     <div class="table_div table-responsive">
         <table class="table table-striped text-center">
-            <thead class="table-header-style">
-                <tr>
-                    <th class="align-middle">
-                        @Html.DisplayName("Tytuł")
-                    </th>
-                    <th class="align-middle">
-                        @Html.DisplayNameFor(model => model.Borrowing[0].borrowDate)
-                    </th>
-                    <th class="align-middle">
-                        @Html.DisplayNameFor(model => model.Borrowing[0].plannedReturnDate)
-                    </th>
-                    <th class="align-middle">
-                        @Html.DisplayNameFor(model => model.Borrowing[0].returnDate)
-                    </th>
-                    <th class="align-middle">Akcja</th>
-                </tr>
-            </thead>
+            @if(Model.Borrowing.Count != 0)
+            {
+                <thead class="table-header-style">
+                    <tr>
+                        <th class="align-middle">
+                            @Html.DisplayName("Tytuł")
+                        </th>
+                        <th class="align-middle">
+                            @Html.DisplayNameFor(model => model.Borrowing[0].borrowDate)
+                        </th>
+                        <th class="align-middle">
+                            @Html.DisplayNameFor(model => model.Borrowing[0].plannedReturnDate)
+                        </th>
+                        <th class="align-middle">
+                            @Html.DisplayNameFor(model => model.Borrowing[0].returnDate)
+                        </th>
+                        <th class="align-middle">Akcja</th>
+                    </tr>
+                </thead>
+            }
             <tbody>
                 @foreach (var item in Model.Borrowing)
                 {

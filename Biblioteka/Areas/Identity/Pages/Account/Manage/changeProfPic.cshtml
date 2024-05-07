@@ -1,0 +1,24 @@
+﻿@page
+@model Biblioteka.Areas.Identity.Pages.Account.Manage.changeProfPicModel
+@{
+}
+
+<div class ="main_container">
+    <div class="list_header">
+        <h3>Zmień zdjęcie profilowe</h3>
+    </div>
+
+    <div class="form_div_register">
+        <form id="registerForm" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="form-group">
+                <label asp-for="image" class="control-label"></label>
+                <input asp-for="image" class="form-control" />
+                <span asp-validation-for="image" class="text-danger"></span>
+            </div>
+            <div class="button_register">
+                <button class="button buttonDefault" id="registerSubmit" type="submit" style="width:50%; left:25%;position: relative;">Zarejestruj się</button>
+            </div>
+        </form>
+    </div>
+</div>

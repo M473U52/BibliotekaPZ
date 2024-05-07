@@ -176,3 +176,6 @@
 2024-04-22 22:31:09.174 +02:00 [INF] Wylogowanie asd@asd.asd - Reader
 2024-04-22 22:31:16.303 +02:00 [INF] Zalogowany użytkownik admin@admin.com - Admin
 2024-04-22 22:31:54.179 +02:00 [INF] Dodano książkę aaaaaaaa
+2024-05-07 22:08:09.968 +02:00 [INF] Wylogowanie admin@admin.com - Admin
+2024-05-07 22:08:17.166 +02:00 [INF] Zalogowany użytkownik asd@asd.asd - Reader
+2024-05-07 22:32:02.390 +02:00 [INF] Zarejestrowano czytelnika asd sda
