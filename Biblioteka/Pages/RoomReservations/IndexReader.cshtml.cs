@@ -32,10 +32,8 @@ namespace Biblioteka.Pages.RoomReservations
 
             if (User.IsInRole("Reader"))
             {
-                Console.Write(User.Identity.Name);
-                RoomReservation = _roomReservationRepository.getAll()
-                .Where(rr => rr.reader.email == User.Identity.Name)
-                .ToList();
+               var email = _userManager.GetUserName(User);
+                RoomReservation = _roomReservationRepository.getAllOfUser(email);
             }
         }
 
