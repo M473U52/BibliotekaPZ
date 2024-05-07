@@ -86,20 +86,16 @@ namespace Biblioteka.Views.Books
                     if (foundReader != null)
                     {
                         var foundBorrowings = await _bibContext.Borrowing
-                           .Include(b => b.book)
-                           .ThenInclude(ba => ba.genre)
-                           .Include(b => b.book)
-                           .ThenInclude(ba => ba.authors)
-                           .ThenInclude(bookAuthor => bookAuthor.author)
-                           .Where(b => b.readers.Any(rb => rb.readerId == foundReader.readerId))
-                           .Include(b => b.employee)
-                           .ToListAsync();
-
+                            .Include(b => b.book)
+                            .ThenInclude(ba => ba.genre)
+                            .Include(b => b.book)
+                            .ThenInclude(ba => ba.authors)
+                            .ThenInclude(bookAuthor => bookAuthor.author)
+                            .Where(b => b.readers.Any(rb => rb.readerId == foundReader.readerId))
+                            .Include(b => b.employee)
+                            .ToListAsync();
 
                         Borrowing = foundBorrowings;
-
-                        
-
 
                         foreach (var borrowing in foundBorrowings)
                         {
@@ -114,7 +110,6 @@ namespace Biblioteka.Views.Books
                                 {
                                     if (bookAuthor.author != null)
                                     {
-
                                         string fullName = bookAuthor.author.FullName;
                                         AuthorsBorrowed.Add(fullName);
                                         Debug.WriteLine(fullName);
@@ -123,112 +118,45 @@ namespace Biblioteka.Views.Books
                             }
                         }
 
-                        if (GenresBorrowed != null)
+                        var recommendedBooksByGenreAndAuthor = new List<Book>();
+
+                        // Szukamy jednej polecanej ksi¹¿ki na podstawie gatunku
+                        if (GenresBorrowed.Any())
                         {
-                            var genreNameCounts = GenresBorrowed
-                                .GroupBy(name => name)
-                                .Select(group => new { GenreName = group.Key, Count = group.Count() })
-                                .OrderByDescending(g => g.Count)
-                                .ToList();
-
-                            if (genreNameCounts.Count >= 2)
+                            var randomGenre = GenresBorrowed[new Random().Next(GenresBorrowed.Count)];
+                            var randomBookByGenre = _bookRepository.GetRandomBookByGenre(randomGenre);
+                            if (randomBookByGenre != null && !Borrowing.Any(b => b.book.bookId == randomBookByGenre.bookId))
                             {
-                                bool isDifferentBook = true;
-                                for (int i = 0; i < genreNameCounts.Count; i++)
-                                {
-                                    for (int j = 0; j < 15; j++)
-                                    {
-                                        List<Book> booksByMostCommonGenre = _bookRepository.GetBooksByGenre(genreNameCounts[i].GenreName);
-                                        Random rnd = new Random();
-                                        int randomIndex = rnd.Next(booksByMostCommonGenre.Count);
-                                        Book randomBook = booksByMostCommonGenre[randomIndex];
-                                        foreach (var Book in RecommendedBooks)
-                                        {
-                                            if (randomBook == Book || Borrowing.Any(b => b.book.bookId == randomBook.bookId))
-                                            {
-                                                isDifferentBook = false;
-                                                break;
-                                            }
-                                        }
-
-                                        if (isDifferentBook)
-                                        {
-                                            RecommendedBooks.Add(randomBook);
-                                            break;
-                                        }
-                                    }
-                                }
-                                //for (int i = 1; i < genreNameCounts.Count; i++)
-                                //{
-                                //    for (int j = 0; j < 15; j++)
-                                //    {
-                                //        List<Book> booksByMostCommonGenre2 = _bookRepository.GetBooksByGenre(genreNameCounts[i].GenreName);
-                                //        Random rnd = new Random();
-                                //        int randomIndex = rnd.Next(booksByMostCommonGenre2.Count);
-                                //        Book randomBook = booksByMostCommonGenre2[randomIndex];
-                                //        foreach (var Book in RecommendedBooks)
-                                //        {
-                                //            if (randomBook == Book || Borrowing.Any(b => b.book.bookId == randomBook.bookId))
-                                //            {
-                                //                isDifferentBook = false;
-                                //                break;
-                                //            }
-                                //        }
-
-                                //        if (isDifferentBook)
-                                //        {
-                                //            RecommendedBooks.Add(randomBook);
-                                //            break;
-                                //        }
-                                //    }
-                                //}
+                                recommendedBooksByGenreAndAuthor.Add(randomBookByGenre);
                             }
                         }
 
-                        if (AuthorsBorrowed != null && AuthorsBorrowed.Any())
+                        // Szukamy jednej polecanej ksi¹¿ki na podstawie autora
+                        if (AuthorsBorrowed.Any())
                         {
-                            var authorNameCounts = AuthorsBorrowed
-                                .GroupBy(fullName => fullName)
-                                .Select(group => new { FullName = group.Key, Count = group.Count() })
-                                .OrderByDescending(g => g.Count)
-                                .ToList();
-
-                            if (authorNameCounts.Count > 0)
+                            var randomAuthor = AuthorsBorrowed[new Random().Next(AuthorsBorrowed.Count)];
+                            var randomBookByAuthor = _bookRepository.GetRandomBookByAuthor(randomAuthor);
+                            if (randomBookByAuthor != null && !Borrowing.Any(b => b.book.bookId == randomBookByAuthor.bookId))
                             {
-                                for (int i = 0; i < authorNameCounts.Count; i++)
-                                {
-                                    var authorName = authorNameCounts[i];
-                                    bool isDifferentBook = true;
-                                    Book recommendedBook3 = _bookRepository.GetRandomBookByAuthor(authorName.FullName);
-                                    foreach (var Book in RecommendedBooks)
-                                    {
-                                        if (recommendedBook3 == Book || Borrowing.Any(b => b.book.bookId == recommendedBook3.bookId))
-                                        {
-                                            isDifferentBook = false;
-                                            break;
-                                        }
-                                    }
-                                    if (isDifferentBook)
-                                    {
-                                        RecommendedBooks.Add(recommendedBook3);
-                                        return;
-                                    }
-                                }
+                                recommendedBooksByGenreAndAuthor.Add(randomBookByAuthor);
                             }
                         }
 
+                        var borrowedBookIds = Borrowing.Select(br => br.book.bookId).ToList();
 
-                        var highestRatedBook = await _bibContext.Book
-                        .Where(b => b.ratingAVG.HasValue)
-                        .OrderByDescending(b => b.ratingAVG)
-                        .FirstOrDefaultAsync();
+                        var highestRatedBooks = await _bibContext.Book
+                            .Where(b => b.ratingAVG.HasValue && !borrowedBookIds.Contains(b.bookId))
+                            .OrderByDescending(b => b.ratingAVG)
+                            .ToListAsync();
 
-                        if (highestRatedBook != null || !Borrowing.Any(b => b.book.bookId == highestRatedBook.bookId))
+                        if (highestRatedBooks.Any())
                         {
-                            RecommendedBooks.Add(highestRatedBook);
+                            var randomHighestRatedBook = highestRatedBooks[new Random().Next(highestRatedBooks.Count)];
+                            recommendedBooksByGenreAndAuthor.Add(randomHighestRatedBook);
                         }
 
-
+                        // Dodajemy polecane ksi¹¿ki do listy RecommendedBooks
+                        RecommendedBooks.AddRange(recommendedBooksByGenreAndAuthor);
                     }
                     else
                     {
