@@ -32,7 +32,15 @@ namespace Biblioteka.Models
             Display(Name = "Data końca rezerwacji")]
         public DateTime endOfReservationDate { get; set; }
 
-        
+        [
+            Required(ErrorMessage = "wymagane jest podanie godziny"),
+            Display(Name = "Godzina rozpoczęczia rezerwacji")]
+        public TimeSpan startingTime { get; set; }
+
+        [
+            Required(ErrorMessage = "wymagane jest podanie godziny"),
+            Display(Name = "Godzina zakończenia rezerwacji")]
+        public TimeSpan endingTime { get; set; }
 
 
         [

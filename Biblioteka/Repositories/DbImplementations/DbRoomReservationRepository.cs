@@ -25,6 +25,15 @@ namespace Biblioteka.Repositories.DbImplementations
                 .ToList();
         }
 
+        public List<RoomReservation> getAllOfUser(string mail)
+        {
+            return _context.RoomReservation
+                .Include(re => re.reader)
+                .Include(ro => ro.room)
+                .Include(e => e.employee).Where(rr => rr.reader.email == mail)
+                .ToList();
+        }
+
         public RoomReservation getOne(int reservationId)
         {
             return _context.RoomReservation

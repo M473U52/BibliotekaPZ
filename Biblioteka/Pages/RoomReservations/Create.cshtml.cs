@@ -6,6 +6,9 @@ using Biblioteka.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Biblioteka.Areas.Identity.Data;
+using System.ComponentModel.DataAnnotations;
+using Xunit.Sdk;
+using Microsoft.VisualBasic;
 
 namespace Biblioteka.Pages.RoomReservations
 {
@@ -40,14 +43,14 @@ namespace Biblioteka.Pages.RoomReservations
         [BindProperty]
         public string RoomId { get; set; } = default!;
 
-        [BindProperty]
-        public TimeSpan StartingHour { get; set; }
 
         [BindProperty]
-        public TimeSpan FinalHour { get; set; }
+        public TimeSpan startingTime { get; set; } = default!;
+        [BindProperty]
+        public TimeSpan endingTime { get; set; } = default!;
 
         [BindProperty]
-        public bool AgreementCheckbox { get; set; }
+        public string AgreementCheckbox { get; set; }
         public IActionResult OnGet(int roomTypeId)
         {
 
@@ -70,6 +73,19 @@ namespace Biblioteka.Pages.RoomReservations
 
         public IActionResult OnPost(int roomTypeId)
         {
+            bool isAgreementChecked = AgreementCheckbox == "on";
+            if (!isAgreementChecked)
+            {
+                ModelState.AddModelError("AgreementCheckbox", "Musisz zaakceptować regulamin.");
+                return Page();
+            }
+
+            var startOfReservation = DateTime.Parse(Request.Form["startOfReservation"]);
+            var endOfReservation = DateTime.Parse(Request.Form["endOfReservation"]);
+
+            RoomReservation.begginingOfReservationDate = startOfReservation.Add(RoomReservation.startingTime);
+            RoomReservation.endOfReservationDate = endOfReservation.Add(RoomReservation.endingTime);
+            
             var roomreservation = RoomReservation;
             RoomReservation newRoomReservation = new RoomReservation()
             {
@@ -77,6 +93,8 @@ namespace Biblioteka.Pages.RoomReservations
                 roomId = RoomReservation.roomId,
                 begginingOfReservationDate = RoomReservation.begginingOfReservationDate,
                 endOfReservationDate = RoomReservation.endOfReservationDate,
+                startingTime = RoomReservation.startingTime,
+                endingTime = RoomReservation.endingTime,
                 Confirmation = RoomReservation.Confirmation,
             };
 
@@ -131,6 +149,7 @@ namespace Biblioteka.Pages.RoomReservations
 
                 return Page();
             }
+            
             _roomReservationRepository.Add(newRoomReservation);
 
             return RedirectToPage("./IndexReader");

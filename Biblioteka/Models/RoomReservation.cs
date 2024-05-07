@@ -40,7 +40,17 @@ namespace Biblioteka.Models
 			Display(Name = "Data końca rezerwacji")]
 		public DateTime endOfReservationDate { get; set; }
 
-		[BindProperty(SupportsGet = true),
+        [BindProperty(SupportsGet = true),
+            Required(ErrorMessage = "wymagane jest podanie godziny"),
+            Display(Name = "Godzina rozpoczęczia rezerwacji")]
+        public TimeSpan startingTime { get; set; }
+
+        [BindProperty(SupportsGet = true),
+            Required(ErrorMessage = "wymagane jest podanie godziny"),
+            Display(Name = "Godzina zakończenia rezerwacji")]
+        public TimeSpan endingTime { get; set; }
+
+        [BindProperty(SupportsGet = true),
 		Display(Name = "Pracownik nadzorujący wynajęcie")]
 		public Employee? employee { get; set; }
 

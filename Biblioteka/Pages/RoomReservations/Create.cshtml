@@ -11,6 +11,8 @@
     <partial name="_UnderHeader" />
     <div class="vertical">
         <form method="post">
+            <input type="hidden" id="startOfReservation" name="startOfReservation" />
+            <input type="hidden" id="endOfReservation" name="endOfReservation" />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="container-1">
                 <div class="calendar-month">
@@ -36,13 +38,13 @@
                 <div class="horizontal-items">
                     <div class="item-vertical-1">
                         <h4>Od godziny</h4>
-                         <input asp-for="StartingHour" type="time" class="form-control size-input" />
-                         <span asp-validation-for="StartingHour" class="text-danger"></span>
+                         <input asp-for="RoomReservation.startingTime" type="time" class="form-control size-input" />
+                         <span asp-validation-for="RoomReservation.startingTime" class="text-danger"></span>
                     </div>
                     <div class="item-vertical-2">
                         <h4>Do godziny</h4>
-                        <input asp-for="FinalHour" type="time" class="form-control size-input" />
-                        <span asp-validation-for="FinalHour" class="text-danger"></span>
+                        <input asp-for="RoomReservation.endingTime" type="time" class="form-control size-input" />
+                        <span asp-validation-for="RoomReservation.endingTime" class="text-danger"></span>
                     </div>
                 </div>
              <div>

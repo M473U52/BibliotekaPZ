@@ -211,16 +211,31 @@ const handleClick = (event) => {
     day_box.classList.toggle("day-box-checked");
     if (day_box.classList.contains("day-box-checked")) {
         day_box.classList.remove("day-box");
-        selectedDays.push(+event.target.textContent);
+        const day = +event.target.textContent; // Pobierz numer dnia
+        const month = new Date().getMonth(); // Pobierz aktualny miesiąc (indeksowany od 0)
+        const year = new Date().getFullYear(); // Pobierz aktualny rok
+        const fullDate = new Date(year, month, day); // Utwórz pełną datę
+        selectedDays.push(fullDate); // Dodaj pełną datę do tablicy selectedDays
     }
     else {
         day_box.classList.add("day-box");
-        let index = selectedDays.indexOf(+event.target.textContent);
+        const day = +event.target.textContent; // Pobierz numer dnia
+        const month = new Date().getMonth(); // Pobierz aktualny miesiąc (indeksowany od 0)
+        const year = new Date().getFullYear(); // Pobierz aktualny rok
+        const fullDate = new Date(year, month, day); // Utwórz pełną datę
+        const index = selectedDays.findIndex(date => date.getDate() === fullDate.getDate()); // Znajdź indeks daty w tablicy selectedDays
         if (index !== -1) {
-            selectedDays.splice(index, +event.target.textContent);
+            selectedDays.splice(index, 1); // Usuń datę z tablicy selectedDays
         }
     }
+    const startOfReservation = selectedDays.length > 0 ? selectedDays[0] : null;
+    const endOfReservation = selectedDays.length > 0 ? selectedDays[selectedDays.length - 1] : null;
+
+    // Przypisz wartości do pól formularza
+    document.getElementById("startOfReservation").value = startOfReservation ? startOfReservation.toLocaleDateString() : null; // Konwertuj datę na string
+    document.getElementById("endOfReservation").value = endOfReservation ? endOfReservation.toLocaleDateString() : null; // Konwertuj datę na string
 }
+
 /*
 function handleClick1(event) {
     if (event.target.tagName === 'DIV') {
