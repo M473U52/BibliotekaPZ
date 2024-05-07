@@ -5,8 +5,11 @@
     ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
 }
 
+<link rel="stylesheet" href="~/css/Account/twofactorauthentication.css" asp-append-version="true" />
+<div class="container_account">
 <partial name="_StatusMessage" for="StatusMessage" />
 <h3>@ViewData["Title"]</h3>
+<hr />
 <div class="alert alert-warning" role="alert">
     <p>
         <span class="glyphicon glyphicon-warning-sign"></span>
@@ -19,6 +22,7 @@
 </div>
 <div>
     <form id="reset-authenticator-form" method="post">
-        <button id="reset-authenticator-button" class="panel_button" type="submit">Zresetuj klucz uwierzytelniający</button>
+        <button id="reset-authenticator-button" class="red-button3" type="submit">Zresetuj klucz uwierzytelniający</button>
     </form>
+</div>
 </div>

@@ -4,10 +4,12 @@
     ViewData["Title"] = "Skonfiguruj aplikację uwierzytelniającą";
     ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
 }
-<div class="flex_div_col">
+<link rel="stylesheet" href="~/css/Account/twofactorauthentication.css" asp-append-version="true" />
+<div class="container_account3">
     <div>
         <partial name="_StatusMessage" for="StatusMessage" />
         <h3>@ViewData["Title"]</h3>
+        <hr />
     </div>
     <div>
         <p>Aby skorzystać z aplikacji uwierzytelniającej, wykonaj następujące kroki:</p>
@@ -15,11 +17,11 @@
             <li>
                 <p>
                     Pobierz aplikację uwierzytelniającą dwuskładnikową, taką jak Microsoft Authenticator
-                    <a class="link_activate_button" href="https://go.microsoft.com/fwlink/?Linkid=825072">Android</a> i
-                    <a class="link_activate_button" href="https://go.microsoft.com/fwlink/?Linkid=825073">iOS</a> lub
+                    (<a style="color: black !important;" href="https://go.microsoft.com/fwlink/?Linkid=825072">Android</a> i
+                    <a  href="https://go.microsoft.com/fwlink/?Linkid=825073" style="color: black !important;">iOS</a>) lub
                     Google Authenticator dla
-                    <a class="link_activate_button" href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&amp;hl=en">Android</a> i
-                    <a class="link_activate_button" href="https://itunes.apple.com/us/app/google-authenticator/id388497605?mt=8">iOS</a>.
+                    <a  href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&amp;hl=en" style="color: black !important;">Android</a> i
+                    <a  href="https://itunes.apple.com/us/app/google-authenticator/id388497605?mt=8" style="color: black !important;">iOS</a>.
                 </p>
             </li>
             <li>
@@ -42,7 +44,7 @@
                             <label asp-for="Input.Code" class="control-label form-label">Kod weryfikacyjny</label>
                             <span asp-validation-for="Input.Code" class="text-danger"></span>
                         </div>
-                        <button type="submit" class="panel_button">Weryfikuj</button>
+                        <button type="submit" class="red-button2">Weryfikuj</button>
                         <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                     </div>
                 </form>

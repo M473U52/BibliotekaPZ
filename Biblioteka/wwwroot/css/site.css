@@ -659,66 +659,17 @@ dt {
 }
 
 
-.profile_photo:hover .fa-pen-to-square {
-    opacity: 1;
-}
 
-.fa-pen-to-square {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    font-size: 2rem;
-    color: #fff;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-}
-.profile_photo:hover > img {
-    filter: grayscale(80%) opacity(0.7);
-}
 
-.profile_photo:hover {
-    background-color: #858585;
-    z-index: 1;
-    cursor: pointer;
-}
-.label_data{
-    font-weight: bold;
-    font-size: 1.1rem;
-}
-.data{
-    font-size: 1.1rem;
-    margin-left: 0.5rem;
-}
-.profile_data{
-    display:flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
 .flex_div_col_default_width{
     display:flex;
     flex-direction:row;
     align-items:center;
     justify-content:center;
 }
-.employee_overall_data {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-.employee_detailed_data {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
 
-.panel_navigation_item {
-    background-color: #c73636;
-    margin-bottom: .5rem;
-    border-radius: 10px;
-    transition: .5s ease;
-}
+
+
 .panel_button {
     background-color: #c73636;
     color:#fff;
@@ -758,94 +709,34 @@ dt {
 .panel_button:hover {
     background-color: #a51414;
 }
-.panel_navigation_item:hover {
-    background-color: #a51414;
-    transform: translateY(-2px);
-}
-.data_hidden {
-    display: none;
-}
-.border_add {
-    color: #c73636;
-    border-bottom: 2px solid #c73636;
-}
-.view_change {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-}
-.detailed_details{
-    margin-left:.5rem;
-}
-.overall_details:hover {
-    cursor: pointer;
-    color: #c73636;
-}
-.detailed_details:hover {
-    cursor: pointer;
-    color: #c73636;
-}
 
 
-.left_profile_div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-right: 1rem;
-}
-.profile {
-    margin: 3rem 0 3rem 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-.profile_details {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-   
-}
-.main_profile_details {
-    width: 60vw;
-    padding: 1rem 3rem 1rem 3rem;
-    border: 4px solid #c73636;
-    border-radius: 10px;
-    background-color: #d6af6d;
-}
-.profile_photo {
-    position: relative;
-    border: 4px solid #c73636;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-bottom: 1rem;
-}
+
+
+
+
 .avg_opinion_inner_div{
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
 }
-@media(max-width:1050px) {
-    .profile {
-        flex-direction: column;
-    }
-}
+
 
 @media(max-width:800px) {
 
-    .main_profile_details{
+    /*.main_profile_details{
         width:65vw;
-    }
+    }*/
     .myContainerv2 {
         width: 80% !important;
     }
 }
 @media(max-width:600px) {
 
-    .main_profile_details {
+    /* .main_profile_details {
         width: 75vw;
-    }
+    }*/
 
     .myContainerv2 {
         width: 90% !important;

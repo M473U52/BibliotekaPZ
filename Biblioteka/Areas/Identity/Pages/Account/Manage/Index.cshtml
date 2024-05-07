@@ -7,31 +7,130 @@
 @inject SignInManager<BibUser> SignInManager
 @inject UserManager<BibUser> UserManager
 
+<link rel="stylesheet" href="~/css/Account/account_details.css" asp-append-version="true" />
+
+<dialog id="change_profile_photo_dialog">
+    <i class="fa-solid fa-circle-xmark dialog-exit"></i>
+    <p class="dialog_header">Zmiana zdjęcia profilowego</p>
+    <div class="actual_user_photo">
+    @{
+        var user = await UserManager.GetUserAsync(User);
+        if (user != null && user.profilePicData != null)
+        {
+            <div class="photo_div_1">
+                <p class="photo_dimensions">180 x 180</p>
+                <img src="data:image/jpg;base64,@(Convert.ToBase64String(user.profilePicData))" alt="Zdjęcie profilowe" />
+            </div>
+            <div class="photo_div_2">
+                <p class="photo_dimensions">108 x 108</p>
+                <img src="data:image/jpg;base64,@(Convert.ToBase64String(user.profilePicData))" alt="Zdjęcie profilowe" />
+            </div>
+            <div class="photo_div_3">
+                <p class="photo_dimensions">54 x 54</p>
+                <img src="data:image/jpg;base64,@(Convert.ToBase64String(user.profilePicData))" alt="Zdjęcie profilowe" />
+            </div>
+        }
+        else
+        {
+            <div class="photo_div_1">
+                <p class="photo_dimensions">180 x 180</p>
+                <img src="~/images/user_photo.jpg" alt="Zdjęcie profilowe" />
+            </div>
+            <div class="photo_div_2">
+                <p class="photo_dimensions">108 x 108</p>
+                <img src="~/images/user_photo.jpg" alt="Zdjęcie profilowe" />
+            </div>
+            <div class="photo_div_3">
+                <p class="photo_dimensions">54 x 54</p>
+                <img src="~/images/user_photo.jpg" alt="Zdjęcie profilowe" />
+            </div>
+        }
+    }
+    </div>
+    <form method="post" asp-page-handler="ChangePhoto" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label class="dialog_label_change_photo" for="image_input">Wybierz zdjęcie profilowe</label>
+            <input id="image_input" asp-for="image" class="form-control"/>
+            <span asp-validation-for="image" class="text-danger"></span>
+        </div>
+        <div class="d-flex flex-row justify-content-center align-items-center">
+            <button type="button" class="action-button action-cancel"><i class="fa-solid fa-xmark"></i>Anuluj</button>
+            <button type="submit" class="action-button action-confirm"><i class="fa-solid fa-check"></i>Zmień</button>
+        </div>
+    </form> 
+</dialog>
+
+
 <div class="profile_details">
 
-<h3>Dane osobowe</h3>
-@if (User.IsInRole("Employee"))
-{
-    <div class="view_change">
-        <p class="overall_details border_add">Dane ogólne</p>
-        <p class="detailed_details">Dane szczegółowe</p>
-    </div>
-}
-<hr />
+    <h3>Dane osobowe</h3>
+    @if (User.IsInRole("Employee"))
+    {
+        <div class="view_change">
+            <p class="overall_details border_add">Dane ogólne</p>
+            <p class="detailed_details">Dane szczegółowe</p>
+        </div>
+    }
+    <hr class="hr_main_line"/>
     @{
         if (User.IsInRole("Reader") && !User.IsInRole("Employee") && !User.IsInRole("Author"))
         {
         <div class="profile_data">
-            <p class="label_data">@Html.DisplayNameFor(model => model.reader.name):</p>
-            <p class="data">@Html.DisplayFor(modelItem =>  Model.reader.name)</p>
+             <p class="label_data">Imię i nazwisko:</p>
+             <p class="data">
+                @Html.DisplayFor(modelItem => Model.reader.name)
+                @Html.DisplayFor(modelItem => Model.reader.surname)
+             </p>
         </div>
-        <div class="profile_data">
-            <p class="label_data">@Html.DisplayNameFor(model => model.reader.surname):</p>
-            <p class="data">@Html.DisplayFor(modelItem =>  Model.reader.surname)</p>
-        </div>
-        <div class="profile_data">
-            <p class="label_data">@Html.DisplayNameFor(model => model.reader.email):</p>
-            <p class="data">@Model.reader.email</p>
+        <div class="profile_data_email">
+            <div class="profile_data_email_data">
+                <p class="label_data">@Html.DisplayNameFor(model => model.reader.email):</p>
+                <p class="data">@Model.reader.email</p>
+                <i class="fa-solid fa-angle-right roll_out_accordion"></i>
+            </div>
+            <div class="email_accordion_content">
+                <div>
+                    <p class="change_email_header">Zmiana adresu e-mail</p>
+                    <form method="post" asp-page-handler="ChangeEmail">
+                        <div class="email_change_main_div">
+                            <div class="form-floating">
+                                <input asp-for="Email" class="form-control bigger_email_input" disabled />
+                                <label asp-for="Email" class="form-label text-black"></label>
+                            </div>
+                            <div class="form-floating">
+                                <input asp-for="NewEmail" class="form-control bigger_email_input" aria-required="true" placeholder="name@example.com" />
+                                <label asp-for="NewEmail" class="form-label text-black">Nowy e-mail</label>
+                                <span asp-validation-for="NewEmail" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating">
+                                <input asp-for="RepeatNewEmail" class="form-control bigger_email_input" aria-required="true" placeholder="name@example.com" />
+                                <label asp-for="RepeatNewEmail" class="form-label text-black">Powtórz e-mail</label>
+                                <span asp-validation-for="RepeatNewEmail" class="text-danger"></span>
+                            </div>
+                            <button class="action-button action-confirm" type="submit" asp-page-handler="ChangeEmail" class="panel_button">Zmień Email</button>
+                        </div>
+                    </form>
+                    <form method="post" asp-page-handler="ResendVerificationEmail">
+                        <div class="email_change_main_div">
+                            @if (Model.IsEmailConfirmed)
+                            {
+                                <div class="email-confirmed-info email-confirmed-info-success">
+                                    <i class="fa-solid fa-check"></i>
+                                    <p class="email-confirmed-success">Adres e-mail został zweryfikowany pomyślnie</p>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="email-confirmed-info email-confirmed-info-error">
+                                    <i class="fa-solid fa-xmark"></i>
+                                    <p class="email-confirmed-success">Adres e-mail nie został zweryfikowany</p>
+                                </div>
+                                <button type="submit" class="activate_e-mail_link">Wyślij mail z linkiem aktywacyjnym</button>
+                            }
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
         <div class="profile_data">
             <p class="label_data">@Html.DisplayNameFor(model => model.reader.birthDate):</p>
@@ -54,21 +153,63 @@
     }
     else if (User.IsInRole("Employee"))
     {
-            <button class="button buttonDefault" style="float:right; margin-right: 50px;">
-                <a class="nav-link text-light" asp-page="/Events/Create">Dodaj nowe wydarzenie</a>
-            </button>
         <div class="employee_overall_data">
             <div class="profile_data">
-                <p class="label_data">@Html.DisplayNameFor(model => model.employee.name):</p>
-                <p class="data">@Html.DisplayFor(modelItem =>  Model.employee.name)</p>
+                <p class="label_data">Imię i nazwisko:</p>
+                <p class="data">
+                    @Html.DisplayFor(modelItem => Model.employee.name)
+                    @Html.DisplayFor(modelItem => Model.employee.surname)
+                </p>
             </div>
-            <div class="profile_data">
-                <p class="label_data">@Html.DisplayNameFor(model => model.employee.surname):</p>
-                <p class="data">@Html.DisplayFor(modelItem =>  Model.employee.surname)</p>
-            </div>
-            <div class="profile_data">
-                <p class="label_data">@Html.DisplayNameFor(model => model.employee.email):</p>
-                <p class="data">@Model.employee.email</p>
+            <div class="profile_data_email">
+                <div class="profile_data_email_data">
+                        <p class="label_data">@Html.DisplayNameFor(model => model.employee.email):</p>
+                        <p class="data">@Model.employee.email</p>
+                        <i class="fa-solid fa-angle-right roll_out_accordion"></i>
+                </div>   
+                <div class="email_accordion_content">
+                    <div>
+                        <p class="change_email_header">Zmiana adresu e-mail</p>
+                        <form method="post" asp-page-handler="ChangeEmail">
+                            <div class="email_change_main_div">
+                                <div class="form-floating">
+                                    <input asp-for="Email" class="form-control bigger_email_input" disabled />
+                                    <label asp-for="Email" class="form-label text-black" ></label>
+                                </div>
+                                <div class="form-floating">
+                                    <input asp-for="NewEmail" class="form-control bigger_email_input" aria-required="true" placeholder="name@example.com" />
+                                    <label asp-for="NewEmail" class="form-label text-black">Nowy e-mail</label>
+                                    <span asp-validation-for="NewEmail" class="text-danger"></span>
+                                </div>
+                                <div class="form-floating">
+                                    <input asp-for="RepeatNewEmail" class="form-control bigger_email_input" aria-required="true" placeholder="name@example.com" />
+                                    <label asp-for="RepeatNewEmail" class="form-label text-black">Powtórz e-mail</label>
+                                    <span asp-validation-for="RepeatNewEmail" class="text-danger"></span>
+                                </div>
+                                <button class="action-button action-confirm" type="submit" asp-page-handler="ChangeEmail" class="panel_button">Zmień Email</button>
+                            </div>
+                        </form>
+                        <form method="post" asp-page-handler="ResendVerificationEmail">
+                            <div class="email_change_main_div">
+                                @if (Model.IsEmailConfirmed)
+                                {
+                                    <div class="email-confirmed-info email-confirmed-info-success">
+                                        <i class="fa-solid fa-check"></i>
+                                        <p class="email-confirmed-success">Adres e-mail został zweryfikowany pomyślnie</p>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="email-confirmed-info email-confirmed-info-error">
+                                        <i class="fa-solid fa-xmark"></i>
+                                        <p class="email-confirmed-success">Adres e-mail nie został zweryfikowany</p>
+                                    </div>
+                                    <button type="submit" class="activate_e-mail_link">Wyślij mail z linkiem aktywacyjnym</button>
+                                }
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
             <div class="profile_data">
                 <p class="label_data">@Html.DisplayNameFor(model => model.employee.dateOfEmployment):</p>
@@ -138,16 +279,61 @@
         else if (User.IsInRole("Author") && !User.IsInRole("Employee"))
         {
             <div class="profile_data">
-                <p class="label_data">@Html.DisplayNameFor(model => model.reader.name):</p>
-                <p class="data">@Html.DisplayFor(modelItem =>  Model.reader.name)</p>
+                <p class="label_data">Imię i nazwisko:</p>
+                <p class="data">
+                    @Html.DisplayFor(modelItem => Model.reader.name)
+                    @Html.DisplayFor(modelItem => Model.reader.surname)
+                </p>
             </div>
-            <div class="profile_data">
-                <p class="label_data">@Html.DisplayNameFor(model => model.reader.surname):</p>
-                <p class="data">@Html.DisplayFor(modelItem =>  Model.reader.surname)</p>
-            </div>
-            <div class="profile_data">
-                <p class="label_data">@Html.DisplayNameFor(model => model.reader.email):</p>
-                <p class="data">@Model.reader.email</p>
+            <div class="profile_data_email">
+                <div class="profile_data_email_data">
+                    <p class="label_data">@Html.DisplayNameFor(model => model.employee.email):</p>
+                    <p class="data">@Model.employee.email</p>
+                    <i class="fa-solid fa-angle-right roll_out_accordion"></i>
+                </div>
+                <div class="email_accordion_content">
+                    <div>
+                        <p class="change_email_header">Zmiana adresu e-mail</p>
+                        <form method="post" asp-page-handler="ChangeEmail">
+                            <div class="email_change_main_div">
+                                <div class="form-floating">
+                                    <input asp-for="Email" class="form-control bigger_email_input" disabled />
+                                    <label asp-for="Email" class="form-label text-black"></label>
+                                </div>
+                                <div class="form-floating">
+                                    <input asp-for="NewEmail" class="form-control bigger_email_input" aria-required="true" placeholder="name@example.com" />
+                                    <label asp-for="NewEmail" class="form-label text-black">Nowy e-mail</label>
+                                    <span asp-validation-for="NewEmail" class="text-danger"></span>
+                                </div>
+                                <div class="form-floating">
+                                    <input asp-for="RepeatNewEmail" class="form-control bigger_email_input" aria-required="true" placeholder="name@example.com" />
+                                    <label asp-for="RepeatNewEmail" class="form-label text-black">Powtórz e-mail</label>
+                                    <span asp-validation-for="RepeatNewEmail" class="text-danger"></span>
+                                </div>
+                                <button class="action-button action-confirm" type="submit" asp-page-handler="ChangeEmail" class="panel_button">Zmień Email</button>
+                            </div>
+                        </form>
+                        <form method="post" asp-page-handler="ResendVerificationEmail">
+                            <div class="email_change_main_div">
+                                @if (Model.IsEmailConfirmed)
+                                {
+                                    <div class="email-confirmed-info email-confirmed-info-success">
+                                        <i class="fa-solid fa-check"></i>
+                                        <p class="email-confirmed-success">Adres e-mail został zweryfikowany pomyślnie</p>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="email-confirmed-info email-confirmed-info-error">
+                                        <i class="fa-solid fa-xmark"></i>
+                                        <p class="email-confirmed-success">Adres e-mail nie został zweryfikowany</p>
+                                    </div>
+                                    <button type="submit" class="activate_e-mail_link">Wyślij mail z linkiem aktywacyjnym</button>
+                                }
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
             <div class="profile_data">
                 <p class="label_data">@Html.DisplayNameFor(model => model.reader.birthDate):</p>
@@ -169,27 +355,60 @@
             </div>
         }
         else
+        {
+            <div class="profile_data">
+                <p class="label_data">Imię i nazwisko: </p>
+                <p class="data">Admin Admin</p>
+            </div>
+            <div class="profile_data">
+                <p class="label_data">Email: </p>
+                <p class="data">@Model.Username</p>
+            </div>
+            <div class="profile_data">
+                <p class="label_data">Rola:</p>
+                <p class="data">Administrator</p>
+            </div>
+        }
+}
+</div>
+
+@{
+    if (TempData["Message"] != null)
     {
-        <div class="profile_data">
-            <p class="label_data">Imię: </p>
-            <p class="data">Admin</p>
-        </div>
-        <div class="profile_data">
-            <p class="label_data">Nazwisko: </p>
-            <p class="data">Admin</p>
-        </div>
-        <div class="profile_data">
-            <p class="label_data">Email: </p>
-            <p class="data">@Model.Username</p>
-        </div>
-        <div class="profile_data">
-            <p class="label_data">Rola:</p>
-            <p class="data">Administrator</p>
+        <div class="notification_div">
+            @if (TempData["Message"]?.ToString()?.Split("/")[0] == "Success")
+            {
+                <div>
+                    <i class="fa-solid fa-check success_notification_icon"></i>
+                </div>
+            }
+            else
+            {
+                <div>
+                    <i class="fa-solid fa-circle-exclamation error_notification_icon"></i>
+                </div>
+            }
+            <div class="notification-content">
+                @if (TempData["Message"]?.ToString()?.Split("/")[0] == "Success")
+                {
+                    <p class="notification-header-success">Sukces!</p>
+                }
+                else
+                {
+                    <p class="notification-header-error">Błąd!</p>
+                }
+                <p class="notification-message">@TempData["Message"]?.ToString()?.Split("/")[1]</p>
+            </div>
+            <div class="hide-notification">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
         </div>
     }
 }
-
-</div>
+<script src="~/js/Account/AccordionTrigger.js"></script>
+<script src="~/js/Borrowing/Notification.js"></script>
+<script src="~/js/Account/ChangePhotoDialogRunner.js"></script>
+<script src="~/js/Account/SetPhoto.js"></script>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

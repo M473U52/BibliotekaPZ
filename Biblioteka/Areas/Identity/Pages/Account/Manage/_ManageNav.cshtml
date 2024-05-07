@@ -2,26 +2,30 @@
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }
+
+<link rel="stylesheet" href="~/css/Account/nav_panel.css" asp-append-version="true" />
+
 <nav>
     <div class="panel_navigation">
-        <div class="nav-item panel_navigation_item"><a class="nav-link text-white @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profil</a></div>
-        <div class="nav-item panel_navigation_item"><a class="nav-link text-white @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Email</a></div>
-        <div class="nav-item panel_navigation_item"><a class="nav-link text-white @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Zmiana hasła</a></div>
+        <div class="nav-item panel_navigation_item"><a class="nav-link text-black @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profil</a></div>
+        <div class="nav-item panel_navigation_item"><a class="nav-link text-black @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Zmiana hasła</a></div>
         @if (hasExternalLogins)
         {
-            <div id="external-logins" class="nav-item panel_navigation_item"><a id="external-login" class="nav-link text-white @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></div>
+            <div id="external-logins" class="nav-item panel_navigation_item"><a id="external-login" class="nav-link text-black @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">External logins</a></div>
         }
-        <div class="nav-item panel_navigation_item"><a class="nav-link text-white @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Uwierzytelnienie Dwuskładnikowe</a></div>
-        <div class="nav-item panel_navigation_item"><a class="nav-link text-white @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Dane Osobiste</a></div>
+        <div class="nav-item panel_navigation_item"><a class="nav-link text-black @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Uwierzytelnienie Dwuskładnikowe</a></div>
+        <div class="nav-item panel_navigation_item"><a class="nav-link text-black @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Dane Osobiste</a></div>
         @if (User.IsInRole("Reader"))
         {
-        <div class="nav-item panel_navigation_item"><a class="nav-link text-white @ManageNavPages.NotifyFreqNavClass(ViewContext)" id="personal-data" asp-page="./NotifyFreq">Częstotliwość powiadomień</a></div>
+            <div class="nav-item panel_navigation_item"><a class="nav-link text-black @ManageNavPages.NotifyFreqNavClass(ViewContext)" id="personal-data" asp-page="./NotifyFreq">Częstotliwość powiadomień</a></div>
 
         }
 
         @if (User.IsInRole("Author"))
         {
-            <div class="nav-item panel_navigation_item"><a class="nav-link text-white" id="personal-data" asp-area="" asp-page="/Authors/Edit">Edytuj panel autora</a></div>
+            <div class="nav-item panel_navigation_item"><a class="nav-link text-black" id="personal-data" asp-area="" asp-page="/Authors/Edit">Edytuj panel autora</a></div>
         }
     </div>
 </nav>
+<script src="~/js/Account/PillClick.js"></script>
+

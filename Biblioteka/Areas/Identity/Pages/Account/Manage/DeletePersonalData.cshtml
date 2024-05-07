@@ -5,10 +5,11 @@
     ViewData["ActivePage"] = ManageNavPages.PersonalData;
 }
 
-
-<div class="flex_div_col">
+<link rel="stylesheet" href="~/css/Account/twofactorauthentication.css" asp-append-version="true" />
+<div class="container_account3">
     <div>
         <h3>@ViewData["Title"]</h3>
+        <hr />
     </div>
     <div class="alert alert-warning" role="alert">
         <p>
@@ -17,7 +18,7 @@
     </div>
 
     <div>
-        <form id="delete-user" method="post">
+        <form class="container_account4" id="delete-user" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             @if (Model.RequirePassword)
             {
@@ -27,7 +28,7 @@
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
             }
-            <button class="panel_button" type="submit">Usuń dane i konto</button>
+            <button class="red-button4" type="submit">Usuń dane i konto</button>
         </form>
     </div>
 </div>

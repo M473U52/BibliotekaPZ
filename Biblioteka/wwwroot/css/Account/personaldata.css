@@ -1,0 +1,42 @@
+﻿.red-button {
+    margin: 1vw;
+    background-color: #8F2121;
+    color: white;
+    padding: 2% 7%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+    width: 15vw;
+}
+
+
+.blue-button {
+    margin: 1vw;
+    background-color: steelblue;
+    color: white;
+    padding: 2% 7%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+    width: 15vw;
+}
+
+
+.container_account {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    width:40vw;
+}
+
+.container_account2 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+}

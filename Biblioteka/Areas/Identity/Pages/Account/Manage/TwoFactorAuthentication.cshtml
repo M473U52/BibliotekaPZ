@@ -6,10 +6,11 @@
     ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
 }
 
-<div class="flex_div_col">
+<link rel="stylesheet" href="~/css/Account/twofactorauthentication.css" asp-append-version="true" />
+<div class="container_account">
     <div>
         <partial name="_StatusMessage" for="StatusMessage" />
-        <h3>Autoryzacja Dwuetapowa</h3>
+        <h3><i class="fa-solid fa-key"></i> Autoryzacja dwuetapowa</h3>
     </div>
     @{
         var consentFeature = HttpContext.Features.Get<ITrackingConsentFeature>();
@@ -49,15 +50,14 @@
                 <a asp-page="./GenerateRecoveryCodes" class="btn btn-primary">Reset recovery codes</a>
             }
 
-            <h4>Uwierzytelnianie</h4>
             @if (!Model.HasAuthenticator)
             {
-                <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="panel_button_positive mb-3">Dodaj uwierzytelnianie dwuetapowe</a>
+                <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="blue-button">Dodaj uwierzytelnianie dwuetapowe</a>
             }
             else
             {
-                <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="panel_button_positive mb-3">Dodaj uwierzytelnianie dwuetapowe</a>
-                <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="panel_button">Resetuj uwierzytelnianie dwuetapowe</a>
+                            <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="blue-button">Dodaj uwierzytelnianie dwuetapowe</a>
+                <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="red-button">Resetuj uwierzytelnianie dwuetapowe</a>
             }
         }
         else

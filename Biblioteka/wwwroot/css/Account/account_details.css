@@ -1,0 +1,164 @@
+﻿@media(max-width:1150px) {
+    .profile_details {
+        min-width: 0px !important;
+    }
+}
+/* details */
+.profile_details {
+    min-width: 576px;
+}
+
+.view_change {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.overall_details:hover {
+    cursor: pointer;
+    color: #c73636;
+}
+
+.border_add {
+    color: #c73636;
+    border-bottom: 2px solid #c73636;
+}
+
+.detailed_details {
+    margin-left: .5rem;
+}
+
+.detailed_details:hover {
+    cursor: pointer;
+    color: #c73636;
+}
+
+.label_data {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.data {
+    font-size: 1.1rem;
+    margin-left: 0.5rem;
+}
+
+.employee_overall_data {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.employee_detailed_data {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.data_hidden {
+    display: none;
+}
+.hr_main_line{
+   margin: .1rem 0 1rem 0;
+}
+
+.profile_data {
+    padding-right: .5rem;
+    display:flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content:flex-start;
+    width: 100%;
+    border-bottom: 1px solid black;
+}
+
+
+.profile_data_email {
+    padding-right: .5rem;
+    width: 100%;
+    border-bottom: 1px solid black;
+}
+.profile_data_email_data{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content: flex-start;
+    width:100%;
+}
+
+.profile_data_email .fa-angle-right {
+    margin-left: auto;
+    font-size: 1.8rem;
+    transition: .5s;
+}
+.profile_data_email .fa-angle-right:hover {
+    transform: translateX(3px);
+    color: #555;
+    cursor: pointer;
+}
+.profile_data p, .profile_data_email_data p{
+    margin-top: .9rem;
+    margin-bottom: .9rem;
+}
+
+
+
+.email_accordion_content {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 500ms;
+}
+.email_accordion_content > div {
+    overflow: hidden;
+}
+.accordion-active {
+    grid-template-rows: 1fr;
+}
+.profile_data_email .fa-angle-right.rotate {
+    transform: rotate(90deg);
+}
+.change_email_header{
+    text-align:center;
+    margin-bottom:.5rem;
+    margin-top: .8rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+.email_change_main_div{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+}
+.bigger_email_input{
+    width: 18rem;
+    margin-bottom: 1rem;
+}
+.activate_e-mail_link{
+    color: black;
+    border:none;
+    margin: .5rem 0 .5rem 0;
+    background-color:transparent;
+
+}
+.activate_e-mail_link:hover {
+    cursor: pointer;
+    color: #6b6b6b;
+}
+.email-confirmed-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+.email-confirmed-info p {
+    margin-left: .5rem;
+    margin-bottom: .5rem;
+}
+.email-confirmed-info-success{
+    color:forestgreen;
+}
+.email-confirmed-info-error{
+    color:red;
+}

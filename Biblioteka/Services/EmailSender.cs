@@ -18,7 +18,7 @@ namespace Biblioteka.Services
             {
                 EnableSsl = false,
                 UseDefaultCredentials = false,
-                Credentials = new NetworkCredential("krztyniec@wp.pl", "Krztyn1ec1")
+                Credentials = new NetworkCredential("krztyniec@wp.pl", "Krztyn1ec2")
                 //Credentials = new NetworkCredential("juvenal.bergstrom99@ethereal.email", "vxhDqpS8RuP1B7VUGp")
                 //Credentials = new NetworkCredential("biblioteka4040", "XSW@3edcvfr")
             };
