@@ -116,7 +116,7 @@ namespace Biblioteka.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "Hasła nie są takie same.")]
             public string ConfirmPassword { get; set; }
 
-            public IFormFile image { get; set; }
+            public IFormFile image { get; set; }    
 
             public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
             {
