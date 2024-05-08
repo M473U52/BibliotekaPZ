@@ -177,3 +177,6 @@
 2024-04-22 22:31:16.303 +02:00 [INF] Zalogowany użytkownik admin@admin.com - Admin
 2024-04-22 22:31:54.179 +02:00 [INF] Dodano książkę aaaaaaaa
 2024-05-07 20:13:26.233 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
+2024-05-08 04:52:19.917 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
+2024-05-08 05:50:26.332 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
+2024-05-08 05:50:29.877 +02:00 [INF] Wylogowanie employee@employee.com - Employee

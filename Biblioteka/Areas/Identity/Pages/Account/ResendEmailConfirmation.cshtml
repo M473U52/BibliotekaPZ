@@ -4,21 +4,30 @@
     ViewData["Title"] = "Resend email confirmation";
 }
 
-<h1>@ViewData["Title"]</h1>
-<h2>Enter your email.</h2>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+
+<div class="main_container">
+
+    <div class="form_div_login" style=" text-align:center">
+        <div style="display: flex; align-items: center; text-align:left">
+            <p style="font-size:80px; font-weight:bold; margin: 0;">!</p>
+            <p style="padding: 20px; margin: 0;">Jeżeli na twoje konto nie zostało wysłane potwierdzenie zarejestrowania konta lub potwierdzenie rejestracji wygasło, podaj poniżej swój email, aby wysłać potwierdzenie ponownie</p>
+        </div>
+        <h2>Wprowadź swój email</h2>
         <form method="post">
-            <div asp-validation-summary="All" class="text-danger" role="alert"></div>
             <div class="form-floating mb-3">
+                
                 <input asp-for="Input.Email" class="form-control" aria-required="true" placeholder="name@example.com" />
                 <label asp-for="Input.Email" class="form-label"></label>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
-            <button type="submit" class="w-100 btn btn-lg btn-primary">Resend</button>
+            <div style="font-weight:bold; text-decoration:none">
+                <div asp-validation-summary="ModelOnly"></div>
+            </div>
+            
+            <button type="submit" class="button buttonDefault">Wyślij potwierdzenie</button>
         </form>
-    </div>
+        </div>
+    
 </div>
 
 @section Scripts {
