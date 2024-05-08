@@ -16,6 +16,7 @@
         </p>
     </div>
 
+
     @foreach (var item in Model.suggestions)
     {
         <div class="suggestions_container">
@@ -26,6 +27,15 @@
                 <form method="post" asp-page-handler="Vote" asp-route-suggestionId="@item.suggestionId" onsubmit="return voteOnce(this);">
                     <button type="submit" class="vote_button">Zagłosuj</button>
                 </form>
+                @if (User.Identity.IsAuthenticated && (User.IsInRole("Employee") || User.IsInRole("Admin")))
+                {
+                    <a asp-page="./Delete" asp-route-id="@item.suggestionId">
+                        <input type="button" value="Usuń sugestię" />
+                    </a>
+                    <a asp-page="../Books/Create" asp-route-suggestionId="@item.suggestionId">
+                        <input type="button" value="Zamów i usuń z listy" />
+                    </a>
+                }
             </div>
         </div>
     }

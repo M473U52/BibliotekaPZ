@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using Xunit.Sdk;
+using Biblioteka.Repositories.DbImplementations;
 namespace Biblioteka.Views.Books
 {
     public class CreateModel : PageModel
@@ -19,13 +20,14 @@ namespace Biblioteka.Views.Books
         private IPublisherRepository _publisherRepository;
         private IAuthorRepository _authorRepository;
         private ITagRepository _tagRepository;
+        private ISuggestionRepository _suggestionRepository;
 
 
         private readonly ILogger<CreateModel> _logger;
 
         public CreateModel(ILogger<CreateModel> logger, IBookRepository bookRepository, IGenreRepository genreRepository,
             IPublisherRepository publisherRepository, IAuthorRepository authorRepository, ITagRepository tagRepository,
-            IBookTypeRepository bookTypeRepository)
+            IBookTypeRepository bookTypeRepository, ISuggestionRepository suggestionRepository)
         {
             _bookRepository = bookRepository;
             _genreRepository = genreRepository;
@@ -34,22 +36,26 @@ namespace Biblioteka.Views.Books
             _tagRepository = tagRepository;
             _bookTypeRepository = bookTypeRepository;
             _logger = logger;
+            _suggestionRepository = suggestionRepository;
         }
         public List<SelectListItem>? Genre { get; set; }
         public List<SelectListItem>? Type { get; set; }
         public List<SelectListItem>? Publisher { get; set; }
-		public List<SelectListItem>? Author { get; set; }
-		public List<SelectListItem>? Tag { get; set; }
+        public List<SelectListItem>? Author { get; set; }
+        public List<SelectListItem>? Tag { get; set; }
 
         [BindProperty]
         public BookDto Book { get; set; } = default!;
+
+        public Book normalBook { get; set; }
+
         [BindProperty]
         [DisplayName("Gatunek")]
         public string GenreId { get; set; } = default!;
         [BindProperty]
         [DisplayName("Tagi")]
         [Required(ErrorMessage = "Tag jest wymagany")]
-		public string[] TagIds { get; set; } = default!;
+        public string[] TagIds { get; set; } = default!;
         [BindProperty]
         [DisplayName("Typ")]
         public string BookTypeId { get; set; } = default!;
@@ -62,7 +68,8 @@ namespace Biblioteka.Views.Books
         [DisplayName("Autorzy")]
         [Required(ErrorMessage = "Autor jest wymagany")]
         public string[] AuthorIds { get; set; }
-        public IActionResult OnGet()
+        public Suggestion suggestion {get; set;}
+        public IActionResult OnGet(int? suggestionId = null)
         {
             Genre = _genreRepository.getAll().Select(r => new SelectListItem { Value = r.genreId.ToString(), Text = r.name }).ToList();
             Type = _bookTypeRepository.getAll().Select(r => new SelectListItem { Value = r.typeId.ToString(), Text = r.name }).ToList();
@@ -70,6 +77,30 @@ namespace Biblioteka.Views.Books
 
             Author = _authorRepository.getAll().Select(r => new SelectListItem { Value = r.authorId.ToString(), Text = r.name + " " + r.surname }).ToList();
             Tag = _tagRepository.getAll().Select(t => new SelectListItem { Value = t.tagId.ToString(), Text = t.name }).ToList();
+
+            if (suggestionId.HasValue)
+            {
+                suggestion = _suggestionRepository.getOne(suggestionId);
+                TempData["SuggestionId"] = suggestionId.Value;
+
+                Author author = _authorRepository.getOne(suggestion.author);
+                if (author is null)
+                {
+                        
+                    Author newAuthor = new Author
+                    {
+                        name = suggestion.author.Split(' ')[0],
+                        surname = suggestion.author.Split(" ")[1],
+                    };
+                }
+                Book newBook = new Book
+                {
+                    title = suggestion.title,
+                    authors = (ICollection<Book_Author>)author,
+                };
+               
+            }
+
 
 			return Page();
         }
@@ -183,6 +214,12 @@ namespace Biblioteka.Views.Books
 
 
                 _bookRepository.Add(newBook);
+            }
+
+            var suggestionId = TempData["SuggestionId"] as int?;
+            if (suggestionId.HasValue)
+            {
+                _suggestionRepository.Delete(suggestionId.Value);
             }
 
             Log.ForContext("SaveToFile", "AnyValue").Information("Dodano książkę " + Book.title );

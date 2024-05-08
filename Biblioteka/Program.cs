@@ -32,6 +32,7 @@ builder.Services.AddScoped<IBookOpinionRepository, BookOpinionsRepository>();
 builder.Services.AddScoped<IEventRepository,  EventRepository>();
 builder.Services.AddScoped<IRoomTypeRepository, DbRoomTypeRepository>();
 builder.Services.AddScoped<IFAQRepository, DbFAQRepository>();
+builder.Services.AddScoped<ISuggestionRepository, SuggestionRepository>();
 builder.Services.AddDbContext<BibContext>(options =>
 {
     //options.UseOracle(builder.Configuration.GetConnectionString("Database"), b=>b.UseOracleSQLCompatibility("11"));

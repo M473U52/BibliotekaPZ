@@ -97,9 +97,17 @@
                     <input asp-for="Book.rowNumber" class="form-control" />
                     <span asp-validation-for="Book.rowNumber" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <input type="submit" value="Dodaj" class="button buttonGreen lightText" />
-                </div>
+
+                <input type="hidden" asp-for="suggestion.suggestionId" />
+                @if(Model.suggestion != null){
+                    <div class="form-group">
+                        <input type="submit" value="Zrealizuj zamówienie" class="button buttonGreen lightText" />
+                    </div>
+                } else {
+                    <div class="form-group">
+                        <input type="submit" value="Dodaj" class="button buttonGreen lightText" />
+                    </div>
+                }
                 </form>
             </div>
         </div>

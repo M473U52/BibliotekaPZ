@@ -176,3 +176,14 @@
 2024-04-22 22:31:09.174 +02:00 [INF] Wylogowanie asd@asd.asd - Reader
 2024-04-22 22:31:16.303 +02:00 [INF] Zalogowany użytkownik admin@admin.com - Admin
 2024-04-22 22:31:54.179 +02:00 [INF] Dodano książkę aaaaaaaa
+2024-05-07 12:38:30.664 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
+2024-05-07 18:48:56.342 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
+2024-05-07 18:50:30.529 +02:00 [INF] Dodano książkę Tes
+2024-05-08 08:03:26.261 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
+2024-05-08 08:24:02.820 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
+2024-05-08 08:24:13.454 +02:00 [INF] Usunięto książkę 
+2024-05-08 08:24:21.940 +02:00 [INF] Usunięto książkę 
+2024-05-08 08:24:58.432 +02:00 [INF] Dodano książkę Test
+2024-05-08 08:36:36.207 +02:00 [INF] Usunięto książkę 
+2024-05-08 08:36:41.462 +02:00 [INF] Usunięto książkę 
+2024-05-08 08:37:33.699 +02:00 [INF] Dodano książkę Test
