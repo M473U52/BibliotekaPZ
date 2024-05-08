@@ -387,6 +387,7 @@ dt {
     text-align: center;
     justify-content: center;
     gap: 2.5rem;
+    border: white;
 }
 .management_info {
     display: flex;
@@ -416,6 +417,7 @@ dt {
     border-radius: 10px;
     background-color: #9e2c2c;
     animation: ZoomIn 2s ease forwards;
+    border: white;
 }
 .management_option:hover {
     background-color: #c73636;

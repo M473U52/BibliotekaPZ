@@ -180,3 +180,6 @@
 2024-05-08 04:52:19.917 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
 2024-05-08 05:50:26.332 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
 2024-05-08 05:50:29.877 +02:00 [INF] Wylogowanie employee@employee.com - Employee
+2024-05-08 06:02:10.572 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
+2024-05-08 06:02:14.414 +02:00 [INF] Wylogowanie employee@employee.com - Employee
+2024-05-08 06:03:08.729 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
