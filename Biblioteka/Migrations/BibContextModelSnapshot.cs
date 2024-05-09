@@ -532,7 +532,7 @@ namespace Biblioteka.Migrations
                         {
                             bookId = 1m,
                             readerId = 1m,
-                            addedDate = new DateTime(2024, 4, 14, 16, 49, 23, 878, DateTimeKind.Local).AddTicks(9642),
+                            addedDate = new DateTime(2024, 4, 14, 14, 22, 37, 482, DateTimeKind.Local).AddTicks(166),
                             opinion = "niesmowicie wciągająca książka",
                             rating = 5m
                         },
@@ -540,7 +540,7 @@ namespace Biblioteka.Migrations
                         {
                             bookId = 2m,
                             readerId = 2m,
-                            addedDate = new DateTime(2024, 4, 25, 17, 49, 23, 878, DateTimeKind.Local).AddTicks(9708),
+                            addedDate = new DateTime(2024, 4, 25, 15, 22, 37, 482, DateTimeKind.Local).AddTicks(210),
                             opinion = "taka sobie",
                             rating = 2m
                         },
@@ -548,7 +548,7 @@ namespace Biblioteka.Migrations
                         {
                             bookId = 3m,
                             readerId = 3m,
-                            addedDate = new DateTime(2024, 5, 4, 22, 49, 23, 878, DateTimeKind.Local).AddTicks(9715),
+                            addedDate = new DateTime(2024, 5, 4, 20, 22, 37, 482, DateTimeKind.Local).AddTicks(213),
                             opinion = "nawet fajna ale czasem za długie opisy",
                             rating = 4m
                         },
@@ -556,7 +556,7 @@ namespace Biblioteka.Migrations
                         {
                             bookId = 4m,
                             readerId = 4m,
-                            addedDate = new DateTime(2024, 5, 2, 13, 49, 23, 878, DateTimeKind.Local).AddTicks(9719),
+                            addedDate = new DateTime(2024, 5, 2, 11, 22, 37, 482, DateTimeKind.Local).AddTicks(216),
                             opinion = "beznadziejna",
                             rating = 1m
                         },
@@ -564,7 +564,7 @@ namespace Biblioteka.Migrations
                         {
                             bookId = 4m,
                             readerId = 5m,
-                            addedDate = new DateTime(2024, 5, 7, 10, 49, 23, 878, DateTimeKind.Local).AddTicks(9727),
+                            addedDate = new DateTime(2024, 5, 7, 8, 22, 37, 482, DateTimeKind.Local).AddTicks(219),
                             opinion = "mi się nawet podoba",
                             rating = 3m
                         });
@@ -679,9 +679,9 @@ namespace Biblioteka.Migrations
                             LateFee = 0m,
                             bookId = 1m,
                             bookLost = false,
-                            borrowDate = new DateTime(2024, 5, 7, 13, 49, 23, 878, DateTimeKind.Local).AddTicks(9998),
+                            borrowDate = new DateTime(2024, 5, 7, 11, 22, 37, 482, DateTimeKind.Local).AddTicks(386),
                             employeeId = 1m,
-                            plannedReturnDate = new DateTime(2024, 6, 7, 13, 49, 23, 879, DateTimeKind.Local).AddTicks(10)
+                            plannedReturnDate = new DateTime(2024, 6, 7, 11, 22, 37, 482, DateTimeKind.Local).AddTicks(389)
                         },
                         new
                         {
@@ -692,9 +692,9 @@ namespace Biblioteka.Migrations
                             LateFee = 3m,
                             bookId = 2m,
                             bookLost = false,
-                            borrowDate = new DateTime(2024, 4, 4, 13, 49, 23, 879, DateTimeKind.Local).AddTicks(18),
+                            borrowDate = new DateTime(2024, 4, 4, 11, 22, 37, 482, DateTimeKind.Local).AddTicks(396),
                             employeeId = 2m,
-                            plannedReturnDate = new DateTime(2024, 5, 7, 13, 49, 23, 879, DateTimeKind.Local).AddTicks(21)
+                            plannedReturnDate = new DateTime(2024, 5, 7, 11, 22, 37, 482, DateTimeKind.Local).AddTicks(398)
                         },
                         new
                         {
@@ -705,9 +705,9 @@ namespace Biblioteka.Migrations
                             LateFee = 0m,
                             bookId = 3m,
                             bookLost = false,
-                            borrowDate = new DateTime(2024, 4, 22, 13, 49, 23, 879, DateTimeKind.Local).AddTicks(27),
+                            borrowDate = new DateTime(2024, 4, 22, 11, 22, 37, 482, DateTimeKind.Local).AddTicks(402),
                             employeeId = 3m,
-                            plannedReturnDate = new DateTime(2024, 5, 23, 13, 49, 23, 879, DateTimeKind.Local).AddTicks(32)
+                            plannedReturnDate = new DateTime(2024, 5, 23, 11, 22, 37, 482, DateTimeKind.Local).AddTicks(404)
                         },
                         new
                         {
@@ -718,10 +718,10 @@ namespace Biblioteka.Migrations
                             LateFee = 0m,
                             bookId = 4m,
                             bookLost = true,
-                            borrowDate = new DateTime(2024, 5, 1, 13, 49, 23, 879, DateTimeKind.Local).AddTicks(36),
+                            borrowDate = new DateTime(2024, 5, 1, 11, 22, 37, 482, DateTimeKind.Local).AddTicks(407),
                             employeeId = 4m,
-                            plannedReturnDate = new DateTime(2024, 6, 1, 13, 49, 23, 879, DateTimeKind.Local).AddTicks(39),
-                            returnDate = new DateTime(2024, 6, 7, 13, 49, 23, 879, DateTimeKind.Local).AddTicks(41)
+                            plannedReturnDate = new DateTime(2024, 6, 1, 11, 22, 37, 482, DateTimeKind.Local).AddTicks(409),
+                            returnDate = new DateTime(2024, 6, 7, 11, 22, 37, 482, DateTimeKind.Local).AddTicks(411)
                         },
                         new
                         {
@@ -732,10 +732,10 @@ namespace Biblioteka.Migrations
                             LateFee = 0m,
                             bookId = 5m,
                             bookLost = false,
-                            borrowDate = new DateTime(2024, 5, 5, 13, 49, 23, 879, DateTimeKind.Local).AddTicks(46),
+                            borrowDate = new DateTime(2024, 5, 5, 11, 22, 37, 482, DateTimeKind.Local).AddTicks(414),
                             employeeId = 5m,
-                            plannedReturnDate = new DateTime(2024, 6, 5, 13, 49, 23, 879, DateTimeKind.Local).AddTicks(75),
-                            returnDate = new DateTime(2024, 5, 27, 13, 49, 23, 879, DateTimeKind.Local).AddTicks(78)
+                            plannedReturnDate = new DateTime(2024, 6, 5, 11, 22, 37, 482, DateTimeKind.Local).AddTicks(416),
+                            returnDate = new DateTime(2024, 5, 27, 11, 22, 37, 482, DateTimeKind.Local).AddTicks(418)
                         });
                 });
 
@@ -1452,17 +1452,11 @@ namespace Biblioteka.Migrations
                     b.Property<DateTime>("endOfReservationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<TimeSpan>("endingTime")
-                        .HasColumnType("time");
-
                     b.Property<decimal>("readerId")
                         .HasColumnType("NUMERIC(4,0)");
 
                     b.Property<decimal>("roomId")
                         .HasColumnType("NUMERIC(2,0)");
-
-                    b.Property<TimeSpan>("startingTime")
-                        .HasColumnType("time");
 
                     b.HasKey("reservationId");
 
@@ -1481,10 +1475,8 @@ namespace Biblioteka.Migrations
                             Confirmation = false,
                             begginingOfReservationDate = new DateTime(2024, 3, 22, 14, 30, 0, 0, DateTimeKind.Unspecified),
                             endOfReservationDate = new DateTime(2024, 3, 22, 16, 30, 0, 0, DateTimeKind.Unspecified),
-                            endingTime = new TimeSpan(0, 0, 0, 0, 0),
                             readerId = 1m,
-                            roomId = 1m,
-                            startingTime = new TimeSpan(0, 0, 0, 0, 0)
+                            roomId = 1m
                         },
                         new
                         {
@@ -1492,10 +1484,8 @@ namespace Biblioteka.Migrations
                             Confirmation = false,
                             begginingOfReservationDate = new DateTime(2024, 3, 22, 16, 0, 0, 0, DateTimeKind.Unspecified),
                             endOfReservationDate = new DateTime(2024, 3, 22, 19, 0, 0, 0, DateTimeKind.Unspecified),
-                            endingTime = new TimeSpan(0, 0, 0, 0, 0),
                             readerId = 2m,
-                            roomId = 2m,
-                            startingTime = new TimeSpan(0, 0, 0, 0, 0)
+                            roomId = 2m
                         },
                         new
                         {
@@ -1503,10 +1493,8 @@ namespace Biblioteka.Migrations
                             Confirmation = false,
                             begginingOfReservationDate = new DateTime(2024, 3, 23, 9, 0, 0, 0, DateTimeKind.Unspecified),
                             endOfReservationDate = new DateTime(2024, 3, 22, 13, 30, 0, 0, DateTimeKind.Unspecified),
-                            endingTime = new TimeSpan(0, 0, 0, 0, 0),
                             readerId = 3m,
-                            roomId = 3m,
-                            startingTime = new TimeSpan(0, 0, 0, 0, 0)
+                            roomId = 3m
                         },
                         new
                         {
@@ -1514,10 +1502,8 @@ namespace Biblioteka.Migrations
                             Confirmation = false,
                             begginingOfReservationDate = new DateTime(2024, 3, 25, 8, 0, 0, 0, DateTimeKind.Unspecified),
                             endOfReservationDate = new DateTime(2024, 3, 22, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            endingTime = new TimeSpan(0, 0, 0, 0, 0),
                             readerId = 4m,
-                            roomId = 4m,
-                            startingTime = new TimeSpan(0, 0, 0, 0, 0)
+                            roomId = 4m
                         },
                         new
                         {
@@ -1525,10 +1511,8 @@ namespace Biblioteka.Migrations
                             Confirmation = false,
                             begginingOfReservationDate = new DateTime(2024, 3, 27, 18, 0, 0, 0, DateTimeKind.Unspecified),
                             endOfReservationDate = new DateTime(2024, 3, 22, 20, 0, 0, 0, DateTimeKind.Unspecified),
-                            endingTime = new TimeSpan(0, 0, 0, 0, 0),
                             readerId = 5m,
-                            roomId = 5m,
-                            startingTime = new TimeSpan(0, 0, 0, 0, 0)
+                            roomId = 5m
                         });
                 });
 

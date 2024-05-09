@@ -1,0 +1,31 @@
+﻿@page
+@model Biblioteka.Pages.Suggestions.DeleteModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="main_container">
+    <div class="inner_container">
+        <div class="list_header">
+            <h1>Czy na pewno chcesz usunąć tę sugestię?</h1>
+        </div>
+        <div class="form_div">
+            
+            <form method="post">
+                <input type="hidden" asp-for="suggestion.suggestionId" />
+                <div class="form-group">
+                    <p><strong>Tytuł:</strong> @Model.suggestion.title</p>
+                    <p><strong>Autor:</strong> @Model.suggestion.author</p>
+                </div>
+                <div class="form-group">
+
+                    <input type="submit" value="Usuń sugestię" class="button buttonGreen"/>
+                    <div>
+                        <a class="lightText button buttonDefault" asp-page="./Index">Wróć</a>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

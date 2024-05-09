@@ -803,11 +803,11 @@ namespace Biblioteka.Migrations
                 columns: new[] { "eventId", "authorId", "description", "eventDate", "name" },
                 values: new object[,]
                 {
-                    { 1m, 1m, "spotkanie fanów książek autora numer 1 ale nazywa się inaczej tylko nie chciało mi się sprawdzić bo długo by scrollować", new DateTime(2024, 4, 26, 0, 0, 0, 0, DateTimeKind.Local), "Spotkanie fanów książek" },
-                    { 2m, 4m, "spotkanie antyfanów książek a autor numer 4 będzie ich zachęcał aby czytali", new DateTime(2024, 4, 28, 0, 0, 0, 0, DateTimeKind.Local), "Spotkanie antyfanów książek" },
-                    { 3m, 8m, "Autor Adam Niemowa będzie rozdawał autografy ale nie można do niego mówić bo sobie tego nie życzy i wtedy nie da autografu ", new DateTime(2024, 4, 28, 0, 0, 0, 0, DateTimeKind.Local), "Podpisywanie książek" },
-                    { 4m, 3m, "Konkurs w którym udział może wziąć każdy. Uczestnicy będą mieli 1h na napisanie rozdziału, który zostanie nastepnie oceniony. Czekają na Was wspaniałe nagrody!", new DateTime(2024, 5, 1, 0, 0, 0, 0, DateTimeKind.Local), "Konkurs pisania na czas" },
-                    { 5m, 9m, "Nauczymy się jak poprawnie pisać. Żerzuha a może rzeżuha czy żeżucha bądź rzerzucha? Na spotkaniu to oraz wiele wiedzy więcej.", new DateTime(2024, 5, 6, 0, 0, 0, 0, DateTimeKind.Local), "Dyktando" }
+                    { 1m, 1m, "spotkanie fanów książek autora numer 1 ale nazywa się inaczej tylko nie chciało mi się sprawdzić bo długo by scrollować", new DateTime(2024, 5, 8, 0, 0, 0, 0, DateTimeKind.Local), "Spotkanie fanów książek" },
+                    { 2m, 4m, "spotkanie antyfanów książek a autor numer 4 będzie ich zachęcał aby czytali", new DateTime(2024, 5, 10, 0, 0, 0, 0, DateTimeKind.Local), "Spotkanie antyfanów książek" },
+                    { 3m, 8m, "Autor Adam Niemowa będzie rozdawał autografy ale nie można do niego mówić bo sobie tego nie życzy i wtedy nie da autografu ", new DateTime(2024, 5, 10, 0, 0, 0, 0, DateTimeKind.Local), "Podpisywanie książek" },
+                    { 4m, 3m, "Konkurs w którym udział może wziąć każdy. Uczestnicy będą mieli 1h na napisanie rozdziału, który zostanie nastepnie oceniony. Czekają na Was wspaniałe nagrody!", new DateTime(2024, 5, 13, 0, 0, 0, 0, DateTimeKind.Local), "Konkurs pisania na czas" },
+                    { 5m, 9m, "Nauczymy się jak poprawnie pisać. Żerzuha a może rzeżuha czy żeżucha bądź rzerzucha? Na spotkaniu to oraz wiele wiedzy więcej.", new DateTime(2024, 5, 18, 0, 0, 0, 0, DateTimeKind.Local), "Dyktando" }
                 });
 
             migrationBuilder.InsertData(
@@ -840,11 +840,11 @@ namespace Biblioteka.Migrations
                 columns: new[] { "bookId", "readerId", "addedDate", "opinion", "rating" },
                 values: new object[,]
                 {
-                    { 1m, 1m, new DateTime(2024, 4, 3, 1, 23, 31, 823, DateTimeKind.Local).AddTicks(5915), "niesmowicie wciągająca książka", 5m },
-                    { 2m, 2m, new DateTime(2024, 4, 14, 2, 23, 31, 823, DateTimeKind.Local).AddTicks(5974), "taka sobie", 2m },
-                    { 3m, 3m, new DateTime(2024, 4, 23, 7, 23, 31, 823, DateTimeKind.Local).AddTicks(5978), "nawet fajna ale czasem za długie opisy", 4m },
-                    { 4m, 4m, new DateTime(2024, 4, 20, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(5981), "beznadziejna", 1m },
-                    { 4m, 5m, new DateTime(2024, 4, 25, 19, 23, 31, 823, DateTimeKind.Local).AddTicks(5984), "mi się nawet podoba", 3m }
+                    { 1m, 1m, new DateTime(2024, 4, 14, 14, 22, 37, 482, DateTimeKind.Local).AddTicks(166), "niesmowicie wciągająca książka", 5m },
+                    { 2m, 2m, new DateTime(2024, 4, 25, 15, 22, 37, 482, DateTimeKind.Local).AddTicks(210), "taka sobie", 2m },
+                    { 3m, 3m, new DateTime(2024, 5, 4, 20, 22, 37, 482, DateTimeKind.Local).AddTicks(213), "nawet fajna ale czasem za długie opisy", 4m },
+                    { 4m, 4m, new DateTime(2024, 5, 2, 11, 22, 37, 482, DateTimeKind.Local).AddTicks(216), "beznadziejna", 1m },
+                    { 4m, 5m, new DateTime(2024, 5, 7, 8, 22, 37, 482, DateTimeKind.Local).AddTicks(219), "mi się nawet podoba", 3m }
                 });
 
             migrationBuilder.InsertData(
@@ -864,11 +864,11 @@ namespace Biblioteka.Migrations
                 columns: new[] { "borrowId", "Confirmation", "IsPaid", "IsReturned", "LateFee", "bookId", "bookLost", "borrowDate", "employeeConfirmingPaymentId", "employeeConfirmingReturnId", "employeeId", "plannedReturnDate", "returnDate" },
                 values: new object[,]
                 {
-                    { 1m, false, false, false, 0m, 1m, false, new DateTime(2024, 4, 25, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6261), null, null, 1m, new DateTime(2024, 5, 25, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6266), null },
-                    { 2m, false, false, false, 3m, 2m, false, new DateTime(2024, 3, 22, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6275), null, null, 2m, new DateTime(2024, 4, 25, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6278), null },
-                    { 3m, false, false, false, 0m, 3m, false, new DateTime(2024, 4, 10, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6285), null, null, 3m, new DateTime(2024, 5, 10, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6288), null },
-                    { 4m, true, false, false, 0m, 4m, true, new DateTime(2024, 4, 19, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6291), null, null, 4m, new DateTime(2024, 5, 19, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6293), new DateTime(2024, 5, 25, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6296) },
-                    { 5m, false, false, true, 0m, 5m, false, new DateTime(2024, 4, 23, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6300), null, null, 5m, new DateTime(2024, 5, 23, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6302), new DateTime(2024, 5, 14, 22, 23, 31, 823, DateTimeKind.Local).AddTicks(6304) }
+                    { 1m, false, false, false, 0m, 1m, false, new DateTime(2024, 5, 7, 11, 22, 37, 482, DateTimeKind.Local).AddTicks(386), null, null, 1m, new DateTime(2024, 6, 7, 11, 22, 37, 482, DateTimeKind.Local).AddTicks(389), null },
+                    { 2m, false, false, false, 3m, 2m, false, new DateTime(2024, 4, 4, 11, 22, 37, 482, DateTimeKind.Local).AddTicks(396), null, null, 2m, new DateTime(2024, 5, 7, 11, 22, 37, 482, DateTimeKind.Local).AddTicks(398), null },
+                    { 3m, false, false, false, 0m, 3m, false, new DateTime(2024, 4, 22, 11, 22, 37, 482, DateTimeKind.Local).AddTicks(402), null, null, 3m, new DateTime(2024, 5, 23, 11, 22, 37, 482, DateTimeKind.Local).AddTicks(404), null },
+                    { 4m, true, false, false, 0m, 4m, true, new DateTime(2024, 5, 1, 11, 22, 37, 482, DateTimeKind.Local).AddTicks(407), null, null, 4m, new DateTime(2024, 6, 1, 11, 22, 37, 482, DateTimeKind.Local).AddTicks(409), new DateTime(2024, 6, 7, 11, 22, 37, 482, DateTimeKind.Local).AddTicks(411) },
+                    { 5m, false, false, true, 0m, 5m, false, new DateTime(2024, 5, 5, 11, 22, 37, 482, DateTimeKind.Local).AddTicks(414), null, null, 5m, new DateTime(2024, 6, 5, 11, 22, 37, 482, DateTimeKind.Local).AddTicks(416), new DateTime(2024, 5, 27, 11, 22, 37, 482, DateTimeKind.Local).AddTicks(418) }
                 });
 
             migrationBuilder.InsertData(

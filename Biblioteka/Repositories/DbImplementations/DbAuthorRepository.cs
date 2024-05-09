@@ -2,6 +2,7 @@ using Biblioteka.Models;
 using Biblioteka.Context;
 using Biblioteka.Repositories.Interfaces;
 using Biblioteka.Repositories.DbImplementations;
+using System.IO;
 namespace Biblioteka.Repositories
 {
     public class DbAuthorRepository : GenericRepository<Author>, IAuthorRepository
@@ -22,6 +23,16 @@ namespace Biblioteka.Repositories
                      return author;
              }
              return null;*/
+        }
+
+        public Author getOne(string name)
+        {
+            string[] fullName = name.Split(" ");
+            if (fullName.Length < 2)
+            {
+                return null;
+            }
+            return _context.Author.FirstOrDefault(a => a.name == fullName[0] && a.surname == fullName[1]);
         }
     }
 }

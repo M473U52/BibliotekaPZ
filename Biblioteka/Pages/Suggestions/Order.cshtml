@@ -1,0 +1,29 @@
+﻿@page
+@model Biblioteka.Pages.Suggestions.OrderModel
+@{
+}
+<div class="main_container">
+    <div class="inner_container">
+        <div class="list_header">
+            <h1>Dodaj nowe zamówienie</h1>
+        </div>
+        <div class="form_div">
+
+            <form method="post">
+                <div class="form-group">
+                    <input type="text" asp-for="book.title" class="form-control" id="title" placeholder="tytuł" />
+                    <span asp-validation-for="book.title" class="text-danger"></span>
+                    <input type="text" asp-for="book.authors" class="form-control" id="author" placeholder="autor" />
+                    <span asp-validation-for="book.authors" class="text-danger"></span>
+                    <input type="text" asp-for="book.availableCopys" class="form-control" id="title" placeholder="tytuł" />
+                    <span asp-validation-for="book.availableCopys" class="text-danger"></span>
+                    <input type="submit" value="Dodaj do listy sugestii" class="button buttonGreen" />
+                    <div>
+                        <a class="lightText button buttonDefault" asp-page="../Books/Index">Wróć</a>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
