@@ -34,7 +34,6 @@ namespace Biblioteka.Areas.Identity.Pages.Account
         private readonly ILogger<EmployeeRegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
-        private readonly ReaderRepository _readerRepository;
         private readonly EmployeeRepository _employeeRepository;
         private readonly EmployeeDataRepository _employeeDataRepository;
         private readonly PositionRepository _positionRepository;
@@ -47,10 +46,7 @@ namespace Biblioteka.Areas.Identity.Pages.Account
             SignInManager<BibUser> signInManager,
             ILogger<EmployeeRegisterModel> logger,
             IEmailSender emailSender,
-            ReaderRepository readerRepository,
-            EmployeeRepository employeeRepository,
-            EmployeeDataRepository employeeDataRepository,
-            PositionRepository positionRepository)
+            BibContext context)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -58,10 +54,9 @@ namespace Biblioteka.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
-            _readerRepository = readerRepository;
-            _employeeRepository = employeeRepository;
-            _employeeDataRepository = employeeDataRepository;
-            _positionRepository = positionRepository;
+            _employeeRepository = new EmployeeRepository(context);
+            _employeeDataRepository = new EmployeeDataRepository(context);
+            _positionRepository = new PositionRepository(context);
 
         }
 

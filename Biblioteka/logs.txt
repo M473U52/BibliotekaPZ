@@ -187,3 +187,19 @@
 2024-05-08 08:36:36.207 +02:00 [INF] Usunięto książkę 
 2024-05-08 08:36:41.462 +02:00 [INF] Usunięto książkę 
 2024-05-08 08:37:33.699 +02:00 [INF] Dodano książkę Test
+2024-05-11 13:40:40.628 +02:00 [INF] Zarejestrowano czytelnika asd asd
+2024-05-11 13:51:12.682 +02:00 [INF] Wylogowanie asd@asd.asd - Reader
+2024-05-11 13:51:21.857 +02:00 [INF] Zalogowany użytkownik admin@admin.com - Admin
+2024-05-11 13:56:36.820 +02:00 [INF] Wylogowanie admin@admin.com - Admin
+2024-05-11 13:56:51.563 +02:00 [INF] Zalogowany użytkownik admin@admin.com - Admin
+2024-05-11 13:57:06.441 +02:00 [INF] Wylogowanie admin@admin.com - Admin
+2024-05-11 13:57:13.257 +02:00 [INF] Zalogowany użytkownik admin@admin.com - Admin
+2024-05-11 14:04:26.265 +02:00 [INF] Wylogowanie admin@admin.com - Admin
+2024-05-11 14:04:48.409 +02:00 [INF] Zalogowany użytkownik admin@admin.com - Admin
+2024-05-11 18:21:01.417 +02:00 [INF] Wylogowanie admin@admin.com - Admin
+2024-05-11 18:21:06.815 +02:00 [INF] Zalogowany użytkownik asd@asd.asd - Reader
+2024-05-11 18:23:38.566 +02:00 [INF] Wylogowanie asd@asd.asd - Reader
+2024-05-11 18:23:45.309 +02:00 [INF] Zalogowany użytkownik admin@admin.com - Admin
+2024-05-11 18:25:59.843 +02:00 [INF] Dodano książkę aa
+2024-05-11 18:26:29.847 +02:00 [INF] Wylogowanie admin@admin.com - Admin
+2024-05-11 18:26:50.745 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee

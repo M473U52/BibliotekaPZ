@@ -15,6 +15,7 @@ using Biblioteka.Repositories;
 using Biblioteka.Models;
 using Biblioteka.Repositories.DbImplementations;
 using Serilog;
+using Biblioteka.Repositories.Interfaces;
 
 namespace Biblioteka.Areas.Identity.Pages.Account
 {
@@ -27,9 +28,7 @@ namespace Biblioteka.Areas.Identity.Pages.Account
         private readonly ILogger<ReaderRegisterModel> _logger;
         private readonly Services.IEmailSender _emailSender;
 
-        private readonly ReaderRepository _readerRepository;
-        private readonly EmployeeRepository _employeeRepository;
-        private readonly EmployeeDataRepository _employeeDataRepository;
+        private readonly IReaderRepository _readerRepository;
 
         public ReaderRegisterModel(
             UserManager<BibUser> userManager,
@@ -46,8 +45,6 @@ namespace Biblioteka.Areas.Identity.Pages.Account
             _logger = logger;
             _emailSender = emailSender;
             _readerRepository = new ReaderRepository(context);
-            _employeeRepository = new EmployeeRepository(context);
-            _employeeDataRepository = new EmployeeDataRepository(context);
         }
 
         /// <summary>
