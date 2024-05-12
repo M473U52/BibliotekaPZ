@@ -16,23 +16,8 @@ namespace Biblioteka.Repositories
         }
         public async Task Add(Employee employee)
         {
-            /*var id = await GetLastId();
-            employee.employeeId = id;*/
-
             _context.Employee.Add(employee);
             await _context.SaveChangesAsync();
-
-            /*try
-            {
-                _context.Employee.Add(employee);
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                // Log the exception
-                Console.WriteLine(ex.ToString());
-            }*/
-
         }
         public Task<int> GetLastId()
         {

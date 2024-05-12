@@ -203,3 +203,31 @@
 2024-05-11 18:25:59.843 +02:00 [INF] Dodano książkę aa
 2024-05-11 18:26:29.847 +02:00 [INF] Wylogowanie admin@admin.com - Admin
 2024-05-11 18:26:50.745 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-05-12 17:48:29.879 +02:00 [INF] Zalogowany użytkownik admin@admin.com - Admin
+2024-05-12 18:24:46.098 +02:00 [INF] Wylogowanie admin@admin.com - Admin
+2024-05-12 18:42:35.217 +02:00 [INF] Zalogowany użytkownik admin@admin.com - Admin
+2024-05-12 18:43:35.157 +02:00 [INF] Wylogowanie admin@admin.com - Admin
+2024-05-12 18:45:22.904 +02:00 [INF] Zalogowany użytkownik admin@admin.com - Admin
+2024-05-12 20:12:00.672 +02:00 [INF] Zarejestrowano pracownika nowszy nowszy
+2024-05-12 20:15:15.014 +02:00 [INF] Zarejestrowano pracownika bbb bbb
+2024-05-12 20:18:44.087 +02:00 [INF] Zarejestrowano pracownika ccc ccc
+2024-05-12 20:20:34.259 +02:00 [INF] Zarejestrowano pracownika ddd ddd
+2024-05-12 20:28:58.384 +02:00 [INF] Zarejestrowano pracownika hhh hhhh
+2024-05-12 20:32:18.984 +02:00 [INF] Zarejestrowano pracownika nnn nnn
+2024-05-12 20:32:29.743 +02:00 [INF] Wylogowanie admin@admin.com - Admin
+2024-05-12 20:32:39.234 +02:00 [INF] Zalogowany użytkownik nnn@gmail.com - Employee
+2024-05-12 20:33:29.138 +02:00 [INF] Wylogowanie nnn@gmail.com - Employee
+2024-05-12 20:33:38.652 +02:00 [INF] Zalogowany użytkownik admin@admin.com - Admin
+2024-05-12 20:40:22.796 +02:00 [INF] Wylogowanie admin@admin.com - Admin
+2024-05-12 20:40:45.903 +02:00 [INF] Zalogowany użytkownik admin@admin.com - Admin
+2024-05-12 20:41:32.335 +02:00 [INF] Zarejestrowano pracownika www www
+2024-05-12 20:48:04.795 +02:00 [INF] Zarejestrowano pracownika lll lll
+2024-05-12 20:48:27.686 +02:00 [INF] Wylogowanie admin@admin.com - Admin
+2024-05-12 20:48:42.495 +02:00 [INF] Zalogowany użytkownik lll@gmail.com - Employee
+2024-05-12 20:51:52.622 +02:00 [INF] Wylogowanie lll@gmail.com - Employee
+2024-05-12 20:52:02.312 +02:00 [INF] Zalogowany użytkownik admin@admin.com - Admin
+2024-05-12 20:52:54.446 +02:00 [INF] Zarejestrowano pracownika mmm mmm
+2024-05-12 20:55:04.313 +02:00 [INF] Zarejestrowano pracownika qqq qqq
+2024-05-12 20:57:34.970 +02:00 [INF] Zarejestrowano pracownika ooo ooo
+2024-05-12 21:00:16.660 +02:00 [INF] Zarejestrowano pracownika eee eee
+2024-05-12 21:03:43.664 +02:00 [INF] Zarejestrowano pracownika rrr rrr

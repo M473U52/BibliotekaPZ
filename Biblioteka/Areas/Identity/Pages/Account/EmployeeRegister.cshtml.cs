@@ -21,6 +21,8 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Serilog;
+using Biblioteka.Repositories.Interfaces;
+using Biblioteka.Areas.Identity.Pages.Account.Validators;
 
 namespace Biblioteka.Areas.Identity.Pages.Account
 {
@@ -34,9 +36,9 @@ namespace Biblioteka.Areas.Identity.Pages.Account
         private readonly ILogger<EmployeeRegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
-        private readonly EmployeeRepository _employeeRepository;
-        private readonly EmployeeDataRepository _employeeDataRepository;
-        private readonly PositionRepository _positionRepository;
+        private readonly IEmployeeRepository _employeeRepository;
+        private readonly IEmployeeDataRepository _employeeDataRepository;
+        private readonly IPositionRepository _positionRepository;
 
         public List<SelectListItem>? position { get; set; }
 
@@ -46,7 +48,10 @@ namespace Biblioteka.Areas.Identity.Pages.Account
             SignInManager<BibUser> signInManager,
             ILogger<EmployeeRegisterModel> logger,
             IEmailSender emailSender,
-            BibContext context)
+            IEmployeeRepository employeeRepository,
+            IEmployeeDataRepository employeeDataRepository,
+            IPositionRepository positionRepository
+            )
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -54,10 +59,9 @@ namespace Biblioteka.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
-            _employeeRepository = new EmployeeRepository(context);
-            _employeeDataRepository = new EmployeeDataRepository(context);
-            _positionRepository = new PositionRepository(context);
-
+            _employeeRepository = employeeRepository;
+            _positionRepository = positionRepository;   
+            _employeeDataRepository = employeeDataRepository;
         }
 
         /// <summary>
@@ -83,6 +87,10 @@ namespace Biblioteka.Areas.Identity.Pages.Account
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
+        /// 
+
+       
+
         public class InputModel : IValidatableObject
         {
             [Required(ErrorMessage = "Imię jest wymagane."),
@@ -169,6 +177,10 @@ namespace Biblioteka.Areas.Identity.Pages.Account
                 BindProperty(SupportsGet = true)]
             public string positionId { get; set; } = default!;
 
+            [DataType(DataType.Upload)]
+            [Display(Name = "Zdjęcie profilowe")]
+            [MaxFileSize(10 * 1024 * 1024, ErrorMessage = "Maksymalny rozmiar pliku wynosi 10 MB.")]
+            [AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png" }, ErrorMessage = "Dozwolone są tylko pliki w formacie JPG lub PNG.")]
             public IFormFile image { get; set; }
 
             public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -192,6 +204,7 @@ namespace Biblioteka.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
@@ -200,16 +213,14 @@ namespace Biblioteka.Areas.Identity.Pages.Account
                 user.surname = Input.surname;
                 user.birthDate = Input.birthDate;
                 if (Input.image != null)
-                    if (Input.image.Length > 0 && Input.image.Length < 10000000 && Path.GetExtension(Input.image.FileName) == ".jpg")
+                    if (Input.image.Length > 0 && Input.image.Length < 10000000 && (Path.GetExtension(Input.image.FileName) == ".jpg" || Path.GetExtension(Input.image.FileName) == ".png" || Path.GetExtension(Input.image.FileName) == ".jpeg"))
                     {
                         using (var ms = new MemoryStream())
                         {
                             Input.image.CopyTo(ms);
                             user.profilePicData = ms.ToArray();
                         }
-                    }
-                    else
-                        ModelState.AddModelError("file not pdf or wrong size", "Plik musi być w formacie JPG i nie większy niż 10MB!");
+                    }           
                 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
@@ -218,7 +229,8 @@ namespace Biblioteka.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     await _userManager.AddToRoleAsync(user, "Employee");
-                    CreateEmployee(user);
+
+                    await CreateEmployee(user);
 
                     _logger.LogInformation("User created a new account with password.");
 
@@ -245,18 +257,17 @@ namespace Biblioteka.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                        return LocalRedirect(returnUrl);
-                    }
-                    
-
+                        TempData["Message"] = $"Success/Pomyślnie dodano nowego pracownika.";
+                        return RedirectToPage("/Employees/Index", new { searchTerm = "" });
+                    }       
                 }
-                foreach (var error in result.Errors)
+                else
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    TempData["Message"] = $"Error/Wystąpił nieoczekiwany błąd podczas dodawania pracownika.";
+                    return RedirectToPage("/Employees/Index", new { searchTerm = "" });
                 }
             }
-
-            // If we got this far, something failed, redisplay form
+            await OnGetAsync(returnUrl);
             return Page();
         }
 
@@ -283,19 +294,21 @@ namespace Biblioteka.Areas.Identity.Pages.Account
             return (IUserEmailStore<BibUser>)_userStore;
         }
 
-        private async void CreateEmployee(BibUser user)
+        private async Task CreateEmployee(BibUser user)
         {
-            var id = await _employeeRepository.GetLastId();
+            
             Employee employee = new Employee();
             employee.name = user.name;
             employee.surname = user.surname;
             employee.email = user.Email;
             employee.dateOfEmployment = DateTime.Now;
 
-            Position? foundPosition = _positionRepository.getOne(Input.positionId);
-            if (foundPosition != null)
-                employee.position = foundPosition;
-
+            if (Input.positionId != "")
+            {
+                Position? foundPosition = _positionRepository.getOne(int.Parse(Input.positionId));
+                if (foundPosition != null)
+                    employee.position = foundPosition;
+            }
             EmployeeData employeeData = new EmployeeData();
             employeeData.pesel = Input.pesel;
             employeeData.street = Input.street;
@@ -303,8 +316,10 @@ namespace Biblioteka.Areas.Identity.Pages.Account
             employeeData.town = Input.town;
             employeeData.zipCode = Input.zipCode;
             employeeData.phoneNumber = Input.phoneNumber;
-            _employeeRepository.Add(employee);
-            _employeeDataRepository.Add(employeeData);
+            employee.employeeData = employeeData;
+
+
+            await _employeeRepository?.Add(employee);
         }
     }
 }

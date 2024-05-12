@@ -1,0 +1,17 @@
+﻿table {
+    font-size: 0.95rem;
+}
+
+    table td, table th {
+        padding: 0.6rem !important;
+    }
+
+.table-header-style {
+    background-color: #882e2e;
+    color: #fff;
+}
+
+.table_div {
+    width: 90%;
+    margin: auto;
+}

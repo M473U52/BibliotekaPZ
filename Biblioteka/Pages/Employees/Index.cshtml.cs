@@ -12,10 +12,12 @@ namespace Biblioteka.Pages.Employees
     public class IndexModel : PageModel
     {
         private IEmployeeRepository _employeeRepository;
+        private IUserRepository _userRepository;
 
-        public IndexModel(IEmployeeRepository employeeRepository)
+        public IndexModel(IEmployeeRepository employeeRepository, IUserRepository userRepository)
         {
             _employeeRepository = employeeRepository;
+            _userRepository = userRepository;
         }
 
         public IList<Employee> Employee { get; set; } = default!;
@@ -33,10 +35,19 @@ namespace Biblioteka.Pages.Employees
 
             if (employee != null)
             {
-                TempData["Message"] = $"Success/Pomyślnie usunięto pracownika {employee.name} {employee.surname}" +
-                                    $" zatrudnionego dnia {employee.dateOfEmployment.ToString("dd.MM.yyyy")}.";
+                var user = _userRepository.GetOne(employee.name, employee.surname, employee.email);
 
-                _employeeRepository.Delete(employeeId);
+                try
+                {
+                    _userRepository.Delete(user);
+                    _employeeRepository.Delete(employeeId);
+                    TempData["Message"] = $"Success/Pomyślnie usunięto pracownika {employee.name} {employee.surname}" +
+                    $" zatrudnionego dnia {employee.dateOfEmployment.ToString("dd.MM.yyyy")}.";
+                }
+                catch (Exception)
+                {
+                    TempData["Message"] = $"Error/Konto wybranego pracownika nie istnieje.";
+                }                
             }
             else
             {

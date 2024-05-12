@@ -6,7 +6,9 @@
 }
 @using Microsoft.AspNetCore.Identity
 
-<link rel="stylesheet" href="~/css/Borrowings/index_admin.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Shared/action_buttons.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Shared/table_style.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Shared/notification_style.css" asp-append-version="true" />
 
 <div>
     <partial name="_UnderHeaderBorrowing" />
@@ -63,7 +65,7 @@
                             @item.returnDate?.ToString("dd.MM.yyyy\nHH:MM")
                         </td>
                         <td class="align-middle">
-                            <button class="action-button action-delete"><i class="fa-solid fa-trash-can"></i>Anuluj<p class="hidden-borrowId">@item.borrowId</p></button>
+                            <button class="action-button action-delete"><i class="fa-solid fa-trash-can"></i>Anuluj<p class="hidden-borrowId d-none">@item.borrowId</p></button>
                         </td>
                     </tr>
                 }

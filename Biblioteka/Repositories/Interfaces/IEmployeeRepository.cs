@@ -4,7 +4,7 @@ namespace Biblioteka.Repositories.Interfaces
 {
     public interface IEmployeeRepository
     {
-        public Task Add(Employee employee/*, EmployeeData employeeData*/);
+        public Task Add(Employee employee);
         public Task<int> GetLastId();
         public void Delete(object id);
         public void Update(Employee employee);

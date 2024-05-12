@@ -9,7 +9,9 @@
 @inject SignInManager<BibUser> SignInManager
 @inject UserManager<BibUser> UserManager
 
-<link rel="stylesheet" href="~/css/Borrowings/index_admin.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Shared/action_buttons.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Shared/table_style.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Shared/notification_style.css" asp-append-version="true" />
 
 <div>
     <partial name="_UnderHeaderBorrowing" />
@@ -151,7 +153,7 @@
                                 }
                                 else if (item.book.availableCopys > 0 && !item.Confirmation)
                                 {
-                                    <button class="action-button action-confirm borrowing_confirmation_button"><i class="fa-solid fa-check"></i>Potwierdź<p class="hidden-borrowId">@item.borrowId</p></button>
+                                    <button class="action-button action-confirm borrowing_confirmation_button"><i class="fa-solid fa-check"></i>Potwierdź<p class="hidden-borrowId d-none">@item.borrowId</p></button>
                                 }
                                 else
                                 {
@@ -165,7 +167,7 @@
                                 }
                                 else if (!item.IsReturned && item.Confirmation)
                                 {
-                                    <button class="action-button action-confirm book_return_button"><i class="fa-solid fa-check"></i>Potwierdź<p class="hidden-borrowId">@item.borrowId</p></button>
+                                    <button class="action-button action-confirm book_return_button"><i class="fa-solid fa-check"></i>Potwierdź<p class="hidden-borrowId d-none">@item.borrowId</p></button>
 
                                 }
                                 else if (!item.Confirmation && !item.IsReturned)
@@ -181,8 +183,8 @@
                             <td class="align-middle">
                                 @if (!item.IsPaid && (item.bookLost || (item.IsReturned && item.Confirmation && item.LateFee > 0)))
                                 {
-                                    <p class="additional_payment_p">Dodatkowa opłata</p>
-                                    <button class="action-button action-confirm payment_confirm_button"><i class="fa-solid fa-check"></i>Potwierdź<p class="hidden-borrowId">@item.borrowId</p></button>
+                                    <p style="margin-bottom:0.4rem;" class="additional_payment_p">Dodatkowa opłata</p>
+                                    <button class="action-button action-confirm payment_confirm_button"><i class="fa-solid fa-check"></i>Potwierdź<p class="hidden-borrowId d-none">@item.borrowId</p></button>
                                 }
                                 else if (item.IsPaid || item.LateFee <= 0)
                                 {
@@ -195,7 +197,7 @@
                             </td>
                         }
                         <td class="align-middle">
-                            <button class="action-button action-delete"><i class="fa-solid fa-trash-can"></i>Usuń<p class="hidden-borrowId">@item.borrowId</p></button>
+                            <button class="action-button action-delete"><i class="fa-solid fa-trash-can"></i>Usuń<p class="hidden-borrowId d-none">@item.borrowId</p></button>
                         </td>
                     </tr>
                 }

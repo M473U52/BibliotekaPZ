@@ -52,12 +52,11 @@ footer {
     background-color: #fff;
     margin-left: auto;
     min-height: 56.7vh;
-    /*padding-top:1rem;*/
+    padding-top:0rem;
     padding-bottom:1rem;
-    /*display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;*/
+}
+.padding_top_1rem{
+    padding-top:1rem;
 }
 .main_header {
     background-color: #781c1c;
@@ -384,4 +383,33 @@ dialog {
 
 .delete_button_dialog:hover {
     background-color: #a70000;
+}
+
+
+.list_header > h1 {
+    margin: 0 !important;
+}
+
+.list_header > h3 {
+    margin: 0 !important;
+}
+
+.list_header {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.form_div_register {
+    width: 50%;
+    min-width: 16rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media(max-width:560px) {
+
+    .form_div_register {
+        width: 16rem;
+    }
 }

@@ -5,6 +5,9 @@
     ViewData["Title"] = "Index";
 }
 
+<link rel="stylesheet" href="~/css/Shared/action_buttons.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Shared/table_style.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Shared/notification_style.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/Employees/index.css" asp-append-version="true" />
 
 <div>
@@ -19,26 +22,26 @@
         </form>
     </div>
 
-    <dialog id="delete_employee_dialog">
-        <i class="fa-solid fa-circle-xmark dialog-exit"></i>
-        <form method="post" asp-page-handler="DeleteEmployee">
-            <input type="hidden" name="employeeId" value="1">
-            <p class="dialog_header">Usuwanie pracownika</p>
-            <p class="dialog_content">Czy napewno chcesz usunąć tego pracownika ?</p>
-            <div class="d-flex flex-row justify-content-center align-items-center">
-                <button type="button" class="action-button action-cancel"><i class="fa-solid fa-xmark"></i>Anuluj</button>
-                <button type="submit" class="action-button action-delete"><i class="fa-solid fa-trash-can"></i>Usuń</button>
-            </div>
-        </form>
-    </dialog>
-
     <div class="move_right">
-        <button class="button buttonDefault addNewBookButton">
-            <a class="nav-link lightText" asp-page="Create">Dodaj nowego pracownika</a>
+        <button class="action-button big-button action-default">
+            <a class="nav-link lightText" asp-area="Identity" asp-page="/Account/EmployeeRegister">Dodaj nowego pracownika</a>
         </button>
     </div>
 
     <div class="table_div table-responsive">
+        <dialog id="delete_employee_dialog">
+            <i class="fa-solid fa-circle-xmark dialog-exit"></i>
+            <form method="post" asp-page-handler="DeleteEmployee">
+                <input type="hidden" name="employeeId" value="1">
+                <p class="dialog_header">Usuwanie pracownika</p>
+                <p class="dialog_content">Czy napewno chcesz usunąć tego pracownika ?</p>
+                <div class="d-flex flex-row justify-content-center align-items-center">
+                    <button type="button" class="action-button action-cancel"><i class="fa-solid fa-xmark"></i>Anuluj</button>
+                    <button type="submit" class="action-button action-delete"><i class="fa-solid fa-trash-can"></i>Usuń</button>
+                </div>
+            </form>
+        </dialog>
+
         <table class="table table-striped text-center">
             <thead class="table-header-style">
                 <tr>
@@ -67,13 +70,13 @@
                         <td class="align-middle td_employment_date">
                             @item.dateOfEmployment.ToString("dd.MM.yyyy")
                         </td>
-                        <td class="align-middle">
+                        <td class="align-middle action_div">
                             @if (item.employeeData == null)
                             {
-                                <button class="button buttonGreen"><a class="lightText" asp-page="../EmployeeExtraData/Create" asp-route-id="@item.employeeId">Dodaj dane szczegółowe</a></button>
+                                <button class="action-button action-confirm mr-2"><i class="fa-solid fa-plus"></i><a class="lightText" asp-page="../EmployeeExtraData/Create" asp-route-id="@item.employeeId">Dodaj dane szczegółowe</a></button>
                             }
-                            <button class="button buttonYellow"><a class="lightText" asp-page="./Details" asp-route-id="@item.employeeId">Szczegóły</a></button>
-                            <button class="action-button action-delete"><i class="fa-solid fa-trash-can"></i>Usuń<p class="hidden-employeeId">@item.employeeId</p></button>
+                            <button class="action-button action-details mr-2"><i class="fa-solid fa-circle-info"></i><a class="lightText" asp-page="./Details" asp-route-id="@item.employeeId">Szczegóły</a></button>
+                            <button class="action-button action-delete"><i class="fa-solid fa-trash-can"></i>Usuń<p class="hidden-employeeId d-none">@item.employeeId</p></button>
                         </td>
                     </tr>
                 }

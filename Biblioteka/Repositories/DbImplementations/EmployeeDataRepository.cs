@@ -7,11 +7,8 @@ namespace Biblioteka.Repositories.DbImplementations
 {
     public class EmployeeDataRepository : GenericRepository<EmployeeData>, IEmployeeDataRepository
     {
-        private readonly BibContext _context;
-        public EmployeeDataRepository(BibContext context) : base(context)
-        {
-            _context = context;
-        }
+        private BibContext _context;
+        public EmployeeDataRepository(BibContext context) : base(context) { }
 
     }
 }

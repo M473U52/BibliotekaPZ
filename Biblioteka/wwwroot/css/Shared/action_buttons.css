@@ -1,0 +1,89 @@
+﻿dialog .action-button {
+    font-size: 1rem;
+    padding: 0.4rem 1rem 0.4rem 1rem;
+}
+.action-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 200px;
+    padding: 0.35rem 1rem 0.35rem 1rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 250ms;
+}
+.action-button:hover {
+    box-shadow: rgba(0, 0, 0, 0.3) 0 4px 12px;
+    transform: translateY(-1px);
+}
+
+.action-button > i {
+    color: #fff;
+    padding-right: 0.3rem;
+}
+
+.big-button {
+    padding: .5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 8px;
+}
+.biggest-button {
+    padding: .8rem;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 10px;
+}
+
+
+
+/*default action*/
+.action-default {
+    color: #fff;
+    background-color: #882e2e;
+}
+.action-default:hover {
+    background-color: #993f3f;
+}
+
+
+
+/*delete action*/
+.action-delete {
+    color: #fff;
+    background-color: #d13636;
+}
+
+
+
+
+/*details action*/
+.action-details {
+    color: #fff;
+    background-color: #e3a514;
+}
+.action-details:hover {
+    background-color: #f4b625;
+}
+
+
+
+/*confirm action*/
+.action-confirm {
+    color: #fff;
+    background-color: forestgreen;
+}
+
+
+
+/*cancel action*/
+.action-cancel {
+    margin-right: 1rem;
+    color: #73708e;
+    background-color: #efeff9 /*#bf4343*/;
+}
+.action-cancel > i {
+    color: #73708e;
+}
