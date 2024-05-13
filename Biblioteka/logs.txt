@@ -203,3 +203,4 @@
 2024-05-11 18:25:59.843 +02:00 [INF] Dodano książkę aa
 2024-05-11 18:26:29.847 +02:00 [INF] Wylogowanie admin@admin.com - Admin
 2024-05-11 18:26:50.745 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-05-12 21:32:49.106 +02:00 [INF] Zalogowany użytkownik admin@admin.com - Admin
