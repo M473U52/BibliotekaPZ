@@ -19,7 +19,7 @@ namespace Biblioteka.Repositories.DbImplementations
         }
         public void Delete(BibUser? user) 
         {
-            if (user == null) throw new ArgumentNullException();
+            if (user is null) throw new ArgumentNullException();
             else
             {
                 _context.Users.Remove(user);

@@ -16,3 +16,15 @@
     padding: 1.1rem 0 0 .75rem !important;
     height:100%;
 }
+@media(max-width:1200px){
+    .employee_register_in_form_div {
+        width: 100% !important;
+        gap: 1rem !important;
+    }
+}
+@media(max-width:800px) {
+    .employee_register_in_form_div {
+        flex-direction: column !important;
+        width: 75% !important;
+    }
+}

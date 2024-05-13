@@ -14,7 +14,7 @@
     <div class="employee_register_form_div">
          <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-            <div class="d-flex flex-row justify-content-center align-items-center gap-5 w-75">
+            <div class="d-flex flex-row justify-content-center align-items-center gap-5 w-75 employee_register_in_form_div">
                 <div class="d-flex flex-column justify-content-center align-items-center gap-3 w-100">
                     <div class="form-floating w-100">
                         <input asp-for="Input.name" class="form-control" aria-required="true" placeholder="name@example.com" />

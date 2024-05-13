@@ -37,7 +37,6 @@ namespace Biblioteka.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
 
         private readonly IEmployeeRepository _employeeRepository;
-        private readonly IEmployeeDataRepository _employeeDataRepository;
         private readonly IPositionRepository _positionRepository;
 
         public List<SelectListItem>? position { get; set; }
@@ -49,7 +48,6 @@ namespace Biblioteka.Areas.Identity.Pages.Account
             ILogger<EmployeeRegisterModel> logger,
             IEmailSender emailSender,
             IEmployeeRepository employeeRepository,
-            IEmployeeDataRepository employeeDataRepository,
             IPositionRepository positionRepository
             )
         {
@@ -61,7 +59,6 @@ namespace Biblioteka.Areas.Identity.Pages.Account
             _emailSender = emailSender;
             _employeeRepository = employeeRepository;
             _positionRepository = positionRepository;   
-            _employeeDataRepository = employeeDataRepository;
         }
 
         /// <summary>

@@ -231,3 +231,7 @@
 2024-05-12 20:57:34.970 +02:00 [INF] Zarejestrowano pracownika ooo ooo
 2024-05-12 21:00:16.660 +02:00 [INF] Zarejestrowano pracownika eee eee
 2024-05-12 21:03:43.664 +02:00 [INF] Zarejestrowano pracownika rrr rrr
+2024-05-13 00:18:54.559 +02:00 [INF] Zarejestrowano pracownika Adam Nowak
+2024-05-13 00:20:37.176 +02:00 [INF] Wylogowanie admin@admin.com - Admin
+2024-05-13 00:20:53.236 +02:00 [INF] Zalogowany użytkownik nowak@email.com - Employee
+2024-05-13 12:49:23.672 +02:00 [INF] Zalogowany użytkownik admin@admin.com - Admin
