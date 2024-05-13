@@ -13,24 +13,48 @@
 
     #map {
         width: 35vw;
-        height: 50vw;
+        height: 50.8vw;
+    }
+
+    .page-container3 {
+        width: 35vw;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .page-container-center-vertically {
+        margin: 0;
+        position: relative;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
     }
 
     .page-container2 {
         background: #882E2E;
         width: 35vw;
-        height: 100%;
+        height: 99vh;
         color: white;
         justify-content: center;
         align-items: center;
         text-align: center;
-        padding: 3vw;
+        padding: 3vh 3vw;
         margin: 3vw;
     }
     .social-media {
         margin: 5vh 0;
     }
+
+    h2 {
+        font-size: 2.4rem;
+    }
+
+    p {
+        font-size: 1.2rem;
+    }
 }
+
 
 @media screen and (max-width: 1300px) {
     .page-container {
@@ -43,14 +67,23 @@
         justify-content: center;
         align-items: center;
     }
+
     .social-media {
         margin: 6vh 0;
     }
 
+    .page-container-center-vertically {
+        margin: 0;
+        position: relative;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
     .page-container2 {
         background: #882E2E;
         width: 65vw;
-        height: 100vh;
+        height: 129vh;
         color: white;
         justify-content: center;
         align-items: center;
@@ -62,6 +95,14 @@
     #map {
         width: 65vw;
         height: 500px;
+    }
+
+    h2 {
+        font-size: 2.1rem;
+    }
+
+    p {
+        font-size: 1rem;
     }
 }
 
