@@ -14,7 +14,7 @@ namespace Biblioteka.Repositories.DbImplementations
         {
             _context = context;
         }
-
+        
 
         public Book getOne(int id)
         {
@@ -27,6 +27,10 @@ namespace Biblioteka.Repositories.DbImplementations
                 .Include(b => b.authors)
                 .ThenInclude(a => a.author).FirstOrDefault(b => b.bookId == id);
 
+        }
+        public Book search (string title)
+        {
+            return _context.Book.FirstOrDefault(p => p.title.ToLower().Contains(title.ToLower()));
         }
 
         public Book getOne(string title)

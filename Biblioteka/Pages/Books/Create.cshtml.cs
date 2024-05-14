@@ -63,6 +63,8 @@ namespace Biblioteka.Views.Books
         [BindProperty]
         [DisplayName("Wydawca")]
         public string PublisherId { get; set; } = default!;
+        [BindProperty]
+        public DateTime releaseDate { get; set; } = DateTime.Now!;
 
         [BindProperty]
         [DisplayName("Autorzy")]
@@ -122,19 +124,30 @@ namespace Biblioteka.Views.Books
             }
 			else
             {
-                var book = Book;
+                
                 Book newBook = new Book()
                 {
                     title = Book.title,
                     ISBN = Book.ISBN,
                     description = Book.description,
                     availableCopys = Book.availableCopys,
-                    ratingAVG = Book.ratingAVG,
                     releaseDate = Book.releaseDate,
+                    ratingAVG = Book.ratingAVG,
                     floor = Book.floor,
                     alley = Book.alley,
                     rowNumber = Book.rowNumber,
                 };
+               
+                if (Book.releaseDate > DateTime.Now)
+                {
+                    ModelState.AddModelError("releaseDate", "Nie można dodać książki, której data wydania jeszcze nie nastąpiła.");
+                }
+               
+                if (_bookRepository.search(Book.title) != null)
+                {
+                    ModelState.AddModelError("Book.title", "Książka o tym tytule została już dodana");
+                }
+
 
                 Genre? foundGenre = _genreRepository.getAll().FirstOrDefault(r => r.genreId.ToString().Equals(GenreId.ToString()));
 
@@ -186,6 +199,7 @@ namespace Biblioteka.Views.Books
                     }
                 }
 
+                
                 if (Book.image != null)
                     if (Book.image.Length > 0 && Book.image.Length < 10000000 && Path.GetExtension(Book.image.FileName) == ".jpg")
                     {

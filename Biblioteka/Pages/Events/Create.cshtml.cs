@@ -58,6 +58,14 @@ namespace Biblioteka.Pages.Events
                 {
                     ModelState.AddModelError("date error", "Data wydarzenia nie może być w przeszłości");
                 }
+                var even = _eventRepository.getAll(); 
+                foreach (var item in even)
+                {
+                    if (item.eventDate == Event.eventDate)
+                    {
+                        ModelState.AddModelError("date error", "W tym momencie odbywa się już inne wydarzenie");
+                    }
+                }
                 var loggedInUserId = _userManager.GetUserId(User);
 
                 if (loggedInUserId != null)

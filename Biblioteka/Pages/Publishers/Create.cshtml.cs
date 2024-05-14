@@ -28,7 +28,12 @@ namespace Biblioteka.Pages.Publishers
             {
                 return Page();
             }
-            _publisherRepository.Add(Publisher);
+          if (_publisherRepository.searchPublisher(Publisher.name)!=null)
+            {
+                ModelState.AddModelError("", "Jest już takie wydawnictwo");
+                return Page();
+            }else
+                _publisherRepository.Add(Publisher);
             return RedirectToPage("./Index");
         }
     }

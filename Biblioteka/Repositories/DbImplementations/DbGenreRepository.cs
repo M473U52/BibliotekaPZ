@@ -18,5 +18,6 @@ namespace Biblioteka.Repositories.DbImplementations
         {
             return _context.Genre.FirstOrDefault(g => g.name.ToLower().Contains(genreName.ToLower()));
         }
+
     }
 }

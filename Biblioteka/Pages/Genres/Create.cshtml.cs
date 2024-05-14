@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Biblioteka.Repositories.Interfaces;
 using Biblioteka.Models;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Biblioteka.Pages.Genres
 {
@@ -30,8 +31,15 @@ namespace Biblioteka.Pages.Genres
             {
                 return Page();
             }
-
-            _genreRepository.Add(Genre);
+            if (_genreRepository.searchGenre(Genre.name) != null)
+            {
+                ModelState.AddModelError("", "Jest już taki gatunek");
+                return Page();
+            }
+            else
+            {
+                _genreRepository.Add(Genre);
+            }
 
             return RedirectToPage("./Index");
         }
