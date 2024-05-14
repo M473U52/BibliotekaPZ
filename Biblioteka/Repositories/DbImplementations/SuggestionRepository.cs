@@ -6,11 +6,15 @@ namespace Biblioteka.Repositories.DbImplementations
 {
     public class SuggestionRepository : GenericRepository<Suggestion>, ISuggestionRepository
     {
-        private readonly BibContext _context;
+        private BibContext _context;
 
         public SuggestionRepository(BibContext context) : base(context)
         {
             _context = context;
+        }
+        public Suggestion search(string title)
+        {
+            return _context.Suggestion.FirstOrDefault(p => p.title.ToLower().Contains(title.ToLower()));
         }
     }
 }

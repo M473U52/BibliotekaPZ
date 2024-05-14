@@ -260,3 +260,4 @@
 2024-05-14 23:43:37.533 +02:00 [INF] Dodano książkę Kukulcze jaja
 2024-05-14 23:52:22.774 +02:00 [INF] Dodano książkę Kukulcze jaja
 2024-05-14 23:57:51.525 +02:00 [INF] Dodano książkę Kukulcze jaja
+2024-05-15 00:22:03.724 +02:00 [INF] Dodano książkę Kukulcze jajko

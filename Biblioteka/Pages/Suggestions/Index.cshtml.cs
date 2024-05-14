@@ -1,16 +1,18 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Biblioteka.Models;
+using Biblioteka.Repositories.Interfaces;
 
 namespace Biblioteka.Pages.Suggestions
 {
     public class IndexModel : PageModel
     {
 
-        private readonly Context.BibContext _context;
-        public IndexModel(Context.BibContext context)
+        private ISuggestionRepository _suggestionRepository;
+        public IndexModel(ISuggestionRepository suggestionRepository)
         {
-            _context = context;
+
+            _suggestionRepository = suggestionRepository;
         }
 
         public IList<Suggestion> suggestions { get; set; } = default!;
@@ -19,7 +21,7 @@ namespace Biblioteka.Pages.Suggestions
         {
             if (suggestions == null)
             {
-                suggestions = _context.Suggestion.ToList();
+                suggestions = _suggestionRepository.getAll();
             }
         }
 
@@ -37,7 +39,7 @@ namespace Biblioteka.Pages.Suggestions
 
         public IActionResult OnPostVote(int suggestionId)
         {
-            var suggestion = _context.Suggestion.Find(suggestionId);
+            var suggestion = _suggestionRepository.getOne(suggestionId);
             if (suggestion != null)
             {
                 var votedKey = "voted_" + suggestionId;
@@ -47,7 +49,7 @@ namespace Biblioteka.Pages.Suggestions
                 }
 
                 suggestion.votes++;
-                _context.SaveChanges();
+                _suggestionRepository.Update(suggestion);
 
                 HttpContext.Response.Cookies.Append(votedKey, "true");
 

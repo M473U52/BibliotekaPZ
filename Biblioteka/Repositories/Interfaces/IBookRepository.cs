@@ -10,6 +10,7 @@ namespace Biblioteka.Repositories.Interfaces
         public Book getOne(string title);
         public List<Book> getAll();
         public Book search(string title);
+        public Book searchISBN(long ISBN);
         public void Add(Book book);
         public void Delete(object id);
         public void Update(Book book);

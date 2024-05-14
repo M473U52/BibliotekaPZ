@@ -33,6 +33,11 @@ namespace Biblioteka.Repositories.DbImplementations
             return _context.Book.FirstOrDefault(p => p.title.ToLower().Contains(title.ToLower()));
         }
 
+        public Book searchISBN(long ISBN)
+        {
+            return _context.Book.FirstOrDefault(p => p.ISBN==ISBN);
+        }
+
         public Book getOne(string title)
         {
             return _context.Book
