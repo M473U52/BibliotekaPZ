@@ -1,0 +1,44 @@
+﻿@page
+@model Biblioteka.Pages.Support.IndexModel
+@{
+	ViewData["Title"] = "Support";
+	var message = TempData["Message"] as string;
+}
+
+<h1>Masz problem i nie możesz znaleźć odpowiedzi? Wyślij wiadomość do jednego z naszych pracowników już teraz</h1><br />
+
+@if (!string.IsNullOrEmpty(message))
+{
+	<div class="success">
+		@message
+	</div>
+}
+
+<button id="createMessage">Utwórz nową wiadomość</button>
+
+<div id="checkBefore" style="display:none;">
+	<p>Przed przejściem dalej sprawdź czy odpowiedź nie znajduje się w sekcji <a href="../FAQs/Index" style="color: black;">FAQ</a></p>
+	<button id="next">Dalej</button>
+</div>
+
+<div id="emailForm" style="display:none;">
+	<form method="post">
+		<label>Temat: </label>
+		<input type="text" name="subject" required /><br />
+		<label>Wiadomość: </label>
+		<textarea name="message" required></textarea><br />
+		<input type="submit" value="Wyślij" />
+	</form>
+</div>
+
+@section Scripts {
+	<script>
+		document.getElementById('createMessage').addEventListener('click', function () {
+			document.getElementById('checkBefore').style.display = 'block';
+		});
+
+		document.getElementById('next').addEventListener('click', function () {
+			document.getElementById('emailForm').style.display = 'block';
+		});
+	</script>
+}
