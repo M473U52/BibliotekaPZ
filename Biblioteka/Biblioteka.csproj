@@ -13,6 +13,8 @@
 	  <Compile Remove="Migrations\20240401141714_sala_rodzaj.Designer.cs" />
 	  <Compile Remove="Migrations\20240422183817_sprint3init.cs" />
 	  <Compile Remove="Migrations\20240422183817_sprint3init.Designer.cs" />
+	  <Compile Remove="Migrations\20240514071514_audiobook.cs" />
+	  <Compile Remove="Migrations\20240514071514_audiobook.Designer.cs" />
   </ItemGroup>
 
 	<ItemGroup>
