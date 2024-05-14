@@ -197,5 +197,12 @@ namespace Biblioteka.Views.Books
 
             return File(book.ebookData, "application/pdf", fileName);
         }
+        public FileResult OnGetDownloadMP3(int id)
+        {
+            var book = _bookRepository.getOne(id);
+            string fileName = book.title + " audiobook.mp3";
+
+            return File(book.audiobookData, "application/mp3", fileName);
+        }
     }
 }

@@ -75,9 +75,16 @@
         </form>
         @if(Model.bookModel.ebookData != null)
         {
-        <div class="mt-3">
+            <div class="mt-3" style="margin-bottom: 20px;">
             <a href=@Url.Page("Details", "DownloadPDF", new { id = Model.Book?.bookId}) class="button buttonGreen lightText">Pobierz ebook</a>
         </div>
+        }
+
+        @if (Model.bookModel.audiobookData != null)
+        {
+            <div class="mt-3">
+                <a href=@Url.Page("Details", "DownloadMP3", new { id = Model.Book?.bookId}) class="button buttonGreen lightText">Pobierz audiobook</a>
+            </div>
         }
 
 

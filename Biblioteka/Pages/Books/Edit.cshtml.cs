@@ -190,7 +190,7 @@ namespace Biblioteka.Views.Books
 					}
 					else
 						ModelState.AddModelError("file not pdf or wrong size", "Plik musi być w formacie JPG i nie większy niż 10MB!");
-
+                
                 if (Book.ebook != null)
                     if (Book.ebook.Length > 0 && Book.ebook.Length < 10000000 && Path.GetExtension(Book.ebook.FileName) == ".pdf")
                     {
@@ -202,6 +202,18 @@ namespace Biblioteka.Views.Books
                     }
                     else
                         ModelState.AddModelError("file not pdf or wrong size", "Plik musi być w formacie PDF i nie większy niż 10MB!");
+
+                if (Book.audiobook != null)
+                    if (Book.audiobook.Length > 0 && Book.audiobook.Length < 10000000 && Path.GetExtension(Book.audiobook.FileName) == ".mp3")
+                    {
+                        using (var ms = new MemoryStream())
+                        {
+                            Book.audiobook.CopyTo(ms);
+                            existingBook.audiobookData = ms.ToArray();
+                        }
+                    }
+                    else
+                        ModelState.AddModelError("file not mp3 or wrong size", "Plik musi być w formacie MP3 i nie większy niż 10MB!");
 
                 _bookRepository.Update(existingBook);
                 return RedirectToPage("./Index");

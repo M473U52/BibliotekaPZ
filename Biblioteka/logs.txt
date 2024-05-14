@@ -203,3 +203,20 @@
 2024-05-11 18:25:59.843 +02:00 [INF] Dodano książkę aa
 2024-05-11 18:26:29.847 +02:00 [INF] Wylogowanie admin@admin.com - Admin
 2024-05-11 18:26:50.745 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-05-13 09:54:38.470 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
+2024-05-13 10:02:03.036 +02:00 [INF] Wylogowanie jan.kowalski@gmail.com - Reader
+2024-05-13 10:02:08.203 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
+2024-05-14 09:54:52.800 +02:00 [INF] Dodano książkę test1
+2024-05-14 09:56:12.695 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
+2024-05-14 09:57:14.159 +02:00 [INF] Wylogowanie jan.kowalski@gmail.com - Reader
+2024-05-14 09:57:17.135 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
+2024-05-14 09:57:41.632 +02:00 [INF] Wylogowanie employee@employee.com - Employee
+2024-05-14 09:57:51.070 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
+2024-05-14 09:59:24.138 +02:00 [INF] Wylogowanie jan.kowalski@gmail.com - Reader
+2024-05-14 09:59:29.961 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
+2024-05-14 10:00:25.237 +02:00 [INF] Dodano książkę test2
+2024-05-14 10:00:29.194 +02:00 [INF] Wylogowanie employee@employee.com - Employee
+2024-05-14 10:00:33.317 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
+2024-05-14 10:13:30.633 +02:00 [INF] Wylogowanie jan.kowalski@gmail.com - Reader
+2024-05-14 10:13:34.532 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
+2024-05-14 10:19:08.290 +02:00 [INF] Dodano książkę asd
