@@ -1,5 +1,5 @@
 ﻿@page
-@model Biblioteka.Pages.RoomReservations.IndexEmployeesModel
+@model Biblioteka.Pages.RoomReservations.IndexReaderModel
 
 @{
     ViewData["Title"] = "ReservationPanel";
@@ -15,7 +15,7 @@
     <div class="list_header">
         <h1>Wynajmowane sale</h1>
     </div>
-    @if (Model.RoomReservation.Any())
+  @*   @if (Model.RoomReservation.Any())
     {
         <div class="search_div">
             <form method="get" asp-page="./IndexEmployees">
@@ -26,7 +26,7 @@
             </form>
         </div>
     }
-
+ *@
     <dialog id="delete_borrowing_dialog">
         <i class="fa-solid fa-circle-xmark dialog-exit"></i>
         <form method="post" asp-page-handler="DeleteBorrowing">

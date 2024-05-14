@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Biblioteka.Pages.RoomReservations
 {
-    [Authorize(Roles = "Reader")]
+    
     public class IndexReaderModel : PageModel
     {
         private readonly UserManager<BibUser> _userManager;
@@ -53,7 +53,7 @@ namespace Biblioteka.Pages.RoomReservations
             {
                 TempData["Message"] = $"Error/Brak sali o takim ID.";
             }
-            return RedirectToPage("./IndexEmployees");
+            return RedirectToPage("./IndexReader");
         }
     }
 }

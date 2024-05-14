@@ -80,8 +80,10 @@ namespace Biblioteka.Pages.RoomReservations
                 return Page();
             }
 
-            var startOfReservation = DateTime.Parse(Request.Form["startOfReservation"]);
-            var endOfReservation = DateTime.Parse(Request.Form["endOfReservation"]);
+          
+            var startOfReservation = DateTime.ParseExact(Request.Form["startOfReservation"], "dd/MM/yyyy", null);
+            var endOfReservation = DateTime.ParseExact(Request.Form["endOfReservation"], "dd/MM/yyyy",null);
+          //  var endOfReservation = DateTime.Parse(Request.Form["endOfReservation"]);
 
             RoomReservation.begginingOfReservationDate = startOfReservation.Add(RoomReservation.startingTime);
             RoomReservation.endOfReservationDate = endOfReservation.Add(RoomReservation.endingTime);

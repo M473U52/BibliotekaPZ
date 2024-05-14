@@ -8,7 +8,7 @@ using Biblioteka.Repositories;
 
 namespace Biblioteka.Pages.RoomReservations
 {
-    [Authorize(Roles = "Admin, Employee, Reader")]
+    [Authorize(Roles = "Admin, Employe")]
     public class IndexEmployeesModel : PageModel
     {
         private readonly IRoomReservationRepository _roomReservationRepository;
