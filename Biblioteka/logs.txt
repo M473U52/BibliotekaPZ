@@ -235,3 +235,29 @@
 2024-05-13 00:20:37.176 +02:00 [INF] Wylogowanie admin@admin.com - Admin
 2024-05-13 00:20:53.236 +02:00 [INF] Zalogowany użytkownik nowak@email.com - Employee
 2024-05-13 12:49:23.672 +02:00 [INF] Zalogowany użytkownik admin@admin.com - Admin
+2024-05-14 11:00:14.472 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
+2024-05-14 11:14:44.412 +02:00 [INF] Dodano książkę Kukulcze jaja
+2024-05-14 15:26:40.295 +02:00 [INF] Dodano książkę Zwiadowcy
+2024-05-14 15:28:43.159 +02:00 [INF] Dodano książkę Kukulcze jaja
+2024-05-14 15:54:42.773 +02:00 [INF] Dodano książkę Kukulcze jaja
+2024-05-14 16:04:00.743 +02:00 [INF] Dodano książkę Kukulcze jaja
+2024-05-14 16:22:03.323 +02:00 [INF] Dodano książkę Kukulcze jaja
+2024-05-14 16:22:39.776 +02:00 [INF] Dodano książkę JamJestWielki
+2024-05-14 16:25:22.391 +02:00 [INF] Dodano książkę JamJestWielki
+2024-05-14 16:27:04.928 +02:00 [INF] Dodano książkę JamJestWielki
+2024-05-14 16:29:31.292 +02:00 [INF] Dodano książkę Kukulcze jaja
+2024-05-14 16:34:45.522 +02:00 [INF] Dodano książkę Kukulcze jaja
+2024-05-14 23:20:57.524 +02:00 [INF] Wylogowanie employee@employee.com - Employee
+2024-05-14 23:21:23.086 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
+2024-05-14 23:21:50.520 +02:00 [INF] Wylogowanie jan.kowalski@gmail.com - Reader
+2024-05-14 23:22:02.828 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
+2024-05-14 23:22:19.280 +02:00 [INF] Wylogowanie employee@employee.com - Employee
+2024-05-14 23:22:30.903 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
+2024-05-14 23:24:32.028 +02:00 [INF] Wylogowanie jan.kowalski@gmail.com - Reader
+2024-05-14 23:24:39.936 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
+2024-05-14 23:25:50.834 +02:00 [INF] Wylogowanie employee@employee.com - Employee
+2024-05-14 23:42:45.814 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
+2024-05-14 23:43:37.533 +02:00 [INF] Dodano książkę Kukulcze jaja
+2024-05-14 23:52:22.774 +02:00 [INF] Dodano książkę Kukulcze jaja
+2024-05-14 23:57:51.525 +02:00 [INF] Dodano książkę Kukulcze jaja
+2024-05-15 00:22:03.724 +02:00 [INF] Dodano książkę Kukulcze jajko

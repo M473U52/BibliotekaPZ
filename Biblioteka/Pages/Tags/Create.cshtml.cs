@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Biblioteka.Repositories.Interfaces;
 using Biblioteka.Models;
+using Biblioteka.Repositories.DbImplementations;
 
 namespace Biblioteka.Pages.Tags
 {
@@ -28,7 +29,15 @@ namespace Biblioteka.Pages.Tags
             {
                 return Page();
             }
-            _tagRepository.Add(Tag);
+            if (_tagRepository.searchTag(Tag.name) != null)
+            {
+                ModelState.AddModelError("", "Jest już dodany taki tag");
+                return Page();
+            }
+            else
+            {
+                _tagRepository.Add(Tag);
+            }
             return RedirectToPage("./Index");
         }
     }

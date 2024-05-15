@@ -1,4 +1,5 @@
 using Biblioteka.Models;
+using Biblioteka.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -6,10 +7,11 @@ namespace Biblioteka.Views.Suggestions
 {
     public class CreateModel : PageModel
     {
-        private readonly Biblioteka.Context.BibContext _context;
-        public CreateModel(Biblioteka.Context.BibContext context)
+        private ISuggestionRepository _suggestionRepository;
+        public CreateModel( ISuggestionRepository suggestionRepository)
         {
-            _context = context;
+
+            _suggestionRepository = suggestionRepository;
         }
 
         [BindProperty]
@@ -21,6 +23,11 @@ namespace Biblioteka.Views.Suggestions
 
         public IActionResult OnPost()
         {
+            if(_suggestionRepository.search(suggestion.title)!=null)
+            {
+                ModelState.AddModelError("", "Ksi¹¿ka o tym tytule jest ju¿ w sugestiach");
+                return Page();
+            }
 
             if (!ModelState.IsValid || suggestion == null)
             {
@@ -29,8 +36,7 @@ namespace Biblioteka.Views.Suggestions
             else
             {
                 suggestion.votes = 1;
-                _context.Suggestion.Add(suggestion);
-                _context.SaveChanges();
+                _suggestionRepository.Add(suggestion);
             }
 
             return RedirectToPage("./Index");

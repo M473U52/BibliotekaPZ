@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Biblioteka.Repositories.Interfaces;
 using Biblioteka.Models;
+using Biblioteka.Repositories.DbImplementations;
 
 namespace Biblioteka.Pages.BookTypes
 {
@@ -31,7 +32,15 @@ namespace Biblioteka.Pages.BookTypes
                 return Page();
             }
 
-            _bookTypeRepository.Add(BookType);
+            if (_bookTypeRepository.searchBookType(BookType.name) != null)
+            {
+                ModelState.AddModelError("", "Jest już dodany taki rodzaj książki");
+                return Page();
+            }
+            else
+            {
+                _bookTypeRepository.Add(BookType);
+            }
 
             return RedirectToPage("./Index");
         }

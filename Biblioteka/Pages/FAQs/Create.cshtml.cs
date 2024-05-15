@@ -28,6 +28,11 @@ namespace Biblioteka.Pages.FAQs
             {
                 return Page();
             }
+            if (_FAQRepository.search(FAQ.question)!=null)
+            {
+                ModelState.AddModelError("", "Jest już takie pytanie");
+                return Page();
+            }
 
             if (_FAQRepository.getAll().Count() <= 0)
             {
