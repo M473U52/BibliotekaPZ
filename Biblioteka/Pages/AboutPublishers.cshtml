@@ -1,0 +1,41 @@
+﻿@page
+@model Biblioteka.Pages.AboutPublishersModel
+@{
+}
+
+<partial name="_UnderHeaderAboutPublishers" />
+<style>
+    .gallery {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
+
+        .gallery .item {
+            margin: 0 20px;
+            text-align: center;
+        }
+
+        .gallery img {
+            width: 100%; /* Możesz dostosować szerokość obrazu */
+            height: auto;
+        }
+</style>
+
+<body>
+    <div class="gallery">
+        <div class="item">
+            <img src="/images/znak.jpg" alt="Logo Wydawnictwa A">
+            <p><p style="font-weight:bold">Wydawnictwo Znak</p> jest renomowanym liderem na rynku publikacji naukowych i akademickich. Specjalizujemy się w wydawaniu podręczników, monografii i czasopism naukowych wspierających rozwój nauki i edukacji. Nasza oferta obejmuje publikacje z różnorodnych dziedzin, takich jak nauki przyrodnicze, humanistyczne, techniczne oraz medyczne. Współpracujemy z czołowymi uczonymi i instytucjami edukacyjnymi, by dostarczać materiały najwyższej jakości, które inspirują i edukują przyszłe pokolenia badaczy.</p>
+        </div>
+        <div class="item">
+            <img src="/images/warstwy.png" alt="Logo Wydawnictwa B">
+            <p><p style="font-weight:bold">Wydawnictwo Warstwy</p> jest wydawnictwem specjalizującym się w literaturze pięknej, które zdobyło uznanie dzięki wyjątkowemu podejściu do wyboru i promocji autorów. W naszym katalogu znajdują się dzieła zarówno klasycznych, jak i współczesnych pisarzy z całego świata. Dzięki pasji do literatury i dbałości o wysoką jakość edytorską, Beta Books oferuje czytelnikom niezapomniane wrażenia literackie, które poruszają, prowokują do myślenia i pozwalają odkrywać nowe perspektywy i kultury.</p>
+        </div>
+        <div class="item">
+            <img src="/images/literatura.png" alt="Logo Wydawnictwa C">
+            <p><p style="font-weight:bold">Wydawnictwo Literatura</p> to wydawnictwo dedykowane literaturze dla dzieci i młodzieży. Nasza misja to wspieranie edukacji i rozwoju osobistego najmłodszych poprzez dostarczanie książek, które bawią, uczą i inspirują. Nasze publikacje obejmują szeroki zakres tematyczny, od bajek i opowiadań po edukacyjne serie naukowe i przygodowe. Gamma Kids jest zobowiązane do tworzenia bezpiecznej, kreatywnej przestrzeni, która rozwija wyobraźnię oraz promuje miłość do czytania.</p>
+        </div>
+    </div>
+</body>
