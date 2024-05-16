@@ -8,15 +8,13 @@
 @inject SignInManager<BibUser> SignInManager
 @inject UserManager<BibUser> UserManager
 
-<link rel="stylesheet" href="~/css/Borrowings/index_admin.css" asp-append-version="true" />
-
+<link rel="stylesheet" href="~/css/Shared/action_buttons.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Shared/table_style.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Shared/notification_style.css" asp-append-version="true" />
 
 <div>
 
     <partial name="_UnderHeaderReservations" />
-        <div class="list_header">
-            <h1>Wynajmowane sale</h1>
-        </div>
         @if (Model.RoomReservation.Any())
         {
             <div class="search_div">
@@ -29,7 +27,7 @@
             </div>
         }
 
-    <dialog id="delete_borrowing_dialog">
+    <dialog id="delete_reservation_dialog">
         <i class="fa-solid fa-circle-xmark dialog-exit"></i>
         <form method="post" asp-page-handler="DeleteBorrowing">
             <input type="hidden" name="reservationId" value="1">
@@ -42,7 +40,7 @@
         </form>
     </dialog>
 
-    <dialog id="confirmation_borrowing_dialog">
+    <dialog id="confirmation_reservation_dialog">
         <i class="fa-solid fa-circle-xmark dialog-exit"></i>
         <form method="post" asp-page-handler="ConfirmBorrowing">
             <input type="hidden" name="reservationId" value="1">
@@ -94,7 +92,7 @@
                         <td class="align-middle">
                                     @Html.DisplayFor(modelItem => item.endOfReservationDate)
                                 </td>
-                        <td class="align-middle">
+                        <td class="align-middle td_room_number">
                                     @Html.DisplayFor(modelItem => item.room.roomNumber)
                                 </td>
                         <td class="align-middle">
@@ -102,10 +100,10 @@
                                 </td>
                                 @if (User.IsInRole("Employee"))
                                 {
-                            <td class="align-middle td_confirm" style="align-items:center; text-align:center;">
+                                    <td class="align-middle td_confirm" style="align-items:center; text-align:center;">
                                         @if (!item.Confirmation)
                                         {
-                                    <button class="action-button action-confirm borrowing_confirmation_button"><i class="fa-solid fa-check"></i>Potwierdź<p class="hidden-borrowId">@item.reservationId</p></button>
+                                    <button class="action-button action-confirm borrowing_confirmation_button"><i class="fa-solid fa-check"></i>Potwierdź<p class="hidden-resId d-none">@item.reservationId</p></button>
                                         }
                                         else
                                         {
@@ -117,11 +115,11 @@
                         <td class="align-middle" style="align-items:center; text-align:center;">
                                 @if (!item.Confirmation)
                                 {
-                                <button class="action-button action-delete"><i class="fa-solid fa-trash-can"></i>Anuluj<p class="hidden-borrowId">@item.reservationId</p></button>
+                                <button class="action-button action-delete"><i class="fa-solid fa-trash-can"></i>Anuluj<p class="hidden-resId d-none">@item.reservationId</p></button>
                             }
                                 else
                                 {
-                                <button class="action-button action-delete"><i class="fa-solid fa-trash-can"></i>Usuń<p class="hidden-borrowId">@item.reservationId</p></button>
+                                <button class="action-button action-delete"><i class="fa-solid fa-trash-can"></i>Usuń<p class="hidden-resId d-none">@item.reservationId</p></button>
                             }
                         </td>
 

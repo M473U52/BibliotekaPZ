@@ -8,26 +8,14 @@
 @inject SignInManager<BibUser> SignInManager
 @inject UserManager<BibUser> UserManager
 
-<link rel="stylesheet" href="~/css/Borrowings/index_admin.css" asp-append-version="true" />
-
+<link rel="stylesheet" href="~/css/Shared/action_buttons.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Shared/table_style.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Shared/notification_style.css" asp-append-version="true" />
 
 <div>
-    <div class="list_header">
-        <h1>Wynajmowane sale</h1>
-    </div>
-  @*   @if (Model.RoomReservation.Any())
-    {
-        <div class="search_div">
-            <form method="get" asp-page="./IndexEmployees">
-                <input type="text" placeholder="Wyszukaj rezerwację" name="SearchTerm" value="@Model.SearchTerm">
-                <button type="submit">
-                    <i class="fas fa-search"></i>
-                </button>
-            </form>
-        </div>
-    }
- *@
-    <dialog id="delete_borrowing_dialog">
+    <partial name="_UnderHeaderReservations" />
+
+    <dialog id="delete_reservation_dialog">
         <i class="fa-solid fa-circle-xmark dialog-exit"></i>
         <form method="post" asp-page-handler="DeleteBorrowing">
             <input type="hidden" name="reservationId" value="1">
@@ -36,45 +24,6 @@
             <div class="d-flex flex-row justify-content-center align-items-center">
                 <button type="button" class="action-button action-cancel"><i class="fa-solid fa-xmark"></i>Anuluj</button>
                 <button type="submit" class="action-button action-delete"><i class="fa-solid fa-trash-can"></i>Usuń</button>
-            </div>
-        </form>
-    </dialog>
-
-    <dialog id="confirmation_borrowing_dialog">
-        <i class="fa-solid fa-circle-xmark dialog-exit"></i>
-        <form method="post" asp-page-handler="ConfirmBorrowing">
-            <input type="hidden" name="reservationId" value="1">
-            <p class="dialog_header">Potwierdzenie rezerwacji sali</p>
-            <p class="dialog_content">Czy napewno chcesz potwierdzić wydanie kluczy?</p>
-            <div class="d-flex flex-row justify-content-center align-items-center">
-                <button type="button" class="action-button action-cancel"><i class="fa-solid fa-xmark"></i>Anuluj</button>
-                <button type="submit" class="action-button action-confirm"><i class="fa-solid fa-check"></i>Potwierdź</button>
-            </div>
-        </form>
-    </dialog>
-
-    <dialog id="confirmation_return_dialog">
-        <i class="fa-solid fa-circle-xmark dialog-exit"></i>
-        <form method="post" asp-page-handler="ConfirmReturn">
-            <input type="hidden" name="borrowingId" value="1">
-            <p class="dialog_header">Potwierdzenie zwrotu</p>
-            <p class="dialog_content">Czy napewno chcesz potwierdzić zwrot tej książki ?</p>
-            <div class="d-flex flex-row justify-content-center align-items-center">
-                <button type="button" class="action-button action-cancel"><i class="fa-solid fa-xmark"></i>Anuluj</button>
-                <button type="submit" class="action-button action-confirm"><i class="fa-solid fa-check"></i>Potwierdź</button>
-            </div>
-        </form>
-    </dialog>
-
-    <dialog id="confirmation_payment">
-        <i class="fa-solid fa-circle-xmark dialog-exit"></i>
-        <form method="post" asp-page-handler="ConfirmPayment">
-            <input type="hidden" name="borrowingId" value="1">
-            <p class="dialog_header">Potwierdzenie opłaty</p>
-            <p class="dialog_content">Czy napewno chcesz potwierdzić opłatę za tą książkę ?</p>
-            <div class="d-flex flex-row justify-content-center align-items-center">
-                <button type="button" class="action-button action-cancel"><i class="fa-solid fa-xmark"></i>Anuluj</button>
-                <button type="submit" class="action-button action-confirm"><i class="fa-solid fa-check"></i>Potwierdź</button>
             </div>
         </form>
     </dialog>
@@ -116,7 +65,7 @@
                         <td class="align-middle">
                             @Html.DisplayFor(modelItem => item.endOfReservationDate)
                         </td>
-                        <td class="align-middle">
+                        <td class="align-middle td_room_number">
                             @Html.DisplayFor(modelItem => item.room.roomNumber)
                         </td>
                         <td class="align-middle">
@@ -127,7 +76,7 @@
                             <td class="align-middle td_confirm" style="align-items:center; text-align:center;">
                                 @if (!item.Confirmation)
                                 {
-                                    <button class="action-button action-confirm borrowing_confirmation_button"><i class="fa-solid fa-check"></i>Potwierdź<p class="hidden-borrowId">@item.reservationId</p></button>
+                                    <button class="action-button action-confirm borrowing_confirmation_button"><i class="fa-solid fa-check"></i>Potwierdź<p class="d-none hidden-resId">@item.reservationId</p></button>
                                 }
                                 else
                                 {
@@ -139,11 +88,11 @@
                         <td class="align-middle" style="align-items:center; text-align:center;">
                             @if (!item.Confirmation)
                             {
-                                <button class="action-button action-delete"><i class="fa-solid fa-trash-can"></i>Anuluj<p class="hidden-borrowId">@item.reservationId</p></button>
+                                <button class="action-button action-delete"><i class="fa-solid fa-trash-can"></i>Anuluj<p class="d-none hidden-resId">@item.reservationId</p></button>
                             }
                             else
                             {
-                                <button class="action-button action-delete"><i class="fa-solid fa-trash-can"></i>Usuń<p class="hidden-borrowId">@item.reservationId</p></button>
+                                <button class="action-button action-delete"><i class="fa-solid fa-trash-can"></i>Usuń<p class="d-none hidden-resId">@item.reservationId</p></button>
                             }
                         </td>
 
