@@ -1,0 +1,32 @@
+﻿.book_add_form_div {
+}
+
+.book_add_form_div > form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.book_add_select_style {
+    padding-top: .62rem !important;
+}
+.fill-form-btn {
+    box-shadow: rgba(0, 0, 0, 0.3) 0 4px 5px;
+}
+.book_add_file_input_style {
+    padding: 2rem 0 0 .75rem !important;
+    height: 100%;
+}
+@media(max-width:1200px) {
+    .book_add_in_form_div {
+        width: 100% !important;
+        gap: 1rem !important;
+    }
+}
+
+@media(max-width:800px) {
+    .book_add_in_form_div {
+        flex-direction: column !important;
+        width: 75% !important;
+    }
+}

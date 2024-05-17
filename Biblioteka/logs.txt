@@ -264,3 +264,6 @@
 2024-05-16 14:01:34.060 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
 2024-05-16 14:37:38.354 +02:00 [INF] Wylogowanie jan.kowalski@gmail.com - Reader
 2024-05-16 14:37:50.314 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-05-17 13:50:15.205 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-05-17 15:42:04.607 +02:00 [INF] Dodano książkę Złote słowa
+2024-05-17 15:59:01.296 +02:00 [INF] Dodano książkę vulgaris curso aetas
