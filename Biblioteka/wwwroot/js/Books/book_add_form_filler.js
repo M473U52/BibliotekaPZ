@@ -44,7 +44,7 @@ const FillForm = () => {
     inputs['ISBNInput'].value = faker.number.int({ min: 1000000000000, max: 9999999999999 });
     inputs['descriptionInput'].value = faker.lorem.words(6);
     inputs['availableCopysInput'].value = faker.number.int({ min: 1, max: 100 });
-    const date = faker.date.birthdate({ min: 1900, max: 2023, mode: 'year' })//new Date(2020, 4, 17, 12, 30);
+    const date = faker.date.birthdate({ min: 1900, max: 2023, mode: 'year' })
     const formattedDate = date.toISOString().slice(0, 16);
     inputs['releaseInput'].value = formattedDate;
     inputs['genreIDSelect'].value = genreIds[Math.floor(Math.random() * genreIds.length)];

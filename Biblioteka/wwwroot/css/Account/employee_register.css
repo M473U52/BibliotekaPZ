@@ -28,3 +28,11 @@
         width: 75% !important;
     }
 }
+.fill-form-btn {
+    box-shadow: rgba(0, 0, 0, 0.3) 0 4px 5px;
+}
+.password_text{
+    text-align:center;
+    margin-top: 1rem;
+    font-weight:bold;
+}

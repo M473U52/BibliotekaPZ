@@ -260,7 +260,8 @@ namespace Biblioteka.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    TempData["Message"] = $"Error/Wystąpił nieoczekiwany błąd podczas dodawania pracownika.";
+                    var errorMessages = result.Errors.Select(e => e.Description);
+                    TempData["Message"] = $"Error/Wystąpił nieoczekiwany błąd podczas dodawania pracownika. {string.Join(",", errorMessages)}";
                     return RedirectToPage("/Employees/Index", new { searchTerm = "" });
                 }
             }

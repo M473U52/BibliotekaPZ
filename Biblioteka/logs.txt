@@ -267,3 +267,17 @@
 2024-05-17 13:50:15.205 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
 2024-05-17 15:42:04.607 +02:00 [INF] Dodano książkę Złote słowa
 2024-05-17 15:59:01.296 +02:00 [INF] Dodano książkę vulgaris curso aetas
+2024-05-19 15:16:32.841 +02:00 [INF] Zalogowany użytkownik admin@admin.com - Admin
+2024-05-19 15:46:48.852 +02:00 [INF] Zarejestrowano pracownika Louisa Waters
+2024-05-19 15:46:59.407 +02:00 [INF] Zarejestrowano pracownika Raphaelle O'Hara
+2024-05-19 15:47:07.507 +02:00 [INF] Zarejestrowano pracownika Kolby Conn
+2024-05-19 15:47:15.125 +02:00 [INF] Zarejestrowano pracownika Hertha Stehr
+2024-05-19 15:47:22.667 +02:00 [INF] Zarejestrowano pracownika Kendrick Jacobs
+2024-05-19 15:52:06.966 +02:00 [INF] Zarejestrowano pracownika Jewel Stiedemann
+2024-05-19 15:54:31.044 +02:00 [INF] Zarejestrowano pracownika Willis Lind
+2024-05-19 15:54:38.943 +02:00 [INF] Zarejestrowano pracownika Wilton Kub
+2024-05-19 15:54:47.509 +02:00 [INF] Zarejestrowano pracownika Dusty Donnelly
+2024-05-19 15:54:55.385 +02:00 [INF] Zarejestrowano pracownika Maryse Denesik
+2024-05-19 15:55:02.970 +02:00 [INF] Zarejestrowano pracownika Fannie Kshlerin
+2024-05-19 16:10:35.640 +02:00 [INF] Zarejestrowano pracownika Orville Hoeger
+2024-05-19 16:10:57.317 +02:00 [INF] Dodano książkę cernuus synagoga vesper
