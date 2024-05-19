@@ -260,6 +260,7 @@ namespace Biblioteka.Views.Books
 
             Log.ForContext("SaveToFile", "AnyValue").Information("Dodano książkę " + Book.title );
 
+            TempData["Message"] = $"Success/Książka została dodana pomyślnie.";
             return RedirectToPage("./Index");
         }
     }

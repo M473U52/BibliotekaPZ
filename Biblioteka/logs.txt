@@ -281,3 +281,13 @@
 2024-05-19 15:55:02.970 +02:00 [INF] Zarejestrowano pracownika Fannie Kshlerin
 2024-05-19 16:10:35.640 +02:00 [INF] Zarejestrowano pracownika Orville Hoeger
 2024-05-19 16:10:57.317 +02:00 [INF] Dodano książkę cernuus synagoga vesper
+2024-05-19 16:26:15.312 +02:00 [INF] Wylogowanie admin@admin.com - Admin
+2024-05-19 16:26:32.462 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
+2024-05-19 16:34:39.192 +02:00 [INF] Wylogowanie jan.kowalski@gmail.com - Reader
+2024-05-19 16:34:49.099 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-05-19 16:35:01.081 +02:00 [INF] Dodano książkę strues culpa attero
+2024-05-19 17:16:21.363 +02:00 [INF] Dodano książkę veniam tumultus dicta
+2024-05-19 17:33:23.742 +02:00 [INF] Dodano książkę adinventitias color absum
+2024-05-19 17:39:41.020 +02:00 [INF] Wylogowanie janusz.kowalski@gmail.com - Employee
+2024-05-19 17:39:55.602 +02:00 [INF] Zalogowany użytkownik admin@admin.com - Admin
+2024-05-19 17:45:02.501 +02:00 [INF] Zarejestrowano pracownika Eliezer Okuneva
