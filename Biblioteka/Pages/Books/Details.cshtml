@@ -108,76 +108,20 @@
              </div>
         </div>
         <div class="page-container-horizontal2">
+            <div class="opinions">
             @{
                 if (!Model.IsRatingAdded)
                 {
-                    <br />
-                        <h3> Wystaw opinię na temat książki</h3>
-                        <form method="post" asp-page-handler="AddOpinion">
-                            <div class="your_opinion_column">
-                                <div class="avg_opinion">
-                                 
+                            <br />
+                                <h3> Wystaw opinię na temat książki</h3>
+                    <form method="post" asp-page-handler="AddOpinion">
+                        <div class="your_opinion_column">
+                            <div class="avg_opinion">
+                                
                                 @{
                                     if (Model.Book.ratingAVG != null)
                                     {
-
-                                                    <h5>Średnia ocena:</h5>
-                                                    <div class="avg_opinion_inner_div mt-3">
-                                                        <div class="avg_stars_div">
-                                                            <span class="fa fa-star fa-2x avg_star"></span>
-                                                            <span class="fa fa-star fa-2x avg_star"></span>
-                                                            <span class="fa fa-star fa-2x avg_star"></span>
-                                                            <span class="fa fa-star fa-2x avg_star"></span>
-                                                            <span class="fa fa-star fa-2x avg_star"></span>
-                                                        </div>
-                                                        <div>
-                                                             <span class="book_rating_avg">@Model.Book.ratingAVG / 5,00</span>
-                                                        </div>
-                                                        <p>Ilość opinii: @Model.Opinions.Count</p>
-                                                    </div>
-                                    }
-                                }
-                                </div>
-                                <div class="your_opinion_row">
-                                    <div class="your_opinion_stars">
-                                        <h5>Twoja ocena:</h5>
-                                        <div class="stars_div">
-                                            <span class="fa fa-star fa-3x add_opinion_star"></span>
-                                            <span class="fa fa-star fa-3x add_opinion_star"></span>
-                                            <span class="fa fa-star fa-3x add_opinion_star"></span>
-                                            <span class="fa fa-star fa-3x add_opinion_star"></span>
-                                            <span class="fa fa-star fa-3x add_opinion_star"></span>
-                                        </div>
-                                        <input type="hidden" name="bookId" asp-for="Book.bookId" />
-                                        <input asp-for="User_Opinion.rating" class="form-control your_rating d-none" />
-                                        <span asp-validation-for="User_Opinion.rating" class="text-danger"></span>
-                                    </div>
-                                    <div class="your_comment">
-                                        <div>
-                                            <label asp-for="User_Opinion.opinion" class="control-label"></label>
-                                        </div>
-                                        <textarea asp-for="User_Opinion.opinion" class="opinion_input form-control" placeholder="Opinia powinna zawierać nie więcej niż 500 znaków"></textarea>
-                                        <span asp-validation-for="User_Opinion.opinion" class="text-danger"></span>
-                                    </div>
-                                </div>
-                                <div class="mt-3">
-                                    <input type="submit" value="Dodaj" class="red-button2" />
-                                </div>
-                            </div>
-                        </form>
-                }
-                else
-                {
-                        <div class="opinion_is_added">
-                            <div class="avg_opinion">
-                                    <h3> Średnia ocena</h3>
-                                @{
-                                if (Model.Book.ratingAVG == null)
-                                {
-                                                <p class="book_rating_avg">Brak ocen</p>
-                                }
-                                else
-                                {
+                                                <h3>Średnia ocena</h3>
                                                 <div class="avg_opinion_inner_div mt-3">
                                                     <div class="avg_stars_div">
                                                         <span class="fa fa-star fa-2x avg_star"></span>
@@ -191,79 +135,140 @@
                                                     </div>
                                                     <p>Ilość opinii: @Model.Opinions.Count</p>
                                                 </div>
+                                    }
+                                }
+                            </div>
+                            <div class="your_opinion_row">
+                                <div class="your_opinion_stars">
+                                    <h4>Twoja ocena</h4>
+                                    <div class="stars_div">
+                                        <span class="fa fa-star fa-3x add_opinion_star"></span>
+                                        <span class="fa fa-star fa-3x add_opinion_star"></span>
+                                        <span class="fa fa-star fa-3x add_opinion_star"></span>
+                                        <span class="fa fa-star fa-3x add_opinion_star"></span>
+                                        <span class="fa fa-star fa-3x add_opinion_star"></span>
+                                    </div>
+                                    <input type="hidden" name="bookId" asp-for="Book.bookId" />
+                                    <input asp-for="User_Opinion.rating" class="form-control your_rating d-none" />
+                                    <span asp-validation-for="User_Opinion.rating" class="text-danger"></span>
+                                </div>
+                                <div class="your_comment">
+                                    <div>
+                                        <label asp-for="User_Opinion.opinion" class="control-label"></label>
+                                    </div>
+                                    <textarea asp-for="User_Opinion.opinion" class="opinion_input form-control" placeholder="Opinia powinna zawierać nie więcej niż 500 znaków"></textarea>
+                                    <span asp-validation-for="User_Opinion.opinion" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                        <input type="submit" value="Dodaj" class="red-button2" />
+                            </div>
+                        </div>
+                    </form>
+                }
+                else
+                {
+                    <div class="opinion_is_added">
+                        <div class="avg_opinion">
+                            <h3>Średnia ocena</h3>
+                            @{
+                                if (Model.Book.ratingAVG == null)
+                                {
+                                            <p class="book_rating_avg">Brak ocen</p>
+                                }
+                                else
+                                {
+                                            <div class="avg_opinion_inner_div mt-3">
+                                                <div class="avg_stars_div">
+                                                    <span class="fa fa-star fa-2x avg_star"></span>
+                                                    <span class="fa fa-star fa-2x avg_star"></span>
+                                                    <span class="fa fa-star fa-2x avg_star"></span>
+                                                    <span class="fa fa-star fa-2x avg_star"></span>
+                                                    <span class="fa fa-star fa-2x avg_star"></span>
+                                                </div>
+                                                <div>
+                                                    <span class="book_rating_avg">@Model.Book.ratingAVG</span><span class="book_rating_max"> / 5,00</span>
+                                                </div>
+                                                <p>Ilość opinii: @Model.Opinions.Count</p>
+                                            </div>
 
                                 }
                             }
-                            </div>
+                        </div>
                         @if (User.IsInRole("Reader") && !User.IsInRole("Employee"))
                         {
-                                    <h4>Dodałeś już opinię na temat tej książki!</h4>
+                                <h4>Dodałeś już opinię na temat tej książki!</h4>
                         }
-                        </div>
+                    </div>
                 }
             }
-        <div class="user_comments">
-                <h2  Pozostałe opinie</h2>
+    <div class="other_comments">
+        
                 @{
-                    if (!Model.Opinions.Any())
+                    if (Model.Opinions.Any())
                     {
-                            <div>
-                                    <p>Obecnie brak opinii na temat tej książki. Bądź pierwszy i podziel się swoją opinią teraz!</p>
-                            </div>
-                    }
-                    else
-                    {
-                            <select id="sortOpinions">
-                                <option value="opinionsDesc">Ocena (malejąco)</option>
-                                <option value="opinionsAsc">Ocena (rosnąco)</option>
-                                <option value="dateDesc" selected>Data dodania (od najnowszej)</option>
-                                <option value="dateAsc">Data dodania (od najstarszej)</option>
-                            </select>
-                            <div id="opinions-container">
+                      <h4> Pozostałe opinie:</h4>
+                        <select id="sortOpinions">
+                            <option value="opinionsDesc">Ocena (malejąco)</option>
+                            <option value="opinionsAsc">Ocena (rosnąco)</option>
+                            <option value="dateDesc" selected>Data dodania (od najnowszej)</option>
+                            <option value="dateAsc">Data dodania (od najstarszej)</option>
+                        </select>
+                        <div id="opinions-container">
                             @foreach (var opinion in Model.Opinions)
                             {
-                                <div class="user-opinion">
-                                      <div class="user_opinion-data">
-                                            <div>
-                                                <img src="~/images/user_photo.jpg" />
-                                            </div>
-                                            <div class="user_opinion-vertical">
-                                            <p>@opinion.opinion</p>
-                                                <div>
-                                                            <span class="fa fa-star fa-2x opinion_star"></span>
-                                                            <span class="fa fa-star fa-2x opinion_star"></span>
-                                                            <span class="fa fa-star fa-2x opinion_star"></span>
-                                                            <span class="fa fa-star fa-2x opinion_star"></span>
-                                                            <span class="fa fa-star fa-2x opinion_star"></span>
-                                                            <p class="user_rating d-none">@opinion.rating</p>
-                                               </div>
-                                        @if (opinion.reader.email == User.Identity.Name)
-                                        {
-                                              <i class="fa-solid fa-circle-xmark delete_comment"></i>
-                                        }
-                                        @{
-                                            <div>
-                                                    <span>Data dodania: <span class="added-date">@opinion.addedDate.Value.ToString("dd/MM/yyyy")</span> przez @opinion.reader.FullName</span>
-                                            </div>
-                                        }
-                                            </div>
-                                            </div>
-                                        </div>
-                                       <dialog class="delete_dialog">
+                                                <div class="comment" style="background-color: white">
+                                    @if (opinion.reader.email == User.Identity.Name)
+                                    {
+                                                <i class="fa-solid fa-circle-xmark delete_comment"></i>
+                                    }
+                                        <dialog class="delete_dialog">
                                             <form method="post" asp-page-handler="DeleteComment">
                                                 <div>
                                                     <p>Czy napewno chcesz usunąć swoją opinię ?</p>
                                                     <input type="hidden" name="bookId" asp-for="Book.bookId" />
-                                                                <input type="submit" value="Usuń" class="red-button2 delete_button_dialog" />
-                                                                            <input type="button" value="Anuluj" class="red-button2 cancel_button_dialog" />
+                                                    <input type="submit" value="Usuń" class="red-button2 delete_button_dialog" />
+                                                    <input type="button" value="Anuluj" class="red-button2 cancel_button_dialog" />
                                                 </div>
                                             </form>
-                                    </dialog>
+                                        </dialog>
+                                        <div class="comment_user" >
+                                            <img src="~/images/user_photo.jpg" />
+                                            <div>
+                                                <p>@opinion.reader.FullName</p>
+                                            @{
+                                                        <div>
+                                                            <span>Data dodania: </span>
+                                                            <span class="added-date">@opinion.addedDate.Value.ToString("dd/MM/yyyy")</span>
+                                                        </div>
+
+
+                                            }
+                                            </div>
+                                        </div>
+                                        <div>
+                                        </div>
+                                        <div>
+                                            <span class="fa fa-star fa-2x opinion_star"></span>
+                                            <span class="fa fa-star fa-2x opinion_star"></span>
+                                            <span class="fa fa-star fa-2x opinion_star"></span>
+                                            <span class="fa fa-star fa-2x opinion_star"></span>
+                                            <span class="fa fa-star fa-2x opinion_star"></span>
+                                            <p class="user_rating d-none">@opinion.rating</p>
+                                        </div>
+                                        <div class="user_opinion">
+                                            <p>@opinion.opinion</p>
+                                        </div>
+                                    </div>
                             }
-                            </div>
+                        </div>
 
                     }
                 }
+    </div>
+</div>
+        </div>
+    </div>
     </div>
 </article>
 
