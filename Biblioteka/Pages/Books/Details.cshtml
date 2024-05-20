@@ -223,16 +223,12 @@
                             @foreach (var opinion in Model.Opinions)
                             {
                                 <div class="user-opinion">
-                                    
-                                            
-                                            <div>
-                                            </div>
-                                            <div class="user_opinion-data">
+                                      <div class="user_opinion-data">
                                             <div>
                                                 <img src="~/images/user_photo.jpg" />
                                             </div>
-                                                        <div class="user_opinion-vertical">
-                                                <p>@opinion.opinion</p>
+                                            <div class="user_opinion-vertical">
+                                            <p>@opinion.opinion</p>
                                                 <div>
                                                             <span class="fa fa-star fa-2x opinion_star"></span>
                                                             <span class="fa fa-star fa-2x opinion_star"></span>
@@ -240,31 +236,28 @@
                                                             <span class="fa fa-star fa-2x opinion_star"></span>
                                                             <span class="fa fa-star fa-2x opinion_star"></span>
                                                             <p class="user_rating d-none">@opinion.rating</p>
-                                                        </div>
+                                               </div>
                                         @if (opinion.reader.email == User.Identity.Name)
                                         {
                                               <i class="fa-solid fa-circle-xmark delete_comment"></i>
                                         }
-                                            @{
-                                                        <div>
-                                                                <span>Data dodania: <span class="added-date">@opinion.addedDate.Value.ToString("dd/MM/yyyy")</span> przez @opinion.reader.FullName</span>
-                                                        </div>
-
-
-                                            }
-                                       
+                                        @{
+                                            <div>
+                                                    <span>Data dodania: <span class="added-date">@opinion.addedDate.Value.ToString("dd/MM/yyyy")</span> przez @opinion.reader.FullName</span>
+                                            </div>
+                                        }
                                             </div>
                                             </div>
                                         </div>
                                        <dialog class="delete_dialog">
-                                                            <form method="post" asp-page-handler="DeleteComment">
-                                                                <div>
-                                                                    <p>Czy napewno chcesz usunąć swoją opinię ?</p>
-                                                                    <input type="hidden" name="bookId" asp-for="Book.bookId" />
-                                                                                <input type="submit" value="Usuń" class="red-button2 delete_button_dialog" />
-                                                                                            <input type="button" value="Anuluj" class="red-button2 cancel_button_dialog" />
-                                                                </div>
-                                                            </form>
+                                            <form method="post" asp-page-handler="DeleteComment">
+                                                <div>
+                                                    <p>Czy napewno chcesz usunąć swoją opinię ?</p>
+                                                    <input type="hidden" name="bookId" asp-for="Book.bookId" />
+                                                                <input type="submit" value="Usuń" class="red-button2 delete_button_dialog" />
+                                                                            <input type="button" value="Anuluj" class="red-button2 cancel_button_dialog" />
+                                                </div>
+                                            </form>
                                     </dialog>
                             }
                             </div>
