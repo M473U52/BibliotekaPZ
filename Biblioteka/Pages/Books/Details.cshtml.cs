@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Biblioteka.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using Biblioteka.Repositories;
 
 namespace Biblioteka.Views.Books
 {
@@ -15,15 +16,17 @@ namespace Biblioteka.Views.Books
         private IBookRepository _bookRepository;
         private IBookOpinionRepository _bookOpinionRepository;
         private IReaderRepository _readerRepository;
+        private IAuthorRepository _authorRepository;
 
 
         public DetailsModel(UserManager<BibUser> userManager, IBookRepository bookRepository,
-            IBookOpinionRepository bookOpinionRepository, IReaderRepository readerRepository)
+            IBookOpinionRepository bookOpinionRepository, IReaderRepository readerRepository, IAuthorRepository authorRepository)
         {
             _userManager = userManager;
             _bookRepository = bookRepository;
             _bookOpinionRepository = bookOpinionRepository;
             _readerRepository = readerRepository;
+            _authorRepository = authorRepository;
         }
         [BindProperty]
         public List<Book_Opinions> Opinions { get; set; } = default!;
@@ -36,6 +39,8 @@ namespace Biblioteka.Views.Books
         public Book bookModel { get; set; }
         public bool IsRatingAdded { get; set; }
         public BibUser user;
+
+        public List<Author> Authors { get; set; }
 
         public IActionResult OnGet(int id)
         {
@@ -75,6 +80,13 @@ namespace Biblioteka.Views.Books
                     alley = book.alley,
                     rowNumber = book.rowNumber
                 };
+
+                var authors = _authorRepository.getAll().Where(a => a.books.Any(b => b.bookId == id)).ToList();
+
+                if(authors != null)
+                {
+                    Authors = authors;
+                }
             }
             return Page();
         }

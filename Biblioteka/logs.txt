@@ -261,3 +261,6 @@
 2024-05-14 23:52:22.774 +02:00 [INF] Dodano książkę Kukulcze jaja
 2024-05-14 23:57:51.525 +02:00 [INF] Dodano książkę Kukulcze jaja
 2024-05-15 00:22:03.724 +02:00 [INF] Dodano książkę Kukulcze jajko
+2024-05-20 22:44:05.002 +02:00 [INF] Zalogowany użytkownik admin@admin.com - Admin
+2024-05-20 22:44:22.550 +02:00 [INF] Wylogowanie admin@admin.com - Admin
+2024-05-20 22:44:55.142 +02:00 [INF] Zalogowany użytkownik jan.kowalski@gmail.com - Reader
