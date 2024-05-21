@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Identity;
 using Biblioteka.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using PdfSharp.Pdf.IO;
+using System.IO;
+using PdfSharp.Pdf;
+
 
 namespace Biblioteka.Views.Books
 {
@@ -42,7 +46,7 @@ namespace Biblioteka.Views.Books
             var book = _bookRepository.getOne(id);
             bookModel = book;
             Opinions = _bookOpinionRepository.getOpinionsForBook(book);
-            
+
             Reader reader;
 
             if (User.IsInRole("Reader") && !User.IsInRole("Employee"))
@@ -190,6 +194,37 @@ namespace Biblioteka.Views.Books
             return RedirectToPage("./Details", new { id = book.bookId });
         }
 
+        public FileResult OnGetPreview(int id)
+        {
+            var book = _bookRepository.getOne(id);
+            string fileName = $"{book.title} ebook.pdf";
+            string encodedFileName = Uri.EscapeDataString(fileName);
+
+            // Load the original PDF document
+            using (MemoryStream inputPdfStream = new MemoryStream(book.ebookData))
+            {
+                PdfDocument inputDocument = PdfReader.Open(inputPdfStream, PdfDocumentOpenMode.Import);
+
+                // Create a new PDF document
+                PdfDocument outputDocument = new PdfDocument();
+
+                // Copy the first five pages from the input document to the output document
+                int pageCount = Math.Min(10, inputDocument.PageCount);
+                for (int i = 0; i < pageCount; i++)
+                {
+                    outputDocument.AddPage(inputDocument.Pages[i]);
+                }
+
+                // Save the output document to a MemoryStream
+                using (MemoryStream outputPdfStream = new MemoryStream())
+                {
+                    outputDocument.Save(outputPdfStream, false);
+                    string contentDisposition = $"inline; filename*=UTF-8''{encodedFileName}";
+                    Response.Headers.Add("Content-Disposition", contentDisposition);
+                    return File(outputPdfStream.ToArray(), "application/pdf");
+                }
+            }
+        }
         public FileResult OnGetDownloadPDF(int id)
         {
             var book = _bookRepository.getOne(id);
