@@ -38,16 +38,28 @@
         {
                         <div>
                                 <a href=@Url.Page("Details", "DownloadPDF", new { id = Model.Book?.bookId}) class="red-button2">Pobierz ebook</a>
-                        </div>
+            </div>
+        }
+        else
+        {
+                <div>
+                                        <button class="red-button2" style="cursor: default">Ebook niedostępny</button>
+                </div>
         }
 
         @if (Model.bookModel.audiobookData != null)
         {
                             <div >
                                     <a href=@Url.Page("Details", "DownloadMP3", new { id = Model.Book?.bookId}) class="red-button3">Pobierz audiobook</a>
-                            </div>
+            </div>
         }
-        </div>
+        else
+        {
+                <div >
+                                                <button class="red-button3" style="cursor: default">Audiobook niedostępny</button>
+                </div>
+        }
+    </div>
             
         @if (User.Identity.IsAuthenticated && (User.IsInRole("Employee") || User.IsInRole("Admin")))
         {
@@ -61,14 +73,16 @@
                     
           </div>
         }
+                @if (Model.Authors != null && Model.Authors.Count > 0)
+        {
     <div class="page-container-horizontal2">
          <br />
-        @if (Model.Authors.Count == 0)
+        @if (Model.Authors.Count == 1)
         {
                             <h2>@Html.DisplayName("Autor")</h2>
                        
         }
-        else if (Model.Authors != null && Model.Authors.Count > 0)
+        else if (Model.Authors != null && Model.Authors.Count > 1)
         {
                               <h2>@Html.DisplayName("Autorzy")</h2> 
         }
@@ -78,7 +92,8 @@
                                         <span>@authors.name @authors.surname</span>
             } 
                         </p>
-    </div>   
+    </div>  
+    }
     <div class="page-container-horizontal2">
                 <div>
                                 <br />
