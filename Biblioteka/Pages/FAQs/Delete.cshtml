@@ -4,17 +4,21 @@
 @{
     ViewData["Title"] = "Delete";
 }
-<div class="myContainerv2">
+<link rel="stylesheet" href="~/css/Shared/action_buttons.css" asp-append-version="true" />
+
+<div class="main-container" style="align-content:center">
     <h1>Usunięcie FAQ:</h1>
+    <h2>Pytanie:</h2>
     <h3>@Model.FAQ.question</h3>
+    <h2>Odpowiedź:</h2>
     <h3>@Model.FAQ.answer</h3>
-    <div class="myForm">
+    <div class="form_div_login">
         <h3>Czy na pewno chcesz usunąć ten element?</h3>
 
         <form method="post">
             <input type="hidden" asp-for="FAQ.FAQId" />
-            <input type="submit" value="Usuń" class="button buttonRed" />
-            <button class="button buttonDefault"><a class="lightText" asp-page="./Index">Wróć</a></button>
+            <input type="submit" value="Usuń" class="action-button action-delete" />
+            <button class="action-button action-default"><a class="lightText" asp-page="./Index">Wróć</a></button>
         </form>
     </div>
 </div>

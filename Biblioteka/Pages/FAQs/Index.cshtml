@@ -3,29 +3,47 @@
 @{
     ViewData["Title"] = "IndexFAQ";
 }
+<link rel="stylesheet" href="~/css/AboutUs/FAQ.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Shared/action_buttons.css" asp-append-version="true" />
 
 <div class="main_container">
     <div class="faq_header">
         <h1>Najczęściej zadawane pytania</h1>
     </div>
 
-        @foreach (var item in Model.FAQList)
+    <div class="support-text">
+        <div>Nie możesz znaleźć odpowiedzi na swoje pytanie?</div>
+        <button class="action-button" onclick="location.href='../Support/Index'">Napisz do nas!</button>
+    </div>
+
+    @foreach (var item in Model.FAQList)
     {
-    <div class="faq-container">
-        <div class="faq-title">
+        <div class="faq-container">
+            <div class="faq-title">
                 <p>@item.question</p>
-            <button class="show_faq_content_button"><i class="fa-solid fa-chevron-up" style="color:#fff"></i></button>
-        </div>
-        <div class="faq-accordion">
-            <div>
+                <button class="show_faq_content_button"><i class="fa-solid fa-chevron-up" style="color:#fff"></i></button>
+            </div>
+            <div class="faq-accordion">
+                <div>
                     <p>@item.answer</p>
+                </div>
             </div>
         </div>
-    </div>
     }
-
-    <a asp-page="../Support/Index">support asp</a>
-    <a href="../Support/Index">support href</a>
 </div>
 
- <script src="~/js/faq.js"></script>
+<script src="~/js/faq.js"></script>
+
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const faqContainers = document.querySelectorAll('.faq-container');
+            faqContainers.forEach((container, index) => {
+                container.classList.add(`delay-${index + 1}`);
+            });
+        });
+
+
+    </script>
+}

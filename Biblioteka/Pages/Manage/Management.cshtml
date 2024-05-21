@@ -3,7 +3,10 @@
 @{
 }
 @inject SignInManager<BibUser> SignInManager
-@inject UserManager<BibUser> UserManager  
+@inject UserManager<BibUser> UserManager
+
+<link rel="stylesheet" href="~/css/Management/management.css" asp-append-version="true" />
+
     <div class="main-container">
         <partial name="_UnderHeaderManagement" />
         <div class="management_options">
@@ -81,6 +84,26 @@
                         </div>
                         <div class="option_text">
                             FAQ
+                        </div>
+                    </div>
+                </a>
+                <a asp-area="" asp-page="/Suggestions/Index">
+                    <div class="management_option">
+                        <div class="option_icon">
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </div>
+                        <div class="option_text">
+                            SUGESTIE
+                        </div>
+                    </div>
+                </a>
+                <a asp-area="" asp-page="/Books/Create">
+                    <div class="management_option">
+                        <div class="option_icon">
+                            <i class="fa-solid fa-book-medical"></i>
+                        </div>
+                        <div class="option_text">
+                            DODAJ KSIĄŻKĘ
                         </div>
                     </div>
                 </a>

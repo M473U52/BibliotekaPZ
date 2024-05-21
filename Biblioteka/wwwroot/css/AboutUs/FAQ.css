@@ -1,0 +1,95 @@
+﻿@keyframes slide-up {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.faq-container {
+    animation: slide-up 1s ease-out forwards;
+    opacity: 0;
+    border-radius: 5px;
+    background-color: #e9e9e9;
+    padding: 1rem 1rem 0.4rem 1rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 5px solid #801C1C;
+}
+
+    .faq-container.delay-1 {
+        animation-delay: 0.1s;
+    }
+
+    .faq-container.delay-2 {
+        animation-delay: 0.2s;
+    }
+
+    .faq-container.delay-3 {
+        animation-delay: 0.3s;
+    }
+
+    .faq-container.delay-4 {
+        animation-delay: 0.4s;
+    }
+
+/* Dodatkowe opóźnienia można dodać zgodnie z liczbą pytań */
+
+/* Reszta istniejących stylów */
+
+.faq_header {
+    margin: 2rem 0 2rem 0;
+}
+
+.faq-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+    .faq-title > button {
+        border: none;
+        background-color: #801C1C;
+        border-radius: 50%;
+        min-width: 2.5rem;
+        height: 2.5rem;
+        transition: transform 0.3s ease;
+    }
+
+        .faq-title > button.active_button {
+            transform: rotate(180deg);
+        }
+
+    .faq-title > p {
+        font-weight: bold;
+    }
+
+.faq-accordion {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 500ms;
+}
+
+.accordion_active {
+    grid-template-rows: 1fr;
+}
+
+.faq-accordion > div {
+    overflow: hidden;
+}
+
+.support-text {
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+    .support-text > button {
+        margin-left: 20px;
+        font-weight: normal;
+    }
