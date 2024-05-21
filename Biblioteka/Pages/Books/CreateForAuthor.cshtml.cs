@@ -23,16 +23,16 @@ namespace Biblioteka.Views.Books
 
         public CreateForAuthorModel(ILogger<CreateModel> logger, IBookRepository bookRepository, IGenreRepository genreRepository,
             IPublisherRepository publisherRepository, ITagRepository tagRepository,
-            IBookTypeRepository bookTypeRepository, IAuthorRepository authorRepository)
+            IBookTypeRepository bookTypeRepository, IAuthorRepository authorRepository, UserManager<BibUser> userManager)
         {
             _bookRepository = bookRepository;
             _genreRepository = genreRepository;
             _publisherRepository = publisherRepository;
             _tagRepository = tagRepository;
             _bookTypeRepository = bookTypeRepository;
-
             _logger = logger;
             _authorRepository = authorRepository;
+            _userManager = userManager;
         }
         public List<SelectListItem>? Genre { get; set; }
         public List<SelectListItem>? Type { get; set; }
@@ -62,8 +62,26 @@ namespace Biblioteka.Views.Books
 
         public async Task<IActionResult> OnPost()
         {
+
+            if (Book.releaseDate > DateTime.Now)
+            {
+                ModelState.AddModelError("Book.releaseDate", "Nie można dodać książki, której data wydania jeszcze nie nastąpiła.");
+            }
+
+            if (_bookRepository.search(Book.title) != null)
+            {
+                ModelState.AddModelError("Book.title", "Książka o tym tytule została już dodana");
+            }
+            if (_bookRepository.searchISBN(Book.ISBN) != null)
+            {
+                ModelState.AddModelError("Book.ISBN", "Książka o tym numerze ISBN jest już dodana");
+            }
             if (!ModelState.IsValid || Book == null)
             {
+                Genre = _genreRepository.getAll().Select(r => new SelectListItem { Value = r.genreId.ToString(), Text = r.name }).ToList();
+                Type = _bookTypeRepository.getAll().Select(r => new SelectListItem { Value = r.typeId.ToString(), Text = r.name }).ToList();
+                Publisher = _publisherRepository.getAll().Select(r => new SelectListItem { Value = r.publisherId.ToString(), Text = r.name }).ToList();
+                Tag = _tagRepository.getAll().Select(t => new SelectListItem { Value = t.tagId.ToString(), Text = t.name }).ToList();
                 foreach (var modelState in ModelState.Values)
                 {
                     foreach (var error in modelState.Errors)

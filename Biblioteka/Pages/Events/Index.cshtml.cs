@@ -44,7 +44,8 @@ namespace Biblioteka.Pages.Events
 
                             if (foundAuthor != null)
                             {
-                                Event = _eventRepository.getAll().Where(e => e.author.authorId == foundAuthor.authorId).ToList();
+                                Event = _eventRepository.getAll().Where(e => e.author != null && e.author.email == foundAuthor.email).ToList();
+
                             }
                         }
                     }

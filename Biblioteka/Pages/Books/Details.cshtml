@@ -20,10 +20,10 @@
                 <div class="book_data">
                     <p class="label_data">@Html.DisplayName("Autorzy"):</p>
                     <p class="data">
-                        @* @foreach (var authors in Model.Book.authors)
+                        @foreach (var authors in Model.bookModel.authors)
                         {
                         <span>@authors.author.name @authors.author.surname</span>
-                        } *@
+                        } 
                     </p>
                 </div>
                 <div class="book_data">
@@ -66,13 +66,12 @@
                 </div>
             </div>
         </div>
+        <div class="form-group">
 
-        <form method="get" asp-page="/Borrowings/Create">
-            <input type="hidden" name="id" value="@Model.Book?.bookId" />
-            <div class="mt-3">
-                <input type="submit" value="Wypożycz" class="button buttonGreen lightText" />
-            </div>
-        </form>
+            <input type="button" value="Dodaj do listy wypożyczeń" class="button buttonGreen" onclick="addToBasket('@Model.Book.bookId', '@Model.Book.title')" />
+            <button type="button" id="redirectToBasketButton" class="button buttonGreen" onclick="addAndRedirect('@Model.Book.bookId', '@Model.Book.title')">Dodaj i przejdź do finalizacji</button>
+
+        </div>
         @if(Model.bookModel.ebookData != null)
         {
             <div class="mt-3" style="margin-bottom: 20px;">
@@ -279,5 +278,44 @@
 </article>
 
 <script src="~/js/opinions.js"></script>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+
+        var basket = JSON.parse(sessionStorage.getItem('basket')) || [];
+
+        function addToBasket(bookId, title) {
+            console.log("hello")        
+
+            if (basket.some(item => item.bookId === bookId)) {
+                alert('Książka już jest w koszyku.');
+                return;
+            }
+
+            if (basket.length >= 5) {
+                alert('Koszyk jest pełny. Możesz dodać maksymalnie 5 książek.');
+                return;
+            }
+
+            basket.push({ book: { bookId: bookId, title: title } });
+            alert('Książka dodana do koszyka.');
+            console.log(basket);
+
+            // zapisz do session storage
+            sessionStorage.setItem('basket', JSON.stringify(basket));
+            console.log(sessionStorage.getItem('basket'));
+        }
+       
+
+        function addAndRedirect(bookId, title) {
+            console.log("here", )
+            addToBasket(bookId, title);
+            window.location.href = '/Basket/Index';
+        }
+    </script>
+}
 
 
