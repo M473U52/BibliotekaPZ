@@ -106,6 +106,9 @@ namespace Biblioteka.Views.Books
         }
         public IActionResult OnPost()
         {
+            ValidateFile(Book.image, new[] { ".jpg" }, 10 * 1024 * 1024, "Okładka");
+            ValidateFile(Book.ebook, new[] { ".pdf" }, 10 * 1024 * 1024, "Ebook");
+            ValidateFile(Book.audiobook, new[] { ".mp3" }, 10 * 1024 * 1024, "Audiobook");
             if (!ModelState.IsValid || Book == null)
             {
                 return Page();
@@ -179,44 +182,51 @@ namespace Biblioteka.Views.Books
                     }
                 }
 
-                if (Book.image != null)
-					if (Book.image.Length > 0 && Book.image.Length < 10000000 && Path.GetExtension(Book.image.FileName) == ".jpg")
-					{
-						using (var ms = new MemoryStream())
-						{
-							Book.image.CopyTo(ms);  
-							existingBook.imageData = ms.ToArray();
-						}
-					}
-					else
-						ModelState.AddModelError("file not pdf or wrong size", "Plik musi być w formacie JPG i nie większy niż 10MB!");
-                
-                if (Book.ebook != null)
-                    if (Book.ebook.Length > 0 && Book.ebook.Length < 10000000 && Path.GetExtension(Book.ebook.FileName) == ".pdf")
+                if (Book.image != null && Book.image.Length > 0)
+                {
+                    using (var ms = new MemoryStream())
                     {
-                        using (var ms = new MemoryStream())
-                        {
-                            Book.ebook.CopyTo(ms);
-                            existingBook.ebookData = ms.ToArray();
-                        }
+                        Book.image.CopyTo(ms);
+                        existingBook.imageData = ms.ToArray();
                     }
-                    else
-                        ModelState.AddModelError("file not pdf or wrong size", "Plik musi być w formacie PDF i nie większy niż 10MB!");
+                }
 
-                if (Book.audiobook != null)
-                    if (Book.audiobook.Length > 0 && Book.audiobook.Length < 10000000 && Path.GetExtension(Book.audiobook.FileName) == ".mp3")
+                if (Book.ebook != null && Book.ebook.Length > 0)
+                {
+                    using (var ms = new MemoryStream())
                     {
-                        using (var ms = new MemoryStream())
-                        {
-                            Book.audiobook.CopyTo(ms);
-                            existingBook.audiobookData = ms.ToArray();
-                        }
+                        Book.ebook.CopyTo(ms);
+                        existingBook.ebookData = ms.ToArray();
                     }
-                    else
-                        ModelState.AddModelError("file not mp3 or wrong size", "Plik musi być w formacie MP3 i nie większy niż 10MB!");
+                }
+
+                if (Book.audiobook != null && Book.audiobook.Length > 0)
+                {
+                    using (var ms = new MemoryStream())
+                    {
+                        Book.audiobook.CopyTo(ms);
+                        existingBook.audiobookData = ms.ToArray();
+                    }
+                }
 
                 _bookRepository.Update(existingBook);
                 return RedirectToPage("./Index");
+            }
+        }
+        private void ValidateFile(IFormFile file, string[] allowedExtensions, int maxFileSize, string fieldName)
+        {
+            if (file != null)
+            {
+                var extension = Path.GetExtension(file.FileName).ToLower();
+                if (!allowedExtensions.Contains(extension))
+                {
+                    ModelState.AddModelError($"Book.{fieldName}", $"Dozwolone rozszerzenia dla {fieldName} to: {string.Join(", ", allowedExtensions)}");
+                }
+
+                if (file.Length > maxFileSize)
+                {
+                    ModelState.AddModelError($"Book.{fieldName}", $"Maksymalny rozmiar pliku dla {fieldName} to {maxFileSize / (1024 * 1024)} MB");
+                }
             }
         }
     }
