@@ -3,13 +3,11 @@ using Biblioteka.Repositories;
 
 namespace Biblioteka.Models
 {
-    public class DailyRaport
+    public class Raport
     {
         private BorrowingRepository _borrowingRepository;
-        public int booksBorrowed { get; set; }
-        public int totalBorrowed { get; set; }
 
-        public DailyRaport(BibContext context)
+        public Raport(BibContext context)
         {
             _borrowingRepository = new BorrowingRepository(context);
         }
