@@ -7,6 +7,8 @@
 @inject SignInManager<BibUser> SignInManager
 @inject UserManager<BibUser> UserManager
 
+<link rel="stylesheet" href="~/css/Shared/notification_style.css" asp-append-version="true" />
+
 <div class="outer_library_container">
     @if (User.Identity.IsAuthenticated && (User.IsInRole("Employee") || User.IsInRole("Admin")))
     {
@@ -140,5 +142,39 @@
         </div>
 
     </div>
+    @{
+        if (TempData["Message"] != null)
+        {
+            <div class="notification_div">
+                @if (TempData["Message"]?.ToString()?.Split("/")[0] == "Success")
+                {
+                    <div>
+                        <i class="fa-solid fa-check success_notification_icon"></i>
+                    </div>
+                }
+                else
+                {
+                    <div>
+                        <i class="fa-solid fa-circle-exclamation error_notification_icon"></i>
+                    </div>
+                }
+                <div class="notification-content">
+                    @if (TempData["Message"]?.ToString()?.Split("/")[0] == "Success")
+                    {
+                        <p class="notification-header-success">Sukces!</p>
+                    }
+                    else
+                    {
+                        <p class="notification-header-error">Błąd!</p>
+                    }
+                    <p class="notification-message">@TempData["Message"]?.ToString()?.Split("/")[1]</p>
+                </div>
+                <div class="hide-notification">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
+        }
+    }
 </div>
 <script src="~/js/Books/book_filter.js"></script>
+<script src="~/js/Borrowing/Notification.js"></script>
