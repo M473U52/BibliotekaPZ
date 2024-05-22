@@ -4,10 +4,11 @@
 @{
     ViewData["Title"] = "Create";
 }
-<div class="myContainerv2">
+<link rel="stylesheet" href="~/css/Shared/action_buttons.css" asp-append-version="true" />
+
+<div class="main-container">
     <h1>Utwórz nowy FAQ</h1>
-    <div class="myForm">
-        <hr />
+    <div class="form_div_login">
         <div class="row">
             <form method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -22,13 +23,13 @@
                     <span asp-validation-for="FAQ.answer" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Stwórz" class="button buttonGreen lightText" />
+                    <input type="submit" value="Stwórz" class="action-button action-confirm" />
                 </div>
             </form>
         </div>
 
         <div>
-            <button class="button buttonDefault"><a class="lightText" asp-page="./All">Wróć</a></button>
+            <button class="action-button action-default"><a class="lightText" asp-page="./All">Wróć</a></button>
         </div>
 
     </div>

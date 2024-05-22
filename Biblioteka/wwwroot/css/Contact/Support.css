@@ -1,0 +1,73 @@
+﻿/* Ensure to include the following CSS in your action_buttons.css or another linked CSS file */
+
+/* Centering the main container */
+.main_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Styling the success message */
+.success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Styling the form */
+#emailForm form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px;
+}
+
+    #emailForm form p {
+        width: 100%;
+        text-align: left;
+        margin-bottom: 5px;
+    }
+
+    #emailForm form input[type="text"],
+    #emailForm form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: none;
+        border-bottom: 2px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    #emailForm form textarea {
+        height: 100px;
+        resize: both;
+        width: 400px;
+        max-width: 600px;
+    }
+
+    #emailForm form input[type="submit"] {
+        padding: 10px 20px;
+        background-color: #801C1C;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+        #emailForm form input[type="submit"]:hover {
+            background-color: #801B1B;
+        }

@@ -3,17 +3,18 @@
 @{
     ViewData["Title"] = "IndexFAQ";
 }
+<link rel="stylesheet" href="~/css/Shared/action_buttons.css" asp-append-version="true" />
 
 <div class="main_container">
     <div class="faq_header">
         <h1>Najczęściej zadawane pytania</h1>
         <div class="list_div">
             <div class="move_right" style="margin-left: 550px">
-                <button class="button buttonDefault addNewBookButton">
-                    <a class="nav-link text-light" asp-page="Create">Dodaj nowy</a>
+                <button class="action-button action-default">
+                    <a class="nav-link text-light" asp-page="Create">Dodaj nowe pytanie</a>
                 </button>
             </div>
-            <div class="table-responsive">
+            <div class="table-header-style">
                 <table class="tableToModify" style="width: 1300px">
                     <thead>
                         <tr>
@@ -37,7 +38,7 @@
                                     @Html.DisplayFor(modelItem => item.answer)
                                 </td>
                                 <td>
-                                    <button class="button buttonRed"><a class="lightText" asp-page="./Delete" asp-route-id="@item.FAQId">Usuń</a></button>
+                                    <button class="action-button action-delete"><a class="lightText" asp-page="./Delete" asp-route-id="@item.FAQId">Usuń</a></button>
                                 </td>
                             </tr>
                         }

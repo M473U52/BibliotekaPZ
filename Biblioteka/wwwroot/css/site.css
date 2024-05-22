@@ -379,60 +379,7 @@ dt {
     align-items: center;
 }
 
-.management_options {
-    padding:3rem;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    text-align: center;
-    justify-content: center;
-    gap: 2.5rem;
-    border: white;
-}
-.management_info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    
-}
-.management_info > h2 {
-    animation: SlideBottom 2s ease forwards;
-}
-.management_info > p {
-    animation: SlideTop 2s ease forwards;
-}
 
-
-.management_option {
-    border: 4px solid #5c1b1b;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    width: 12rem;
-    height: 12rem;
-    border-radius: 10px;
-    background-color: #9e2c2c;
-    animation: ZoomIn 2s ease forwards;
-    border: white;
-}
-.management_option:hover {
-    background-color: #c73636;
-    cursor:pointer;
-}
-.option_icon{
-    font-size: 3.5rem;
-}
-.option_text{
-    font-size: 1.3rem;
-    font-weight: bold;
-}
-.content_margin{
-    margin-bottom: 5rem;
-}
 
 .book_details {
     display: flex;
@@ -780,47 +727,7 @@ dt {
         max-height: 65vh;
     }
 }
-.faq-container {
-    border-radius: 15px;
-    border: .2rem solid #c73636;
-    background-color: #d6af6d;
-    width: 60%;
-    padding: 1rem;
-    margin-bottom: 1.5rem;
-}
-.faq_header{
-    margin: 2rem 0 2rem 0;
-}
-.faq-title {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-.faq-title > button {
-    border: none;
-    background-color: black;
-    border-radius: 50%;
-    min-width: 2.5rem;
-    height: 2.5rem;
-    transition: transform 0.3s ease;
-}
-.faq-title > button.active_button {
-    transform: rotate(180deg);
-}
-.faq-title > p {
-    font-weight: bold;
-}
-.faq-accordion{
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 500ms;
-}
-.accordion_active{
-    grid-template-rows: 1fr;
-}
-.faq-accordion>div{
-    overflow:hidden;
-}
+
 .form_buttons{
     display:flex;
     flex-direction:column;

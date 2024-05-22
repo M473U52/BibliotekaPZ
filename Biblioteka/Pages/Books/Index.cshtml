@@ -10,12 +10,6 @@
 <link rel="stylesheet" href="~/css/Shared/notification_style.css" asp-append-version="true" />
 
 <div class="outer_library_container">
-    @if (User.Identity.IsAuthenticated && (User.IsInRole("Employee") || User.IsInRole("Admin")))
-    {
-        <a asp-page="./Create">
-            <input type="button" value="Dodaj książkę" />
-        </a>
-    }
 
     <div class="used_filters">
         <div class="used_filters_header">

@@ -4,8 +4,14 @@
 	ViewData["Title"] = "Support";
 	var message = TempData["Message"] as string;
 }
+<link rel="stylesheet" href="~/css/Shared/action_buttons.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Contact/Support.css" asp-append-version="true" />
 
-<h1>Masz problem i nie możesz znaleźć odpowiedzi? Wyślij wiadomość do jednego z naszych pracowników już teraz</h1><br />
+
+<h1>Masz problem i nie możesz znaleźć odpowiedzi? Wyślij wiadomość do jednego z naszych pracowników już teraz</h1>
+<br />
+
+<div class="main_container">
 
 @if (!string.IsNullOrEmpty(message))
 {
@@ -14,31 +20,33 @@
 	</div>
 }
 
-<button id="createMessage">Utwórz nową wiadomość</button>
+<button class="action-button" id="createMessage">Utwórz nową wiadomość</button>
 
 <div id="checkBefore" style="display:none;">
-	<p>Przed przejściem dalej sprawdź czy odpowiedź nie znajduje się w sekcji <a href="../FAQs/Index" style="color: black;">FAQ</a></p>
-	<button id="next">Dalej</button>
+	<p>Przed przejściem dalej sprawdź czy odpowiedź nie znajduje się w sekcji <a class="darkText" href="../FAQs/Index" style="color: black; font-weight:bold;">FAQ</a></p>
+	<button class="action-button" id="next">Dalej</button>
 </div>
 
 <div id="emailForm" style="display:none;">
 	<form method="post">
-		<label>Temat: </label>
+		<p style="font-weight: bold">Temat: </p>
 		<input type="text" name="subject" required /><br />
-		<label>Wiadomość: </label>
+		<p style="font-weight:bold">Wiadomość: </p>
 		<textarea name="message" required></textarea><br />
 		<input type="submit" value="Wyślij" />
 	</form>
 </div>
-
+</div>
 @section Scripts {
 	<script>
 		document.getElementById('createMessage').addEventListener('click', function () {
 			document.getElementById('checkBefore').style.display = 'block';
+			document.getElementById('createMessage').style.display = 'none';
 		});
 
 		document.getElementById('next').addEventListener('click', function () {
 			document.getElementById('emailForm').style.display = 'block';
+			document.getElementById('checkBefore').style.display = 'none';
 		});
 	</script>
 }
