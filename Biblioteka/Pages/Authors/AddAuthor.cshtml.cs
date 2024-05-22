@@ -56,10 +56,10 @@ namespace Biblioteka.Pages.Authors
                 await _userManager.AddToRoleAsync(user, "Author");
                 foundReader.isAuthor = true;
 
-                Author.name = foundReader.name;
-                Author.surname = foundReader.surname;
-                Author.birthDate = foundReader.birthDate ?? default(DateTime);
-                Author.email = foundReader.email;
+                 Author.name = foundReader.name;
+                 Author.surname = foundReader.surname;
+                 Author.birthDate = foundReader.birthDate ?? default(DateTime);
+                 Author.email = foundReader.email;
                 _authorRepository.Add(Author);
             }
             return RedirectToPage("./Index");

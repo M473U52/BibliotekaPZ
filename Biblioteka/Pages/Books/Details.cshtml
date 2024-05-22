@@ -36,62 +36,62 @@
     <div class="page-container-vertical">
         @if (Model.bookModel.ebookData != null)
         {
-                        <div>
-                                <a href=@Url.Page("Details", "DownloadPDF", new { id = Model.Book?.bookId}) class="red-button2">Pobierz ebook</a>
+            <div>
+                 <a href=@Url.Page("Details", "DownloadPDF", new { id = Model.Book?.bookId}) class="red-button2">Pobierz ebook</a>
             </div>
         }
         else
         {
-                <div>
-                                        <button class="red-button2" style="cursor: default">Ebook niedostępny</button>
-                </div>
+            <div>
+                <button class="red-button2" style="cursor: default">Ebook niedostępny</button>
+            </div>
         }
 
         @if (Model.bookModel.audiobookData != null)
         {
-                            <div >
-                                    <a href=@Url.Page("Details", "DownloadMP3", new { id = Model.Book?.bookId}) class="red-button3">Pobierz audiobook</a>
+            <div >
+                 <a href=@Url.Page("Details", "DownloadMP3", new { id = Model.Book?.bookId}) class="red-button3">Pobierz audiobook</a>
             </div>
         }
         else
         {
-                <div >
-                                                <button class="red-button3" style="cursor: default">Audiobook niedostępny</button>
-                </div>
+            <div >
+                <button class="red-button3" style="cursor: default">Audiobook niedostępny</button>
+            </div>
         }
     </div>
             
         @if (User.Identity.IsAuthenticated && (User.IsInRole("Employee") || User.IsInRole("Admin")))
         {
             <div class="page-container-vertical">
-                    <button class="red-button2">
-                        <a class="lightText" asp-page="./Edit" asp-route-id="@Model.Book?.bookId">Edytuj</a>
-                    </button>
-                            <button class="red-button3">
-                        <a class="lightText" asp-page="./Delete" asp-route-id="@Model.Book?.bookId">Usun</a>
-                    </button>
+                <button class="red-button2">
+                    <a class="lightText" asp-page="./Edit" asp-route-id="@Model.Book?.bookId">Edytuj</a>
+                </button>
+                        <button class="red-button3">
+                    <a class="lightText" asp-page="./Delete" asp-route-id="@Model.Book?.bookId">Usun</a>
+                </button>
                     
           </div>
         }
-                @if (Model.Authors != null && Model.Authors.Count > 0)
+        @if (Model.Authors != null && Model.Authors.Count > 0)
         {
-    <div class="page-container-horizontal2">
-         <br />
+        <div class="page-container-horizontal2">
+             <br />
         @if (Model.Authors.Count == 1)
         {
-                            <h2>@Html.DisplayName("Autor")</h2>
+            <h2>@Html.DisplayName("Autor")</h2>
                        
         }
         else if (Model.Authors != null && Model.Authors.Count > 1)
         {
-                              <h2>@Html.DisplayName("Autorzy")</h2> 
+            <h2>@Html.DisplayName("Autorzy")</h2> 
         }
         <p class="data">
-            @foreach (var authors in Model.Authors)
-            {
-                                        <span>@authors.name @authors.surname</span>
-            } 
-                        </p>
+        @foreach (var authors in Model.Authors)
+        {
+            <span>@authors.name @authors.surname</span>
+        } 
+         </p>
     </div>  
     }
     <div class="page-container-horizontal2">
@@ -104,20 +104,26 @@
                 }
                 else
                 {
-                        <div class="vertical">
-                               <i class="label_book">@Html.DisplayNameFor(model => model.Book.floor): &ensp; </i> 
-                               <i class="info_book">@Html.DisplayFor(model => model.Book.floor) &ensp;</i> 
-                               <i class="label_book">@Html.DisplayNameFor(model => model.Book.alley): &ensp; </i> 
-                                    <i class="info_book">@Html.DisplayFor(model => model.Book.alley) &ensp; </i>
-                                    <i class="label_book">@Html.DisplayNameFor(model => model.Book.rowNumber): &ensp; </i> 
-                                <i class="info_book">@Html.DisplayFor(model => model.Book.rowNumber)</i>
+                    <div class="vertical">
+                            <i class="label_book">@Html.DisplayNameFor(model => model.Book.floor): &ensp; </i> 
+                            <i class="info_book">@Html.DisplayFor(model => model.Book.floor) &ensp;</i> 
+                            <i class="label_book">@Html.DisplayNameFor(model => model.Book.alley): &ensp; </i> 
+                                <i class="info_book">@Html.DisplayFor(model => model.Book.alley) &ensp; </i>
+                                <i class="label_book">@Html.DisplayNameFor(model => model.Book.rowNumber): &ensp; </i> 
+                            <i class="info_book">@Html.DisplayFor(model => model.Book.rowNumber)</i>
+                    </div>
+                        <form method="get" asp-page="/Borrowings/Create">
+                        <input type="hidden" name="id" value="@Model.Book?.bookId" />
+                        @*<div>
+                                <input type="submit" value="Wypożycz" class="red-button" />
+                        </div>*@
+
+                        <div class="form-group">
+                            <input type="button" value="Dodaj do listy wypożyczeń" class="button buttonGreen" onclick="addToBasket('@Model.Book.bookId', '@Model.Book.title')" />
+                            <button type="button" id="redirectToBasketButton" class="button buttonGreen" onclick="addAndRedirect('@Model.Book.bookId', '@Model.Book.title')">Dodaj i przejdź do finalizacji</button>
                         </div>
-                            <form method="get" asp-page="/Borrowings/Create">
-                            <input type="hidden" name="id" value="@Model.Book?.bookId" />
-                            <div>
-                                    <input type="submit" value="Wypożycz" class="red-button" />
-                            </div>
-                        </form>
+
+                    </form>
 
                 }
              </div>
@@ -288,5 +294,44 @@
 </article>
 
 <script src="~/js/opinions.js"></script>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+
+        var basket = JSON.parse(sessionStorage.getItem('basket')) || [];
+
+        function addToBasket(bookId, title) {
+            console.log("hello")        
+
+            if (basket.some(item => item.bookId === bookId)) {
+                alert('Książka już jest w koszyku.');
+                return;
+            }
+
+            if (basket.length >= 5) {
+                alert('Koszyk jest pełny. Możesz dodać maksymalnie 5 książek.');
+                return;
+            }
+
+            basket.push({ book: { bookId: bookId, title: title } });
+            alert('Książka dodana do koszyka.');
+            console.log(basket);
+
+            // zapisz do session storage
+            sessionStorage.setItem('basket', JSON.stringify(basket));
+            console.log(sessionStorage.getItem('basket'));
+        }
+       
+
+        function addAndRedirect(bookId, title) {
+            console.log("here", )
+            addToBasket(bookId, title);
+            window.location.href = '/Basket/Index';
+        }
+    </script>
+}
 
 
