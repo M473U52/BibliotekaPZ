@@ -16,7 +16,7 @@ namespace Biblioteka.Repositories.DbImplementations
         }
         
 
-        public Book getOne(int id)
+        public Book? getOne(int id)
         {
             return _context.Book
                 .Include(b => b.tags)

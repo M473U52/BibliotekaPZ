@@ -27,7 +27,7 @@ namespace Biblioteka.Repositories
             return id;
         }
 
-        public Reader GetByMail(string email)
+        public Reader GetByMail(string? email)
         {
             foreach (var reader in GetAll())
             {

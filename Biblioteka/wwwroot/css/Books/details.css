@@ -126,14 +126,23 @@
     }
 }
 
-.page-container-horizontal2 {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 2vw;
-    border-top: #882E2E solid 2px;
+.main_details_buttons{
+    display:flex;
+    flex-direction:row;
+    gap: 1rem;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
 }
+
+    .page-container-horizontal2 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 2vw;
+        border-top: #882E2E solid 2px;
+    }
     .book-data {
         width: 30vw;
         height: 500px;
@@ -163,18 +172,18 @@
         display: inline-block;
         border: none;
     }
+.red-button2 {
+    background-color: #8F2121;
+    color: white;
+    padding: 3vh 8%;
+    margin: 5% 0;
+    width: 300px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+}
 
-    .red-button2 {
-        background-color: #8F2121;
-        color: white;
-        padding: 3vh 8%;
-        margin: 5% 0;
-        width: 300px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        border: none;
-    }
 
     
 
@@ -190,3 +199,20 @@
         justify-content: center;
         align-items: center;
     }
+
+.default_button {
+    padding: 1rem 8%;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 4px 12px;
+    text-align: center;
+    border: none;
+    min-width: 14rem;
+    transition: all 250ms;
+}
+.default_button:not(:disabled):hover {
+    box-shadow: rgba(0, 0, 0, 0.4) 0 5px 12px;
+    transform: translateY(-2px);
+}
+.predicted_end_date_input{
+    margin-bottom: 1rem;
+}

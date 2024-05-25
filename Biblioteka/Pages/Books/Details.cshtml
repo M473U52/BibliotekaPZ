@@ -9,15 +9,34 @@
 }
 
 <link rel="stylesheet" href="~/css/Books/details.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Shared/action_buttons.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Shared/notification_style.css" asp-append-version="true" />
 
 <article class="container-width">
+    <dialog id="borrowing_dialog">
+        <i class="fa-solid fa-circle-xmark dialog-exit"></i>
+        <form method="post" asp-page-handler="AddBorrowing">
+            <input type="hidden" name="bookId" value="1"/>
+            <p class="dialog_header">Wypożyczenie książki</p>
+            <p class="dialog_content">Aby wypożyczyć książkę podaj datę przewidywanego zwrotu:</p>
+            <div class="form-floating w-100 predicted_end_date_input">
+                <input type="date" asp-for="Input.predictedEndDate" class="form-control" aria-required="true" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" max="@DateTime.Now.AddMonths(6).ToString("yyyy-MM-dd")" />
+                <label asp-for="Input.predictedEndDate"></label>
+                <span asp-validation-for="Input.predictedEndDate" class="text-danger"></span>
+            </div>
+            <div class="d-flex flex-row justify-content-center align-items-center">
+                <button type="button" class="action-button action-cancel"><i class="fa-solid fa-xmark"></i>Anuluj</button>
+                <button type="submit" class="action-button action-confirm"><i class="fa-solid fa-check"></i>Wypożycz</button>
+            </div>
+        </form>
+    </dialog>
     <div class="page-container-horizontal">
         <div class="cover">
              <img src="~/images/@(Model.Book.image != null ? $"covers/{Model.Book.bookId}.jpg" : "okladka.jpg")" alt="Okładka książki @Model.Book.title" />
         </div>
         <div class="book-data">
             <div>
-             <h1>@Html.DisplayFor(model => model.Book.title)</h1>
+             <h1 class="book_title">@Html.DisplayFor(model => model.Book.title)</h1>
 
 
             </div>
@@ -33,7 +52,7 @@
             </div>
         </div>
     </div>
-    <div class="page-container-vertical">
+    <div class="main_details_buttons">
         @if (Model.bookModel.ebookData != null)
         {
             @*<div>
@@ -49,7 +68,7 @@
         else
         {
             <div>
-                <button class="red-button2" style="cursor: default">Ebook niedostępny</button>
+                <button class="default_button action-cancel m-0" disabled>Ebook niedostępny</button>
             </div>
         }
 
@@ -62,80 +81,80 @@
         else
         {
             <div >
-                <button class="red-button3" style="cursor: default">Audiobook niedostępny</button>
+                <button class="default_button action-cancel m-0" disabled>Audiobook niedostępny</button>
             </div>
         }
+        @if(Model.bookModel.availableCopys > 0)
+        {
+            <div>
+                <button class="default_button action-confirm book_borrow_btn">Wypożycz</button>
+            </div>
+        }
+        else
+        {
+            <div>
+                <button class="default_button action-cancel m-0" disabled>Brak książki</button>
+            </div>
+        }
+
     </div>
             
-        @if (User.Identity.IsAuthenticated && (User.IsInRole("Employee") || User.IsInRole("Admin")))
-        {
-            <div class="page-container-vertical">
-                <button class="red-button2">
-                    <a class="lightText" asp-page="./Edit" asp-route-id="@Model.Book?.bookId">Edytuj</a>
-                </button>
-                        <button class="red-button3">
-                    <a class="lightText" asp-page="./Delete" asp-route-id="@Model.Book?.bookId">Usun</a>
-                </button>
+    @if (User.Identity.IsAuthenticated && (User.IsInRole("Employee") || User.IsInRole("Admin")))
+    {
+        <div class="page-container-vertical">
+            <button class="red-button2">
+                <a class="lightText" asp-page="./Edit" asp-route-id="@Model.Book?.bookId">Edytuj</a>
+            </button>
+                    <button class="red-button3">
+                <a class="lightText" asp-page="./Delete" asp-route-id="@Model.Book?.bookId">Usun</a>
+            </button>
                     
-          </div>
-        }
-        @if (Model.Authors != null && Model.Authors.Count > 0)
-        {
+        </div>
+    }
+    @if (Model.Authors != null && Model.Authors.Count > 0)
+    {
         <div class="page-container-horizontal2">
-             <br />
-        @if (Model.Authors.Count == 1)
-        {
-            <h2>@Html.DisplayName("Autor")</h2>
+            <br />
+            @if (Model.Authors.Count == 1)
+            {
+                <h2>@Html.DisplayName("Autor")</h2>
                        
-        }
-        else if (Model.Authors != null && Model.Authors.Count > 1)
-        {
-            <h2>@Html.DisplayName("Autorzy")</h2> 
-        }
-        <p class="data">
-        @foreach (var authors in Model.Authors)
-        {
-            <span>@authors.name @authors.surname</span>
-        } 
-         </p>
-    </div>  
+            }
+            else if (Model.Authors != null && Model.Authors.Count > 1)
+            {
+                <h2>@Html.DisplayName("Autorzy")</h2> 
+            }
+            <p class="data">
+                @foreach (var authors in Model.Authors)
+                {
+                    <span>@authors.name @authors.surname</span>
+                } 
+            </p>
+        </div>  
     }
     <div class="page-container-horizontal2">
-                <div>
-                                <br />
-                <h2 >Lokalizacja książki w bibliotece</h2>
-                @if (Model.Book.availableCopys == 0)
-                {
-                       <span>(Obecnie nie ma książki w bibliotece, to będzie jej lokalizacja, jeżeli znowu będzie dostępna.) </span>
-                }
-                else
-                {
-                    <div class="vertical">
-                            <i class="label_book">@Html.DisplayNameFor(model => model.Book.floor): &ensp; </i> 
-                            <i class="info_book">@Html.DisplayFor(model => model.Book.floor) &ensp;</i> 
-                            <i class="label_book">@Html.DisplayNameFor(model => model.Book.alley): &ensp; </i> 
-                                <i class="info_book">@Html.DisplayFor(model => model.Book.alley) &ensp; </i>
-                                <i class="label_book">@Html.DisplayNameFor(model => model.Book.rowNumber): &ensp; </i> 
-                            <i class="info_book">@Html.DisplayFor(model => model.Book.rowNumber)</i>
-                    </div>
-                        <form method="get" asp-page="/Borrowings/Create">
-                        <input type="hidden" name="id" value="@Model.Book?.bookId" />
-                        @*<div>
-                                <input type="submit" value="Wypożycz" class="red-button" />
-                        </div>*@
-
-                        <div class="form-group">
-                            <input type="button" value="Dodaj do listy wypożyczeń" class="button buttonGreen" onclick="addToBasket('@Model.Book.bookId', '@Model.Book.title')" />
-                            <button type="button" id="redirectToBasketButton" class="button buttonGreen" onclick="addAndRedirect('@Model.Book.bookId', '@Model.Book.title')">Dodaj i przejdź do finalizacji</button>
-                        </div>
-
-                    </form>
-
-                }
-             </div>
+        <div>
+            <br />
+            <h2 >Lokalizacja książki w bibliotece</h2>
+            @if (Model.Book.availableCopys == 0)
+            {
+                    <span>(Obecnie nie ma książki w bibliotece, to będzie jej lokalizacja, jeżeli znowu będzie dostępna.) </span>
+            }
+            else
+            {
+                <div class="vertical">
+                        <i class="label_book">@Html.DisplayNameFor(model => model.Book.floor): &ensp; </i> 
+                        <i class="info_book">@Html.DisplayFor(model => model.Book.floor) &ensp;</i> 
+                        <i class="label_book">@Html.DisplayNameFor(model => model.Book.alley): &ensp; </i> 
+                            <i class="info_book">@Html.DisplayFor(model => model.Book.alley) &ensp; </i>
+                            <i class="label_book">@Html.DisplayNameFor(model => model.Book.rowNumber): &ensp; </i> 
+                        <i class="info_book">@Html.DisplayFor(model => model.Book.rowNumber)</i>
+                </div>
+            }
         </div>
-        <div class="page-container-horizontal2">
-            <div class="opinions">
+    </div>
+    <div class="page-container-horizontal2">
+        <div class="opinions">
             @{
                 if (!Model.IsRatingAdded)
                 {
@@ -229,12 +248,11 @@
                     </div>
                 }
             }
-    <div class="other_comments">
-        
+            <div class="other_comments">
                 @{
                     if (Model.Opinions.Any())
                     {
-                      <h4> Pozostałe opinie:</h4>
+                        <h4> Pozostałe opinie:</h4>
                         <select id="sortOpinions">
                             <option value="opinionsDesc">Ocena (malejąco)</option>
                             <option value="opinionsAsc">Ocena (rosnąco)</option>
@@ -292,52 +310,52 @@
 
                     }
                 }
-    </div>
-</div>
+            </div>
         </div>
     </div>
-    </div>
+    @{
+        if (TempData["Message"] != null)
+        {
+            <div class="notification_div">
+                @if (TempData["Message"]?.ToString()?.Split("/")[0] == "Success")
+                {
+                    <div>
+                        <i class="fa-solid fa-check success_notification_icon"></i>
+                    </div>
+                }
+                else
+                {
+                    <div>
+                        <i class="fa-solid fa-circle-exclamation error_notification_icon"></i>
+                    </div>
+                }
+                <div class="notification-content">
+                    @if (TempData["Message"]?.ToString()?.Split("/")[0] == "Success")
+                    {
+                        <p class="notification-header-success">Sukces!</p>
+                    }
+                    else
+                    {
+                        <p class="notification-header-error">Błąd!</p>
+                    }
+                    <p class="notification-message">@TempData["Message"]?.ToString()?.Split("/")[1]</p>
+                </div>
+                <div class="hide-notification">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
+        }
+    }
 </article>
 
 <script src="~/js/opinions.js"></script>
+<script src="~/js/Books/AddBorrowingDialogRunner.js"></script>
+<script src="~/js/Borrowing/Notification.js"></script>
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-
-    <script>
-
-        var basket = JSON.parse(sessionStorage.getItem('basket')) || [];
-
-        function addToBasket(bookId, title) {
-            console.log("hello")        
-
-            if (basket.some(item => item.bookId === bookId)) {
-                alert('Książka już jest w koszyku.');
-                return;
-            }
-
-            if (basket.length >= 5) {
-                alert('Koszyk jest pełny. Możesz dodać maksymalnie 5 książek.');
-                return;
-            }
-
-            basket.push({ book: { bookId: bookId, title: title } });
-            alert('Książka dodana do koszyka.');
-            console.log(basket);
-
-            // zapisz do session storage
-            sessionStorage.setItem('basket', JSON.stringify(basket));
-            console.log(sessionStorage.getItem('basket'));
-        }
-       
-
-        function addAndRedirect(bookId, title) {
-            console.log("here", )
-            addToBasket(bookId, title);
-            window.location.href = '/Basket/Index';
-        }
-    </script>
 }
 
 

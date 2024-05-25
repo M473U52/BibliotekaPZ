@@ -10,7 +10,8 @@ using PdfSharp.Pdf.IO;
 using System.IO;
 using PdfSharp.Pdf;
 using Biblioteka.Repositories;
-
+using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Biblioteka.Views.Books
 {
@@ -21,22 +22,44 @@ namespace Biblioteka.Views.Books
         private IBookOpinionRepository _bookOpinionRepository;
         private IReaderRepository _readerRepository;
         private IAuthorRepository _authorRepository;
+        private IEmployeeRepository _employeeRepository;
+        private IBorrowingRepository _borrowingRepository;
 
 
         public DetailsModel(UserManager<BibUser> userManager, IBookRepository bookRepository,
-            IBookOpinionRepository bookOpinionRepository, IReaderRepository readerRepository, IAuthorRepository authorRepository)
+            IBookOpinionRepository bookOpinionRepository, IReaderRepository readerRepository, IAuthorRepository authorRepository, IEmployeeRepository employeeRepository, IBorrowingRepository borrowingRepository)
         {
             _userManager = userManager;
             _bookRepository = bookRepository;
             _bookOpinionRepository = bookOpinionRepository;
             _readerRepository = readerRepository;
             _authorRepository = authorRepository;
+            _employeeRepository = employeeRepository;
+            _borrowingRepository = borrowingRepository; 
+
         }
         [BindProperty]
         public List<Book_Opinions> Opinions { get; set; } = default!;
 
         [BindProperty]
         public Book_OpinionsDto User_Opinion { get; set; } = default!;
+
+        [BindProperty]
+        public InputModel Input { get; set; }
+
+        public class InputModel : IValidatableObject
+        {
+            [Required(ErrorMessage = "Przewidywana data zwrotu książki jest obowiązkowa."),
+                Display(Name = "Przewidywana data zwrotu")]
+            public DateTime predictedEndDate { get; set; }
+            public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+            {
+                if (predictedEndDate <= DateTime.Today)
+                {
+                    yield return new ValidationResult("Przewidywana data zwrotu nie może być z przeszłości!", new[] { "predictedEndDate" });
+                }
+            }
+        }
 
         //[BindProperty]
         public BookDto Book { get; set; }
@@ -93,6 +116,75 @@ namespace Biblioteka.Views.Books
                 }
             }
             return Page();
+        }
+        public IActionResult OnPostAddBorrowing(int bookId)
+        {
+            var context = new ValidationContext(this)
+            {
+                MemberName = nameof(this.Input)
+            };
+            bool isPredictedEndDateValid = Validator.TryValidateProperty(this.Input, context, new List<ValidationResult>());
+            
+            if (!isPredictedEndDateValid)
+            {
+                TempData["Message"] = $"Error/Formularz został wypełniony błędnie.";
+                return RedirectToPage("./Details", new { id = bookId });
+            }
+
+            Reader? reader = _readerRepository.GetByMail(HttpContext.User.Identity.Name);
+
+            if (reader == null)
+            {
+                TempData["Message"] = $"Error/Nie można odnaleźć użytkownika w bazie.";
+                return RedirectToPage("./Details", new { id = bookId });
+            }
+
+            List<Employee> employeeList = _employeeRepository.GetAll();
+
+            if (!employeeList.Any())
+            {
+                TempData["Message"] = $"Error/Brak pracownika mogącego obsłużyć wypożyczenie.";
+                return RedirectToPage("./Details", new { id = bookId });
+            }
+
+            Random random = new Random();
+            int a = random.Next(0, employeeList.Count);
+            Employee randomEmployee = employeeList[a];           
+            Book? book = _bookRepository.getOne(bookId);
+
+            if (book == null)
+            {
+                TempData["Message"] = $"Error/Brak książki o podanym id.";
+                return RedirectToPage("./Details", new { id = bookId });
+            }
+
+            var borrowing = new Borrowing();
+            borrowing.book = book;
+            borrowing.employee = randomEmployee;
+            borrowing.borrowDate = DateTime.Now;
+            borrowing.plannedReturnDate = Input.predictedEndDate;
+            borrowing.returnDate = null;
+            borrowing.bookLost = false;
+            borrowing.Confirmation = false;
+            borrowing.IsPaid = false;
+            borrowing.IsReturned = false;   
+            borrowing.LateFee = 0;
+
+            borrowing.readers.Add(new Reader_Borrowings
+            {
+                reader = reader,
+                borrow = borrowing,
+            });
+
+            _borrowingRepository.Add(borrowing);
+
+            book.availableCopys -= 1;
+            _bookRepository.Update(book);
+
+            TempData["Message"] = $"Success/Pomyślnie dokonano wypożyczenia książki: \"{book.title}\" " +
+                                $"w dniach {DateTime.Now.ToString("dd.MM.yyyy")} - {Input.predictedEndDate.ToString("dd.MM.yyyy")}.";
+
+            return RedirectToPage("../Borrowings/IndexReader");
         }
 
         public IActionResult OnPostAddOpinion(int bookId)
