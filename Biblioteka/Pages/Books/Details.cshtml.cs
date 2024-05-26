@@ -17,7 +17,7 @@ namespace Biblioteka.Views.Books
 {
     public class DetailsModel : PageModel
     {
-        private readonly UserManager<BibUser> _userManager;
+        private UserManager<BibUser> _userManager;
         private IBookRepository _bookRepository;
         private IBookOpinionRepository _bookOpinionRepository;
         private IReaderRepository _readerRepository;
@@ -26,7 +26,9 @@ namespace Biblioteka.Views.Books
         private IBorrowingRepository _borrowingRepository;
 
 
-        public DetailsModel(UserManager<BibUser> userManager, IBookRepository bookRepository,
+        public DetailsModel(
+            UserManager<BibUser> userManager,
+            IBookRepository bookRepository,
             IBookOpinionRepository bookOpinionRepository, IReaderRepository readerRepository, IAuthorRepository authorRepository, IEmployeeRepository employeeRepository, IBorrowingRepository borrowingRepository)
         {
             _userManager = userManager;
@@ -117,7 +119,7 @@ namespace Biblioteka.Views.Books
             }
             return Page();
         }
-        public IActionResult OnPostAddBorrowing(int bookId)
+        public async Task<IActionResult> OnPostAddBorrowing(int bookId)
         {
             var context = new ValidationContext(this)
             {
@@ -128,10 +130,10 @@ namespace Biblioteka.Views.Books
             if (!isPredictedEndDateValid)
             {
                 TempData["Message"] = $"Error/Formularz został wypełniony błędnie.";
-                return RedirectToPage("./Details", new { id = bookId });
+                return  RedirectToPage("./Details", new { id = bookId });
             }
-
-            Reader? reader = _readerRepository.GetByMail(HttpContext.User.Identity.Name);
+            var user = await _userManager.GetUserAsync(User);
+            Reader? reader = _readerRepository.GetByMail(user.Email);
 
             if (reader == null)
             {
