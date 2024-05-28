@@ -84,6 +84,8 @@
                 <button class="default_button action-cancel m-0" disabled>Audiobook niedostępny</button>
             </div>
         }
+        @if (User.Identity.IsAuthenticated && (User.IsInRole("Reader")))
+    {
         @if(Model.bookModel.availableCopys > 0)
         {
             <div>
@@ -95,6 +97,13 @@
             <div>
                 <button class="default_button action-cancel m-0" disabled>Brak książki</button>
             </div>
+            }
+        }
+        else
+        {
+                <div>
+                        <button class="default_button book_borrow_btn" disabled>Wypożycz</button>
+                </div>
         }
 
     </div>
