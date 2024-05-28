@@ -29,7 +29,7 @@
 
 .main_container p {
     font-size: 20px;
-    margin-left: 20px;
+    margin-left: 25px;
 }
 
 #user-photo {
@@ -78,5 +78,20 @@
 }
 
 .visible {
-    max-height: 500px; /* Ustaw maksymalną wysokość na odpowiednią wartość */
+    max-height: 700px; /* Ustaw maksymalną wysokość na odpowiednią wartość */
+}
+
+
+dt {
+    margin-left: 20px;
+    background-color: #e6e6e6;
+    padding: 5px;
+    border-radius: 5px;
+    max-width: 300px;
+}
+
+dd {
+    font-size: 20px;
+    margin-left: 25px;
+    margin-top: 5px;
 }

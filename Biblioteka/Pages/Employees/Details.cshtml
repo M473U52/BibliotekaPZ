@@ -39,7 +39,7 @@
     </div>
     <div class="general-info">
         <h3>Dane ogólne</h3>
-        <h4>Stanowisko:</h4>
+        <h4>Stanowisko</h4>
         @{
             if (Model.Employee.position == null)
             {
@@ -50,9 +50,9 @@
                 <p>@Model.Employee.position</p>
             }
         }
-        <h4>Data Zatrudnienia:</h4>
-        <p>@Model.Employee.dateOfEmployment</p>
-        <h4>Numer Telefonu:</h4>
+        <h4>Data Zatrudnienia</h4>
+        <p> @String.Format("{0:yyyy-MM-dd}", Model.Employee.dateOfEmployment)</p>
+        <h4>Numer Telefonu</h4>
         <p>@Model.EmployeeData.phoneNumber</p>
     </div>
     <div>

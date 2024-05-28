@@ -269,3 +269,4 @@
 2024-05-22 00:12:08.732 +02:00 [INF] Wylogowanie admin@admin.com - Admin
 2024-05-22 00:12:16.827 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
 2024-05-28 14:53:20.045 +02:00 [INF] Zalogowany użytkownik admin@admin.com - Admin
+2024-05-28 19:30:02.221 +02:00 [INF] Zalogowany użytkownik admin@admin.com - Admin
