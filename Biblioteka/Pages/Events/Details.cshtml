@@ -33,10 +33,6 @@
                     </dd>
                 </dl>
                 <div class="form_buttons">
-                    <button class="action-button action-details">
-                        <a class="lightText" asp-page="./Edit" asp-route-id="@Model.Event?.eventId">Edytuj</a>
-                    </button>
-                    <button class="action-button action-default">
                     @if (User.IsInRole("Reader"))
                     {
                         <form method="post"> @*asp-page-handler="SignUp">*@
@@ -44,7 +40,7 @@
                             <button type="submit" class="btn btn-primary">Zapisz się</button>
                         </form>
                     }
-                    else
+                     else if (User.IsInRole("Employee") || User.IsInRole("Admin"))
                     {
                         <button class="button buttonGreen">
                             <a class="lightText" asp-page="./Edit" asp-route-id="@Model.Event?.eventId">Edytuj</a>
