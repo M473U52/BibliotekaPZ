@@ -52,6 +52,7 @@ namespace Biblioteka.Models
         public ICollection<Reader_Borrowings> borrowings { get; set; } = new List<Reader_Borrowings>();
 		public ICollection<RoomReservation> reservations { get; set; } = new List<RoomReservation>();
         public ICollection<Book_Opinions> bookOpinions { get; set; } = new List<Book_Opinions>();
+        public ICollection<Reader_Events> events { get; set; } = new List<Reader_Events>();
 
         [Display(Name = "Imię i nazwisko")]
         public string FullName

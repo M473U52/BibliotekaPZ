@@ -6,6 +6,12 @@
 <link rel="stylesheet" href="~/css/Home/main.css" asp-append-version="true" />
 
 <article class="home-article">
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
     <section id="info">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="display:none;"></button>
 
@@ -86,6 +92,19 @@
                     </script>
                 }
             }
+
+        @if (Model.UpcomingEvent.Any())
+        {
+            <div class="alert alert-info">
+                <ul>
+                    @foreach (var notification in Model.UpcomingEvent)
+                    {
+                        <li>@notification</li>
+                    }
+                </ul>
+            </div>
+        }
+
     </section>
     <section class="events containers-horizontal-vertical">
         <div class="title-section">

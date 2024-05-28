@@ -36,5 +36,10 @@ namespace Biblioteka.Repositories
             }
             return null;
         }
+
+        public Reader getOneByEmail(string email)
+        {
+            return _context.Reader.FirstOrDefault(r => r.email == email);
+        }
     }
 }

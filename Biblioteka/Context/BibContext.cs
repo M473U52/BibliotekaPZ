@@ -43,6 +43,7 @@ namespace Biblioteka.Context
         public DbSet<FAQ> FAQ { get; set; }
 
         public DbSet<Suggestion> Suggestion { get; set; }
+        public DbSet<Reader_Events> Reader_Events { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -117,6 +118,18 @@ namespace Biblioteka.Context
                 .HasOne(x => x.borrow)
                 .WithMany(x => x.readers)
                 .HasForeignKey(x => x.borrowId);
+
+
+            modelBuilder.Entity<Reader_Events>().ToTable("Reader_Events");
+            modelBuilder.Entity<Reader_Events>().HasKey(p => new { p.readerId, p.eventId });
+            modelBuilder.Entity<Reader_Events>()
+                .HasOne(x => x.reader)
+                .WithMany(x => x.events)
+                .HasForeignKey(x => x.readerId);
+            modelBuilder.Entity<Reader_Events>()
+                .HasOne(x => x.eventt)
+                .WithMany(x => x.readers)
+                .HasForeignKey(x => x.eventId);
 
 
             modelBuilder.Entity<Borrowing>()
