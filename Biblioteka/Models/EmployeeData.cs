@@ -53,7 +53,8 @@ namespace Biblioteka.Models
 		[BindProperty(SupportsGet = true),
             Required,
 			Display(Name = "Data urodzenia")]
-		public DateTime birthDate { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime birthDate { get; set; }
 
 		public Employee employee { get; set; }
 	}

@@ -4,15 +4,15 @@
 @{
     ViewData["Title"] = "Edit";
 }
+<partial name="_UnderHeaderEdit" />
+
+<link rel="stylesheet" href="~/css/Shared/action_buttons.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Employees/Edit.css" asp-append-version="true" />
 <div class="main_container">
-    <div class="inner_container">
-        <div class="list_header">
-            <h1>Edytuj szczegółowe dane pracownika</h1>
-        </div>
-        <div class="form_div">
-            <div class="form_div_login">
+
+
+            <div class="edit-form">
                 <form method="post">
-                    <hr />
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="EmployeeData.employeeId" />
                     <div class="form-group">
@@ -52,16 +52,14 @@
                     </div>
                     <div class="form_buttons">
                         <div class="form-group">
-                            <input type="submit" value="Zapisz" class="button buttonGreen" />
+                            <input type="submit" value="Zapisz" class="action-button action-confirm" />
                         </div>
                         <div>
-                            <a class="lightText button buttonDefault" asp-page="../Employees/Index">Wróć</a>
+                            <a class="lightText action-button action-default" asp-page="../Employees/Index">Wróć</a>
                         </div>
                     </div>     
                 </form>
             </div>
-        </div>
-    </div>
 </div>
 
 @section Scripts {
