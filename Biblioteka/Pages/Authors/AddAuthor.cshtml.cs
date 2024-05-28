@@ -37,6 +37,7 @@ namespace Biblioteka.Pages.Authors
 
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
+       
         public async Task<IActionResult> OnPost()
         {
             if (!ModelState.IsValid || ReaderId == null)

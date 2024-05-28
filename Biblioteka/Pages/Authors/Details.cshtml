@@ -4,61 +4,31 @@
 @{
     ViewData["Title"] = "Details";
 }
-<div class="main_container">
-    <div class="inner_container">
-        <div class="list_header">
-            <h1>Dane autora</h1>
-        </div>
-        <div class="form_div">
-            <div class="form_div_login">
-                <dl>
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Author.name)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.Author.name)
-                    </dd>
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Author.surname)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.Author.surname)
-                    </dd>
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Author.birthDate)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.Author.birthDate)
-                    </dd>
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Author.country)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.Author.country)
-                    </dd>
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Author.nickname)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.Author.nickname)
-                    </dd>
-                    <dt>
-                        @Html.DisplayNameFor(model => model.Author.description)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.Author.description)
-                    </dd>
-                </dl>
+<link rel="stylesheet" href="~/css/Shared/action_buttons.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/site.css" />
 
-                <div>
-                    <button class="button  buttonGreen">
-                        <a class="lightText" asp-page="./Edit" asp-route-id="@Model.Author.authorId">Edytuj</a>
-                    </button>
-                    <button class="button buttonDefault">
-                        <a class="lightText" asp-page="./Index">Wróć</a>
-                    </button>
-                </div>
+
+    <div class="page-container-horizontal">
+        <div class="cover">
+            <img src="~/images/@(Model.Author.image != null ? $"covers/{Model.Author.authorId}.jpg" : "user_photo.jpg")" alt="Author Photo" />
+        </div>
+        <div class="book-data">
+            <h1>@Html.DisplayFor(model => model.Author.FullName)</h1>
+            <div class="vertical">
+            <p><strong>Adres email:</strong> @Html.DisplayFor(model => model.Author.email)</p>
+            <p><strong>Kraj pochodzenia:</strong> @Html.DisplayFor(model => model.Author.country)</p>
+            <p><strong>Data urodzenia:</strong> @Html.DisplayFor(model => model.Author.birthDate)</p>
+            <p><strong>Pseudonim:</strong> @Html.DisplayFor(model => model.Author.nickname)</p>
+            <p><strong>Opis:</strong> @Html.DisplayFor(model => model.Author.description)</p>
+            </div>
+        <div class="form_buttons">
+            <div class="form-group">
+                <button class="action-button action-default"><a class="lightText" asp-page="./Edit" asp-route-id="@Model.Author.authorId">Edytuj</a></button>
+            </div>
+            <div>
+                <button class="action-button action-default"><a class="lightText" asp-page="./Index">Wróć</a></button>
             </div>
         </div>
     </div>
-</div>
+    </div>
+

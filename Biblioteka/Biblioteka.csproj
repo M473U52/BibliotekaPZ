@@ -17,6 +17,14 @@
 	  <Compile Remove="Migrations\20240514071514_audiobook.Designer.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Remove="wwwroot\js\author\ModalDialogRunner.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\author\ModalDialogRunner.js" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="Portable.BouncyCastle" Version="1.8.9" />
 		<PackageReference Include="FakeItEasy" Version="8.1.0" />
@@ -62,6 +70,14 @@
 			<AutoGen>True</AutoGen>
 			<DependentUpon>RoomType.cs</DependentUpon>
 		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="wwwroot\js\Author\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="wwwroot\js\author\ModalDialogRunner.js" />
 	</ItemGroup>
 
 </Project>
