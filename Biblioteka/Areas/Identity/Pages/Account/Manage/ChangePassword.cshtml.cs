@@ -98,56 +98,31 @@ namespace Biblioteka.Areas.Identity.Pages.Account.Manage
             return Page();
         }
 
-        public async Task<IActionResult> OnPostSendChangePasswordEmailAsync()
+        public async Task<IActionResult> OnPostAsync()
         {
-            /*if (!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return Page();
-            }*/
+            }
 
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return RedirectToPage("/Account/Login");
             }
 
-            // zamienic tu
-            /*var changePasswordResult = await _userManager.ChangePasswordAsync(user, Input.OldPassword, Input.NewPassword);
-            if (!changePasswordResult.Succeeded)
+            var result = await _userManager.ChangePasswordAsync(user, Input.OldPassword, Input.NewPassword);
+            if (!result.Succeeded)
             {
-                foreach (var error in changePasswordResult.Errors)
+                foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
                 return Page();
-            }*/
-
-            var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-            code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-
-            var passwordChangeLink = Url.Page(
-            "ConfirmPasswordReset",
-            pageHandler: null,
-            values: new { userId = user.Id, code = code },
-            protocol: Request.Scheme);
-
-            try
-            {
-                await _emailSender.SendEmailAsync(user.Email, "Zmiana hasła",
-             $"Kliknij w link, aby zmienić hasło: '{passwordChangeLink}'.");
             }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Error sending email: {ex.Message}");
-            }
-
-
 
             await _signInManager.RefreshSignInAsync(user);
-            _logger.LogInformation("User changed their password successfully.");
-            StatusMessage = "Password change link has been sent to your email";
-
-            return RedirectToPage();
+            return RedirectToPage("../ResetPasswordConfirmation");
         }
     }
 }
