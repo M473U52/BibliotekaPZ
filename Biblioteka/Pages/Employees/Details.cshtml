@@ -4,66 +4,84 @@
 @{
     ViewData["Title"] = "Details";
 }
+<partial name="_UnderHeaderEmployeeDetails" />
+
+<link rel="stylesheet" href="~/css/Shared/action_buttons.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Employees/details.css" asp-append-version="true" />
+
 <div class="main_container">
-    <div class="inner_container">
-        <div class="list_header">
-            <h1>Informacje o pracowniku</h1>
+    <div class="main-header">
+        <div class="image-container">
+            <img id="user-photo" src="~/images/user_photo.jpg" />
+            <i class="fa-solid fa-pen-to-square"></i>
         </div>
-        <div class="form_div">
-            <div class="form_div_login">
-                <hr />
-                <div>
-                    <h3>Dane ogólne</h3>
-                    <hr />
-                    <dl>
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Employee.name)
-                        </dt>
-                        <dd>
-                            @Html.DisplayFor(model => model.Employee.name)
-                        </dd>
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Employee.surname)
-                        </dt>
-                        <dd>
-                            @Html.DisplayFor(model => model.Employee.surname)
-                        </dd>
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Employee.dateOfEmployment)
-                        </dt>
-                        <dd>
-                            @Html.DisplayFor(model => model.Employee.dateOfEmployment)
-                        </dd>
-                        <dt>
-                            @Html.DisplayNameFor(model => model.Employee.position.name)
-                        </dt>
-                        <dd>
-                            @Html.DisplayFor(model => model.Employee.position.name)
-                        </dd>
-                    </dl>
-                </div>       
-                <partial name="~/Pages/EmployeeExtraData/_DetailsPartial.cshtml" model="Model" />
-                <div>
-                    <button class="button buttonYellow">
-                        <a class="lightText" asp-page="./Edit" asp-route-id="@Model.Employee?.employeeId">Edytuj dane ogólne</a>
-                    </button>
-                    @if (Model.EmployeeData == null)
-                    {
-                        <button class="button buttonGreen">
-                            <a class="lightText" asp-page="../EmployeeExtraData/Create" asp-route-id="@Model.Employee?.employeeId">Dodaj dane szczegółowe</a>
-                        </button>
-                    }
-                    else
-                    {
-                        <button class="button buttonYellow">
-                            <a class="lightText" asp-page="../EmployeeExtraData/Edit" asp-route-id="@Model.EmployeeData?.employeeId">Edytuj dane szczegółowe</a>
-                        </button>
-                    }
-                    <button class="button buttonDefault">
-                        <a class="lightText" asp-page="./Index">Wróć do listy pracowników</a>
-                    </button>
-                </div>
-            </div>
+        <h1>@Model.Employee.name @Model.Employee.surname</h1>
+        <div class="header-buttons">
+            <button class="action-button action-details">
+                <a class="lightText" asp-page="./Edit" asp-route-id="@Model.Employee?.employeeId">Edytuj dane ogólne</a>
+            </button>
+            @if (Model.EmployeeData == null)
+            {
+                <button class="action-button action-confirm">
+                    <a class="lightText" asp-page="../EmployeeExtraData/Create" asp-route-id="@Model.Employee?.employeeId">Dodaj dane szczegółowe</a>
+                </button>
+            }
+            else
+            {
+                <button class="action-button action-details">
+                    <a class="lightText" asp-page="../EmployeeExtraData/Edit" asp-route-id="@Model.EmployeeData?.employeeId">Edytuj dane szczegółowe</a>
+                </button>
+            }
+            <button class="action-button action-default">
+                <a class="lightText" asp-page="./Index">Wróć do listy pracowników</a>
+            </button>
+        </div>
+    </div>
+    <div class="general-info">
+        <h3>Dane ogólne</h3>
+        <h4>Stanowisko:</h4>
+        @{
+            if (Model.Employee.position == null)
+            {
+                <p>Nie podano</p>
+            }
+            else
+            {
+                <p>@Model.Employee.position</p>
+            }
+        }
+        <h4>Data Zatrudnienia:</h4>
+        <p>@Model.Employee.dateOfEmployment</p>
+        <h4>Numer Telefonu:</h4>
+        <p>@Model.EmployeeData.phoneNumber</p>
+    </div>
+    <div>
+        <h3 id="toggle-details" style="cursor:pointer;">
+            Dane szczegółowe
+            <span id="toggle-text" style="font-size: smaller; color: #e6e6e6;">(rozwiń)</span>
+        </h3>
+        <div id="specific-info" class="hidden">
+            <partial name="~/Pages/EmployeeExtraData/_DetailsPartial.cshtml" model="Model" />
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var toggleHeader = document.getElementById("toggle-details");
+        var specificInfo = document.getElementById("specific-info");
+        var toggleText = document.getElementById("toggle-text");
+
+        toggleHeader.addEventListener("click", function () {
+            if (specificInfo.classList.contains("hidden")) {
+                specificInfo.classList.remove("hidden");
+                specificInfo.classList.add("visible");
+                toggleText.textContent = "(schowaj)";
+            } else {
+                specificInfo.classList.remove("visible");
+                specificInfo.classList.add("hidden");
+                toggleText.textContent = "(rozwiń)";
+            }
+        });
+    });
+</script>
