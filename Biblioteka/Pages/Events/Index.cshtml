@@ -4,7 +4,8 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+<link rel="stylesheet" href="~/css/Shared/action_buttons.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Events/Index.css" asp-append-version="true" />
 <div class="main_container">
     <div class="inner_container">
         <div class="list_header">
@@ -57,14 +58,14 @@
                                 <td>
                                     @if (User.IsInRole("Admin") || User.IsInRole("Employee"))
                                     {
-                                        <button class="button buttonGreen"><a class="lightText" asp-page="./Edit" asp-route-id="@item.eventId">Edytuj</a></button>
+                                        <button class="action-button action-confirm"><a class="lightText" asp-page="./Edit" asp-route-id="@item.eventId">Edytuj</a></button>
                                     }
                                     else if (User.IsInRole("Author"))
                                     {
-                                        <button class="button buttonGreen"><a class="lightText" asp-page="./Edit" asp-route-id="@item.eventId">Edytuj</a></button>
+                                        <button class="action-button action-confirm"><a class="lightText" asp-page="./Edit" asp-route-id="@item.eventId">Edytuj</a></button>
                                     }
-                                    <button class="button buttonRed"><a class="lightText" asp-page="./Delete" asp-route-id="@item.eventId">Usuń</a></button>
-                                    <button class="button buttonYellow"><a class="lightText" asp-page="./Details" asp-route-id="@item.eventId">Detale</a></button>
+                                    <button class="action-button action-delete"><a class="lightText" asp-page="./Delete" asp-route-id="@item.eventId">Usuń</a></button>
+                                    <button class="action-button action-details"><a class="lightText" asp-page="./Details" asp-route-id="@item.eventId">Detale</a></button>
                                 </td>
                             </tr>
                         }

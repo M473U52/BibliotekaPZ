@@ -1,0 +1,39 @@
+﻿.proper-form {
+    width: 40%;
+    min-width: 16rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+input {
+    border: none;
+    border-bottom: solid 2px red;
+}
+
+/* Edit.css */
+
+.form-control {
+    border-bottom: 2px solid #801c1c; /* Zmienia kolor obramowania */
+    border-radius: 5px; /* Zaokrągla rogi */
+    padding: 5px; /* Dodaje wypełnienie wewnętrzne */
+    font-size: 18px; /* Zwiększa rozmiar czcionki */
+    background-color: #f9f9f9; /* Ustawia kolor tła */
+    color: #333; /* Ustawia kolor tekstu */
+    transition: border-color 0.3s; /* Dodaje animację zmiany koloru obramowania */
+}
+
+    .form-control:focus {
+        border-color: #801c1c; /* Zmienia kolor obramowania po kliknięciu */
+        outline: none; /* Usuwa domyślne obramowanie przeglądarki */
+        box-shadow: 0 0 8px rgba(102, 175, 233, 0.6); /* Dodaje efekt cienia */
+    }
+
+.control-label {
+    font-weight: bold;
+}
+
+textarea.form-control {
+    width: 100%;
+    resize: vertical; /* Umożliwia użytkownikowi zmianę rozmiaru pola w pionie */
+    min-height: 100px; /* Minimalna wysokość pola */
+}

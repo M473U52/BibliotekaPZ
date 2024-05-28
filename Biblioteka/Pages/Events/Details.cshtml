@@ -4,14 +4,14 @@
 @{
     ViewData["Title"] = "Details";
 }
-
+<partial name="_UnderHeaderDetails" />
+<link rel="stylesheet" href="~/css/Shared/action_buttons.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Events/form.css" asp-append-version="true" />
 <div class="main_container">
-    <div class="inner_container">
-        <div class="list_header">
-            <h1>Informacje o wydarzeniu</h1>
-        </div>
-        <div class="form_div">
-            <div class="form_div_login">
+
+
+
+            <div class="proper-form">
                 <dl>
                     <dt>
                         @Html.DisplayNameFor(model => model.Event.name)
@@ -33,15 +33,14 @@
                     </dd>
                 </dl>
                 <div class="form_buttons">
-                    <button class="button buttonGreen">
+                    <button class="action-button action-details">
                         <a class="lightText" asp-page="./Edit" asp-route-id="@Model.Event?.eventId">Edytuj</a>
                     </button>
-                    <button class="button buttonDefault">
+                    <button class="action-button action-default">
                         <a class="lightText" asp-page="./Index">Wróć</a>
                     </button>
                 </div>
             </div>
-        </div>
-    </div>
+        
 </div>
 

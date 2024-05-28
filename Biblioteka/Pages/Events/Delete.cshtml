@@ -4,15 +4,13 @@
 @{
     ViewData["Title"] = "Delete";
 }
-
-
+<partial name="_UnderHeaderDelete" />
+<link rel="stylesheet" href="~/css/Shared/action_buttons.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Events/form.css" asp-append-version="true" />
 <div class="main_container">
-    <div class="inner_container">
-        <div class="list_header">
-            <h3>Czy napewno chcesz usunąć to wydarzenie?</h3>
-        </div>
-        <div class="form_div">
-            <div class="form_div_login">
+
+
+            <div class="proper-form">
                 <dl>
                     <dt>
                         @Html.DisplayNameFor(model => model.Event.name)
@@ -36,8 +34,8 @@
 
                 <form method="post">
                     <input type="hidden" asp-for="Event.eventId" />
-                    <input type="submit" value="Usuń" class="button buttonRed" />
-                    <button class="button buttonDefault"><a class="lightText" asp-page="./Index">Wróć</a></button>
+                    <input type="submit" value="Usuń" class="action-button action-delete" />
+                    <button class="action-button action-default"><a class="lightText" asp-page="./Index">Wróć</a></button>
                 </form>
             </div>
         </div>
