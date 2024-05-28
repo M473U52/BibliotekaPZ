@@ -1222,3 +1222,36 @@ h1 {
         min-width: 1000px; /* Zapobiega kurczeniu się tabeli poniżej 1000px */
     }
 }
+.page-container-horizontal {
+    display: flex;
+    align-items: flex-start;
+    margin: 20px;
+}
+
+.cover {
+    margin-right: 40px;
+    margin-top: 20px;
+}
+
+    .cover img {
+        max-width: 300px;
+        height: 250px;
+        border-radius: 10px;
+    }
+
+.book-data {
+    max-width: 600px;
+}
+
+    .book-data h1 {
+        margin-top: 0;
+    }
+
+    .book-data .vertical {
+        margin-top: 10px;
+    }
+
+        .book-data .vertical i {
+            display: block;
+            margin: 5px 0;
+        }

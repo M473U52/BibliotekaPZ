@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Biblioteka.Models;
 using Biblioteka.Repositories.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Biblioteka.Pages.Authors
 {
@@ -19,6 +20,23 @@ namespace Biblioteka.Pages.Authors
         public void OnGet()
         {
             Author = _authorRepository.getAll();
+        }
+        public IActionResult OnPostDeleteBorrowing(int authorId)
+        {
+            var author = _authorRepository.getOne(authorId);
+
+            if (author != null)
+            {
+
+                TempData["Message"] = $"Success/Pomyślnie usunięto autora: \"{author.name}\" \"{author.surname}\"";
+
+                _authorRepository.Delete(authorId);
+            }
+            else
+            {
+                TempData["Message"] = $"Error/Nie ma takiego autora.";
+            }
+            return RedirectToPage("./Index");
         }
     }
 }

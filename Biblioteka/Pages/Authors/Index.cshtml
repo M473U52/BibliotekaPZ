@@ -7,71 +7,123 @@
 @using Biblioteka.Repositories
 
 <link rel="stylesheet" href="~/css/Authors/Index.css" asp-append-version="true" />
-<div class="under-header">
-    <h3>Autorzy</h3>
-</div>
-<div class="main-container">
-<div class="two-columns">
-        <div class="column">
-             <button class="button-green">
-                    <a class="text-light" asp-page="Create">Dodaj nowego autora</a>
-             </button>
-         </div>
-        <div class="column">
-             <button class="button-green">
-                    <a class="text-light" asp-page="AddAuthor">Nadaj prawa autora</a>
-             </button>
-         </div>
-</div>
-<div class="vertical container">
-        <table class="simple-table">
-                    <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Author[0].name)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Author[0].surname)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Author[0].birthDate)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Author[0].country)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Author[0].nickname)
-                            </th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.Author)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.surname)
-                                </td>
-                                <td>
-                                    @item.birthDate.ToString("yyyy-MM-dd")
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.country)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.nickname)
-                                </td>
-                                <td>
-                                         <button class="button-green2"><a class="lightText" asp-page="./Edit" asp-route-id="@item.authorId">Edytuj</a></button>
-                                          <button class="button-green2"><a class="lightText" asp-page="./Details" asp-route-id="@item.authorId">Detale</a></button>
-                                    <button class="button-red"><a class="lightText" asp-page="./Delete" asp-route-id="@item.authorId">Usuń</a></button>
-                                         
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+<link rel="stylesheet" href="~/css/Shared/action_buttons.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Shared/table_style.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Shared/notification_style.css" asp-append-version="true" />
+<div>
+    <div class="under-header">
+        <h3>Autorzy</h3>
+    </div>
+    <dialog id="delete_author_dialog">
+        <i class="fa-solid fa-circle-xmark dialog-exit"></i>
+        <form method="post" asp-page-handler="DeleteBorrowing">
+            <input type="hidden" name="authorId" value="1">
+            <p class="dialog_header">Usuwanie autora</p>
+            <p class="dialog_content">Czy napewno chcesz usunąć tego autora ?</p>
+            <div class="d-flex flex-row justify-content-center align-items-center">
+                <button type="button" class="action-button action-cancel"><i class="fa-solid fa-xmark"></i>Anuluj</button>
+                <button type="submit" class="action-button action-delete"><i class="fa-solid fa-trash-can"></i>Usuń</button>
             </div>
+        </form>
+    </dialog>
+    <div class="main-container">
+    <div class="two-columns">
+            <div class="column">
+                 <button class="button-green">
+                        <a class="text-light" asp-page="Create">Dodaj nowego autora</a>
+                 </button>
+             </div>
+            <div class="column">
+                 <button class="button-green">
+                        <a class="text-light" asp-page="AddAuthor">Nadaj prawa autora</a>
+                 </button>
+             </div>
+    </div>
+    <div class="vertical container">
+            <table class="simple-table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Author[0].name)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Author[0].surname)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Author[0].birthDate)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Author[0].country)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Author[0].nickname)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Author)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.surname)
+                                    </td>
+                                    <td>
+                                        @item.birthDate.ToString("yyyy-MM-dd")
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.country)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.nickname)
+                                    </td>
+                                    <td class="align-middle">
+                                        <button class="button-green2"><a class="lightText" asp-page="./Edit" asp-route-id="@item.authorId">Edytuj</a></button>
+                                        <button class="button-green2"><a class="lightText" asp-page="./Details" asp-route-id="@item.authorId">Detale</a></button>
+                                        <button class="action-button action-delete"><i class="fa-solid fa-trash-can"></i>Usuń<p class="hidden-authorId d-none">@item.authorId</p></button>                                      
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+        @{
+            if (TempData["Message"] != null)
+            {
+                <div class="notification_div">
+                    @if (TempData["Message"]?.ToString()?.Split("/")[0] == "Success")
+                    {
+                        <div>
+                            <i class="fa-solid fa-check success_notification_icon"></i>
+                        </div>
+                    }
+                    else
+                    {
+                        <div>
+                            <i class="fa-solid fa-circle-exclamation error_notification_icon"></i>
+                        </div>
+                    }
+                    <div class="notification-content">
+                        @if (TempData["Message"]?.ToString()?.Split("/")[0] == "Success")
+                        {
+                            <p class="notification-header-success">Sukces!</p>
+                        }
+                        else
+                        {
+                            <p class="notification-header-error">Błąd!</p>
+                        }
+                        <p class="notification-message">@TempData["Message"]?.ToString()?.Split("/")[1]</p>
+                    </div>
+                    <div class="hide-notification">
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+<script src="~/js/Borrowing/ModalDialogRunner.js"></script>
+<script src="~/js/Borrowing/Notification.js"></script>

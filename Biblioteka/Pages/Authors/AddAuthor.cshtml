@@ -4,13 +4,11 @@
 @{
     ViewData["Title"] = "Create";
 }
+<link rel="stylesheet" href="~/css/Shared/action_buttons.css" asp-append-version="true" />
 <div class="main_container">
-    <div class="inner_container">
-        <div class="list_header">
-            <h1>Dodaj nowego autora</h1>
-        </div>
-        <div class="form_div">
-            <div class="form_div_login">
+        <h1>Nadaj prawa autora</h1>
+        <div class="form_div_login">
+            <div class="row">
                 <form method="post">
                     <hr />
                     <div class="form-group">
@@ -19,16 +17,15 @@
                     </div>
                     <div class="form_buttons">
                         <div class="form-group">
-                            <input type="submit" value="Dodaj" class="button buttonGreen" />
+                            <input type="submit" value="Dodaj" class="action-button action-confirm" />
                         </div>
                         <div>
-                            <a class="lightText button buttonDefault" asp-page="./Index">Wróć</a>
+                            <button class="action-button action-default"><a class="lightText" asp-page="./Index">Wróć</a></button>
                         </div>
                     </div>  
-                </form>   
+                </form>
             </div>
         </div>
-    </div>
 </div>
 
 
