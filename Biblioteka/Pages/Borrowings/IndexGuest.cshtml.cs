@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Biblioteka.Pages.Borrowings
 {
+    [Authorize]
     [Authorize(Roles = "Guest")]
     public class IndexGuestModel : PageModel
     {

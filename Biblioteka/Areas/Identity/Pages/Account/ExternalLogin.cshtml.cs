@@ -80,6 +80,11 @@ namespace Biblioteka.Areas.Identity.Pages.Account
             [Required]
             [EmailAddress]
             public string Email { get; set; }
+            [Required]
+            public string Name { get; set; }
+
+            [Required]
+            public string Surname { get; set; }
         }
         
         public IActionResult OnGet() => RedirectToPage("./Login");
@@ -127,7 +132,9 @@ namespace Biblioteka.Areas.Identity.Pages.Account
                 {
                     Input = new InputModel
                     {
-                        Email = info.Principal.FindFirstValue(ClaimTypes.Email)
+                        Email = info.Principal.FindFirstValue(ClaimTypes.Email),
+                        Name = info.Principal.FindFirstValue(ClaimTypes.GivenName), // Pobranie imienia
+                        Surname = info.Principal.FindFirstValue(ClaimTypes.Surname) // Pobranie nazwiska
                     };
                 }
                 return Page();
@@ -148,6 +155,12 @@ namespace Biblioteka.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+                user.name = Input.Name;
+                user.surname = Input.Surname;
+                user.Email = Input.Email;
+
+                // Ustawienie nazwy użytkownika na podstawie adresu e-mail
+                user.UserName = Input.Email;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
@@ -158,6 +171,9 @@ namespace Biblioteka.Areas.Identity.Pages.Account
                     result = await _userManager.AddLoginAsync(user, info);
                     if (result.Succeeded)
                     {
+                        // Ustawienie roli "Czytelnik" dla nowego użytkownika
+                        await _userManager.AddToRoleAsync(user, "Reader");
+
                         _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
 
                         var userId = await _userManager.GetUserIdAsync(user);
@@ -172,7 +188,6 @@ namespace Biblioteka.Areas.Identity.Pages.Account
                         await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                             $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                        // If account confirmation is required, we need to show the link if we don't have a real email sender
                         if (_userManager.Options.SignIn.RequireConfirmedAccount)
                         {
                             return RedirectToPage("./RegisterConfirmation", new { Email = Input.Email });
@@ -192,6 +207,9 @@ namespace Biblioteka.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
             return Page();
         }
+
+
+
 
         private BibUser CreateUser()
         {

@@ -10,6 +10,8 @@ using NuGet.Protocol;
 using Serilog;
 using Biblioteka.Models;
 using Microsoft.CodeAnalysis.Elfie.Diagnostics;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 //using Microsoft.AspNetCore.Identity.UI.Services;
 
@@ -54,6 +56,22 @@ builder.Services.AddDefaultIdentity<BibUser>(options =>
 .AddEntityFrameworkStores<BibContext>()
 .AddDefaultTokenProviders()
 .AddErrorDescriber<BibErrorDescriber>();
+var configuration = builder.Configuration;
+// Konfiguracja uwierzytelniania Google
+//builder.Services.AddAuthentication(options =>
+//{
+//    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+//    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+//    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+//})
+//.AddCookie()
+builder.Services.AddAuthentication()
+    .AddGoogle(options =>
+    {
+        options.ClientId = builder.Configuration.GetSection("GoogleAuthSettings").GetValue<string>("ClientId");
+        options.ClientSecret = builder.Configuration.GetSection("GoogleAuthSettings").GetValue<string>("ClientSecret");
+        options.CallbackPath = "/signin-google"; // Œcie¿ka odpowiadaj¹ca œcie¿ce w panelu deweloperskim Google
+    });
 
 builder.Services.Configure<DataProtectionTokenProviderOptions>(options =>
 {
@@ -83,10 +101,6 @@ builder.Services.AddControllersWithViews().AddMvcOptions(options =>
 
 var app = builder.Build();
 
-
-
-
-
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -101,12 +115,20 @@ app.MapDefaultControllerRoute();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 /*app.MapControllerRoute(
 	name: "default",
 	pattern: "{controller=Home}/{action=Index}/{id?}");*/
-app.MapRazorPages();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapRazorPages();
+
+    //koniec punktu uwierzytelniania dla logowania z Google
+    endpoints.MapControllerRoute("google-auth", "google-auth/{**catchall}", new { controller = "Account", action = "ExternalLoginCallback" });
+});
+
 
 using (var scope = app.Services.CreateScope())
 {
