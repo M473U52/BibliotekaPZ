@@ -24,11 +24,10 @@ namespace Biblioteka.Pages.Authors
         public IActionResult OnPostDeleteBorrowing(int authorId)
         {
             var author = _authorRepository.getOne(authorId);
-
             if (author != null)
             {
 
-                TempData["Message"] = $"Success/Pomyślnie usunięto autora: \"{author.name}\" \"{author.surname}\"";
+                TempData["Message"] = $"Success/Pomyślnie usunięto autora: \"{author.FullName}\"";
 
                 _authorRepository.Delete(authorId);
             }

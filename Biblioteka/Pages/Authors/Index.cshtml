@@ -19,7 +19,7 @@
         <form method="post" asp-page-handler="DeleteBorrowing">
             <input type="hidden" name="authorId" value="1">
             <p class="dialog_header">Usuwanie autora</p>
-            <p class="dialog_content">Czy napewno chcesz usunąć tego autora ?</p>
+            <p class="dialog_content">Czy napewno chcesz usunąć tego autora?</p>
             <div class="d-flex flex-row justify-content-center align-items-center">
                 <button type="button" class="action-button action-cancel"><i class="fa-solid fa-xmark"></i>Anuluj</button>
                 <button type="submit" class="action-button action-delete"><i class="fa-solid fa-trash-can"></i>Usuń</button>
@@ -64,11 +64,13 @@
                         <tbody>
                             @foreach (var item in Model.Author)
                             {
+                            if (item != null)
+                            {
                                 <tr>
-                                    <td>
+                                    <td >
                                         @Html.DisplayFor(modelItem => item.name)
                                     </td>
-                                    <td>
+                                    <td >
                                         @Html.DisplayFor(modelItem => item.surname)
                                     </td>
                                     <td>
@@ -83,10 +85,11 @@
                                     <td class="align-middle">
                                         <button class="button-green2"><a class="lightText" asp-page="./Edit" asp-route-id="@item.authorId">Edytuj</a></button>
                                         <button class="button-green2"><a class="lightText" asp-page="./Details" asp-route-id="@item.authorId">Detale</a></button>
-                                        <button class="action-button action-delete"><i class="fa-solid fa-trash-can"></i>Usuń<p class="hidden-authorId d-none">@item.authorId</p></button>                                      
+                                        <button class="button-red action-delete ">Usuń<p class="hidden-authorId d-none">@item.authorId</p></button>
                                     </td>
                                 </tr>
                             }
+                        }
                         </tbody>
                     </table>
                 </div>
@@ -125,5 +128,5 @@
         }
     </div>
 </div>
-<script src="~/js/Borrowing/ModalDialogRunner.js"></script>
+<script src="~/js/Author/ModalDialogRunner.js"></script>
 <script src="~/js/Borrowing/Notification.js"></script>
