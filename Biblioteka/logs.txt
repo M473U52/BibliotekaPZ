@@ -295,3 +295,4 @@
 2024-05-28 19:09:52.511 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
 2024-05-28 19:10:52.811 +02:00 [INF] Wylogowanie employee@employee.com - Employee
 2024-05-28 19:19:56.813 +02:00 [INF] Wylogowanie dawid.konstanciuk@gmail.com - Reader
+2024-05-29 00:53:52.783 +02:00 [INF] Wylogowanie nieznanaznana2@gmail.com - Reader
