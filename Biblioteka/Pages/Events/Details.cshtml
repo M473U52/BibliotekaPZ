@@ -37,6 +37,20 @@
                         <a class="lightText" asp-page="./Edit" asp-route-id="@Model.Event?.eventId">Edytuj</a>
                     </button>
                     <button class="action-button action-default">
+                    @if (User.IsInRole("Reader"))
+                    {
+                        <form method="post"> @*asp-page-handler="SignUp">*@
+                            <input type="hidden" name="eventId" value="@Model.Event?.eventId" />
+                            <button type="submit" class="btn btn-primary">Zapisz się</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <button class="button buttonGreen">
+                            <a class="lightText" asp-page="./Edit" asp-route-id="@Model.Event?.eventId">Edytuj</a>
+                        </button>
+                    }
+                    <button class="button buttonDefault">
                         <a class="lightText" asp-page="./Index">Wróć</a>
                     </button>
                 </div>

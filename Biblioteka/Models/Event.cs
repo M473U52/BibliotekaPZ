@@ -35,5 +35,6 @@ namespace Biblioteka.Models
         public Author author { get; set; }
         public int authorId { get; set; }
 
+        public ICollection<Reader_Events> readers { get; set; } = new List<Reader_Events>();
     }
 }

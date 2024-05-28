@@ -35,6 +35,7 @@ namespace Biblioteka.Pages
         public IList<Event> Events { get; set; } = default!;
 
         public IList<Book> NewPublications { get; set; } = default!;
+        public IList<string> UpcomingEvent { get; set; } = new List<string>();
 
         private async Task SendReminderEmailAsync(string userEmail, string subject, string message)
         {
@@ -95,6 +96,22 @@ namespace Biblioteka.Pages
                         else
                         {
                             Borrowing = null;
+                        }
+
+                        var readerEvents = await _bibContext.Reader_Events
+                        .Include(re => re.eventt)
+                        .Where(re => re.readerId == foundReader.readerId)
+                        .ToListAsync();
+
+                        foreach (var readerEvent in readerEvents)
+                        {
+                            var eventDate = readerEvent.eventt.eventDate;
+                            var daysUntilEvent = (eventDate - DateTime.Now).TotalDays;
+
+                            if (daysUntilEvent <= 2 && daysUntilEvent >= 0)
+                            {
+                                UpcomingEvent.Add($"Zbli¿a siê wydarzenie: {readerEvent.eventt.name} w dniu {eventDate.ToShortDateString()}.");
+                            }
                         }
                     }
                     else
