@@ -4,6 +4,8 @@
 
 using System.ComponentModel.DataAnnotations;
 using Biblioteka.Areas.Identity.Data;
+using Biblioteka.Models;
+using Biblioteka.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -15,15 +17,33 @@ namespace Biblioteka.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<BibUser> _userManager;
         private readonly SignInManager<BibUser> _signInManager;
         private readonly ILogger<DeletePersonalDataModel> _logger;
+        private readonly IEmployeeRepository _employeeRepository;
+        private readonly IEmployeeDataRepository _employeeDataRepository;
+        private readonly IReaderRepository _readerRepository;
+        private readonly IBorrowingRepository _borrowingRepository;
+        private readonly IRoomReservationRepository _roomReservationRepository;
+        private readonly IBookOpinionRepository _bookOpinionRepository;
 
         public DeletePersonalDataModel(
             UserManager<BibUser> userManager,
             SignInManager<BibUser> signInManager,
-            ILogger<DeletePersonalDataModel> logger)
+            ILogger<DeletePersonalDataModel> logger,
+            IEmployeeRepository employeeRepository,
+            IEmployeeDataRepository employeeDataRepository,
+            IReaderRepository readerRepository,
+            IBorrowingRepository borrowingRepository,
+            IRoomReservationRepository roomReservationRepository,
+            IBookOpinionRepository bookOpinionRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _employeeRepository = employeeRepository;
+            _employeeDataRepository = employeeDataRepository;
+            _readerRepository = readerRepository;
+            _borrowingRepository = borrowingRepository;
+            _roomReservationRepository = roomReservationRepository;
+            _bookOpinionRepository = bookOpinionRepository;
         }
 
         /// <summary>
@@ -85,6 +105,9 @@ namespace Biblioteka.Areas.Identity.Pages.Account.Manage
                 }
             }
 
+            deleteEmployee();
+            deleteReader();
+
             var result = await _userManager.DeleteAsync(user);
             var userId = await _userManager.GetUserIdAsync(user);
             if (!result.Succeeded)
@@ -98,5 +121,38 @@ namespace Biblioteka.Areas.Identity.Pages.Account.Manage
 
             return Redirect("~/");
         }
+
+        private void deleteReader()
+        {
+            Reader reader = _readerRepository.GetByMail(User.Identity.Name);
+
+            if (reader !=  null)
+            {
+                foreach (Reader_Borrowings borrowing in reader.borrowings)
+                {
+                    _borrowingRepository.Delete(borrowing.borrow.borrowId);
+                }
+                foreach (RoomReservation reservation in reader.reservations)
+                {
+                    _roomReservationRepository.Delete(reservation.reservationId);
+                }
+                foreach (Book_Opinions opinion in reader.bookOpinions)
+                {
+                    _bookOpinionRepository.DeleteOpinion(opinion);
+                }
+                _readerRepository.Delete(reader.readerId);
+            }
+        }
+        private void deleteEmployee()
+        {
+            Employee employee = _employeeRepository.GetByMail(User.Identity.Name);
+            
+            if (employee != null)
+            {
+                _employeeDataRepository.Delete(employee.employeeId);
+                _employeeRepository.Delete(employee.employeeId);
+            }
+        }
+
     }
 }
