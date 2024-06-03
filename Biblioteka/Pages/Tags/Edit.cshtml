@@ -5,15 +5,17 @@
     ViewData["Title"] = "Edit";
 }
 
-<div class="main_container">
+<link rel="stylesheet" href="~/css/Tag_BookTypes/main.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Shared/action_buttons.css" asp-append-version="true" />
+
+<div class="page-container">
     <div class="inner_container">
         <div class="list_header">
-            <h1>Edycja tagu: @Model.Tag.name</h1>
+            <h1>Edycja tagu</h1>
+            <hr />
         </div>
-        <div class="form_div">
-            <div class="form_div_login">
+        <div>
                 <form method="post">
-                    <hr />
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="Tag.tagId" />
                     <div class="form-group">
@@ -23,15 +25,14 @@
                     </div>
                     <div class="form_buttons">
                         <div class="form-group">
-                            <input type="submit" value="Zapisz" class="button buttonGreen lightText" />
+                            <input type="submit" value="Zapisz" class="button action-button action-confirm" />
                         </div>
                         <div>
-                            <a class="lightText button buttonDefault" asp-page="./Index">Wróć</a>
+                            <a class="action-button action-default" asp-page="./Index">Wróć</a>
                         </div>
                     </div>
-                    
                 </form>
-            </div>
+
         </div>
     </div>
 </div>

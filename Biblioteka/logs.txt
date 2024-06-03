@@ -306,3 +306,12 @@
 2024-05-29 01:17:53.522 +02:00 [INF] Zalogowany użytkownik anna12@op.pl - Reader
 2024-05-29 01:18:45.803 +02:00 [INF] Wylogowanie anna12@op.pl - Reader
 2024-05-29 09:58:57.361 +02:00 [INF] Zalogowany użytkownik anna12@op.pl - Reader
+2024-05-29 10:17:02.669 +02:00 [INF] Zarejestrowano czytelnika Anna Mak
+2024-05-29 12:17:50.783 +02:00 [INF] Wylogowanie anna12@op.pl - Reader
+2024-05-29 12:18:03.913 +02:00 [INF] Zalogowany użytkownik anna12@op.pl - Reader
+2024-05-29 12:20:14.539 +02:00 [INF] Wylogowanie paulinastasz02@gmail.com - Reader
+2024-05-29 12:20:50.422 +02:00 [INF] Zalogowany użytkownik admin@admin.com - Admin
+2024-05-29 12:22:33.468 +02:00 [INF] Wylogowanie admin@admin.com - Admin
+2024-05-29 12:23:06.301 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
+2024-06-03 16:20:14.815 +02:00 [INF] Wylogowanie employee@employee.com - Employee
+2024-06-03 16:20:27.000 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
