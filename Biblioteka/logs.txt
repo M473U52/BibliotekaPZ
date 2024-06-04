@@ -313,3 +313,4 @@
 2024-06-04 03:04:42.661 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
 2024-06-04 03:28:43.196 +02:00 [INF] Usunięto książkę 
 2024-06-04 14:50:05.586 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-06-04 21:25:56.372 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
