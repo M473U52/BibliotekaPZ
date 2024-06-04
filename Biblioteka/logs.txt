@@ -307,3 +307,8 @@
 2024-05-29 01:18:45.803 +02:00 [INF] Wylogowanie anna12@op.pl - Reader
 2024-05-29 09:58:57.361 +02:00 [INF] Zalogowany użytkownik anna12@op.pl - Reader
 2024-06-04 02:24:43.947 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
+2024-06-04 03:04:05.227 +02:00 [INF] Wylogowanie employee@employee.com - Employee
+2024-06-04 03:04:13.495 +02:00 [INF] Zalogowany użytkownik admin@admin.com - Admin
+2024-06-04 03:04:29.538 +02:00 [INF] Wylogowanie admin@admin.com - Admin
+2024-06-04 03:04:42.661 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
+2024-06-04 03:28:43.196 +02:00 [INF] Usunięto książkę 

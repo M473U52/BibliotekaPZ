@@ -4,118 +4,109 @@
 @{
     ViewData["Title"] = "Edit";
 }
-<div class="main_container">
-    <div class="inner_container">
-        <div class="list_header">
-            <h1>Edytuj książkę pt: <b></b></h1>
-        </div>
-        <div class="form_div">
-            <div class="form_div_login">
-                <form method="post" enctype="multipart/form-data">
-                    <hr />
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="Book.bookId" />
-                    <div class="form-group">
-                        <label asp-for="Book.title" class="control-label"></label>
+
+<link rel="stylesheet" href="~/css/Shared/action_buttons.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Books//Edit.css" asp-append-version="true" />
+
+<div class="main_container padding_top_1rem">
+    <div class="list_header">
+        <h3>Edycja książki <span id="book_title">@Model.Book.title</span></h3>
+    </div>
+    <div class="book_edit_form_div">
+        <form id="book_edit_form" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Book.bookId" />
+            <div class="d-flex flex-row justify-content-center align-items-center gap-5 w-75 book_edit_in_form_div">
+                <div class="d-flex flex-column justify-content-center align-items-center gap-3 w-100">
+                    <div class="form-floating w-100">
                         <input asp-for="Book.title" class="form-control" />
+                        <label asp-for="Book.title" class="control-label"></label>
                         <span asp-validation-for="Book.title" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Book.ISBN" class="control-label"></label>
+                    <div class="form-floating w-100">
                         <input asp-for="Book.ISBN" class="form-control" />
+                        <label asp-for="Book.ISBN" class="control-label"></label>
                         <span asp-validation-for="Book.ISBN" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Book.description" class="control-label"></label>
+                    <div class="form-floating w-100">
                         <input asp-for="Book.description" class="form-control" />
+                        <label asp-for="Book.description" class="control-label"></label>
                         <span asp-validation-for="Book.description" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Book.availableCopys" class="control-label"></label>
+                    <div class="form-floating w-100">
                         <input asp-for="Book.availableCopys" class="form-control" />
+                        <label asp-for="Book.availableCopys" class="control-label"></label>
                         <span asp-validation-for="Book.availableCopys" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <label asp-for="Book.releaseDate" class="control-label"></label>
+                    <div class="form-floating w-100">
                         <input asp-for="Book.releaseDate" class="form-control" />
+                        <label asp-for="Book.releaseDate" class="control-label"></label>
                         <span asp-validation-for="Book.releaseDate" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-floating w-100">
+                        <select asp-for="GenreId" class="form-control form-select book_edit_select_style" asp-items="Model.Genre">
+                        </select>
                         <label asp-for="GenreId" class="control-label"></label>
-                        <select asp-for="GenreId" class="form-control" asp-items="Model.Genre"></select>
-                        <span asp-validation-for="GenreId" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-floating w-100">
+                        <select asp-for="TagIds" class="form-control form-select book_edit_select_style" multiple="multiple" asp-items="Model.Tag">
+                        </select>
                         <label asp-for="TagIds" class="control-label"></label>
-                        <select asp-for="TagIds" asp-items="Model.Tag" class="form-control" multiple="multiple"></select>
-                        <span asp-validation-for="TagIds" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-floating w-100">
+                        <select asp-for="BookTypeId" class="form-control form-select book_edit_select_style" asp-items="Model.Type">
+                        </select>
                         <label asp-for="BookTypeId" class="control-label"></label>
-                        <select asp-for="BookTypeId" class="form-control" asp-items="Model.Type"></select>
-                        <span asp-validation-for="BookTypeId" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="PublisherId" class="control-label"></label>
-                        <select asp-for="PublisherId" class="form-control" asp-items="Model.Publisher"></select>
-                        <span asp-validation-for="PublisherId" class="text-danger"></span>
-					</div>
-                    <div class="form-group">
-                        <label asp-for="AuthorIds" class="control-label"></label>
-                        <select asp-for="AuthorIds" asp-items="Model.Author" class="form-control" multiple="multiple"></select>
-                        <span asp-validation-for="AuthorIds" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Book.image" class="control-label"></label>
-                        <input asp-for="Book.image" class="form-control" />
-                        <span asp-validation-for="Book.image" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Book.ebook" class="control-label"></label>
-                        <input asp-for="Book.ebook" class="form-control" />
-                        <span asp-validation-for="Book.ebook" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Book.audiobook" class="control-label"></label>
-                        <input asp-for="Book.audiobook" class="form-control" />
-                        <span asp-validation-for="Book.audiobook" class="text-danger"></span>
-                    </div>
-                    <hr />
-                    @{
-                        if (User.IsInRole("Employee"))
-                        {
-                        <dd>
-                            <span>Lokalizacja książki w bibliotece:</span>
-                        </dd>
-                        <div class="form-group">
-                            <label asp-for="Book.floor" class="control-label"></label>
-                            <input asp-for="Book.floor" class="form-control" />
-                            <span asp-validation-for="Book.floor" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Book.alley" class="control-label"></label>
-                            <input asp-for="Book.alley" class="form-control" />
-                            <span asp-validation-for="Book.alley" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Book.rowNumber" class="control-label"></label>
-                            <input asp-for="Book.rowNumber" class="form-control" />
-                            <span asp-validation-for="Book.rowNumber" class="text-danger"></span>
-                        </div>
-                        }
-                    }
-                <div class="form_buttons">
-                    <div class="form-group">
-                        <input type="submit" value="Zapisz" class="button buttonGreen lightText" />
-                    </div>
-                    <div>
-                        <a class="lightText button buttonDefault" asp-page="./Index">Wróć</a>
                     </div>
                 </div>
-               
-                </form>
+                <div class="d-flex flex-column justify-content-center align-items-center gap-3 w-100">
+                    <div class="form-floating w-100">   
+                        <select asp-for="PublisherId" class="form-control form-select book_edit_select_style" asp-items="Model.Publisher">
+                        </select>
+                        <label asp-for="PublisherId" class="control-label"></label>
+                    </div>
+                    <div class="form-floating w-100">
+                        <select asp-for="AuthorIds" class="form-control form-select book_edit_select_style" asp-items="Model.Author" multiple="multiple">
+                        </select>
+                        <label asp-for="AuthorIds" class="control-label"></label>
+                    </div>
+                    <div class="form-floating w-100">
+                        <input asp-for="Book.image" class="form-control book_edit_image_input_style" placeholder="Zdjęcie profilowe" />
+                        <label asp-for="Book.image" class="control-label"></label>
+                        <span asp-validation-for="Book.image" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating w-100">
+                        <input asp-for="Book.ebook" class="form-control book_edit_image_input_style" />
+                        <label asp-for="Book.ebook" class="control-label"></label>
+                        <span asp-validation-for="Book.ebook" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating w-100">
+                        <input asp-for="Book.audiobook" class="form-control book_edit_image_input_style" />
+                        <label asp-for="Book.audiobook" class="control-label"></label>
+                        <span asp-validation-for="Book.audiobook" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating w-100">
+                        <input asp-for="Book.floor" class="form-control" />
+                        <label asp-for="Book.floor" class="control-label"></label>
+                        <span asp-validation-for="Book.floor" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating w-100">
+                        <input asp-for="Book.alley" class="form-control" />
+                        <label asp-for="Book.alley" class="control-label"></label>
+                        <span asp-validation-for="Book.alley" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating w-100">
+                        <input asp-for="Book.rowNumber" class="form-control" />
+                        <label asp-for="Book.rowNumber" class="control-label"></label>
+                        <span asp-validation-for="Book.rowNumber" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-        </div>
+            <button class="action-button biggest-button action-default mt-4" id="addSubmit" type="submit">Zapisz</button>
+            <a asp-page="./Index">
+                <div class="action-button action-cancel-mr-0 mt-3 back-btn" type="button">Wróć</div>
+            </a>
+        </form>
     </div>
 </div>
 
