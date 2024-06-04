@@ -6,9 +6,25 @@
 }
 
 <link rel="stylesheet" href="~/css/Tag_BookTypes/main.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Shared/action_buttons.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Shared/table_style.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Shared/notification_style.css" asp-append-version="true" />
+
 <partial name="_UnderHeaderBookTypes" />
 
 <div class="page-container">
+     <dialog id="delete_tag_dialog2">
+        <i onclick="Cancel()" class="fa-solid fa-circle-xmark dialog-exit"></i>
+        <form method="post" asp-page-handler="DeleteType">
+            <input id="inputter" type="hidden" name="id" value="1" onClick=SetValue()>
+            <p class="dialog_header">Usuwanie rodzaju</p>
+            <p class="dialog_content">Czy napewno chcesz usunąć ten rodzaj?</p>
+            <div class="d-flex flex-row justify-content-center align-items-center">
+                <button type="button" onclick="Cancel()" id="cancel" class="button-red text-light"><i class="fa-solid fa-xmark"></i>Anuluj</button>
+                <button type="submit" onClick=SetValue() class="button-red text-light"><i class="fa-solid fa-trash-can"></i>Usuń</button>
+            </div>
+        </form>
+       </dialog>
     <div class="inner_container">
         @if (Model.BookType.Any())
         {
@@ -46,8 +62,8 @@
                                 </td>
                                 <td>
                                         <button class="button-green"><a class="lightText" asp-page="./Edit" asp-route-id="@item.typeId">Edytuj</a></button>
-                                        <button class="button-red"><a class="lightText" asp-page="./Delete" asp-route-id="@item.typeId">Usuń</a>
-
+                                        
+                                                <button class="button-red text-light" onclick="funDelete(@item.typeId)">Usuń<p class="hidden-Id d-none">@item.typeId</p> </button>
                             </button>
                                 </td>
                             </tr>
@@ -60,3 +76,4 @@
 </div>
 
 
+<script src="~/js/BookTypes/ModalDialogRunner.js"></script>

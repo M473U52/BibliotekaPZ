@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Biblioteka.Repositories.Interfaces;
 using Biblioteka.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Biblioteka.Pages.Tags
 {
@@ -26,6 +27,12 @@ namespace Biblioteka.Pages.Tags
                 // Jeśli nazwa nie jest określona, pobierz wszystkie wydawnictwa
                 Tag = _tagRepository.getAll();
             }
+        }
+
+        public IActionResult OnPostDeleteTag(int id)
+        {
+            _tagRepository.Delete(id);
+            return RedirectToPage("./Index");
         }
     }
 }

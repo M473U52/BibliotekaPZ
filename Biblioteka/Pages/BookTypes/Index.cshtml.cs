@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Biblioteka.Repositories.Interfaces;
 using Biblioteka.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Biblioteka.Pages.BookTypes
 {
@@ -26,6 +27,13 @@ namespace Biblioteka.Pages.BookTypes
                 // Jeśli nazwa nie jest określona, pobierz wszystkie wydawnictwa
                 BookType = _bookTypeRepository.getAll();
             }
+        }
+
+        public IActionResult OnPostDeleteType(int id)
+        {
+            _bookTypeRepository.Delete(id);
+
+            return RedirectToPage("./Index");
         }
     }
 }

@@ -19,6 +19,8 @@
 
   <ItemGroup>
     <Content Remove="wwwroot\js\author\ModalDialogRunner.js" />
+    <Content Remove="wwwroot\js\BookTypes\ModalDialogRunner.js" />
+    <Content Remove="wwwroot\js\Tag\ModalDialogRunner.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -79,6 +81,8 @@
 
 	<ItemGroup>
 	  <None Include="wwwroot\js\author\ModalDialogRunner.js" />
+	  <None Include="wwwroot\js\BookTypes\ModalDialogRunner.js" />
+	  <None Include="wwwroot\js\Tag\ModalDialogRunner.js" />
 	</ItemGroup>
 
 </Project>

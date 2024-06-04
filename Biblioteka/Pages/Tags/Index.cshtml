@@ -10,6 +10,18 @@
 <partial name="_UnderHeaderTag" />
 
 <div class="page-container">
+    <dialog id="delete_tag_dialog2">
+        <i onclick="Cancel()" class="fa-solid fa-circle-xmark dialog-exit"></i>
+        <form method="post" asp-page-handler="DeleteTag">
+            <input id="inputter" type="hidden" name="id" value="1"  onClick=SetValue() >
+            <p class="dialog_header">Usuwanie taga</p>
+            <p class="dialog_content">Czy napewno chcesz usunąć tego taga?</p>
+            <div class="d-flex flex-row justify-content-center align-items-center">
+                <button type="button" onclick="Cancel()" id="cancel" class="button-red text-light"><i class="fa-solid fa-xmark"></i>Anuluj</button>
+                <button type="submit" onclick="SetValue()" class="button-red text-light"><i class="fa-solid fa-trash-can"></i>Usuń</button>
+            </div>
+        </form>
+       </dialog>
     <div class="inner_container">
         @if (Model.Tag.Any())
         {
@@ -47,7 +59,8 @@
                                 </td>
                                 <td>
                                         <button class="button-green"><a class="lightText" asp-page="./Edit" asp-route-id="@item.tagId">Edytuj</a></button>
-                                        <button class="button-red"><a class="lightText" asp-page="./Delete" asp-route-id="@item.tagId">Usuń</a></button>
+                                         <button class="button-red text-light" onclick="funDelete(@item.tagId)">Usuń<p class="hidden-Id d-none">@item.tagId</p> </button>
+                                       
                                 </td>
                             </tr>
                         }
@@ -57,3 +70,5 @@
         </div>
     </div>
 </div>
+
+<script src="~/js/Tag/ModalDialogRunner.js"></script>
