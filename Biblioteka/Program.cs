@@ -74,6 +74,12 @@ builder.Services.AddAuthentication()
         options.CallbackPath = "/signin-google"; // Œcie¿ka odpowiadaj¹ca œcie¿ce w panelu deweloperskim Google
     });
 
+builder.Services.AddAuthentication().AddFacebook(options =>
+{
+    options.ClientId = builder.Configuration.GetSection("FacebookAuthSettings").GetValue<string>("ClientId");
+    options.ClientSecret = builder.Configuration.GetSection("FacebookAuthSettings").GetValue<string>("ClientSecret");
+});
+
 builder.Services.Configure<DataProtectionTokenProviderOptions>(options =>
 {
     options.TokenLifespan = TimeSpan.FromMinutes(5);

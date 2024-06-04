@@ -306,3 +306,7 @@
 2024-05-29 01:17:53.522 +02:00 [INF] Zalogowany użytkownik anna12@op.pl - Reader
 2024-05-29 01:18:45.803 +02:00 [INF] Wylogowanie anna12@op.pl - Reader
 2024-05-29 09:58:57.361 +02:00 [INF] Zalogowany użytkownik anna12@op.pl - Reader
+2024-06-04 14:52:58.848 +02:00 [INF] Wylogowanie szymonsin@gmail.com - Reader
+2024-06-04 15:10:57.411 +02:00 [INF] Wylogowanie szymonsin@gmail.com - Reader
+2024-06-04 15:11:29.068 +02:00 [INF] Wylogowanie sss@gmail.com - Reader
+2024-06-04 15:11:39.007 +02:00 [INF] Wylogowanie sss@gmail.com - Reader
