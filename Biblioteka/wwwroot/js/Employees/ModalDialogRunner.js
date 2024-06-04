@@ -1,6 +1,5 @@
 ﻿const delete_buttons_arr = document.querySelectorAll(".action-delete");
 const dialog_employee_delete = document.querySelector("#delete_employee_dialog");
-console.log(dialog_employee_delete);
 
 const SetButtonsOnClickListeners = () => {
     delete_buttons_arr.forEach(button => {

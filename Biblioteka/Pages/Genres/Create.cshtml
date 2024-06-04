@@ -4,36 +4,30 @@
 @{
     ViewData["Title"] = "Create";
 }
-<div class="main_container">
-    <div class="inner_container">
-        <div class="list_header">
-            <h1>Stwórz Gatunek</h1>
-        </div>
-        <div class="form_div">
-            <div class="form_div_login">
-                <form method="post">
-                    <hr />
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="form-group">
-                        <label asp-for="Genre.name" class="control-label"></label>
-                        <input asp-for="Genre.name" class="form-control" />
-                        <span asp-validation-for="Genre.name" class="text-danger"></span>
-                    </div>
-                    <div class="form_buttons">
-                        <div class="form-group">
-                            <input type="submit" value="Stwórz" class="button buttonGreen lightText" />
-                        </div>
-                        <div>
-                            <a class="lightText button buttonDefault" asp-page="./Index">Wróć</a>
-                        </div>
-                    </div>
-                    
-                </form>
+<link rel="stylesheet" href="~/css/Shared/action_buttons.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Genres/create.css" asp-append-version="true" />
+
+<div class="main_container padding_top_1rem">
+    <div class="list_header">
+        <h3>Dodawanie nowego gatunku</h3>
+    </div>
+    <div class="genre_add_form_div">
+        <form id="genre_form" method="post">
+            <div class="d-flex flex-row justify-content-center align-items-center gap-5 w-75 genre_add_in_form_div">
+                <div class="form-floating w-75">
+                    <input asp-for="Genre.name" class="form-control" />
+                    <label asp-for="Genre.name" class="control-label"></label>
+                    <span asp-validation-for="Genre.name" class="text-danger"></span>
+                </div>
             </div>
-        </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger mt-2"></div>
+            <button class="action-button biggest-button action-default mt-4" id="addSubmit" type="submit">Dodaj gatunek</button>
+            <a asp-page="./Index">
+                <div class="action-button action-cancel mt-3 back-btn">Wróć</div>
+            </a> 
+        </form>
     </div>
 </div>
-
 
 @section Scripts {
     @{

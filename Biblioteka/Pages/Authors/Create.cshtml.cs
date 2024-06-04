@@ -29,8 +29,7 @@ namespace Biblioteka.Pages.Authors
         {
             if (!ModelState.IsValid || Author == null)
             {
-                TempData["Message"] = $"Error/Wystąpił błąd podczas dodawania autora. Formularz przesłano z błędem";
-                return RedirectToPage("./Index");
+                return Page();
             }
             if (Author.image != null)
             {

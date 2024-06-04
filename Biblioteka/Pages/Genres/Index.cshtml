@@ -4,54 +4,108 @@
 @{
     ViewData["Title"] = "Index";
 }
-<div class="main_container">
-    <div class="inner_container">
-        <div class="list_header">
-            <h1>Gatunki</h1>
-        </div>
-        @if (Model.Genre.Any())
+
+<link rel="stylesheet" href="~/css/Shared/action_buttons.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Shared/table_style.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Shared/notification_style.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Genres/index.css" asp-append-version="true" />
+
+<div>
+    <partial name="_UnderHeaderGenre" />
+
+    <div class="search_div">
+        <form method="get" asp-page="./Index">
+            <input type="text" placeholder="Wyszukaj gatunek" name="SearchTerm" value="@Model.SearchTerm">
+            <button type="submit">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
+    </div>
+
+    <dialog id="delete_genre_dialog">
+        <i class="fa-solid fa-circle-xmark dialog-exit"></i>
+        <form method="post" asp-page-handler="DeleteGenre">
+            <input type="hidden" name="genreId" value="1">
+            <p class="dialog_header">Usuwanie gatunku</p>
+            <p class="dialog_content">Czy napewno chcesz usunąć ten gatunek ?</p>
+            <div class="d-flex flex-row justify-content-center align-items-center">
+                <button type="button" class="action-button action-cancel"><i class="fa-solid fa-xmark"></i>Nie, anuluj</button>
+                <button type="submit" class="action-button action-delete"><i class="fa-solid fa-trash-can"></i>Tak, usuń</button>
+            </div>
+        </form>
+    </dialog>
+
+    <div class="move_right">
+        <button class="action-button big-button action-default">
+            <a class="nav-link text-light" asp-page="Create">Dodaj nowy gatunek</a>
+        </button>
+    </div>
+
+    <div class="table_div table-responsive w-75">
+        <table class="table table-striped text-center">
+            <thead class="table-header-style">
+                <tr>
+                    <th class="align-middle">
+                        @Html.DisplayNameFor(model => model.Genre[0].name)
+                    </th>
+                    <th class="align-middle">Akcja</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Genre)
+                {
+                    <tr>
+                        <td class="align-middle genre_name">
+                            @Html.DisplayFor(modelItem => item.name)
+                        </td>
+                        <td class="align-middle action_div">
+                            <a class="lightText" asp-page="./Edit" asp-route-id="@item.genreId">
+                                <div class="action-button action-confirm mr-2"><i class="fa-solid fa-pen"></i>Edytuj</div>
+                            </a>
+                            <button class="action-button action-delete"><i class="fa-solid fa-trash-can"></i><p class="hidden-genreId d-none">@item.genreId</p>Usuń</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @if (!Model.Genre.Any())
         {
-            <div class="search_div">
-                <form method="get" asp-page="./Index">
-                    <input type="text" placeholder="Wyszukaj gatunek" name="genreName">
-                    <button type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </form>
+            // handle empty list
+        }
+    </div>
+    @{
+        if (TempData["Message"] != null)
+        {
+            <div class="notification_div">
+                @if (TempData["Message"]?.ToString()?.Split("/")[0] == "Success")
+                {
+                    <div>
+                        <i class="fa-solid fa-check success_notification_icon"></i>
+                    </div>
+                }
+                else
+                {
+                    <div>
+                        <i class="fa-solid fa-circle-exclamation error_notification_icon"></i>
+                    </div>
+                }
+                <div class="notification-content">
+                    @if (TempData["Message"]?.ToString()?.Split("/")[0] == "Success")
+                    {
+                        <p class="notification-header-success">Sukces!</p>
+                    }
+                    else
+                    {
+                        <p class="notification-header-error">Błąd!</p>
+                    }
+                    <p class="notification-message">@TempData["Message"]?.ToString()?.Split("/")[1]</p>
+                </div>
+                <div class="hide-notification">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
             </div>
         }
-        <div class="move_right">
-            <button class="button buttonDefault addNewBookButton">
-                <a class="nav-link text-light" asp-page="Create">Dodaj nowy gatunek</a>
-            </button>
-        </div>
-        <div class="list_div">
-            <div class="table-responsive">
-                <table class="tableToModify">
-                    <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Genre[0].name)
-                            </th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.Genre)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.name)
-                                </td>
-                                <td>
-                                    <button class="button buttonGreen"><a class="lightText" asp-page="./Edit" asp-route-id="@item.genreId">Edytuj</a></button>
-                                    <button class="button buttonRed"><a class="lightText" asp-page="./Delete" asp-route-id="@item.genreId">Usuń</a></button>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>   
-     </div>
+    }
 </div>
+<script src="~/js/Genre/ModalDialogRunner.js"></script>
+<script src="~/js/Borrowing/Notification.js"></script>

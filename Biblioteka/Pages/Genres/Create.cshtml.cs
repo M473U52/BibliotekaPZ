@@ -27,7 +27,7 @@ namespace Biblioteka.Pages.Genres
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public IActionResult OnPost()
         {
-          if (!ModelState.IsValid ||  Genre == null)
+            if (!ModelState.IsValid ||  Genre == null)
             {
                 return Page();
             }
@@ -36,11 +36,8 @@ namespace Biblioteka.Pages.Genres
                 ModelState.AddModelError("", "Jest już taki gatunek");
                 return Page();
             }
-            else
-            {
-                _genreRepository.Add(Genre);
-            }
-
+            _genreRepository.Add(Genre);
+            TempData["Message"] = $"Success/Pomyślnie dodano gatunek: {Genre.name}.";
             return RedirectToPage("./Index");
         }
     }
