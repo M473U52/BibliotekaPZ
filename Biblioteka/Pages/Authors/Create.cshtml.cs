@@ -27,7 +27,13 @@ namespace Biblioteka.Pages.Authors
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public IActionResult OnPost()
         {
+            if (!ModelState.IsValid || Author == null)
+            {
+                TempData["Message"] = $"Error/Wystąpił błąd podczas dodawania autora. Formularz przesłano z błędem";
+                return RedirectToPage("./Index");
+            }
             if (Author.image != null)
+            {
                 if (Author.image.Length > 0 && Author.image.Length < 10000000 && Path.GetExtension(Author.image.FileName) == ".jpg")
                 {
                     using (var ms = new MemoryStream())
@@ -37,15 +43,15 @@ namespace Biblioteka.Pages.Authors
                     }
                 }
                 else
+                {
                     ModelState.AddModelError("file not pdf or wrong size", "Plik musi być w formacie JPG i nie większy niż 10MB!");
-            
-            if (!ModelState.IsValid || Author == null)
-            {
-                return Page();
-            }
-
+                    TempData["Message"] = $"Error/Plik z zdjęciem musi być w formacie JPG i nie większy niż 10MB!";
+                    return RedirectToPage("./Index");
+                }        
+            }  
             _authorRepository.Add(Author);
 
+            TempData["Message"] = $"Success/Pomyślnie dodano nowego autora.";
             return RedirectToPage("./Index");
         }
     }

@@ -29,14 +29,18 @@
     <div class="main-container">
     <div class="two-columns">
             <div class="column">
-                 <button class="button-green">
-                        <a class="text-light" asp-page="Create">Dodaj nowego autora</a>
-                 </button>
+                <a class="text-light" asp-page="Create">
+                     <button class="button-green">
+                            Dodaj nowego autora
+                     </button>
+                </a>
              </div>
             <div class="column">
+                <a class="text-light" asp-page="AddAuthor">
                  <button class="button-green">
-                        <a class="text-light" asp-page="AddAuthor">Nadaj prawa autora</a>
+                        Nadaj prawa autora
                  </button>
+                </a>
              </div>
     </div>
     <div class="vertical container">
@@ -93,40 +97,40 @@
                         </tbody>
                     </table>
                 </div>
-        @{
-            if (TempData["Message"] != null)
-            {
-                <div class="notification_div">
+    </div>
+    @{
+        if (TempData["Message"] != null)
+        {
+            <div class="notification_div">
+                @if (TempData["Message"]?.ToString()?.Split("/")[0] == "Success")
+                {
+                    <div>
+                        <i class="fa-solid fa-check success_notification_icon"></i>
+                    </div>
+                }
+                else
+                {
+                    <div>
+                        <i class="fa-solid fa-circle-exclamation error_notification_icon"></i>
+                    </div>
+                }
+                <div class="notification-content">
                     @if (TempData["Message"]?.ToString()?.Split("/")[0] == "Success")
                     {
-                        <div>
-                            <i class="fa-solid fa-check success_notification_icon"></i>
-                        </div>
+                        <p class="notification-header-success">Sukces!</p>
                     }
                     else
                     {
-                        <div>
-                            <i class="fa-solid fa-circle-exclamation error_notification_icon"></i>
-                        </div>
+                        <p class="notification-header-error">Błąd!</p>
                     }
-                    <div class="notification-content">
-                        @if (TempData["Message"]?.ToString()?.Split("/")[0] == "Success")
-                        {
-                            <p class="notification-header-success">Sukces!</p>
-                        }
-                        else
-                        {
-                            <p class="notification-header-error">Błąd!</p>
-                        }
-                        <p class="notification-message">@TempData["Message"]?.ToString()?.Split("/")[1]</p>
-                    </div>
-                    <div class="hide-notification">
-                        <i class="fa-solid fa-xmark"></i>
-                    </div>
+                    <p class="notification-message">@TempData["Message"]?.ToString()?.Split("/")[1]</p>
                 </div>
-            }
+                <div class="hide-notification">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
         }
-    </div>
+    }
 </div>
 <script src="~/js/Author/ModalDialogRunner.js"></script>
 <script src="~/js/Borrowing/Notification.js"></script>
