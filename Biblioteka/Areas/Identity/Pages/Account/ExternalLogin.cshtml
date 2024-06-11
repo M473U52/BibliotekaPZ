@@ -1,21 +1,25 @@
 ﻿@page
 @model ExternalLoginModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Rejestracja";
 }
 
-<h1>@ViewData["Title"]</h1>
-<h2 id="external-login-title">Associate your @Model.ProviderDisplayName account.</h2>
-<hr />
+<link rel="stylesheet" href="~/css/Shared/action_buttons.css" asp-append-version="true" />
 
-<p id="external-login-description" class="text-info">
-    You've successfully authenticated with <strong>@Model.ProviderDisplayName</strong>.
-    Please enter an email address for this site below and click the Register button to finish
-    logging in.
-</p>
+<div class="list_header">
+    <h1>@ViewData["Title"]</h1>
+    <h2 id="external-login-title">Powiązanie konta @Model.ProviderDisplayName z kontem biblioteki.</h2>
+    <h5 id="external-login-description" class="text-info">
+        Pomyślnie uwierzytelniłeś się w <strong>@Model.ProviderDisplayName</strong>.
+        Wpisz poniżej adres e-mail  i kliknij przycisk Zarejestruj, aby zakończyć logowanie.
+    </h5>
+</div>
 
-<div class="row">
-    <div class="col-md-4">
+
+
+
+
+<div class="form_div_login">
         <form asp-page-handler="Confirmation" asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="form-floating mb-3">
@@ -34,10 +38,12 @@
                 <label asp-for="Input.Surname" class="form-label"></label>
                 <span asp-validation-for="Input.Surname" class="text-danger"></span>
             </div>
+            <div style="text-align: center;">
+            <button type="submit" class="action-login-button action-default">Zarejestruj się</button>
+            </div>
 
-            <button type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+            
         </form>
-    </div>
 </div>
 
 @section Scripts {
