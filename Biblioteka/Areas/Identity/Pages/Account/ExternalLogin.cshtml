@@ -24,18 +24,18 @@
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="form-floating mb-3">
                 <input asp-for="Input.Email" class="form-control" autocomplete="email" placeholder="Please enter your email."/>
-                <label asp-for="Input.Email" class="form-label"></label>
+                <label asp-for="Input.Email" class="form-label">email</label>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.Name" class="form-control" placeholder="Please enter your name." />
-                <label asp-for="Input.Name" class="form-label"></label>
+                <input asp-for="Input.Name" class="form-control" placeholder="Podaj swoje imię." />
+                <label asp-for="Input.Name" class="form-label">Imie</label>
                 <span asp-validation-for="Input.Name" class="text-danger"></span>
             </div>
 
             <div class="form-floating mb-3">
-                <input asp-for="Input.Surname" class="form-control" placeholder="Please enter your surname." />
-                <label asp-for="Input.Surname" class="form-label"></label>
+                <input asp-for="Input.Surname" class="form-control" placeholder="Podaj swoje nazwisko." />
+                <label asp-for="Input.Surname" class="form-label">Nazwisko</label>
                 <span asp-validation-for="Input.Surname" class="text-danger"></span>
             </div>
             <div style="text-align: center;">

@@ -313,3 +313,5 @@
 2024-06-12 00:00:30.885 +02:00 [INF] Wylogowanie kuba.palaszewski8@gmail.com - Reader
 2024-06-12 00:04:06.098 +02:00 [INF] Wylogowanie kuba.palaszewski8@gmail.com - Reader
 2024-06-12 00:04:24.387 +02:00 [INF] Wylogowanie kuba.palaszewski8@gmail.com - Reader
+2024-06-12 07:16:45.929 +02:00 [INF] Wylogowanie palaszek.kontakt@gmail.com - Reader
+2024-06-12 07:16:58.517 +02:00 [INF] Wylogowanie palaszek.kontakt@gmail.com - Reader
