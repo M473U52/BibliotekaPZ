@@ -13,6 +13,10 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Biblioteka.Repositories.Interfaces;
+using Biblioteka.Repositories;
+using Biblioteka.Models;
+using Biblioteka.Context;
 
 namespace Biblioteka.Areas.Identity.Pages.Account
 {
@@ -26,12 +30,15 @@ namespace Biblioteka.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
         private readonly ILogger<ExternalLoginModel> _logger;
 
+        private readonly IReaderRepository _readerRepository;
+
         public ExternalLoginModel(
             SignInManager<BibUser> signInManager,
             UserManager<BibUser> userManager,
             IUserStore<BibUser> userStore,
             ILogger<ExternalLoginModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            BibContext context)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -39,6 +46,7 @@ namespace Biblioteka.Areas.Identity.Pages.Account
             _emailStore = GetEmailStore();
             _logger = logger;
             _emailSender = emailSender;
+            _readerRepository = new ReaderRepository(context);
         }
 
         /// <summary>
@@ -85,6 +93,9 @@ namespace Biblioteka.Areas.Identity.Pages.Account
 
             [Required]
             public string Surname { get; set; }
+
+            [Display(Name = "Data urodzenia")]
+            public DateTime? birthDate { get; set; }
         }
         
         public IActionResult OnGet() => RedirectToPage("./Login");
@@ -134,7 +145,7 @@ namespace Biblioteka.Areas.Identity.Pages.Account
                     {
                         Email = info.Principal.FindFirstValue(ClaimTypes.Email),
                         Name = info.Principal.FindFirstValue(ClaimTypes.GivenName), // Pobranie imienia
-                        Surname = info.Principal.FindFirstValue(ClaimTypes.Surname) // Pobranie nazwiska
+                        Surname = info.Principal.FindFirstValue(ClaimTypes.Surname), // Pobranie nazwiska   
                     };
                 }
                 return Page();
@@ -173,6 +184,7 @@ namespace Biblioteka.Areas.Identity.Pages.Account
                     {
                         // Ustawienie roli "Czytelnik" dla nowego użytkownika
                         await _userManager.AddToRoleAsync(user, "Reader");
+                        CreateReader(user);
 
                         _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
 
@@ -232,6 +244,19 @@ namespace Biblioteka.Areas.Identity.Pages.Account
                 throw new NotSupportedException("The default UI requires a user store with email support.");
             }
             return (IUserEmailStore<BibUser>)_userStore;
+        }
+
+        private void CreateReader(BibUser user)
+        {
+            //var id = _readerRepository.GetLastId();
+            Reader reader = new Reader();
+            //reader.readerId = id;
+            reader.name = user.name;
+            reader.surname = user.surname;
+            reader.email = user.Email;
+            reader.birthDate = user.birthDate;
+
+            _readerRepository.Add(reader);
         }
     }
 }
