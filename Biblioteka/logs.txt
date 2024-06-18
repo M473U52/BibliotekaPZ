@@ -315,3 +315,7 @@
 2024-06-12 00:04:24.387 +02:00 [INF] Wylogowanie kuba.palaszewski8@gmail.com - Reader
 2024-06-12 07:16:45.929 +02:00 [INF] Wylogowanie palaszek.kontakt@gmail.com - Reader
 2024-06-12 07:16:58.517 +02:00 [INF] Wylogowanie palaszek.kontakt@gmail.com - Reader
+2024-06-18 15:53:50.252 +02:00 [INF] Wylogowanie janusz.kowalski@gmail.com - Employee
+2024-06-18 15:54:00.410 +02:00 [INF] Wylogowanie dawid.konstanciuk@gmail.com - Reader
+2024-06-18 15:54:27.742 +02:00 [INF] Wylogowanie dawid.konstanciuk@gmail.com - Reader
+2024-06-18 15:55:04.324 +02:00 [INF] Wylogowanie dawid.konstanciuk@gmail.com - Reader
