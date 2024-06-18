@@ -4,11 +4,25 @@
 @{
     ViewData["Title"] = "Index";
 }
-<div class="main_container">
+
+<link rel="stylesheet" href="~/css/Tag_BookTypes/main.css" asp-append-version="true" />
+
+<partial name="_UnderHeaderTag" />
+
+<div class="page-container">
+    <dialog id="delete_tag_dialog2">
+        <i onclick="Cancel()" class="fa-solid fa-circle-xmark dialog-exit"></i>
+        <form method="post" asp-page-handler="DeleteTag">
+            <input id="inputter" type="hidden" name="id" value="1"  onClick=SetValue() >
+            <p class="dialog_header">Usuwanie taga</p>
+            <p class="dialog_content">Czy napewno chcesz usunąć tego taga?</p>
+            <div class="d-flex flex-row justify-content-center align-items-center">
+                <button type="button" onclick="Cancel()" id="cancel" class="button-red text-light"><i class="fa-solid fa-xmark"></i>Anuluj</button>
+                <button type="submit" onclick="SetValue()" class="button-red text-light"><i class="fa-solid fa-trash-can"></i>Usuń</button>
+            </div>
+        </form>
+       </dialog>
     <div class="inner_container">
-        <div class="list_header">
-            <h1>Lista Tagów</h1>
-        </div>
         @if (Model.Tag.Any())
         {
             <div class="search_div">
@@ -21,13 +35,13 @@
             </div>
         }
         <div class="move_right">
-            <button class="button buttonDefault addNewBookButton">
+            <button class="button-green">
                 <a class="nav-link text-light" asp-page="Create">Dodaj nowy tag</a>
             </button>
         </div>
         <div class="list_div">
             <div class="table-responsive">
-                <table class="tableToModify">
+                <table class="table-page">
                     <thead>
                         <tr>
                             <th>
@@ -44,8 +58,9 @@
                                     @Html.DisplayFor(modelItem => item.name)
                                 </td>
                                 <td>
-                                    <button class="button buttonGreen"><a class="lightText" asp-page="./Edit" asp-route-id="@item.tagId">Edytuj</a></button>
-                                    <button class="button buttonRed"><a class="lightText" asp-page="./Delete" asp-route-id="@item.tagId">Usuń</a></button>
+                                        <button class="button-green"><a class="lightText" asp-page="./Edit" asp-route-id="@item.tagId">Edytuj</a></button>
+                                         <button class="button-red text-light" onclick="funDelete(@item.tagId)">Usuń<p class="hidden-Id d-none">@item.tagId</p> </button>
+                                       
                                 </td>
                             </tr>
                         }
@@ -55,3 +70,5 @@
         </div>
     </div>
 </div>
+
+<script src="~/js/Tag/ModalDialogRunner.js"></script>

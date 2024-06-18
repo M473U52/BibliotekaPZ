@@ -5,15 +5,17 @@
     ViewData["Title"] = "Create";
 }
 
-<div class="main_container">
+<link rel="stylesheet" href="~/css/Tag_BookTypes/main.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Shared/action_buttons.css" asp-append-version="true" />
+
+<div class="page-container">
     <div class="inner_container">
         <div class="list_header">
             <h1>Tworzenie Rodzaju Książki</h1>
+            <hr />
         </div>
-        <div class="form_div">
-            <div class="form_div_login">
                 <form method="post">
-                    <hr />
+                    
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="BookType.name" class="control-label"></label>
@@ -22,16 +24,14 @@
                     </div>
                     <div class="form_buttons">
                         <div class="form-group">
-                            <input type="submit" value="Stwórz" class="button buttonGreen lightText" />
+                            <input type="submit" value="Stwórz" class="button action-button action-confirm" />
                         </div>
                         <div>
-                           <a class="lightText button buttonDefault" asp-page="./Index">Wróć</a>
+                           <a class="action-button action-default" asp-page="./Index">Wróć</a>
                         </div>
                     </div>
                     
                 </form>
-            </div>
-        </div>
     </div>
 </div>
 

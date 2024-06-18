@@ -4,11 +4,28 @@
 @{
     ViewData["Title"] = "Index";
 }
-<div class="main_container">
+
+<link rel="stylesheet" href="~/css/Tag_BookTypes/main.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Shared/action_buttons.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Shared/table_style.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Shared/notification_style.css" asp-append-version="true" />
+
+<partial name="_UnderHeaderBookTypes" />
+
+<div class="page-container">
+     <dialog id="delete_tag_dialog2">
+        <i onclick="Cancel()" class="fa-solid fa-circle-xmark dialog-exit"></i>
+        <form method="post" asp-page-handler="DeleteType">
+            <input id="inputter" type="hidden" name="id" value="1" onClick=SetValue()>
+            <p class="dialog_header">Usuwanie rodzaju</p>
+            <p class="dialog_content">Czy napewno chcesz usunąć ten rodzaj?</p>
+            <div class="d-flex flex-row justify-content-center align-items-center">
+                <button type="button" onclick="Cancel()" id="cancel" class="button-red text-light"><i class="fa-solid fa-xmark"></i>Anuluj</button>
+                <button type="submit" onClick=SetValue() class="button-red text-light"><i class="fa-solid fa-trash-can"></i>Usuń</button>
+            </div>
+        </form>
+       </dialog>
     <div class="inner_container">
-        <div class="list_header">
-            <h1>Rodzaje Książek</h1>
-        </div>
         @if (Model.BookType.Any())
         {
             <div class="search_div">
@@ -21,13 +38,13 @@
             </div>
         }
         <div class="move_right">
-            <button class="button buttonDefault addNewBookButton">
+            <button class="button-green">
                 <a class="nav-link text-light" asp-page="Create">Dodaj nowy rodzaj</a>
             </button>
         </div>
         <div class="list_div">
             <div class="table-responsive">
-                <table class="tableToModify">
+                <table class="table-page">
                     <thead>
                         <tr>
                             <th>
@@ -44,8 +61,10 @@
                                     @Html.DisplayFor(modelItem => item.name)
                                 </td>
                                 <td>
-                                    <button class="button buttonGreen"><a class="lightText" asp-page="./Edit" asp-route-id="@item.typeId">Edytuj</a></button>
-                                    <button class="button buttonRed"><a class="lightText" asp-page="./Delete" asp-route-id="@item.typeId">Usuń</a></button>
+                                        <button class="button-green"><a class="lightText" asp-page="./Edit" asp-route-id="@item.typeId">Edytuj</a></button>
+                                        
+                                                <button class="button-red text-light" onclick="funDelete(@item.typeId)">Usuń<p class="hidden-Id d-none">@item.typeId</p> </button>
+                            
                                 </td>
                             </tr>
                         }
@@ -57,3 +76,4 @@
 </div>
 
 
+<script src="~/js/BookTypes/ModalDialogRunner.js"></script>
