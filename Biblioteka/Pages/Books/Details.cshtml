@@ -32,7 +32,7 @@
     </dialog>
     <div class="page-container-horizontal">
         <div class="cover">
-             <img src="~/images/@(Model.Book.image != null ? $"covers/{Model.Book.bookId}.jpg" : "okladka.jpg")" alt="Okładka książki @Model.Book.title" />
+            <img src="@Url.Page("Details", "CoverImage", new { id = Model.Book.bookId })" alt="Okładka książki @Model.Book.title" />
         </div>
         <div class="book-data">
             <div>
