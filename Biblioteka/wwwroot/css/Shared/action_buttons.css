@@ -88,12 +88,19 @@
     color: #73708e;
 }
 
-.action-cancel-mr-0 {
-    margin-right: 1rem;
-    color: #73708e;
-    background-color: #efeff9 /*#bf4343*/;
-}
 
-.action-cancel-mr-0 > i {
-    color: #73708e;
+.action-login-button {
+    flex: 1 1 auto;
+    margin: 3px;
+    padding: 15px;
+    text-decoration: none;
+    text-align: center;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+    font-weight: bold;
+    outline: none;
+    border:none;
 }
