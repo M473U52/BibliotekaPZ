@@ -75,10 +75,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="wwwroot\js\Author\" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <None Include="wwwroot\js\author\ModalDialogRunner.js" />
 	</ItemGroup>
 

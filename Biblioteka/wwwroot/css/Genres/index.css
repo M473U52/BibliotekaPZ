@@ -1,0 +1,13 @@
+﻿.move_right {
+    width: 90%;
+    display: flex;
+    justify-content: right;
+    margin: 1rem auto 1.5rem auto;
+}
+
+.action_div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

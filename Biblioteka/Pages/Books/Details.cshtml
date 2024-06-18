@@ -111,13 +111,12 @@
     @if (User.Identity.IsAuthenticated && (User.IsInRole("Employee") || User.IsInRole("Admin")))
     {
         <div class="page-container-vertical">
-            <button class="red-button2">
-                <a class="lightText" asp-page="./Edit" asp-route-id="@Model.Book?.bookId">Edytuj</a>
-            </button>
-                    <button class="red-button3">
-                <a class="lightText" asp-page="./Delete" asp-route-id="@Model.Book?.bookId">Usun</a>
-            </button>
-                    
+            <a asp-page="./Edit" asp-route-id="@Model.Book?.bookId">
+                <div class="red-button2">Edytuj</div>
+            </a>
+            <a asp-page="./Delete" asp-route-id="@Model.Book?.bookId">
+                <div class="red-button3">Usun</div>
+            </a>
         </div>
     }
     @if (Model.Authors != null && Model.Authors.Count > 0)

@@ -119,7 +119,8 @@ namespace Biblioteka.Views.Books
 
                 if (existingBook == null)
                 {
-                    return NotFound();
+                    TempData["Message"] = $"Error/Brak książki o id {Book.bookId} w bazie";
+                    return RedirectToPage("./Index");
                 }
 
                 existingBook.title = Book.title;
@@ -134,38 +135,44 @@ namespace Biblioteka.Views.Books
 
                 Genre? foundGenre = _genreRepository.getAll().FirstOrDefault(r => r.genreId.ToString().Equals(GenreId.ToString()));
                 
-                if (foundGenre != null)
+                if (foundGenre == null)
                 {
-                    existingBook.genre = foundGenre;
-                }
-                else
                     ModelState.AddModelError("", "Gatunek jest wymagany.");
+                    TempData["Message"] = $"Error/Brak gatunku o id {GenreId} w bazie";
+                    return RedirectToPage("./Index");
+                   
+                }
+                existingBook.genre = foundGenre;     
 
                 existingBook.tags = new List<Book_Tag>();
 
                 foreach (var tagId in TagIds)
                 {
                     Tag? foundTag = _tagRepository.getAll().FirstOrDefault(r => r.tagId.ToString() == tagId);
-                    if (foundTag != null)
+                    if (foundTag == null)
                     {
-                        existingBook.tags.Add(new Book_Tag { tag = foundTag, book = existingBook });
-                    }
-                    else
                         ModelState.AddModelError("", "Tagi są wymagane.");
+                        TempData["Message"] = $"Error/Brak tagu o id {tagId} w bazie";
+                        return RedirectToPage("./Index");
+                    }
+                    existingBook.tags.Add(new Book_Tag { tag = foundTag, book = existingBook });        
                 }
 
                 Publisher? foundPublisher = _publisherRepository.getAll().FirstOrDefault(r => r.publisherId.ToString().Equals(PublisherId.ToString()));
-
-                if (foundPublisher != null)
+                if (foundPublisher == null)
                 {
-                    existingBook.publisher = foundPublisher;
+                    TempData["Message"] = $"Error/Brak wydawcy o id {PublisherId} w bazie";
+                    return RedirectToPage("./Index");
                 }
+                existingBook.publisher = foundPublisher;
+
                 BookType? foundType = _bookTypeRepository.getAll().FirstOrDefault(r => r.typeId.ToString().Equals(BookTypeId.ToString()));
-
-                if (foundType != null)
+                if (foundType == null)
                 {
-                    existingBook.type = foundType;
+                    TempData["Message"] = $"Error/Brak typu książki o id {BookTypeId} w bazie";
+                    return RedirectToPage("./Index");
                 }
+                existingBook.type = foundType;
 
                 existingBook.authors = new List<Book_Author>();
 
@@ -174,42 +181,69 @@ namespace Biblioteka.Views.Books
                     foreach (var authorId in AuthorIds)
                     {
                         Author? foundAuthor = _authorRepository.getAll().FirstOrDefault(r => r.authorId.ToString() == authorId);
-                        if (foundAuthor != null)
+                        if (foundAuthor == null)
                         {
-
-                            existingBook.authors.Add(new Book_Author { author = foundAuthor, book = existingBook });
+                            TempData["Message"] = $"Error/Brak autora o id {authorId} w bazie";
+                            return RedirectToPage("./Index");
                         }
+                        existingBook.authors.Add(new Book_Author { author = foundAuthor, book = existingBook });
                     }
                 }
-
                 if (Book.image != null && Book.image.Length > 0)
                 {
-                    using (var ms = new MemoryStream())
+                    if (Book.image.Length > 0 && Book.image.Length < 10000000 && Path.GetExtension(Book.image.FileName) == ".jpg")
                     {
-                        Book.image.CopyTo(ms);
-                        existingBook.imageData = ms.ToArray();
+                        using (var ms = new MemoryStream())
+                        {
+                            Book.image.CopyTo(ms);
+                            existingBook.imageData = ms.ToArray();
+                        }
                     }
+                    else
+                    {
+                        TempData["Message"] = $"Error/Plik z okładką musi być w formacie JPG i nie większy niż 10MB!";
+                        return RedirectToPage("./Index");
+                    }
+                      
                 }
 
-                if (Book.ebook != null && Book.ebook.Length > 0)
+                if (Book.ebook != null)
                 {
-                    using (var ms = new MemoryStream())
+                    if (Book.ebook.Length > 0 && Book.ebook.Length < 10000000 && Path.GetExtension(Book.ebook.FileName) == ".pdf")
                     {
-                        Book.ebook.CopyTo(ms);
-                        existingBook.ebookData = ms.ToArray();
+                        using (var ms = new MemoryStream())
+                        {
+                            Book.ebook.CopyTo(ms);
+                            existingBook.ebookData = ms.ToArray();
+                        }
                     }
+                    else
+                    {
+                        TempData["Message"] = $"Error/Plik z ebookiem musi być w formacie PDF i nie większy niż 10MB!";
+                        return RedirectToPage("./Index");
+                    }   
                 }
 
-                if (Book.audiobook != null && Book.audiobook.Length > 0)
+                if (Book.audiobook != null)
                 {
-                    using (var ms = new MemoryStream())
+                    if (Book.audiobook.Length > 0 && Book.audiobook.Length < 10000000 && Path.GetExtension(Book.audiobook.FileName) == ".mp3")
                     {
-                        Book.audiobook.CopyTo(ms);
-                        existingBook.audiobookData = ms.ToArray();
+                        using (var ms = new MemoryStream())
+                        {
+                            Book.audiobook.CopyTo(ms);
+                            existingBook.audiobookData = ms.ToArray();
+                        }
+                    }
+                    else
+                    {
+                        TempData["Message"] = $"Error/Plik z audiobookiem musi być w formacie MP3 i nie większy niż 10MB!";
+                        return RedirectToPage("./Index");
                     }
                 }
 
                 _bookRepository.Update(existingBook);
+
+                TempData["Message"] = $"Success/Pomyślnie dokonano edycji książki \"{Book.title}\".";
                 return RedirectToPage("./Index");
             }
         }

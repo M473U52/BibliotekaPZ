@@ -5,59 +5,63 @@
     ViewData["Title"] = "Create";
 }
 <link rel="stylesheet" href="~/css/Shared/action_buttons.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Authors/Create.css" asp-append-version="true" />
 
-<div class="main_container" style="display: flex; justify-content: center;  align-items: center; flex-direction: column;">
-    <h1 >Dodaj autora</h1>
-    <div class="form_div_login">
-        <div class="row">
-            <form method="post" enctype="multipart/form-data">
-                <hr />
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Author.name" class="control-label"></label>
-                    <input asp-for="Author.name" class="form-control" />
-                    <span asp-validation-for="Author.name" class="text-danger"></span>
+<div class="main_container padding_top_1rem">
+    <div class="list_header">
+        <h3>Dodawanie nowego autora</h3>
+    </div>
+    <div class="author_add_form_div">
+        <form id="author_form" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="d-flex flex-row justify-content-center align-items-center gap-5 w-75 author_add_in_form_div">
+                <div class="d-flex flex-column justify-content-center align-items-center gap-3 w-100">
+                    <div class="form-floating w-100">
+                        <input asp-for="Author.name" class="form-control" />
+                        <label asp-for="Author.name" class="control-label"></label>
+                        <span asp-validation-for="Author.name" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating w-100">
+                        <input asp-for="Author.surname" class="form-control" />
+                        <label asp-for="Author.surname" class="control-label"></label>
+                        <span asp-validation-for="Author.surname" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating w-100">
+                        <input asp-for="Author.birthDate" class="form-control" />
+                        <label asp-for="Author.birthDate" class="control-label"></label>
+                        <span asp-validation-for="Author.birthDate" class="text-danger"></span>
+                    </div>            
                 </div>
-                <div class="form-group">
-                    <label asp-for="Author.surname" class="control-label"></label>
-                    <input asp-for="Author.surname" class="form-control" />
-                    <span asp-validation-for="Author.surname" class="text-danger"></span>
+                <div class="d-flex flex-column justify-content-center align-items-center gap-3 w-100">
+                    <div class="form-floating w-100">
+                        <input asp-for="Author.country" class="form-control" />
+                        <label asp-for="Author.country" class="control-label"></label>
+                        <span asp-validation-for="Author.country" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating w-100">
+                        <input asp-for="Author.nickname" class="form-control" />
+                        <label asp-for="Author.nickname" class="control-label"></label>
+                        <span asp-validation-for="Author.nickname" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating w-100">
+                        <input asp-for="Author.description" class="form-control" />
+                        <label asp-for="Author.description" class="control-label"></label>
+                        <span asp-validation-for="Author.description" class="text-danger"></span>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Author.birthDate" class="control-label"></label>
-                    <input asp-for="Author.birthDate" class="form-control" />
-                    <span asp-validation-for="Author.birthDate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Author.country" class="control-label"></label>
-                    <input asp-for="Author.country" class="form-control" />
-                    <span asp-validation-for="Author.country" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Author.nickname" class="control-label"></label>
-                    <input asp-for="Author.nickname" class="form-control" />
-                    <span asp-validation-for="Author.nickname" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Author.description" class="control-label"></label>
-                    <input asp-for="Author.description" class="form-control" />
-                    <span asp-validation-for="Author.description" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Author.image" class="control-label"></label>
-                    <input asp-for="Author.image" class="form-control" />
-                    <span asp-validation-for="Author.image" class="text-danger"></span>
-                </div>
-                <div class="form_groups">
-                    <input type="submit" value="Dodaj" class="button action-button action-confirm" />
-                </div>
-             </form>
-        </div>
-        <div>
-            <button class="action-button action-default"> <a class="lightText" asp-page="./Index">Wróć</a></button>
-        </div>         
+            </div>   
+            <div class="form-floating mt-3">
+                <input asp-for="Author.image" class="form-control author_add_image_input_style" />
+                <label asp-for="Author.image" class="control-label"></label>
+                <span asp-validation-for="Author.image" class="text-danger"></span>
+            </div>
+            <button class="action-button biggest-button action-default mt-4" id="addSubmit" type="submit">Dodaj autora</button>
+            <button class="action-button action-cancel mt-3 fill-form-btn" type="button">Wypełnij formularz przykładowymi danymi</button>
+        </form>
     </div>
 </div>
+
+<script type="module" src="~/js/Author/AddAuthorFormFiller.js"></script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

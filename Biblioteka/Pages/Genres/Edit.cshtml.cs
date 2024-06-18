@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Biblioteka.Repositories.Interfaces;
 using Biblioteka.Models;
+using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
 
 namespace Biblioteka.Pages.Genres
 {
@@ -24,7 +25,8 @@ namespace Biblioteka.Pages.Genres
             var genre =  _genreRepository.getOne(id);
             if (genre == null)
             {
-                return NotFound();
+                TempData["Message"] = $"Error/Brak gatunku o id: {id}.";
+                return RedirectToPage("./Index");
             }
             Genre = genre;
             return Page();
@@ -35,32 +37,24 @@ namespace Biblioteka.Pages.Genres
             if (!ModelState.IsValid)
             {
                 return Page();
-            }          
-            
+            }
+            if (_genreRepository.searchGenre(Genre.name) != null)
+            {
+                ModelState.AddModelError("", "Jest już taki gatunek");
+                return Page();
+            }
+
             try
             {
                 _genreRepository.Update(Genre);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!GenreExists(Genre.genreId))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                TempData["Message"] = $"Error/Wystąpił błąd podczas aktualizacji rekordu w bazie.";
+                return RedirectToPage("./Index");
             }
-            
+            TempData["Message"] = $"Success/Pomyślnie zmodyfikowano gatunek: {Genre.name}.";
             return RedirectToPage("./Index");
-        }
-
-        private bool GenreExists(int id)
-        {
-            var isExisted = _genreRepository.getOne(id);
-
-            return isExisted != null ? true : false;
         }
     }
 }
