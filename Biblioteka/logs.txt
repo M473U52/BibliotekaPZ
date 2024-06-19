@@ -316,3 +316,5 @@
 2024-06-03 16:20:14.815 +02:00 [INF] Wylogowanie employee@employee.com - Employee
 2024-06-03 16:20:27.000 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
 2024-06-04 09:19:06.796 +02:00 [INF] Zalogowany użytkownik employee@employee.com - Employee
+2024-06-18 15:58:22.373 +02:00 [INF] Zalogowany użytkownik janusz.kowalski@gmail.com - Employee
+2024-06-18 17:14:10.810 +02:00 [INF] Wylogowanie janusz.kowalski@gmail.com - Employee
