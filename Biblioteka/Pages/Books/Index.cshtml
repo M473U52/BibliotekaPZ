@@ -66,7 +66,7 @@
                             <div class="book_div">
                                 <a class="lightText" asp-page="./Details" asp-route-id="@book.bookId">
                                     <div class="book_cover">
-                                        <img src="~/images/@(book.imageData != null ? $"covers/{book.bookId}.jpg" : "okladka.jpg")" alt="Okładka książki @book.title" />
+                                        <img src="@Url.Page("Details", "CoverImage", new { id = book.bookId })" alt="Okładka książki @book.title" />
                                     </div>
                                 </a>
                                 <div class="book_info">
@@ -106,7 +106,7 @@
                 <div class="book_div">
                     <a class="lightText" asp-page="./Details" asp-route-id="@book.bookId">
                         <div class="book_cover">
-                            <img src="~/images/okladka.jpg" alt="Okładka książki @book.title" />
+                            <img src="@Url.Page("Details", "CoverImage", new { id = book.bookId })" alt="Okładka książki @book.title" />
                         </div>
                     </a>
                     <div class="book_info">

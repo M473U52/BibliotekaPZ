@@ -165,6 +165,18 @@ namespace Biblioteka.Views.Books
                 }
             }
         }
+        public FileResult OnGetCoverImage(int id)
+        {
+            var book = _bookRepository.getOne(id);
+            if (book == null || book.imageData == null)
+            {
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/okladka.jpg");
+                var imageBytes = System.IO.File.ReadAllBytes(filePath);
+                return File(imageBytes, "image/jpeg");
+            }
+
+            return File(book.imageData, "image/jpeg");
+        }
 
         public int BookCountForGenre(int genre_id)
         {

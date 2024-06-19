@@ -4,6 +4,7 @@ using Biblioteka.Repositories.Interfaces;
 using Biblioteka.Models;
 using Microsoft.AspNetCore.Identity;
 using Biblioteka.Areas.Identity.Data;
+using Biblioteka.Repositories.DbImplementations;
 
 namespace Biblioteka.Views.Books
 {
@@ -36,7 +37,7 @@ namespace Biblioteka.Views.Books
                 {
                     string email = user.Email;
 
-                    var foundAuthor = _authorRepository.getAll().FirstOrDefault(r => r.email == email);
+                    var foundAuthor = _authorRepository.GetByMail(email);
 
                     if (foundAuthor != null)
                     {
@@ -45,12 +46,13 @@ namespace Biblioteka.Views.Books
                             .Where(b => b.authors.Any(a => a.authorId == foundAuthor.authorId))
                             .ToList();
                     }
+                     
                 }
 
             }
 
         }
-
+      
         /* public void OnPost(int bookId)
          {
              Book book = _bookRepository.getOne(bookId);

@@ -12,6 +12,7 @@ using PdfSharp.Pdf;
 using Biblioteka.Repositories;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using iText.Commons.Actions.Contexts;
 
 namespace Biblioteka.Views.Books
 {
@@ -344,6 +345,18 @@ namespace Biblioteka.Views.Books
             string fileName = book.title + " audiobook.mp3";
 
             return File(book.audiobookData, "application/mp3", fileName);
+        }
+        public FileResult OnGetCoverImage(int id)
+        {
+            var book = _bookRepository.getOne(id);
+            if (book == null || book.imageData == null)
+            {
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/okladka.jpg");
+                var imageBytes = System.IO.File.ReadAllBytes(filePath);
+                return File(imageBytes, "image/jpeg");
+            }
+
+            return File(book.imageData, "image/jpeg");
         }
     }
 }
